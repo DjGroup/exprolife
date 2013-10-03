@@ -32,7 +32,5 @@
 Presentation / GUI------------------Logic / OM------------------
 Data Access  
 این به این معنی است که لایه Presentaion برای ارتباط با Data access فقط باید از طریق Logic به آن دست یابد در حالیکه در MVC این چنین نیست و هر عنصر در مثلث MVC میتواند با دو عنصر دیگر در ارتباط باشد .  (منبع:[codeproject](http://www.codeproject.com/Questions/234107/MVC-vs-3-tier-Architecture))
-   *   متدولوژی:  
-ما از روش `Agile` پروژه را انجام میدهیم .
-  
+
 
