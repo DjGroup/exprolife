@@ -49,7 +49,7 @@
 پاسخگویی به تغییرات بالاتر از پیروی یک طرح،
 با وجود اینکه موارد سمت چپ ارزشمند هستند ولی ما برای موارد سمت راست ارزش بیشتری قائل هستیم.))
 
-![Alt text](Generic_diagram_of_an_agile_methodology_for_software_development.jpg)
+![Alt text](http://upload.wikimedia.org/wikipedia/commons/f/ff/Generic_diagram_of_an_agile_methodology_for_software_development.png)
 
 * ناگفته پیداست که این متدولوژی بیشترین کارایی و تطابق را با مسیر ما در تولید و توسعه محصول مد نظرمان دارد؛ پس ما به مفاهیم آن پایبندیم و از شکل نمایش داده شده که راهکار اصلی این متدولوژی را نمایش می‌دهد پیروی می‌کنیم.
 
