@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/homepage.css">
+    </head>
+    <body>
+        <!-- this is the gray layer that covered all of the screen when REGISTER clicked-->
+        <div id="fadeLayer"></div>
+        <div id="registerForm">
+            <div id="leftRegisterContent">
+                <div id="upContent">
+                    <div id="innerUpContent">
+                        <div class="arrow-right"></div>
+                        <h3>Please fill the fields below:</h3>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" name="firstname" type="text" placeholder="First Name">
+                            <div class="arrow-left"></div>
+                            <div class="information">Firstname contains numbers and letters</div>
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" name="lastname" type="text" placeholder="Last Name">
+                            <div class="arrow-left"></div>
+                            <div class="information">Lastname contains numbers and letters</div>
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput long1" name="email" type="text" placeholder="Email@address.com">
+                            <div class="arrow-left"></div>
+                            <div class="information">Enter valid Email address</div>
+                        </div>
+                        <div class="fieldRow" style="margin-top: 20px;">
+                            <input id="male" type="radio" name="gender" value="male">
+	                        <label for="male">Male</label>
+                            <input id="female" type="radio" name="gender" value="female">
+	                        <label for="female">Female</label>
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" name="password" type="password" placeholder="password">
+                            <div class="arrow-left"></div>
+                            <div class="information">Enter your password (at least 6 characters)</div>
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" name="rePass" type="password" placeholder="retype password">
+                            <div class="arrow-left"></div>
+                            <div class="information">retype your password</div>
+                        </div>
+
+                    </div>
+                </div>
+                <input class="RegisterButton left red" type="button" value="Skip this step">
+                <input class="RegisterButton right green" type="button" value="Continue">
+                <div id="registerCloseIcon">
+                    <img src="images/close.png" width="50px">
+                </div>
+            </div>
+
+            <div id="rightSteps">
+                <div class="step not-accepted">
+                    <div class="innerStep">
+                        <img src="images/identity.png" width="90px" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logo">
+            <img src="images/logo.png">
+        </div>
+        <div id="top">
+            <div id="loginClose">
+                <img src="images/close.png" width="30px">
+            </div>
+            <div id="login">
+                <h1>
+                    Login
+                </h1>
+                <div id="innerForm">
+                    <input class="input" type="text" placeholder="Email Address">
+                    <input class="input" type="password" placeholder="password">
+                    <input class="button" type="button" value="Login">
+                </div>
+
+            </div>
+            <div id="register">
+                <h1>
+                    Register
+                </h1>
+            </div>
+        </div>
+        <div id="slider">
+            <img src="images/slide.jpg">
+        </div>
+
+        <script src="js/jquery-2.0.3.min.js"></script>
+        <script src="js/homepage.js"></script>
+    </body>
+</html>
