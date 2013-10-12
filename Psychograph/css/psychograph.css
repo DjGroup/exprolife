@@ -10,7 +10,7 @@ body {
 }
 .header{
 	background-color:rgb(44,62,80);
-	height:80px;
+	height:90px;
 	width:100%;
 	border-radius:6px;
 }
@@ -38,10 +38,10 @@ body {
 }
 #Search-label{
 	color:white;
-	font-size:18px;
+	font-size:22px;
 }
 #Search-icon{
-	background-image:url(../images/todo/search-2x.png);
+	background-image:url(../images/todo/PNG/search.png);
 	/*background-color: transparent;*/
 	background-position: 0px 0px;
 	border: none; 
@@ -55,45 +55,128 @@ body {
 	left:-40px;
 	top:-2px;
 	background-color:white;
+	
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
 }
 #Search-icon:hover{
-	background-image:url(../images/todo/search-orange-2x.png);
+	background-image:url(../images/todo/PNG-white/search.png);
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
 }
 #Search-icon:active, #Search-icon:focus{
 	outline:none;
 }
-#Menu-div{
-	background-color:transparent;
-	height:80px;
-	width:250px;
+#Menu-wrapper{
+	width:270px;
+	height: 90px;
 	float:right;
 	margin-top:-60px;
-	margin-right:2px;
+	border-radius: 6px;
 }
-#Menu-div a{
-
-	width:80px;
-	height:80px;
+#Menu-div{
+}
+#Home-div{
+	height:auto;
+	width:90px;;
 	float:right;
 }
-#Menu-div a img{
-	background-position:center;
+#Notification-div{
+	height:auto;
+	width:90px;
+	float:right;
 }
+#Exit-div{
+	height:auto;
+	width:90px;
+	float:right;
+}
+#Menu-div a{
+	border:none;
+	padding-top:100%;
+}
+
 #Home-icon{
-	background-image:url(../images/todo/PNG/home.png);
+	background-image:url(../images/todo/PNG-white/home.png);
 	background-repeat: no-repeat;
-	width:80px;
-	height:80px;
+	border-radius:6px;
+	background-position:center;
+	background-size:auto;
+	width:90px;
+	height:88px;
+	
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Home-icon:hover, #Home-icon:focus{
+	background-color:#6D849C;
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Home-icon:active{
+	background-color:#141E29;
 }
 #Exit-icon{
-	background-image:url(../images/todo/PNG/exit.png);
+	background-image:url(../images/todo/PNG-white/exit.png);
 	background-repeat: no-repeat;
-	width:80px;
-	height:80px;
+	background-position:center;
+	border-radius:6px;
+	background-size:auto;
+	width:90px;
+	height:88px;
+	
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Exit-icon:hover, #Exit-icon:focus{
+	background-color:#6D849C;
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Exit-icon:active{
+	background-color:#141E29;
 }
 #Notification-icon{
-	background-image:url(../images/todo/PNG/notification.png);
+	background-image:url(../images/todo/PNG-white/notification.png);
 	background-repeat: no-repeat;
-	width:80px;
-	height:80px;
+	background-position:center;
+	background-size:auto;
+	border-radius:6px;
+	width:90px;
+	height:88px;
+	
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Notification-icon:hover, #Notification-icon:focus{
+	background-color:#6D849C;
+	-webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+#Notification-icon:active{
+	background-color:#141E29;
 }
