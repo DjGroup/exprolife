@@ -6,7 +6,15 @@ body {
   color: #333;
   font-size: 12px;
   line-height: 20px;
-  background-color:rgb(244, 224, 249);
+background: #f7f7f7; /* Old browsers */
+background: -moz-linear-gradient(top,  #f7f7f7 0%, #f4e0f9 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f4e0f9)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f7f7f7 0%,#f4e0f9 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f7f7f7 0%,#f4e0f9 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f7f7f7 0%,#f4e0f9 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #f7f7f7 0%,#f4e0f9 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f4e0f9',GradientType=0 ); /* IE6-9 */
+
 }
 .header{
 	background-color:rgb(44,62,80);
@@ -179,4 +187,30 @@ body {
 }
 #Notification-icon:active{
 	background-color:#141E29;
+}
+#Main-div{
+	/*background-color:blue;*/
+	width:100%;
+}
+#Col-1{
+	background-color:rgba(255, 255, 255, 0.3);
+	width:20%;
+	height:1000px;
+	margin-left:80px;
+	top:50px;
+	position:relative;
+	
+	border-radius: 6px;
+	box-shadow: 0px 5px 20px #444;
+
+}
+#Col-2{
+	width:65%;
+	height:1000px;
+	top:50px;
+	float:right;
+	position:relative;
+	left: 200px;
+	border-radius: 6px;
+	box-shadow: 0px 5px 20px #444;
 }
