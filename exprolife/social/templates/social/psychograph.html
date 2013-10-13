@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat-ui.css' %}">
+        <title>Psychograph</title>
+    </head>
+
+    <body>
+        <div class="header">
+        	<div id="Logo-image">
+        		<img  src="logo.png"/>
+            </div>
+            <div id="Search-div">
+          		<form id="Search-form">
+            		<label id="Search-label">Search</label>
+              		<input type="text" placeholder="Projects, People" id="Search-input" class="form-control flat" />
+                    <input type="button" id="Search-icon" />
+            	</form>
+            </div>
+            <div id="Menu-wrapper">
+            	<div id="Menu-div">
+            		<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>
+                    <div id="Home-div"><a id="Home-link" href="#"><div id="Home-icon"></div></a></div>
+                    <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
+        	    </div>
+            </div>
+        </div>
+
+        <div id="Main-div">
+        	<div id="Col-2">
+            </div>
+        	<div id="Col-1">
+            </div>
+        </div>
+    </body>
+</html>
