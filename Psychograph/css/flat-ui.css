@@ -1272,7 +1272,7 @@ fieldset[disabled] .form-control {
   cursor: default;
 }
 .form-control.flat {
-  border-color: transparent;
+  /*border-color: transparent;*/
 }
 .form-control.flat:hover {
   border-color: #bdc3c7;
