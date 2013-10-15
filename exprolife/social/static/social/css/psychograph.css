@@ -214,3 +214,76 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 	border-radius: 6px;
 	box-shadow: 0px 5px 20px #444;
 }
+
+/* this is search box appearance*/
+#search{
+    float: left;
+    font-size: 20px;
+    width: 500;
+    padding-left: 20px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 5px solid #7b158a;
+    -moz-border-radius: 50px 0px 0px 50px;
+    -webkit-border-radius: 50px 0px 0px 50px;
+    border-radius: 50px 0px 0px 50px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: 0px 0px 20px #030501;
+    -webkit-box-shadow: 0px 0px 20px #030501;
+    box-shadow: 0px 0px 20px #030501;
+    /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    opacity: 0.43;
+}
+
+#searchSection{
+    margin-left: 20px;
+    float:left;
+    width:600px;
+}
+
+#searchResultSection{
+    position: fixed;
+    overflow: auto;
+    display: none;
+    z-index: 9999;
+    width: 580px;
+    height:70px;
+    background: #658be6;
+    top: 70px;
+    left: 320px;
+    box-shadow: 10px 10px 20px ,
+    0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+    0 10px rgba(0, 0, 0, 0.05) inset,
+    0 0px 5px 2px rgba(0, 121, 255, 0.74),
+    0 0px 10px 2px rgba(5, 0, 255, 0.74) inset;
+}
+
+#innerSearch{
+    margin: 20px 10px 0 10px;
+}
+
+    /*every user item search height is 70px*/
+.itemSearch{
+    cursor: pointer;
+    width:100%;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.itemSearch img{
+    margin: 5px 0 0 20px;
+    float: left;
+}
+
+.itemSearch p{
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.itemSearch img, .itemSearch p{
+    float:left;
+}
+
+.ajaxLogoSearch, .notfound{
+    text-align: center;
+}

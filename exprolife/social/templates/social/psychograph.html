@@ -19,6 +19,18 @@
                     <input type="button" id="Search-icon" />
             	</form>
             </div>
+            <div id="searchResultSection">
+                <div id="innerSearch">
+                    <div class="ajaxLogoSearch">
+                        <img src="../../static/social/images/loading.gif" height="40px">
+                    </div>
+                    <div class="notfound">
+                        <p>Nothing found please try something else</p>
+                    </div>
+                    <div class="itemSearch">
+                    </div>
+                </div>
+            </div>
             <div id="Menu-wrapper">
             	<div id="Menu-div">
             		<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>
@@ -34,5 +46,7 @@
         	<div id="Col-1">
             </div>
         </div>
+        <script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+        <script src="{% static 'social/js/psychographPage.js' %}"></script>
     </body>
 </html>

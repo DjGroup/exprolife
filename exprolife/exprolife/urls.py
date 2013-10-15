@@ -17,4 +17,6 @@ urlpatterns = patterns('',
 
     # enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^ajax/', include('ajax.urls', namespace="ajax"))
 )
