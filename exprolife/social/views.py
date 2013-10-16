@@ -25,9 +25,7 @@ def index(request):
             return HttpResponse(template.render(context))
     try:
         try:
-                #register
-				
-				#password hashing
+                #register with password hashing
                 hashed_password = MD5.new()
                 hashed_password.update(request.POST['password'])
                 user = User.objects.create(firstName=request.POST['firstname'],
@@ -57,7 +55,8 @@ def index(request):
                 #if user exists (means email exists )
                 if loginedUser:
                     #check the password
-					hashed_password.update(request.POST['password'])
+                    hashed_password = MD5.new()
+                    hashed_password.update(request.POST['password'])
                     if loginedUser[0].password == hashed_password.hexdigest():
                         request.session['user_id'] = loginedUser[0].id
                         request.session['first_name'] = loginedUser[0].firstName

@@ -36,7 +36,7 @@ $(document).ready(function(){
                     else{
                         var searchResult = $("#searchResultSection");
                         $(".ajaxLogoSearch").hide();
-                        searchResult.css({"height":20});
+                        searchResult.height("20px");
 
                         for(var i=0;i<result.users.length;i++){
                             var content = '<div class="itemSearch">\
@@ -44,7 +44,7 @@ $(document).ready(function(){
                     <p class="firstname">'+ result.users[i].firstname+ '</p><p class="lastname">'+ result.users[i].lastname +'</p></div>';
                             if(searchResult.height() < 370){
 
-                                searchResult.height("+=70px");
+//                                searchResult.height("+=70px");
                             }
                             $("#innerSearch").append(content);
                         }
