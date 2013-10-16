@@ -53,6 +53,9 @@ a:focus {
 	background-color:rgb(44,62,80);
 	height:90px;
 	border-radius:6px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 .psychograph-input{
     border: 2px solid #bdc3c7;
@@ -265,17 +268,16 @@ a:focus {
 	background-color:#141E29;
 }
 #Main-div{
-	width:1366px;
-	height:900px
+	width:100%;
+	height:100%;
 }
 #Col-1{
 	background-color:rgba(255, 255, 255, 0.3);
 	width:269px;
 	height:700px;
 	margin-left:80px;
-	top:50px;
+	top:150px;
 	position:relative;
-	
 	border-radius: 6px;
 	box-shadow: 0px 5px 20px #444;
 
@@ -283,7 +285,7 @@ a:focus {
 #Col-2{
 	width:800px;
 	height:700px;
-	top:50px;
+	top:150px;
 	right:-170px;
 	float:right;
 	position:relative;

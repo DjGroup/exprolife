@@ -36,13 +36,14 @@ $(document).ready(function(){
                     else{
                         var searchResult = $("#searchResultSection");
                         $(".ajaxLogoSearch").hide();
-                       searchResult.css({"height":20});
+                        searchResult.css({"height":20});
 
                         for(var i=0;i<result.users.length;i++){
                             var content = '<div class="itemSearch">\
                     <img src="../../static/social/images/defaultMaleImage.png" height="50px">\
                     <p class="firstname">'+ result.users[i].firstname+ '</p><p class="lastname">'+ result.users[i].lastname +'</p></div>';
                             if(searchResult.height() < 370){
+
                                 searchResult.height("+=70px");
                             }
                             $("#innerSearch").append(content);
