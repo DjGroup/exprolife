@@ -6,7 +6,7 @@
     <body>
         <!-- this is the gray layer that covered all of the screen when REGISTER clicked-->
         <div id="fadeLayer"></div>
-        <form action="/" method="post" >
+        <form id="mainRegisterForm" action="/" method="post" >
             {% csrf_token %}
             <div id="registerForm">
                 <div id="leftRegisterContent">
@@ -18,16 +18,24 @@
                                 <input class= "RegisterInput" name="firstname" type="text" placeholder="First Name">
                                 <div class="arrow-left"></div>
                                 <div class="information">Firstname contains numbers and letters</div>
+                                <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>
                             <div class="fieldRow">
                                 <input class= "RegisterInput" name="lastname" type="text" placeholder="Last Name">
                                 <div class="arrow-left"></div>
                                 <div class="information">Lastname contains numbers and letters</div>
+                                <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>
                             <div class="fieldRow">
                                 <input class= "RegisterInput long1" name="email" type="text" placeholder="Email@address.com">
+
                                 <div class="arrow-left"></div>
                                 <div class="information">Enter valid Email address</div>
+                                <img class="ajaxEmailCheck long" src="{% static 'social/images/loading2.gif' %}" width="30px">
+                                <img class="correct long" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect long" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>
                             <div class="fieldRow" style="margin-top: 20px;">
                                 <input id="male" type="radio" name="gender" value="male">
@@ -39,16 +47,21 @@
                                 <input class= "RegisterInput" name="password" type="password" placeholder="password">
                                 <div class="arrow-left"></div>
                                 <div class="information">Enter your password (at least 6 characters)</div>
+                                <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>
                             <div class="fieldRow">
                                 <input class= "RegisterInput" name="rePass" type="password" placeholder="retype password">
                                 <div class="arrow-left"></div>
                                 <div class="information">retype your password</div>
+                                <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>
                         </div>
                     </div>
                     <input class="RegisterButton left red" type="button" value="Skip this step">
                     <input class="RegisterButton right green" type="submit" value="Continue">
+                    <img class="ajaxLogoRegister" width="80px" src="{% static 'social/images/loading3.gif' %}">
                     <div id="registerCloseIcon">
                         <img src="{% static 'social/images/close.png' %}" width="50px">
                     </div>
@@ -90,49 +103,42 @@
             </div>
         </div>
 		<div id="slideshow">
-		<img src="{% static 'social/images/slide1.jpg' %}" class="active">
-		<img src="{% static 'social/images/slide2.jpg' %}">
-		<img src="{% static 'social/images/slide3.jpg' %}">
-		<img src="{% static 'social/images/slide4.jpg' %}">
-		<img src="{% static 'social/images/slide5.jpg' %}">
-
-   
-</div>
+		    <img src="{% static 'social/images/slide1.jpg' %}" class="active">
+		    <img src="{% static 'social/images/slide2.jpg' %}">
+    		<img src="{% static 'social/images/slide3.jpg' %}">
+		    <img src="{% static 'social/images/slide4.jpg' %}">
+    		<img src="{% static 'social/images/slide5.jpg' %}">
+        </div>
         <script src="{% static 'social/js/jquery-1.2.6.min.js' %}"></script>
 
-<script type="text/javascript">
+        <script type="text/javascript">
+            function slideSwitch() {
+                var $active = $('#slideshow IMG.active');
+                if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
 
-function slideSwitch() {
-    var $active = $('#slideshow IMG.active');
+                // use this to pull the images in the order they appear in the markup
+                var $next =  $active.next().length ? $active.next()
+                    : $('#slideshow IMG:first');
 
-    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+                // uncomment the 3 lines below to pull the images in random order
 
-    // use this to pull the images in the order they appear in the markup
-    var $next =  $active.next().length ? $active.next()
-        : $('#slideshow IMG:first');
+                // var $sibs  = $active.siblings();
+                // var rndNum = Math.floor(Math.random() * $sibs.length );
+                // var $next  = $( $sibs[ rndNum ] );
+                $active.addClass('last-active');
 
-    // uncomment the 3 lines below to pull the images in random order
-    
-    // var $sibs  = $active.siblings();
-    // var rndNum = Math.floor(Math.random() * $sibs.length );
-    // var $next  = $( $sibs[ rndNum ] );
+                $next.css({opacity: 0.0})
+                    .addClass('active')
+                    .animate({opacity: 1.0}, 1000, function() {
+                        $active.removeClass('active last-active');
+                    });
+            }
 
+            $(function() {
+                setInterval( "slideSwitch()", 5000 );
+            });
 
-    $active.addClass('last-active');
-
-    $next.css({opacity: 0.0})
-        .addClass('active')
-        .animate({opacity: 1.0}, 1000, function() {
-            $active.removeClass('active last-active');
-        });
-}
-
-$(function() {
-    setInterval( "slideSwitch()", 5000 );
-});
-
-</script>
-
+        </script>
         <script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
         <script src="{% static 'social/js/homepage.js' %}"></script>
     </body>
