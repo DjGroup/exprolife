@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 #for password hashing
+#Crypto library can be downloaded from here: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 from Crypto.Hash import MD5
 
 from social.models import *
