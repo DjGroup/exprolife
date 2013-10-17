@@ -32,7 +32,7 @@ def registerCheck(request):
     #check that firstName is valid(containing number and letters only)
     firstName = request.REQUEST['firstname']
 
-    firstAndLastNameRegex = r'^[a-zA-Z0-9]*$'
+    firstAndLastNameRegex = r'^[a-zA-Z0-9]+$'
     emailRegex = r'[a-zA-Z0-9_]+(\.[a-zA-Z0-9_+])*@[a-zA-Z0-9_]+\.[a-zA-Z0-9_.+]{2,}$'
 
     isValidFirstName = re.match(firstAndLastNameRegex, firstName)

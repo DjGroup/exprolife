@@ -5,7 +5,7 @@ $(document).ready(function(){
     $("#Search-input").keyup(function(){
         $(".itemSearch").remove();
         $(".notfound").hide();
-        $("#searchResultSection").height("70px");
+//        $("#searchResultSection").height("70px");
 
         if(!$("#Search-input").val()){
             $("#searchResultSection").slideUp();
@@ -43,8 +43,7 @@ $(document).ready(function(){
                     <img src="../../static/social/images/defaultMaleImage.png" height="50px">\
                     <p class="firstname">'+ result.users[i].firstname+ '</p><p class="lastname">'+ result.users[i].lastname +'</p></div>';
                             if(searchResult.height() < 370){
-
-//                                searchResult.height("+=70px");
+                                searchResult.height("+=70px");
                             }
                             $("#innerSearch").append(content);
                         }

@@ -173,6 +173,9 @@ body{
                         height: 50px;
                         margin:10px 0 10px 0;
                     }
+                        label[for="male"], label[for="female"]{
+                            float:left;
+                        }
 
                     .ajaxEmailCheck, .correct, .notCorrect{
                         position: absolute;
@@ -285,6 +288,7 @@ body{
                         height: 80%;
                         background: #c9cbcd;
                     }
+
             #downContent{
                 width: 100%;
                 height: 12%;
