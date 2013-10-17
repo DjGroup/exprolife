@@ -3,6 +3,9 @@ from django.template import RequestContext, loader
 from django.http import HttpResponse
 from django.shortcuts import render
 
+#for password hashing
+from Crypto.Hash import MD5
+
 from social.models import *
 
 
@@ -23,9 +26,13 @@ def index(request):
     try:
         try:
                 #register
+				
+				#password hashing
+                hashed_password = MD5.new()
+                hashed_password.update(request.POST['password'])
                 user = User.objects.create(firstName=request.POST['firstname'],
                                            lastName=request.POST['lastname'],
-                                           password=request.POST['password'],
+                                           password=hashed_password.hexdigest(),
                                            email=request.POST['email'],
                                            sex=0 if request.POST['gender'] == 'male' else 1 if request.POST['gender'] ==
                                            'female' else -1,
@@ -50,7 +57,8 @@ def index(request):
                 #if user exists (means email exists )
                 if loginedUser:
                     #check the password
-                    if loginedUser[0].password == request.POST['password']:
+					hashed_password.update(request.POST['password'])
+                    if loginedUser[0].password == hashed_password.hexdigest():
                         request.session['user_id'] = loginedUser[0].id
                         request.session['first_name'] = loginedUser[0].firstName
                         request.session['last_name'] = loginedUser[0].lastName
