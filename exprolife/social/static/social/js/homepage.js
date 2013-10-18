@@ -12,6 +12,11 @@ function validateEmail(email) {
 }
 
 $(document).ready(function(){
+
+    $(".alert").delay(3000).fadeOut(1000);
+
+    $(".registerAlert").delay(5000).fadeOut(1000);
+
     $("#login").on("click" ,function(){
         if(!isLoginFormShown){
             $(this).find("h1").animate({
@@ -440,7 +445,4 @@ $(document).ready(function(){
             }
         });
     });
-//    function gotoHome(){
-//        document.mainRegisterForm.submit();
-//    }
 });

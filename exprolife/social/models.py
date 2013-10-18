@@ -9,5 +9,5 @@ class User(models.Model):
     score = models.IntegerField(default=0)
 
     #male=0 female=1
-    sex = models.BooleanField()
+    sex = models.BooleanField(blank=False, default=None)
     #image = models.ImageField()

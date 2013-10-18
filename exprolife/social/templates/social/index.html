@@ -4,11 +4,39 @@
         <link rel="stylesheet" href="{% static 'social/css/homepage.css' %}">
     </head>
     <body>
+    {% if error %}
+        <div class="alert">
+            <p> {{ error }} </p>
+        </div>
+    {% endif %}
+    {% if isNOTOK %}
+        <div class="registerAlert">
+            <h4> correct This Errors: </h4>
+            {% if FNE %}
+                <p> {{ FNE }}</p>
+            {% endif %}
+            {% if LNE %}
+                <p>{{ LNE }}</p>
+            {% endif %}
+            {% if EME %}
+                <p>{{ EME }}</p>
+            {% endif %}
+            {% if SXE %}
+                <p>{{ SXE }}</p>
+            {% endif %}
+            {% if PAE %}
+                <p>{{ PAE }}</p>
+            {% endif %}
+            {% if RPE %}
+                <p>{{ RPE }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
         <!-- this is the gray layer that covered all of the screen when REGISTER clicked-->
-        <div id="fadeLayer"></div>
+        <div id="fadeLayer" {% if isNOTOK %}style="display: block;" {% endif %}></div>
         <form id="mainRegisterForm" action="/" method="post" >
             {% csrf_token %}
-            <div id="registerForm">
+            <div id="registerForm" {% if isNOTOK %} style="display: block;" {% endif %}>
                 <div id="leftRegisterContent">
                     <div id="upContent">
                         <div id="innerUpContent">
@@ -62,7 +90,7 @@
                         </div>
                     </div>
                     <input class="RegisterButton left red" type="button" value="Skip this step">
-                    <input class="RegisterButton right green" type="submit" value="Continue">
+                    <input class="RegisterButton right green" name="registerSubmit" type="submit" value="Continue">
                     <img class="ajaxLogoRegister" width="80px" src="{% static 'social/images/loading3.gif' %}">
                     <div id="registerCloseIcon">
                         <img src="{% static 'social/images/close.png' %}" width="50px">
@@ -77,40 +105,50 @@
                 </div>
             </div>
         </form>
-        <div id="logo">
-            <img src="{% static 'social/images/logo.png' %}">
-        </div>
-        <div id="top">
-            <div id="loginClose">
-                <img src="{% static 'social/images/close.png' %}" width="30px">
+        <div id="header">
+            <div id="logo">
+                <img src="{% static 'social/images/logo.png' %}">
             </div>
-            <div id="login">
-                <h1>
-                    Login
-                </h1>
-                <form action="/" method="post" >
-                    {% csrf_token %}
-                    <div id="innerForm">
-                        <input class="input" name = "email" type="text" placeholder="Email Address">
-                        <input class="input" name = "password" type="password" placeholder="password">
-                        <input class="button" type="submit" value="Login">
-                    </div>
-                </form>
+            <div id="top">
+                <div id="loginClose">
+                    <img src="{% static 'social/images/close.png' %}" width="30px">
+                </div>
+                <div id="login">
+                    <h1>
+                        Login
+                    </h1>
+                    <form action="/" method="post" >
+                        {% csrf_token %}
+                        <div id="innerForm">
+                            <input class="input" name = "email" type="text" placeholder="Email Address">
+                            <input class="input" name = "password" type="password" placeholder="password">
+                            <input class="button" name="loginSubmit" type="submit" value="Login">
+                        </div>
+                    </form>
 
-            </div>
-            <div id="register">
-                <h1>
-                    Register
-                </h1>
+                </div>
+                <div id="register">
+                    <h1>
+                        Register
+                    </h1>
+                </div>
             </div>
         </div>
-		<div id="slideshow">
-		    <img src="{% static 'social/images/slide1.jpg' %}" class="active">
-		    <img src="{% static 'social/images/slide2.jpg' %}">
-    		<img src="{% static 'social/images/slide3.jpg' %}">
-		    <img src="{% static 'social/images/slide4.jpg' %}">
-    		<img src="{% static 'social/images/slide5.jpg' %}">
+        <div id="motto">
+            <h1>
+                EXperience PROfessional LIFE
+            </h1>
         </div>
+        <div id="slider">
+		    <div id="slideshow">
+    		    <img src="{% static 'social/images/slide1.jpg' %}" class="active">
+    		    <img src="{% static 'social/images/slide2.jpg' %}">
+        		<img src="{% static 'social/images/slide3.jpg' %}">
+    		    <img src="{% static 'social/images/slide4.jpg' %}">
+        		<img src="{% static 'social/images/slide5.jpg' %}">
+            </div>
+        </div>
+
         <script src="{% static 'social/js/jquery-1.2.6.min.js' %}"></script>
 
         <script type="text/javascript">
