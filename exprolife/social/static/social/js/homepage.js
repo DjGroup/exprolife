@@ -32,11 +32,20 @@ $(document).ready(function(){
         $("#loginClose").hide();
     });
 
-    $("#register").on("click" ,function(){
+    $("#register,#sign").on("click" ,function(){
         $("#fadeLayer").show();
         $("#registerForm").show();
     });
-
+   $("#about").on("click",function(){
+        $(".left4").find("li").text("Students of Iran University of Science and Technology : "+
+            " Pouria Faraji      " +
+            " Abolfazl Mahdizade , " +
+            " Yalda Khosroshahi , " +
+            " Mojtaba Kamyabi , " +
+            " Farshad Abdollahi , " +
+            " Ehsan Ahmadi , " +
+            " Kave Vahedi ").fadeIn(100);
+    });
     $("#registerCloseIcon").on("click" ,function(){
         $("#fadeLayer").hide();
         $("#registerForm").hide();
