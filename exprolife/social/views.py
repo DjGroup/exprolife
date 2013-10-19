@@ -1,9 +1,11 @@
 # Create your views here.
+from urllib import thishost
 from django.template import RequestContext, loader
 from django.http import HttpResponse
 from django.shortcuts import render
 
 #for password hashing
+#Download link of pyCrypto: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 from Crypto.Hash import MD5
 
 from social.models import *
@@ -20,8 +22,9 @@ def isset(dict, string):
 def index(request):
     #is currently logged in ?
     if isset(request.session, 'user_id') and isset(request.session, 'first_name') and isset(request.session, 'last_name') :
+            thisUser = User.objects.filter(id=request.session['user_id'])
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, )
+            context = RequestContext(request, {'myUser': thisUser[0]})
             return HttpResponse(template.render(context))
     if request.POST.get('registerSubmit'):
         #check that firstName is valid(containing number and letters only)
@@ -72,6 +75,7 @@ def index(request):
             request.session['user_id'] = user.id
             request.session['first_name'] = user.firstName
             request.session['last_name'] = user.lastName
+            request.session['email'] = user.email
             template = loader.get_template('social/psychograph.html')
             context = RequestContext(request, )
             return HttpResponse(template.render(context))
@@ -110,6 +114,7 @@ def index(request):
                     request.session['user_id'] = loginedUser[0].id
                     request.session['first_name'] = loginedUser[0].firstName
                     request.session['last_name'] = loginedUser[0].lastName
+                    request.session['email'] = loginedUser[0].email
                     template = loader.get_template('social/psychograph.html')
                     context = RequestContext(request, {
                     })

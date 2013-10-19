@@ -8,6 +8,7 @@ body {
     line-height: 1.231;
     width: 1320px;
     margin: 0 auto;
+    height: 1000px;
 background: #f7f7f7; /* Old browsers */
 background: -moz-linear-gradient(top,  #f7f7f7 0%, #f4e0f9 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f4e0f9)); /* Chrome,Safari4+ */
@@ -282,11 +283,20 @@ a:focus {
 	box-shadow: 0px 5px 20px #444;
 
 }
+#Col-1 p{
+    color: #34495e;
+    font-size: 1.2em;
+    margin-left:30px;
+}
+#Col-1 p label{
+    font-size: 1.2em;
+    font-weight: bold;
+}
 #Col-2{
 	width:800px;
 	height:700px;
 	top:150px;
-	right:-170px;
+	right:100px;
 	float:right;
 	position:relative;
 	border-radius: 6px;
