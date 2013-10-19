@@ -26,7 +26,7 @@ def index(request):
             template = loader.get_template('social/psychograph.html')
             context = RequestContext(request, {'myUser': thisUser[0]})
             return HttpResponse(template.render(context))
-    if request.POST.get('registerButton'):
+    if request.POST.get('registerSubmit'):
         #check that firstName is valid(containing number and letters only)
         firstName = request.POST['firstname']
         lastName = request.POST['lastname']
