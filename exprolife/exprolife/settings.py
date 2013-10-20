@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'exprolife',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': '872505651',
+        'PASSWORD': '',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -132,6 +132,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'social',
+    # The following line enable gravatar usage
+    'django_gravatar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -162,3 +164,10 @@ LOGGING = {
         },
     }
 }
+#these line are to set defaults for GRAVATAR
+GRAVATAR_URL = 'http://www.gravatar.com/'
+GRAVATAR_SECURE_URL = 'https://secure.gravatar.com/'
+GRAVATAR_DEFAULT_SIZE = 80
+GRAVATAR_DEFAULT_IMAGE = 'mm'
+GRAVATAR_DEFAULT_RATING = 'g'
+GRAVATAR_DEFAULT_SECURE = True
