@@ -36,7 +36,7 @@
     </div>
     <div id="Menu-wrapper">
         <div id="Menu-div">
-            <div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>
+            <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
             <div id="Home-div"><a id="Home-link" href="#"><div id="Home-icon"></div></a></div>
             <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
         </div>
@@ -57,14 +57,17 @@
                 <div class="tab-content">
                     <h3>Edit</h3>
                     <div id="Edit-form">
+                        <form method="post" action="/">
+                            {% csrf_token %}
                         <h3 class="form-label">First Name</h3>
-                        <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" />
+                        <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" name="edit-first" />
                         <h3 class="form-label">Last Name</h3>
-                        <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" />
+                        <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" name="edit-last" />
                         <h3 class="form-label">Email</h3>
-                        <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" />
+                        <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />
                         <br />
-                        <div id="Save-div"><a href="#fakelink"  id="Save-button">Save</a></div>
+                        <input type="submit" id="Save-button" name="saveButton" value="save" />
+                        </form>
                     </div>
                 </div>
                 <div class="tab-content">

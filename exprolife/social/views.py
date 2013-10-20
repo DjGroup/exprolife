@@ -22,10 +22,30 @@ def isset(dict, string):
 def index(request):
     #is currently logged in ?
     if isset(request.session, 'user_id') and isset(request.session, 'first_name') and isset(request.session, 'last_name') :
-            thisUser = User.objects.filter(id=request.session['user_id'])
-            template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': thisUser[0]})
-            return HttpResponse(template.render(context))
+            #This 'if' is for checking that save button in psychograph is clicked or not
+            if request.POST.get('saveButton'):
+                user_edit = User.objects.get(id=request.session['user_id'])
+                user_edit.firstName = request.POST['edit-first']  #changing First Name in Database
+                request.session['first_name'] = user_edit.firstName #Changing First Name in Session
+
+                user_edit.lastName = request.POST['edit-last']  #changing Last Name in Database
+                request.session['last_name'] = user_edit.lastName #Changing Last Name in Session
+
+                user_edit.email = request.POST['edit-email']  #changing Email in Database
+                request.session['email'] = user_edit.email #Changing Email in Session
+
+                user_edit.save()
+				
+				#Reloading from Database
+                changedUser = User.objects.filter(id=request.session['user_id'])
+                template = loader.get_template('social/psychograph.html')
+                context = RequestContext(request, {'myUser': changedUser[0]})
+                return HttpResponse(template.render(context))
+            else:
+                thisUser = User.objects.filter(id=request.session['user_id'])
+                template = loader.get_template('social/psychograph.html')
+                context = RequestContext(request, {'myUser': thisUser[0]})
+                return HttpResponse(template.render(context))
     if request.POST.get('registerButton'):
         #check that firstName is valid(containing number and letters only)
         firstName = request.POST['firstname']
