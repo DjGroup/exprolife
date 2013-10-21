@@ -96,8 +96,10 @@ def index(request):
             request.session['first_name'] = user.firstName
             request.session['last_name'] = user.lastName
             request.session['email'] = user.email
+			
+			theUser = User.objects.filter(id=request.session['user_id'])
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, )
+            context = RequestContext(request, {'myUser': theUser[0]})
             return HttpResponse(template.render(context))
         else:
             print 123
@@ -136,8 +138,7 @@ def index(request):
                     request.session['last_name'] = loginedUser[0].lastName
                     request.session['email'] = loginedUser[0].email
                     template = loader.get_template('social/psychograph.html')
-                    context = RequestContext(request, {
-                    })
+                    context = RequestContext(request, {'myUser': loginedUser[0]})
                     return HttpResponse(template.render(context))
                 else:
                     template = loader.get_template('social/index.html')
