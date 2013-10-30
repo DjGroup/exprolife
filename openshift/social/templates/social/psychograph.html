@@ -1,0 +1,105 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
+    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+    <script type="text/javascript" src="{% static 'social/js/script.js' %}"></script>
+    <title>Wellcome {{ request.session.first_name }}</title>
+</head>
+
+
+<body>
+<div class="header">
+    <div id="Logo-image">
+        <img src="{% static 'social/images/logo.png' %}" width="100px" height="100px">
+    </div>
+    <div id="Search-div">
+        <form id="Search-form">
+            <label id="Search-label">Search</label>
+            <input type="text" placeholder="Projects, People" id="Search-input" class="psychograph-input" />
+            <input type="button" id="Search-icon" />
+        </form>
+    </div>
+    <div id="searchResultSection">
+        <div id="innerSearch">
+            <div class="ajaxLogoSearch">
+                <img src="../../static/social/images/loading.gif" height="40px">
+            </div>
+            <div class="notfound">
+                <p>Nothing found please try something else</p>
+            </div>
+            <div class="itemSearch">
+            </div>
+        </div>
+    </div>
+    <div id="Menu-wrapper">
+        <div id="Menu-div">
+            <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
+            <div id="Home-div"><a id="Home-link" href="#"><div id="Home-icon"></div></a></div>
+            <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
+        </div>
+    </div>
+</div>
+
+<div id="Main-div">
+    <div id="Col-2">
+        <section id="wrapper" class="wrapper">
+            <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
+            <div id="v-nav">
+                <ul>
+                    <li tab="tab1" class="first current">Edit</li>
+                    <!--<li tab="tab2">Test1</li>
+                    <li tab="tab3">Test2</li>
+                    <li tab="tab4" class="last">Test3</li>-->
+                </ul>
+                <div class="tab-content">
+                    <h3>Edit</h3>
+                    <div id="Edit-form">
+                        <form method="post" action="/">
+                            {% csrf_token %}
+                        <h3 class="form-label">First Name</h3>
+                        <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" name="edit-first" />
+                        <h3 class="form-label">Last Name</h3>
+                        <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" name="edit-last" />
+                        <h3 class="form-label">Email</h3>
+                        <input type="text" disabled="disabled" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />
+                        <br />
+                        <input type="submit" id="Save-button" name="saveButton" value="save" />
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <h3>Test1</h3>
+                </div>
+                <div class="tab-content">
+                    <h3>Test2</h3>
+                </div>
+                <div class="tab-content">
+                    <h3>Test3</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="Col-1">
+
+        <div id="Psychograph-image-div">
+            <div id="Psychograph-image" style="background-image:url({{ myUrl }});"></div>
+        </div>
+        <div id="Score-div">
+            <label id="Score">Score</label>
+            <span id="Score-text">{{ myUser.score }}</span>
+        </div>
+        <p><label>First Name: </label>{{ myUser.firstName }}</p>
+        <p><label>Last Name: </label>{{ myUser.lastName }}</p>
+        <p><label>Email: </label>{{ myUser.email }}</p>
+    </div>
+</div>
+<div id="down-footer">
+    <li> CopyRight 2013 - ExProLife </li>
+</div>
+<script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script src="{% static 'social/js/psychographPage.js' %}"></script>
+</body>
+</html>
