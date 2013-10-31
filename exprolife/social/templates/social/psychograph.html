@@ -50,8 +50,10 @@
             <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
             <div id="v-nav">
                 <ul>
-   		    <li tab="tab1" class="first current">Board</li>
+   		            <li tab="tab1" class="first current">Board</li>
                     <li tab="tab2" >Edit</li>
+                    <li tab="tab2" class="second current">Add Competence</li>
+
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
                 </ul>
@@ -103,7 +105,37 @@ be thankful if anybody could help me.
                 </div>
                 
                 <div class="tab-content">
-                    <h3>Test2</h3>
+                    <h3>Add Your Competences</h3>
+                    <div id="Competence-form">
+                        <form method="post" action="/">
+                            {% csrf_token %}
+                            <h3 class="form-label">Title</h3>
+                            <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
+                            <h3 class="form-label">Description</h3>
+                            <input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />
+                            <!--<h3 class="form-label">Email</h3>
+                            <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
+                            <h3 class="form-label">Tags</h3>
+                            <input type="text" id="Tags-text" class="psychograph-input"  name="comp-tag" />
+                            <h3 class="form-label">Developers</h3>
+                            <input type="text" id="Developers-text" class="psychograph-input"  name="comp-developer" />
+                            <h3 class="form-label">Manager</h3>
+                            <input type="text" id="Manager-text" class="psychograph-input"  name="comp-manager" />
+                            <h3 class="form-label">Picture</h3>
+                            <input type="text" id="Picture-text" class="psychograph-input"  name="comp-pic" />
+                            <input type="submit" id="PicBrowse-button" name="comp-picBrowseButton" value="Browse" />
+                            <input type="submit" id="Default-button" name="comp-defaultButton" value="Default" />
+                            <h3 class="form-label">Release Date</h3>
+                            <input type="text" id="ReleaseDate-text" class="psychograph-input" name="comp-releasedate" placeholder="If Competence Published"  />
+                            <h3 class="form-label">Source Code</h3>
+                            <input type="text" id="Code-text" class="psychograph-input"  name="comp-code" />
+                            <input type="submit" id="CodeBrowse-button" name="comp-codeBrowseButton" value="Browse" />
+                            <h3 class="form-label">Usage</h3>
+                            <input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />
+                            <br />
+                            <input type="submit" id="Save-button" name="saveButton" value="save" />
+                        </form>
+                    </div>
                 </div>
                 <div class="tab-content">
                     <h3>Test3</h3>
