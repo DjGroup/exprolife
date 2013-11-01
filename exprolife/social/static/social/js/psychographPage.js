@@ -62,4 +62,17 @@ $(document).ready(function(){
             });
         }
     });
+    $('.first').on("click", function(){
+        $('#Col-1').fadeOut("fast", function(){
+            $('#Col-2').animate({
+                width:"1100px"
+            }, "slow");
+        });
+    });
+    $('#v-nav').children().first().children().not(".first").on("click", function(){
+        $('#Col-2').animate({
+                width:"800px"
+            }, "slow");
+        $('#Col-1').delay(500).fadeIn("slow");
+    });
 });

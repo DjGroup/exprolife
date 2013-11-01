@@ -275,6 +275,7 @@ a:focus {
 	/*height:100%*/;
 }
 #Col-1{
+    display: none;
 	background-color:rgba(255, 255, 255, 0.3);
 	width:269px;
 	height:700px;
@@ -295,7 +296,7 @@ a:focus {
     font-weight: bold;
 }
 #Col-2{
-	width:800px;
+	width:1100px;
 	/*height:1200px;*/
 	min-height:700px;
 	top:150px;
@@ -400,6 +401,7 @@ a:focus {
 
 #v-nav >ul >li
 {
+    cursor: pointer;
     width: 100px;
     list-style-type: none;
     display: block;
