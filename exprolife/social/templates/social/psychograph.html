@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
@@ -69,6 +69,25 @@
 							</div>
 							<input type="submit" id="Post-button" name="PostSubmitButton" value="Post" />
 						</form>
+						<span class="project-div">
+							<div class="project-desc">
+								<h3>Genetic Algorithm</h3>
+								<span>This project which is implemented by Java and PHP is one of the best projects that is created 
+								on earth. Different kinds of frameworks and languages are used in order to produce a very high level
+								application and ...</span>
+								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>
+								<div class="project-tag">
+									<div class="tag-span">Java</div>
+									<div class="tag-span">PHP</div>
+									<div class="tag-span">...</div>
+								</div>
+							</div>
+							<div class="project-image">
+								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">
+								<div class="score-number">3555</div></div>
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>
+							</div>
+						</span>
 						<div class="post-div">
 							<div class="post-body">This post is for test. A test project is made by me which need to be completed. I would
 be thankful if anybody could help me.
@@ -85,6 +104,46 @@ be thankful if anybody could help me.
 								Posted Jan 15, 2012 at 10:54 pm
 							</div>
 						</div>
+						<span class="project-div">
+							<div class="project-desc">
+								<h3>Machine Learning with python</h3>
+								<span>This project aims a very professional aspect of the machine learning field that is 
+								implemented by the python language...</span>
+								<div class="project-date">Created Dec 12, 2013 at 7:12 pm</div>
+								<div class="project-tag">
+									<div class="tag-span">Python</div>
+									<div class="tag-span">C++</div>
+									<div class="tag-span">Java</div>
+									<div class="tag-span">ANTLR</div>
+									<div class="tag-span">Microsoft office</div>
+									<div class="tag-span">...</div>
+								</div>
+							</div>
+							<div class="project-image">
+								<div class="project-score" style="background-image: url(../../static/social/images/logos/wet_asphalt.png);">
+								<div class="score-number">35</div></div>
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>
+							</div>
+						</span>
+						
+						<span class="project-div">
+							<div class="project-desc">
+								<h3>Image Processing with OpenCV</h3>
+								<span>This project is about image processing with a C++ library called OpenCV. This library is used because
+								it's fast and furious. There were other libraries but I prefered to choose only this one so ...</span>
+								<div class="project-date">Created Apr 30, 2011 at 10:20 am</div>
+								<div class="project-tag">
+									<div class="tag-span">OpenCV</div>
+									<div class="tag-span">C++</div>
+								</div>
+							</div>
+							<div class="project-image">
+								<div class="project-score" style="background-image: url(../../static/social/images/logos/alizarin.png);">
+								<div class="score-number">0</div></div>
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/opencv-logo.png);"></div>
+							</div>
+						</span>
+						
 			    	</div>
                 </div>
                 <div class="tab-content">
@@ -110,7 +169,7 @@ be thankful if anybody could help me.
                         <form method="post" action="/">
                             {% csrf_token %}
                             <h3 class="form-label">Title</h3>
-                            <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
+                            <input type="text" id="Title-text" class="psychograph-input" name="comp-title"  />
                             <h3 class="form-label">Description</h3>
                             <input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />
                             <!--<h3 class="form-label">Email</h3>
