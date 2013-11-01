@@ -3,18 +3,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/script.js' %}"></script>
-    <title>Welcome {{ request.session.first_name }}</title>
+    <title>Wellcome {{ request.session.first_name }}</title>
 </head>
 
 
 <body>
 <div class="header">
     <div id="Logo-image">
-        <img  src="{% static 'social/images/logo.png' %}"/>
+        <img  src="logo.png"/>
     </div>
     <div id="Search-div">
         <form id="Search-form">
@@ -50,24 +49,11 @@
             <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
             <div id="v-nav">
                 <ul>
-   		    <li tab="tab1" class="first current">Board</li>
-                    <li tab="tab2" >Edit</li>
-                    <!--<li tab="tab3">Test2</li>
+                    <li tab="tab1" class="first current">Edit</li>
+                    <!--<li tab="tab2">Test1</li>
+                    <li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
                 </ul>
-				<div class="tab-content">
-	            <h3>Post</h3>
-			    	<div id="Board-div">
-						<form id="Board-form">
-						    <textarea placeholder="Enter your post here" class="psychograph-input"></textarea>
-							<h3>Tags</h3>
-							<!--<input name="psychograph-input" class="psychograph-input" id="Tag-input" value="Clean,Fresh,Modern" />-->
-							<div id="Tag-div">
-							<input name="tagsinput" class="tagsinput" value="Clean,Fresh,Modern" id="Tag-input" />
-							</div>
-						</form>
-			    	</div>
-                </div>
                 <div class="tab-content">
                     <h3>Edit</h3>
                     <div id="Edit-form">
@@ -84,7 +70,9 @@
                         </form>
                     </div>
                 </div>
-                
+                <div class="tab-content">
+                    <h3>Test1</h3>
+                </div>
                 <div class="tab-content">
                     <h3>Test2</h3>
                 </div>
@@ -107,17 +95,11 @@
         <p><label>Last Name: </label>{{ myUser.lastName }}</p>
         <p><label>Email: </label>{{ myUser.email }}</p>
     </div>
-</div>
 <div id="down-footer">
    <li> CopyRight 2013 - ExProLife </li>
 </div>
-
+</div>
 <script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
 <script src="{% static 'social/js/psychographPage.js' %}"></script>
-<script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
-<script src="{% static 'social/js/flat/application.js' %}"></script>
-<script src="{% static 'social/js/flat/bootstrap.min.js' %}"></script>
-<script src="{% static 'social/js/flat/bootstrap-select.js' %}"></script>
-<script src="{% static 'social/js/flat/jquery-1.8.3.min.js' %}"></script>
 </body>
 </html>
