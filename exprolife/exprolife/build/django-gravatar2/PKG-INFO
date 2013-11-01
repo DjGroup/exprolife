@@ -1,0 +1,121 @@
+Metadata-Version: 1.1
+Name: django-gravatar2
+Version: 1.1.3
+Summary: Essential Gravatar support for Django. Features helper methods, templatetags and a full test suite!
+Home-page: https://github.com/twaddington/django-gravatar
+Author: Tristan Waddington
+Author-email: tristan.waddington@gmail.com
+License: Copyright (c) 2013 Tristan Waddington <tristan.waddington@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Description: django-gravatar
+        ================
+        A lightweight django-gravatar app. Includes helper methods for interacting with gravatars outside of template code.
+        
+        .. image:: https://secure.travis-ci.org/twaddington/django-gravatar.png
+           :target: http://travis-ci.org/twaddington/django-gravatar
+        
+        Features
+        ========
+        
+        - Helper methods for constructing a gravatar url and checking an email for an existing gravatar
+        - Templatetags for generating a gravatar url or gravatar <img> tag.
+        - Full test suite!
+        
+        Installing
+        ==========
+        Install from PyPi:
+        
+        ::
+        
+            $ pip install django-gravatar2
+        
+        Make sure you install `django-gravatar2 <http://pypi.python.org/pypi/django-gravatar2>`_ as
+        there are several other incompatible django-gravatar libraries available.
+        
+        Add django_gravatar to your INSTALLED_APPS in settings.py:
+        
+        ::
+        
+            INSTALLED_APPS = (
+                # ...
+                'django_gravatar',
+            )
+        
+        Basic Usage
+        ===========
+        Use in code:
+        
+        ::
+        
+            from django_gravatar.helpers import get_gravatar_url, has_gravatar
+        
+            url = get_gravatar_url('alice@example.com', size=150)
+            gravatar_exists = has_gravatar('bob@example.com')
+        
+        Use in templates:
+        
+        ::
+        
+            {% load gravatar %}
+        
+            {% gravatar_url user.email 150 %}
+            # https://secure.gravatar.com/avatar/hash.jpg?size=150
+        
+            {% gravatar user.email 150 %}
+            # <img class="gravatar" src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="150" height="150" alt="" />
+        
+            {% gravatar user.email 150 "user@example.com" %}
+            # <img class="gravatar" src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="150" height="150" alt="user@example.com" />
+        
+        Configuring
+        ===========
+        The following options can be configured in your settings.py:
+        
+        GRAVATAR_URL            # Gravatar base url. Defaults to 'http://www.gravatar.com/'
+        
+        GRAVATAR_SECURE_URL     # Gravatar base secure https url. Defaults to 'https://secure.gravatar.com/'
+        
+        GRAVATAR_DEFAULT_SIZE   # Gravatar size in pixels. Defaults to '80'
+        
+        GRAVATAR_DEFAULT_IMAGE  # An image url or one of the following: 'mm', 'identicon', 'monsterid', 'wavatar', 'retro'. Defaults to 'mm'
+        
+        GRAVATAR_DEFAULT_RATING # One of the following: 'g', 'pg', 'r', 'x'. Defaults to 'g'
+        
+        GRAVATAR_DEFAULT_SECURE # True to use https by default, False for plain http. Defaults to True
+        
+        Contributing
+        ============
+        Feel free to `fork django-gravatar <https://github.com/twaddington/django-gravatar>`_
+        on GitHub! We'd love to see your pull requests. Please make sure you run
+        tests before submitting a patch.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Framework :: Django

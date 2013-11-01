@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README
+README.rst
+setup.py
+django_gravatar/__init__.py
+django_gravatar/compat.py
+django_gravatar/helpers.py
+django_gravatar/models.py
+django_gravatar/tests.py
+django_gravatar/views.py
+django_gravatar/templatetags/__init__.py
+django_gravatar/templatetags/gravatar.py
+django_gravatar2.egg-info/PKG-INFO
+django_gravatar2.egg-info/SOURCES.txt
+django_gravatar2.egg-info/dependency_links.txt
+django_gravatar2.egg-info/top_level.txt

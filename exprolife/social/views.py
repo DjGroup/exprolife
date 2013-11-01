@@ -10,7 +10,9 @@ import hashlib
 #for password hashing
 #Download link of pyCrypto: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 from Crypto.Hash import MD5
-
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from social.models import *
 import re
 
@@ -171,3 +173,28 @@ def index(request):
     else:
         return render(request, 'social/index.html')
         #is this except really need ? => must be think later
+
+
+def nameDetailIndex(request, first_name, last_name, queueNumber=None):
+    try:
+        user = User.objects.filter(firstName=first_name, lastName=last_name)
+        if user:
+            if not queueNumber:
+                if len(user) > 1:
+                    user = user[0]
+            else:
+                #start id counter from 1 not 0 because style of URL :D
+
+                user = user[int(queueNumber)-1]
+        else:
+            raise Http404
+        return render(request, 'social/psychograph.html', {
+            'user': user
+        })
+    except:
+        raise Http404
+
+
+def idDetailIndex(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    return redirect('FLSocial', first_name=user.firstName, last_name=user.lastName)

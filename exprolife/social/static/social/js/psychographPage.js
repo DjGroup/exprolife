@@ -51,7 +51,12 @@ $(document).ready(function(){
                             $(this).css({"background":"rgb(55, 108, 221)"});
                         },function(){
                             $(this).css({"background":"#658be6"});
-                        });
+                        })
+                            .on("click", function(){
+                                var first = $(this).children().first().next().text();
+                                var last = $(this).children().first().next().next().text();
+                                document.location.href= '/' + first + '.' + last;
+                            });
                     }
                 }
             });

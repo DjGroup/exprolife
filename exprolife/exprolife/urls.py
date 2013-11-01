@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from social import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -18,5 +19,11 @@ urlpatterns = patterns('',
     # enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^ajax/', include('ajax.urls', namespace="ajax"))
+    url(r'^ajax/', include('ajax.urls', namespace="ajax")),
+
+    #see the profile of members in the public (with privileges ):domain.com/firstName.lastName
+    url(r'^(?P<first_name>\w+).(?P<last_name>\w+)(.)?(?P<queueNumber>\d+)?/$', views.nameDetailIndex, name="FLSocial"),
+
+    #same but with user_id:domain.com/10052
+    url(r'^(?P<user_id>\d+)/$', views.idDetailIndex, name="IDSocial"),
 )
