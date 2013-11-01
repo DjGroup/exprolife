@@ -3,6 +3,7 @@
 
 body {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
+  word-wrap: break-word;
   color: #333;
     font-size: 14px;
     line-height: 1.231;
@@ -655,6 +656,94 @@ a:focus {
 	font-family: 'Lato', Helvetica, Arial, sans-serif;
 	direction:rtl;
 	margin-top:10px;
+}
+.project-div{
+	margin-top: 10px;
+	display: inline-block;	
+	border-bottom:1px dotted #727CC2;
+	padding-bottom:10px;
+}
+.project-score{
+	background-color: red;
+	width: 75px;
+	height: 75px;
+	z-index: 1;
+	position: absolute;
+	background-position:center;
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-color: transparent;
+}
+.score-number{
+	font-size: 22px;
+	color: white;
+	font-weight: bold;
+	font-family: Agency FB;
+	position: relative;
+	top: 16px;
+	right: 12px;
+	text-align: center;
+	width: 100%;
+	transform:rotate(-45deg);
+	-o-transform: rotate(-45deg);
+   -moz-transform: rotate(-45deg);
+   -webkit-transform: rotate(-45deg);
+}
+.project-image{
+	background-color: #ECF0F1;
+	width: 150px;
+	height: 150px;
+	display: block;
+	float: left;
+}
+.project-desc{
+	float: right;
+	width: 400px;
+	min-height: 150px;
+	margin-left: 15px;
+}
+.project-desc h3{
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-size: 2.2em;
+}
+.project-tag{
+	width: 225px;
+	margin-top: 20px;
+	float: left;
+}
+.tag-span{
+	background-color: #BDC3C7;
+	font-size: 13px;
+	border-radius:6px;
+	margin-right: 7px;
+	padding: 6.5px;
+	padding-right: 9px;
+	padding-left: 9px;
+	float: left;
+	margin-top: 5px;
+	
+}
+.project-date{
+	color:#999;
+	font-style:italic;
+	font-size:11px;
+	font-family: 'Lato', Helvetica, Arial, sans-serif;
+	direction:rtl;
+	margin-top:40px;
+	width: 170px;
+	float: right;
+	}
+.project-logo{
+	background-position:center;
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-color: transparent;
+	position: relative;
+	top: 25px;
+	margin: auto;
+	width: 100px;
+	height: 100px;
 }
 #down-footer{
     float: left;
