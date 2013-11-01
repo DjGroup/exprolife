@@ -1743,6 +1743,8 @@ fieldset[disabled] .form-control + .input-icon,
   padding: 6px 1px 1px 6px;
   overflow-y: auto;
   text-align: left;
+  min-width:200px;
+  display:table-cell;
 }
 .tagsinput .tag {
   border-radius: 4px;
@@ -1786,6 +1788,13 @@ fieldset[disabled] .form-control + .input-icon,
   width: 12px;
 }
 .tagsinput-remove-link {
+
+  background-image:url(../../images/psychograph/todo/PNG-white/close.png);
+  background-repeat: no-repeat;
+  background-position:right;
+  background-size:8px;
+  margin-right:5px;
+
   bottom: 0;
   color: #ffffff;
   cursor: pointer;
@@ -1803,8 +1812,8 @@ fieldset[disabled] .form-control + .input-icon,
 }
 .tagsinput-remove-link:before {
   color: #ffffff;
-  content: "\e00b";
-  font-family: "Flat-UI-Icons";
+  /*content: "\e00b";
+  font-family: "Flat-UI-Icons";*/
 }
 .tagsinput-add-container {
   vertical-align: middle;
@@ -1812,6 +1821,13 @@ fieldset[disabled] .form-control + .input-icon,
 }
 .tagsinput-add {
   background-color: #d6dbdf;
+
+  background-image:url(../../images/psychograph/todo/PNG-white/plus.png);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size:11px;
+  width:10px;
+  height:10px;
   border-radius: 3px;
   color: #ffffff;
   cursor: pointer;
@@ -1828,8 +1844,8 @@ fieldset[disabled] .form-control + .input-icon,
   background-color: #1abc9c;
 }
 .tagsinput-add:before {
-  content: "\e009";
-  font-family: "Flat-UI-Icons";
+  /*content: "\e009";
+  font-family: "Flat-UI-Icons";*/
 }
 .tags_clear {
   clear: both;

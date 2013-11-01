@@ -6,9 +6,9 @@ body {
   color: #333;
     font-size: 14px;
     line-height: 1.231;
-    width: 1320px;
+    width: 1286px;
     margin: 0 auto;
-    height: 1000px;
+    /*height: 100%;*/
 background: #f7f7f7; /* Old browsers */
 background: -moz-linear-gradient(top,  #f7f7f7 0%, #f4e0f9 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f4e0f9)); /* Chrome,Safari4+ */
@@ -105,8 +105,10 @@ a:focus {
 	width: 150px;
 }
 #Logo-image img{
-	width:100%;
-	height:100%;
+	/*width:100%;
+	height:100%;*/
+	width: 250px;
+        height: 80px;
 	margin-top: 10px;
 	margin-left:10px;
 }
@@ -270,7 +272,7 @@ a:focus {
 }
 #Main-div{
 	width:100%;
-	height:100%;
+	/*height:100%*/;
 }
 #Col-1{
 	background-color:rgba(255, 255, 255, 0.3);
@@ -294,10 +296,12 @@ a:focus {
 }
 #Col-2{
 	width:800px;
-	height:700px;
+	/*height:1200px;*/
+	min-height:700px;
 	top:150px;
 	right:100px;
 	float:right;
+	margin-bottom:150px;
 	position:relative;
 	border-radius: 6px;
 	box-shadow: 0px 5px 20px #444;
@@ -311,7 +315,7 @@ a:focus {
 #Psychograph-image{
 	background-size:cover;
 	width:210px;
-	height:230px;
+	height:210px;
 	margin-left:30px;
 	top:30px;
 	position:relative;
@@ -375,7 +379,7 @@ a:focus {
 
 #v-nav
 {
-    height: 100%;
+    /*height:100%;*/
     margin: auto;
     color: #333;
     font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
@@ -440,11 +444,12 @@ a:focus {
 #v-nav >div.tab-content
 {
     margin-left: 130px;
-	margin-right:50px;
+    margin-right:50px;
     border: 1px solid #ddd;
     background-color: #FFF;
     min-height: 400px;
-	height:500px;
+	/*height:700px;*/
+	min-height:600px;
     position: relative;
     z-index: 9;
     padding: 12px;
@@ -453,7 +458,8 @@ a:focus {
     box-shadow: inset 0 0 35px 5px #fafbfd;
     display: none;
     padding: 25px;
-	border-radius: 0 6px 6px 6px;
+    padding-top:0px;
+    border-radius: 0 6px 6px 6px;
 }
 
 #v-nav >div.tab-content >h3
@@ -578,13 +584,38 @@ a:focus {
 .ajaxLogoSearch, .notfound{
     text-align: center;
 }
+#Board-div{
+	/*height:100%;*/
+}
+
+#Board-div textarea{
+	width:100%;
+	max-width:570px;
+	height:200px;
+}
+
+#Board-div #Tag-input{
+	width:100%;
+	background: white;
+  	overflow-y: auto;
+  	text-align: left;
+}
+#Board-form{
+	/*height:100%;*/
+}
+#Tag-div{
+	height:35px;
+	max-height:100px;
+}
 #down-footer{
     float: left;
     font-size: 18;
     width:100%;
-    height:5%;
+    height:50px;
+	position:relative;
     text-align: center;
     background-color: #34495E;
+	border-radius:6px;
 }
 #down-footer li{
     color:#b6b6b8 ;
