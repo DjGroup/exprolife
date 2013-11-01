@@ -63,8 +63,9 @@
 							<h3>Tags</h3>
 							<!--<input name="psychograph-input" class="psychograph-input" id="Tag-input" value="Clean,Fresh,Modern" />-->
 							<div id="Tag-div">
-							<input name="tagsinput" class="tagsinput" value="Clean,Fresh,Modern" id="Tag-input" />
+							<input name="tagsinput" class="tagsinput"  id="Tag-input" />
 							</div>
+							<input type="submit" id="Post-button" name="PostSubmitButton" value="Post" />
 						</form>
 			    	</div>
                 </div>
@@ -97,7 +98,7 @@
     <div id="Col-1">
 
         <div id="Psychograph-image-div">
-            <div id="Psychograph-image" style="background-image:url({{ myUrl }});"></div>
+            <div id="Psychograph-image"> <!--style="background-image:url({{ myUrl }});"-->></div>
         </div>
         <div id="Score-div">
             <label id="Score">Score</label>
