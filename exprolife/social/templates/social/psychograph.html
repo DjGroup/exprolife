@@ -169,13 +169,17 @@ be thankful if anybody could help me.
                         <form method="post" action="/">
                             {% csrf_token %}
                             <h3 class="form-label">Title</h3>
-                            <input type="text" id="Title-text" class="psychograph-input" name="comp-title"  />
+                            <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
                             <h3 class="form-label">Description</h3>
-                            <input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />
+                            <textarea  class="psychograph-input" name="comp-descript"></textarea>
+                            <!--<input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />-->
                             <!--<h3 class="form-label">Email</h3>
-                            <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
+                                <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
                             <h3 class="form-label">Tags</h3>
-                            <input type="text" id="Tags-text" class="psychograph-input"  name="comp-tag" />
+                            <div id="Tag-div1">
+                                <input name="tagsinput" class="tagsinput"  id="Tag-input1" />
+                            </div>
+                            <!--<input type="text" id="Tags-text" class="psychograph-input"  name="comp-tag" />-->
                             <h3 class="form-label">Developers</h3>
                             <input type="text" id="Developers-text" class="psychograph-input"  name="comp-developer" />
                             <h3 class="form-label">Manager</h3>
@@ -190,7 +194,8 @@ be thankful if anybody could help me.
                             <input type="text" id="Code-text" class="psychograph-input"  name="comp-code" />
                             <input type="submit" id="CodeBrowse-button" name="comp-codeBrowseButton" value="Browse" />
                             <h3 class="form-label">Usage</h3>
-                            <input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />
+                            <textarea  class="psychograph-input" name="comp-usages"></textarea>
+                            <!--<input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />-->
                             <br />
                             <input type="submit" id="Save-button" name="saveButton" value="save" />
                         </form>
