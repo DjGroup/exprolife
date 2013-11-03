@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'social',
     # The following line enable gravatar usage
-    'django_gravatar',
+    #'django_gravatar',
 )
 
 # A sample logging configuration. The only tangible logging

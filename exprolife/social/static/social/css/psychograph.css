@@ -7,7 +7,7 @@ body {
   color: #333;
     font-size: 14px;
     line-height: 1.231;
-    width: 1286px;
+    /*width: 1286px;*/
     margin: 0 auto;
     /*height: 100%;*/
 background: #f7f7f7; /* Old browsers */
@@ -58,6 +58,7 @@ a:focus {
     position: fixed;
     width: 100%;
     z-index: 100;
+    left: 0;
 }
 .psychograph-input{
     border: 2px solid #bdc3c7;
@@ -280,7 +281,8 @@ a:focus {
 	background-color:rgba(255, 255, 255, 0.3);
 	width:269px;
 	height:700px;
-	margin-left:80px;
+	/*margin-left:80px;*/
+    left: 80px;
 	top:150px;
 	position:relative;
 	border-radius: 6px;
@@ -664,9 +666,9 @@ a:focus {
 	display: inline-block;	
 	border-bottom:1px dotted #727CC2;
 	padding-bottom:10px;
+    width: 100%;
 }
 .project-score{
-	background-color: red;
 	width: 75px;
 	height: 75px;
 	z-index: 1;
@@ -700,7 +702,7 @@ a:focus {
 }
 .project-desc{
 	float: right;
-	width: 400px;
+	width: 700px;
 	min-height: 150px;
 	margin-left: 15px;
 }
@@ -710,7 +712,7 @@ a:focus {
 	font-size: 2.2em;
 }
 .project-tag{
-	width: 225px;
+	width: 500px;
 	margin-top: 20px;
 	float: left;
 }
