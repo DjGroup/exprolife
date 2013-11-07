@@ -65,7 +65,6 @@ $(document).ready(function(){
             $('#Col-2').animate({
                 width:"1100px"
             }, "slow");
-            $('.project-div, .post-div').delay(500).fadeIn("slow");
         });
     });
     $('#v-nav').children().first().children().not(".first").on("click", function(){
@@ -73,71 +72,5 @@ $(document).ready(function(){
                 width:"800px"
             }, "slow");
         $('#Col-1').delay(500).fadeIn("slow");
-        $('.project-div, .post-div').hide();
-    });
-    $("#Board-form").submit(function(event){
-        var thisRegisterForm = $(this);
-        $(".ajaxLogoBoard").show();
-        event.preventDefault();
-        var content = $("textarea.psychograph-input").val();
-        var tags = $('.tag').find('span').text();
-        var data ={
-            content:content,
-            tagList:tags
-        };
-        $.ajax({
-            url: 'ajax/postboardcheck',
-            data: data,
-            dataType: 'json',
-            success:function(result){
-                if(result.content=='0'){
-                    $('textarea.psychograph-input').css({
-                        "background" : "rgba(255, 82, 82, 0.5)"
-                    });
-                }
-                else{
-                    $('textarea.psychograph-input').css({
-                        "background" : "#FFFFFF"
-                    });
-                }
-                if(result.tagList=='0'){
-                    $('#Tag-input_tagsinput').css({
-                        "background" : "rgba(255, 82, 82, 0.5)"
-                    });
-                }
-                else{
-                    $('#Tag-input_tagsinput').css({
-                        "background" : "#FFFFFF"
-                    });
-                }
-
-                $(".ajaxLogoBoard").hide();
-                if(result.isOK=='1'){
-                    var content = $('#Board-form').children().first().val();
-                    var tags = $('.tag').text();
-                    var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160))
-                    tagList.splice(-1);
-                    var tagSection = '';
-
-                    for(var i=0; i<tagList.length; i++){
-                        tagSection += '<div class="tag-span">'+tagList[i]+'</div>';
-                    }
-                    var mainContent = $('<span class="project-div">\
-							<div class="project-desc">\
-								<h3>not specified yet</h3>\
-								<span>'+ content +'</span>\
-								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>\
-								<div class="project-tag">'+tagSection +'</div>\
-							</div>\
-							<div class="project-image">\
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-								<div class="score-number">3555</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>\
-							</div>\
-						</span>');
-                    mainContent.clone().hide().insertAfter($('#Board-div').children().first()).fadeIn("slow");
-                }
-            }
-        });
     });
 });

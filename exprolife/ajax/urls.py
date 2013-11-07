@@ -10,4 +10,6 @@ urlpatterns = patterns('',
 
     url(r'registercheck/$', views.registerCheck, name='ajaxRegisterCheck'),
 
+    url(r'postboardcheck/$', views.postBoardCheck, name='ajaxPostBoardCheck'),
+
     )

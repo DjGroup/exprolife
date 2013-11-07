@@ -75,3 +75,19 @@ def registerCheck(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
+def postBoardCheck(request):
+    response = {'isOK': 0, 'content': 1, 'tagList': 1}
+    content = request.REQUEST['content']
+    tagList = request.REQUEST['tagList']
+    # print request.session['first_name']
+    if not content:
+        response['content'] = 0
+    if not tagList:
+        response['tagList'] = 0
+    if response['content'] and response['tagList']:
+        response['isOK'] = 1
+        user = User.objects.get(email=request.session['email'])
+        user.boardpost_set.create(content=content, tagList=tagList)
+        print 1
+
+    return HttpResponse(json.dumps(response), content_type='application.json')

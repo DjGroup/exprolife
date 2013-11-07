@@ -589,8 +589,14 @@ a:focus {
 .ajaxLogoSearch, .notfound{
     text-align: center;
 }
-#Board-div{
-	/*height:100%;*/
+
+.ajaxLogoBoard{
+    display: none;
+    float:right;
+}
+
+.submit-div{
+    width: 100%;
 }
 
 #Board-div textarea{
@@ -615,7 +621,7 @@ a:focus {
 }
 
 #Post-button{
-    width: 70px;
+    /*width: 70px;*/
     height: 40px;
 	margin-top:40px;
 	margin-bottom:10px;
