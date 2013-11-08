@@ -29,14 +29,16 @@ $(document).ready(function(){
     }
 //  end of migration
 
-
-
+//  when click somewhere else input search box must be slideUp();
+    $(document).not("#Search-input, #searchResultSection").click(function(){
+        $("#searchResultSection").slideUp();
+    });
 
     var currentRequest = null;
     $("#Search-input").keyup(function(){
         $(".itemSearch").remove();
         $(".notfound").hide();
-//        $("#searchResultSection").height("70px");
+//        $("#searchResultSection").height("20px");
 
         if(!$("#Search-input").val()){
             $("#searchResultSection").slideUp();
@@ -93,6 +95,7 @@ $(document).ready(function(){
             });
         }
     });
+
     $('.first').on("click", function(){
         $('#Col-1').fadeOut("slow", function(){
             $('#Col-2').animate({
@@ -187,7 +190,6 @@ $(document).ready(function(){
     });
     var getInfoAjax = $('#getInfoAjax');
     getInfoAjax.show();
-    alert(123);
     $.ajax({
         url: 'ajax/getposts',
         dataType: 'json',

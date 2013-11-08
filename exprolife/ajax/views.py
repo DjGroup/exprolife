@@ -8,8 +8,26 @@ from datetime import datetime
 
 def autocompleteModel(request):
     response = {"users": [], "found": 0}
-    users = User.objects.filter(Q(firstName__startswith=request.REQUEST['query']) |
-                                Q(lastName__startswith=request.REQUEST['query']))
+    splitter = request.REQUEST['query'].split()
+    if len(splitter) == 1:
+        # users
+        users = User.objects.filter(Q(firstName__contains=splitter[0]) |
+                                    Q(lastName__contains=splitter[0])
+                                    )
+
+        # TODO: projects and posts must search also ....
+
+    elif len(splitter) == 2:
+        print splitter
+        users = User.objects.filter((Q(firstName__contains=splitter[0]) |
+                                    Q(lastName__contains=splitter[0])) &
+                                    (Q(firstName__contains=splitter[1]) |
+                                    Q(lastName__contains=splitter[1])))
+
+    else:
+        # TODO: projects and posts must search also ....
+        pass
+
     if not users:
         return HttpResponse(json.dumps(response), content_type='application.json')
     response["found"] = 1
