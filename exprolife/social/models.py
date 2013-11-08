@@ -21,11 +21,10 @@ class Competence(models.Model):
     developers = models.CharField(max_length=50, blank=False, default=None)
     manager = models.CharField(max_length=20, blank=False, default=None)
     picture = models.ImageField(upload_to="uploads_image/", blank=True)
-    releaseDate = models.DateField()
+    Date = models.DateField()
     sourceCode = models.FileField(upload_to="uploads_file/", blank=True)
     usage = models.CharField(max_length=50, blank=True, default=None)
     vote = models.IntegerField(default=0)
-    time = models.DateTimeField(auto_now_add=True)
 
 
 class BoardPost(models.Model):

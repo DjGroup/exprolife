@@ -224,7 +224,7 @@ $(document).ready(function(){
     getInfoAjax.hide("slow");
 	
 
-/*
+
     $("#Competence-form").submit(function(event){
         var thisRegisterForm = $(this);
         $(".ajaxLogoBoard").show();
@@ -235,7 +235,6 @@ $(document).ready(function(){
         var developers = $("#Developers-text").val();
         var manager = $("#Manager-text").val();
         var picture = $("#Picture-text").val();
-        var releaseDate = $("#ReleaseDate-text").val();
         var sourceCode = $("#Code-text").val();
         var usage = $("#Usage-text").val();
         var data ={
@@ -245,7 +244,6 @@ $(document).ready(function(){
             developers:developers,
             manager:manager,
             picture:picture,
-            releaseDate:releaseDate,
             sourceCode:sourceCode,
             usage:usage
         };
@@ -282,5 +280,5 @@ $(document).ready(function(){
 
             }
         });
-    });*/
+    });
 });

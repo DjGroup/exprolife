@@ -150,7 +150,7 @@
                             <h3 class="form-label">Title</h3>
                             <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
                             <h3 class="form-label">Description</h3>
-                            <textarea  class="psychograph-input" name="comp-descript"></textarea>
+                            <textarea  class="psychograph-input" id = "Description-text" name="comp-descript"></textarea>
                             <!--<input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />-->
                             <!--<h3 class="form-label">Email</h3>
                                 <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
@@ -167,16 +167,15 @@
                             <input type="text" id="Picture-text" class="psychograph-input"  name="comp-pic" />
                             <input type="submit" id="PicBrowse-button" name="comp-picBrowseButton" value="Browse" />
                             <input type="submit" id="Default-button" name="comp-defaultButton" value="Default" />
-                            <h3 class="form-label">Release Date</h3>
-                            <input type="text" id="ReleaseDate-text" class="psychograph-input" name="comp-releasedate" placeholder="If Competence Published"  />
                             <h3 class="form-label">Source Code</h3>
                             <input type="text" id="Code-text" class="psychograph-input"  name="comp-code" />
                             <input type="submit" id="CodeBrowse-button" name="comp-codeBrowseButton" value="Browse" />
                             <h3 class="form-label">Usage</h3>
-                            <textarea  class="psychograph-input" name="comp-usages"></textarea>
+                            <textarea  class="psychograph-input" id ="Usage-text" name="comp-usages"></textarea>
                             <!--<input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />-->
                             <br />
-                            <input type="submit" id="Save-button" name="saveButton" value="save" />
+							 <input type="submit" id="Save-button" name="saveButton1" value="save" />
+                            <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                         </form>
                     </div>
                 </div>
