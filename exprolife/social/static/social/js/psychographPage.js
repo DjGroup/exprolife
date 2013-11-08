@@ -220,4 +220,65 @@ $(document).ready(function(){
         }
     });
     getInfoAjax.hide("slow");
+	
+
+/*
+    $("#Competence-form").submit(function(event){
+        var thisRegisterForm = $(this);
+        $(".ajaxLogoBoard").show();
+        event.preventDefault();
+        var title = $("#Title-text").val();
+        var description = $("#Description-text").val();
+        var tags = $("#Tag-input1").val();
+        var developers = $("#Developers-text").val();
+        var manager = $("#Manager-text").val();
+        var picture = $("#Picture-text").val();
+        var releaseDate = $("#ReleaseDate-text").val();
+        var sourceCode = $("#Code-text").val();
+        var usage = $("#Usage-text").val();
+        var data ={
+            title:title,
+            description:description,
+            tags:tags,
+            developers:developers,
+            manager:manager,
+            picture:picture,
+            releaseDate:releaseDate,
+            sourceCode:sourceCode,
+            usage:usage
+        };
+        $.ajax({
+            url: 'ajax/competenceCheck',
+            data: data,
+            dataType: 'json',
+            success:function(result){
+                if(result.title=='0'){
+                    $('textarea.psychograph-input').css({
+                        "background" : "rgba(255, 82, 82, 0.5)"
+                    });
+                }
+                else{
+                    $('textarea.psychograph-input').css({
+                        "background" : "#FFFFFF"
+                    });
+                }
+                if(result.tags=='0'){
+                    $('#Tag-input_tagsinput').css({
+                        "background" : "rgba(255, 82, 82, 0.5)"
+                    });
+                }
+                else{
+                    $('#Tag-input_tagsinput').css({
+                        "background" : "#FFFFFF"
+                    });
+                }
+
+                $(".ajaxLogoBoard").hide();
+
+
+
+
+            }
+        });
+    });*/
 });

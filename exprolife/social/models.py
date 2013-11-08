@@ -25,6 +25,7 @@ class Competence(models.Model):
     sourceCode = models.FileField(upload_to="uploads_file/", blank=True)
     usage = models.CharField(max_length=50, blank=True, default=None)
     vote = models.IntegerField(default=0)
+	time = models.DateTimeField(auto_now_add=True)
 
 
 class BoardPost(models.Model):

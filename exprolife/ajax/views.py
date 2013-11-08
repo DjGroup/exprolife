@@ -110,3 +110,39 @@ def getPosts(request):
     #......................
 
     return HttpResponse(json.dumps(response), content_type='application.json')
+	
+
+#def competenceCheck(request):
+#    response = {'isOK': 0, 'title': 1, 'description': 1 , 'tags' :1 , 'developers' :1 , 'manager' : 1 , 'picture':1 ,'releaseDate':1, 'sourceCode':1,'usage':1}
+#    title = request.REQUEST['title']
+#    description = request.REQUEST['description']
+#    tags = request.REQUEST['tags']
+#    developers = request.REQUEST['developers']
+#    manager = request.REQUEST['manager']
+#    picture = request.REQUEST['picture']
+#    releaseDate = request.REQUEST['releaseDate']
+#    sourceCode = request.REQUEST['sourceCode']
+#    usage = request.REQUEST['usage']
+
+#    print request.session['first_name']
+#    if not title:
+#        response['title'] = 0
+#    if not tags:
+#        response['tags'] = 0
+#    if not developers:
+#        response['developers'] = 0
+#    if not manager:
+#        response['manager'] = 0
+#    if not picture:
+#        response['picture'] = 0
+#    if not sourceCode:
+#        response['sourceCode'] = 0
+
+#    if response['title'] and response['tags'] and response['developers'] and response['manager'] and response['picture'] and response['sourceCode'] :
+#        response['isOK'] = 1
+#        user = User.objects.get(email=request.session['email'])
+#        print "ta inja"
+#        user.competence_set.create(title=title, description=description, tags=tags, developers=developers, manager=manager, picture=picture,releaseDate=releaseDate , sourceCode=sourceCode, usage=usage)
+#        print "ok"
+
+#    return HttpResponse(json.dumps(response), content_type='application.json')
