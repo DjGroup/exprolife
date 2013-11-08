@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
-    <script type="text/javascript" src="{% static 'social/js/script.js' %}"></script>
     <title>Welcome {{ request.session.first_name }}</title>
 </head>
 
@@ -50,17 +49,18 @@
             <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
             <div id="v-nav">
                 <ul>
-   		            <li tab="tab1" class="first current">Board</li>
-                    <li tab="tab2" >Edit</li>
-                    <li tab="tab2" class="second current">Add Competence</li>
+   		            <li tab="Board" class="first current">Board</li>
+                    <li tab="Edit" >Edit</li>
+                    <li tab="Competence" class="second current">Add Competence</li>
 
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
                 </ul>
 				<div class="tab-content">
-	            <h3>Post</h3>
+	                <h3>Post</h3>
 			    	<div id="Board-div">
 						<form id="Board-form">
+                            <input type="text" placeholder="insert your title" id="title-board" class="psychograph-input" name="comp-title">
 						    <textarea placeholder="Enter your post here" class="psychograph-input"></textarea>
 							<h3>Tags</h3>
 							<!--<input name="psychograph-input" class="psychograph-input" id="Tag-input" value="Clean,Fresh,Modern" />-->
@@ -72,82 +72,58 @@
                                 <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                             </div>
 						</form>
-						<span class="project-div">
-							<div class="project-desc">
-								<h3>Genetic Algorithm</h3>
-								<span>This project which is implemented by Java and PHP is one of the best projects that is created 
-								on earth. Different kinds of frameworks and languages are used in order to produce a very high level
-								application and ...</span>
-								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>
-								<div class="project-tag">
-									<div class="tag-span">Java</div>
-									<div class="tag-span">PHP</div>
-									<div class="tag-span">...</div>
-								</div>
-							</div>
-							<div class="project-image">
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">
-								<div class="score-number">3555</div></div>
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>
-							</div>
-						</span>
-						<div class="post-div">
-							<div class="post-body">This post is for test. A test project is made by me which need to be completed. I would
-be thankful if anybody could help me.
-							</div>
-							<div class="post-date">
-								Posted June 30, 2010 at 6:34 am
-							</div>
-						</div>
+                        <div id="getInfoAjax">
+                            <img src="../../static/social/images/loading3.gif" height="100px">
+                        </div>
 
-						<div class="post-div">
-							<div class="post-body">This is another post that can help me find different bugs and lets me find different aspects of the project. This post is just for test and doesn't have any other purposes.
-							</div>
-							<div class="post-date">
-								Posted Jan 15, 2012 at 10:54 pm
-							</div>
-						</div>
-						<span class="project-div">
-							<div class="project-desc">
-								<h3>Machine Learning with python</h3>
-								<span>This project aims a very professional aspect of the machine learning field that is 
-								implemented by the python language...</span>
-								<div class="project-date">Created Dec 12, 2013 at 7:12 pm</div>
-								<div class="project-tag">
-									<div class="tag-span">Python</div>
-									<div class="tag-span">C++</div>
-									<div class="tag-span">Java</div>
-									<div class="tag-span">ANTLR</div>
-									<div class="tag-span">Microsoft office</div>
-									<div class="tag-span">...</div>
-								</div>
-							</div>
-							<div class="project-image">
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/wet_asphalt.png);">
-								<div class="score-number">35</div></div>
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>
-							</div>
-						</span>
-						
-						<span class="project-div">
-							<div class="project-desc">
-								<h3>Image Processing with OpenCV</h3>
-								<span>This project is about image processing with a C++ library called OpenCV. This library is used because
-								it's fast and furious. There were other libraries but I prefered to choose only this one so ...</span>
-								<div class="project-date">Created Apr 30, 2011 at 10:20 am</div>
-								<div class="project-tag">
-									<div class="tag-span">OpenCV</div>
-									<div class="tag-span">C++</div>
-								</div>
-							</div>
-							<div class="project-image">
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/alizarin.png);">
-								<div class="score-number">0</div></div>
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/opencv-logo.png);"></div>
-							</div>
-						</span>
+{#                      #####################  POST STRUCTURE  ########################                  #}
+
+{#						<span class="project-div">#}
+{#							<div class="project-desc">#}
+{#								<h3>Genetic Algorithm</h3>#}
+{#								<span>This project which is implemented by Java and PHP is one of the best projects that is created #}
+{#								on earth. Different kinds of frameworks and languages are used in order to produce a very high level#}
+{#								application and ...</span>#}
+{#								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>#}
+{#								<div class="project-tag">#}
+{#									<div class="tag-span">Java</div>#}
+{#									<div class="tag-span">PHP</div>#}
+{#									<div class="tag-span">...</div>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="project-image">#}
+{#								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">#}
+{#								<div class="score-number">3555</div></div>#}
+{#								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>#}
+{#							</div>#}
+{#						</span>#}
+
+{#                      #####################  /POST STRUCTURE  ########################                  #}
+
+
+{#                      ##################### COMMENT STRUCTURE ########################                  #}
+
+{#						<div class="post-div">#}
+{#							<div class="post-body">This post is for test. A test project is made by me which need to be completed. I would#}
+{#be thankful if anybody could help me.#}
+{#							</div>#}
+{#							<div class="post-date">#}
+{#								Posted June 30, 2010 at 6:34 am#}
+{#							</div>#}
+{#						</div>#}
+{##}
+{#						<div class="post-div">#}
+{#							<div class="post-body">This is another post that can help me find different bugs and lets me find different aspects of the project. This post is just for test and doesn't have any other purposes.#}
+{#							</div>#}
+{#							<div class="post-date">#}
+{#								Posted Jan 15, 2012 at 10:54 pm#}
+{#							</div>#}
+{#						</div>#}
+
+{#                      ##################### /COMMENT STRUCTURE ########################                  #}
 						
 			    	</div>
+
                 </div>
                 <div class="tab-content">
                     <h3>Edit</h3>
@@ -203,9 +179,6 @@ be thankful if anybody could help me.
                             <input type="submit" id="Save-button" name="saveButton" value="save" />
                         </form>
                     </div>
-                </div>
-                <div class="tab-content">
-                    <h3>Test3</h3>
                 </div>
             </div>
         </section>

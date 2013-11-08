@@ -76,18 +76,37 @@ def registerCheck(request):
 
 
 def postBoardCheck(request):
-    response = {'isOK': 0, 'content': 1, 'tagList': 1}
+    response = {'isOK': 0, 'title': 1, 'content': 1, 'tagList': 1}
     content = request.REQUEST['content']
     tagList = request.REQUEST['tagList']
+    title = request.REQUEST['title']
     # print request.session['first_name']
     if not content:
         response['content'] = 0
     if not tagList:
         response['tagList'] = 0
-    if response['content'] and response['tagList']:
+    if not title:
+        response['title'] = 0
+    if response['content'] and response['tagList'] and response['title']:
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        user.boardpost_set.create(content=content, tagList=tagList)
-        print 1
+        user.boardpost_set.create(content=content, tagList=tagList, title=title)
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def getPosts(request):
+    response = {'ownPosts': {"title": [], "content": [], "tagList": []}, }   # another remaining
+    user = User.objects.get(email=request.session['email'])
+
+    #query for get the posts that `USER OWNS THEM`
+    postsOfUser = user.boardpost_set.all()
+    for i in postsOfUser:
+        response['ownPosts']["title"].append(i.title)
+        response['ownPosts']["content"].append(i.content)
+        response['ownPosts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+
+    #another queries ..... (traceShip , ...)
+    #......................
 
     return HttpResponse(json.dumps(response), content_type='application.json')

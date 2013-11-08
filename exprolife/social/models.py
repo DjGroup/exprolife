@@ -29,7 +29,7 @@ class Competence(models.Model):
 
 class BoardPost(models.Model):
     user = models.ForeignKey(User)
-    #title = models.CharField(max_length=100, blank=False)
+    title = models.CharField(max_length=100, blank=False)
     content = models.TextField(max_length=1000, blank=False, default=None)
     #image = models.ImageField()
     tagList = models.CharField(max_length=1000, blank=False, default=None)

@@ -490,7 +490,7 @@ a:focus {
 	width:300px;
 }
 #Save-button{
-    width: 70px;
+    /*width: 70px;*/
     height: 50px;
     margin-top:50px;
 	margin-bottom:10px;
@@ -592,7 +592,15 @@ a:focus {
 
 .ajaxLogoBoard{
     display: none;
-    float:right;
+    float: right;
+}
+
+#getInfoAjax{
+    width: 100%;
+}
+
+#getInfoAjax img{
+    margin-left: 45%;
 }
 
 .submit-div{
@@ -768,8 +776,12 @@ a:focus {
 #down-footer li{
     color:#b6b6b8 ;
 }
-#Title-text{
+#Title-text, #title-board{
     width: 550px;
+}
+
+#title-board{
+    margin-bottom: 20px;
 }
 
 
