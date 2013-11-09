@@ -1,3 +1,8 @@
+
+var escapeTags = function(str) {
+   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 $(document).ready(function(){
 //  migrated code from script.js
     var items = $('#v-nav>ul>li').each(function () {
@@ -124,7 +129,7 @@ $(document).ready(function(){
             title:title
         };
         $.ajax({
-            url: 'ajax/postboardcheck',
+            url: '/ajax/postboardcheck',
             data: data,
             dataType: 'json',
             success:function(result){
@@ -161,9 +166,10 @@ $(document).ready(function(){
 
                 $(".ajaxLogoBoard").hide();
                 if(result.isOK=='1'){
-                    var content = $('#Board-form').children().first().val();
-                    var tags = $('.tag').text();
-                    var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160))
+                    var title = escapeTags($('#title-board').val());
+                    var content = escapeTags($('#Board-form').children().first().next().val());
+                    var tags = escapeTags($('.tag').text());
+                    var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160));
                     tagList.splice(-1);
                     var tagSection = '';
 
@@ -172,7 +178,7 @@ $(document).ready(function(){
                     }
                     var mainContent = $('<span class="project-div">\
 							<div class="project-desc">\
-								<h3>'+$('#title-board').val() +'</h3>\
+								<h3>'+ title +'</h3>\
 								<span>'+ content +'</span>\
 								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>\
 								<div class="project-tag">'+tagSection +'</div>\
@@ -198,10 +204,9 @@ $(document).ready(function(){
         dataType: 'json',
         data:data,
         success:function(result){
-
             for(var i=0; i<result.ownPosts.content.length; i++){
-                var title = result.ownPosts.title[i];
-                var content = result.ownPosts.content[i];
+                var title = escapeTags(result.ownPosts.title[i]);
+                var content = escapeTags(result.ownPosts.content[i]);
                 var tagList = result.ownPosts.tagList[i];
                 var tagSection = '';
                 for(var j=0; j<tagList.length; j++){
@@ -252,7 +257,7 @@ $(document).ready(function(){
             usage:usage
         };
         $.ajax({
-            url: 'ajax/competenceCheck',
+            url: '/ajax/competenceCheck',
             data: data,
             dataType: 'json',
             success:function(result){

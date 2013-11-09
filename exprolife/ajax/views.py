@@ -120,7 +120,7 @@ def getPosts(request):
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
         user = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
         if len(firstAndLastName) == 3:
-            user = user[firstAndLastName[2]-1]
+            user = user[int(firstAndLastName[2])-1]
         else:
             user = user[0]
     except:
@@ -172,11 +172,9 @@ def competenceCheck(request):
     if response['title'] and response['tags'] and response['developers'] and response['manager'] and response['picture'] and response['sourceCode'] :
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        print "ta inja"
         print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+Date+" "+sourceCode + " " + \
             usage
         user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
                                    manager=manager, picture=picture,Date=Date , sourceCode=sourceCode, usage=usage)
-        print "ok"
 
     return HttpResponse(json.dumps(response), content_type='application.json')

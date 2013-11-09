@@ -178,11 +178,9 @@ def index(request):
 def nameDetailIndex(request, first_name, last_name, queueNumber=None):
     try:
         anotherUser = User.objects.filter(firstName=first_name, lastName=last_name)
-        print bool(anotherUser)
         if anotherUser:
             if not queueNumber:
-                if len(anotherUser) > 1:
-                    anotherUser = anotherUser[0]
+                anotherUser = anotherUser[0]
             else:
                 #start id counter from 1 not 0 because style of URL :D
 
