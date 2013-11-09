@@ -21,13 +21,14 @@ class Competence(models.Model):
     developers = models.CharField(max_length=50, blank=False, default=None)
     manager = models.CharField(max_length=20, blank=False, default=None)
     picture = models.ImageField(upload_to="uploads_image/", blank=True)
-    Date = models.DateField()
+    date = models.DateTimeField()
     sourceCode = models.FileField(upload_to="uploads_file/", blank=True)
     usage = models.CharField(max_length=50, blank=True, default=None)
     vote = models.IntegerField(default=0)
 
 
 class BoardPost(models.Model):
+    date = models.DateTimeField()
     user = models.ForeignKey(User)
     title = models.CharField(max_length=100, blank=False)
     content = models.TextField(max_length=1000, blank=False, default=None)

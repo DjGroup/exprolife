@@ -117,7 +117,6 @@ $(document).ready(function(){
         $('.project-div, .post-div').hide();
     });
     $("#Board-form").submit(function(event){
-        var thisRegisterForm = $(this);
         $(".ajaxLogoBoard").show();
         event.preventDefault();
         var content = $("textarea.psychograph-input").val();
@@ -180,7 +179,7 @@ $(document).ready(function(){
 							<div class="project-desc">\
 								<h3>'+ title +'</h3>\
 								<span>'+ content +'</span>\
-								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>\
+								<div class="project-date">Created '   +result.month+   ' '   +result.day+   ', '   +result.year +   ' at '   +result.hour+   ':'   +result.minute+   ':'   +result.second+   '</div>\
 								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\
@@ -216,7 +215,7 @@ $(document).ready(function(){
 							<div class="project-desc">\
 								<h3>'+ title +'</h3>\
 								<span>'+ content +'</span>\
-								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>\
+								<div class="project-date">Created '   +result.ownPosts.month[i]+   ' '   +result.ownPosts.day[i]+   ', '   +result.ownPosts.year[i] +   ' at '   +result.ownPosts.hour[i]+   ':'   +result.ownPosts.minute[i]+   ':'   +result.ownPosts.second[i]+   '</div>\
 								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\

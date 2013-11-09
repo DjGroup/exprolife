@@ -5,6 +5,8 @@ import re
 import json
 from datetime import datetime
 
+from django.utils import timezone
+
 
 def autocompleteModel(request):
     response = {"users": [], "found": 0}
@@ -94,7 +96,28 @@ def registerCheck(request):
 
 
 def postBoardCheck(request):
-    response = {'isOK': 0, 'title': 1, 'content': 1, 'tagList': 1}
+    response = {'isOK': 0, 'title': 1, 'content': 1, 'tagList': 1,
+                'year': None,
+                'month': None,
+                'day': None,
+                'hour': None,
+                'minute': None,
+                'second': None
+                }
+
+    monthNames = {1: "January",
+                  2: "February",
+                  3: "March",
+                  4: "April",
+                  5: "May",
+                  6: "June",
+                  7: "July",
+                  8: "August",
+                  9: "September",
+                  10: "October",
+                  11: "November",
+                  12: "December"
+                  }
     content = request.REQUEST['content']
     tagList = request.REQUEST['tagList']
     title = request.REQUEST['title']
@@ -108,13 +131,21 @@ def postBoardCheck(request):
     if response['content'] and response['tagList'] and response['title']:
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        user.boardpost_set.create(content=content, tagList=tagList, title=title)
+        user.boardpost_set.create(date=timezone.now(), content=content, tagList=tagList, title=title)
+        currentDateTime = timezone.now()
+        response['year'] = currentDateTime.year
+        response['month'] = monthNames[currentDateTime.month]
+        response['day'] = currentDateTime.day
+        response['hour'] = currentDateTime.hour
+        response['minute'] = currentDateTime.minute
+        response['second'] = currentDateTime.second
 
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
 def getPosts(request):
-    response = {'ownPosts': {"title": [], "content": [], "tagList": []}, }   # another remaining
+    response = {'ownPosts': {"title": [], "content": [], "tagList": [], "year": [], "month": [],
+                             "day": [], "hour": [], "minute": [], "second": []},}   # another remaining
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
@@ -127,11 +158,18 @@ def getPosts(request):
         user = User.objects.get(email=request.session['email'])
 
     #query for get the posts that `USER OWNS THEM`
-    postsOfUser = user.boardpost_set.all()
+    postsOfUser = user.boardpost_set.all().order_by("-date")
     for i in postsOfUser:
         response['ownPosts']["title"].append(i.title)
         response['ownPosts']["content"].append(i.content)
         response['ownPosts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        response['ownPosts']['year'].append(i.date.year)
+        response['ownPosts']['month'].append(i.date.month)
+        response['ownPosts']['day'].append(i.date.day)
+        response['ownPosts']['hour'].append(i.date.hour)
+        response['ownPosts']['minute'].append(i.date.minute)
+        response['ownPosts']['second'].append(i.date.second)
+
 
     #another queries ..... (traceShip , ...)
     #......................
