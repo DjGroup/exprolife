@@ -156,7 +156,7 @@ def index(request):
                 request.session['last_name'] = loginedUser[0].lastName
                 request.session['email'] = loginedUser[0].email
                 template = loader.get_template('social/psychograph.html')
-                context = RequestContext(request, {'myUser': loginedUser[0],'myUrl': image_url})
+                context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
             else:
                 template = loader.get_template('social/index.html')
@@ -177,20 +177,21 @@ def index(request):
 
 def nameDetailIndex(request, first_name, last_name, queueNumber=None):
     try:
-        user = User.objects.filter(firstName=first_name, lastName=last_name)
-        if user:
+        anotherUser = User.objects.filter(firstName=first_name, lastName=last_name)
+        print bool(anotherUser)
+        if anotherUser:
             if not queueNumber:
-                if len(user) > 1:
-                    user = user[0]
+                if len(anotherUser) > 1:
+                    anotherUser = anotherUser[0]
             else:
                 #start id counter from 1 not 0 because style of URL :D
 
-                user = user[int(queueNumber)-1]
+                anotherUser = anotherUser[int(queueNumber)-1]
         else:
             raise Http404
-        return render(request, 'social/psychograph.html', {
-            'user': user
-        })
+        template = loader.get_template('social/psychograph.html')
+        context = RequestContext(request, {'anotherUser': anotherUser})
+        return HttpResponse(template.render(context))
     except:
         raise Http404
 

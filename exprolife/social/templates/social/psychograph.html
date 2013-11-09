@@ -6,7 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+    {% if myUser %}
     <title>Welcome {{ request.session.first_name }}</title>
+    {% endif %}
+
+    {% if anotherUser %}
+    <title>{{ anotherUser.firstName }} {{ anotherUser.lastName }}</title>
+    {% endif %}
 </head>
 
 
@@ -46,12 +52,21 @@
 <div id="Main-div">
     <div id="Col-2">
         <section id="wrapper" class="wrapper">
-            <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
+            <h1 id="Content-title">
+                {% if myUser %}
+                    {{request.session.first_name}} {{ request.session.last_name }}
+                {% endif %}
+                {% if anotherUser %}
+                    {{ anotherUser.firstName }} {{ anotherUser.lastName }}
+                {% endif %}
+            </h1>
             <div id="v-nav">
                 <ul>
    		            <li tab="Board" class="first current">Board</li>
+                    {% if myUser %}
                     <li tab="Edit" >Edit</li>
                     <li tab="Competence" class="second current">Add Competence</li>
+                    {% endif %}
 
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
@@ -59,6 +74,7 @@
 				<div class="tab-content">
 	                <h3>Post</h3>
 			    	<div id="Board-div">
+                        {% if myUser %}
 						<form id="Board-form">
                             <input type="text" placeholder="insert your title" id="title-board" class="psychograph-input" name="comp-title">
 						    <textarea placeholder="Enter your post here" class="psychograph-input"></textarea>
@@ -72,6 +88,7 @@
                                 <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                             </div>
 						</form>
+                        {% endif %}
                         <div id="getInfoAjax">
                             <img src="../../static/social/images/loading3.gif" height="100px">
                         </div>
@@ -125,6 +142,7 @@
 			    	</div>
 
                 </div>
+                {% if myUser %}
                 <div class="tab-content">
                     <h3>Edit</h3>
                     <div id="Edit-form">
@@ -179,6 +197,7 @@
                         </form>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </section>
     </div>

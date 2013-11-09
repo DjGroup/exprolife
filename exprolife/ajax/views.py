@@ -115,7 +115,16 @@ def postBoardCheck(request):
 
 def getPosts(request):
     response = {'ownPosts': {"title": [], "content": [], "tagList": []}, }   # another remaining
-    user = User.objects.get(email=request.session['email'])
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
+        user = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user[firstAndLastName[2]-1]
+        else:
+            user = user[0]
+    except:
+        user = User.objects.get(email=request.session['email'])
 
     #query for get the posts that `USER OWNS THEM`
     postsOfUser = user.boardpost_set.all()
@@ -130,9 +139,9 @@ def getPosts(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
-
 def competenceCheck(request):
-    response = {'isOK': 0, 'title': 1, 'description': 1 , 'tags' :1 , 'developers' :1 , 'manager' : 1 , 'picture':1 ,'sourceCode':1,'usage':1}
+    response = {'isOK': 0, 'title': 1, 'description': 1, 'tags': 1, 'developers': 1, 'manager': 1, 'picture': 1,
+                'sourceCode': 1, 'usage': 1}
     title = request.REQUEST['title']
     description = request.REQUEST['description']
     tags = request.REQUEST['tags']
@@ -164,8 +173,10 @@ def competenceCheck(request):
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
         print "ta inja"
-        print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+Date+" "+sourceCode+ " "+ usage
-        user.competence_set.create(title=title, description=description, tags=tags, developers=developers, manager=manager, picture=picture,Date=Date , sourceCode=sourceCode, usage=usage)
+        print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+Date+" "+sourceCode + " " + \
+            usage
+        user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
+                                   manager=manager, picture=picture,Date=Date , sourceCode=sourceCode, usage=usage)
         print "ok"
 
     return HttpResponse(json.dumps(response), content_type='application.json')

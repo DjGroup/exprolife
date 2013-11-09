@@ -190,9 +190,13 @@ $(document).ready(function(){
     });
     var getInfoAjax = $('#getInfoAjax');
     getInfoAjax.show();
+    var data ={
+        user: window.location.pathname
+    };
     $.ajax({
-        url: 'ajax/getposts',
+        url: '/ajax/getposts',
         dataType: 'json',
+        data:data,
         success:function(result){
 
             for(var i=0; i<result.ownPosts.content.length; i++){
