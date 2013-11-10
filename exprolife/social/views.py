@@ -114,7 +114,7 @@ def index(request):
             request.session['email'] = user.email
             theUser = User.objects.filter(id=request.session['user_id'])
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': theUser[0],'myUrl': image_url})
+            context = RequestContext(request, {'myUser': theUser[0],'myUrl': image_url,'alert':1 })
             return HttpResponse(template.render(context))
         else:
             sendError = {"isNOTOK": True}

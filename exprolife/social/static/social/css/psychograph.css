@@ -942,3 +942,17 @@ a:focus {
     width: 550px;
 }
 
+
+
+.alert{
+    z-index: 9999;
+    right: -400px;
+    float: right;
+    width: 300px;
+    padding: 10px 35px 10px 14px;
+    border-radius: 4px;
+    position: absolute;
+    background: #ddf0d7;
+    border-color:#a4cd98;
+    color:#1c652c;
+}

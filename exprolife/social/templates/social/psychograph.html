@@ -13,6 +13,13 @@
     {% if anotherUser %}
     <title>{{ anotherUser.firstName }} {{ anotherUser.lastName }}</title>
     {% endif %}
+	
+	
+    {% if alert %}
+        <div class="alert">
+        <p>  <strong>Welcome!</strong> Hello {{ request.session.first_name }}</p>
+        </div>
+    {% endif %}
 </head>
 
 
