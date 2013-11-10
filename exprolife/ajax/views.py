@@ -158,6 +158,7 @@ def getPosts(request):
         user = User.objects.get(email=request.session['email'])
 
     #query for get the posts that `USER OWNS THEM`
+
     postsOfUser = user.boardpost_set.all().order_by("-date")
     for i in postsOfUser:
         response['ownPosts']["title"].append(i.title)
@@ -187,7 +188,7 @@ def getCompetence(request):
                                    "year": [], "month": [], "day": [], "hour": [], "minute": [], "second": [],
                                    "sourceCode": [], "usage": []}, }
     user = User.objects.get(email=request.session['email'])
-    competencesOfUser = user.competence_set.all()
+    competencesOfUser = user.competence_set.all().order_by("-date")
     for i in competencesOfUser:
         response['ownCompetences']["title"].append(i.title)
         response['ownCompetences']["description"].append(i.description)
@@ -237,15 +238,14 @@ def competenceCheck(request):
         response['usage'] = 1
     if not sourceCode:
         response['sourceCode'] = 0
-    if response['title'] and response['tags'] and response['developers'] and response['manager'] and \
-            response['picture'] and response['sourceCode'] :
+    if response['title'] and response['tags'] and response['developers'] and response['manager'] :
+
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
         # print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+
         # str(timezone.now())+" "+sourceCode + " " + \
         #     usage
         user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
-                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
-                                   usage=usage)
-
+                                  manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
+                                 usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')

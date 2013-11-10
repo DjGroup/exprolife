@@ -171,7 +171,6 @@ $(document).ready(function(){
                     var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160));
                     tagList.splice(-1);
                     var tagSection = '';
-
                     for(var i=0; i<tagList.length; i++){
                         tagSection += '<div class="tag-span">'+tagList[i]+'</div>';
                     }
@@ -183,9 +182,7 @@ $(document).ready(function(){
 								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-								<div class="score-number">0</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>\
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
 							</div>\
 						</span>');
                     mainContent.clone().hide().insertAfter($('#Board-div').children().first()).fadeIn("slow");
@@ -213,15 +210,13 @@ $(document).ready(function(){
                 }
                 var currentDiv = $('<span class="project-div">\
 							<div class="project-desc">\
-								<h3>'+ title +'</h3>\
-								<span>'+ content +'</span>\
+								<h3><center>'+ title +'</center></h3>\
+								<h4>'+ content +'</h4>\
 								<div class="project-date">Created '   +result.ownPosts.month[i]+   ' '   +result.ownPosts.day[i]+   ', '   +result.ownPosts.year[i] +   ' at '   +result.ownPosts.hour[i]+   ':'   +result.ownPosts.minute[i]+   ':'   +result.ownPosts.second[i]+   '</div>\
 								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-								<div class="score-number">0</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>\
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
 							</div>\
 						</span>')
                 $('#Board-div').children().last().after(currentDiv);
@@ -243,7 +238,7 @@ $(document).ready(function(){
                 var tags = result.ownCompetences.tags[i];
                 var developers = result.ownCompetences.developers[i];
                 var manager = result.ownCompetences.manager[i];
-//                var Date = result.ownCompetences.Date[i];
+//              var Date = result.ownCompetences.Date[i];
                 var usage = result.ownCompetences.usage[i];
                 var tagSection = '';
                 for(var j=0; j<tags.length; j++){
@@ -259,9 +254,9 @@ $(document).ready(function(){
 							<div class="project-image">\
 								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
 								<div class="score-number">0</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>\
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
 							</div>\
-							<span>'+ usage +'</span>\
+							<span><center>'+ usage +'</center></span>\
 						</span>')
                 $('#Board-div').children().last().after(currentDiv);
 
@@ -282,6 +277,7 @@ $(document).ready(function(){
         var picture = $("#Picture-text").val();
         var sourceCode = $("#Code-text").val();
         var usage = $("#Usage-text").val();
+        var check = 0;
         var data ={
             title:title,
             description:description,
@@ -298,6 +294,7 @@ $(document).ready(function(){
             dataType: 'json',
             success:function(result){
                 if(result.title=='0'){
+                    check  =1;
                     $('#Title-text').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
@@ -308,6 +305,7 @@ $(document).ready(function(){
                     });
                 }
                 if(result.tags=='0'){
+                    check=1;
                     $('#Tag-input1_tagsinput').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
@@ -318,6 +316,7 @@ $(document).ready(function(){
                     });
                 }
                 if(result.developers=='0'){
+                    check =1 ;
                     $('#Developers-text').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
@@ -328,6 +327,7 @@ $(document).ready(function(){
                     });
                 }
                 if(result.manager=='0'){
+                    check =1 ;
                     $('#Manager-text').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
@@ -339,10 +339,28 @@ $(document).ready(function(){
                 }
 
                 $(".ajaxLogoBoard").hide();
-
-
-
-
+                if(result.manager=='1' && result.title=='1' && result.tags=='1' && result.developers=='1'){
+                    showTab("#Board");
+                    var tag = $("#Tag-input1").val().split(',');
+                    var tagSection = '';
+                    var d = new Date();
+                    var month = d.getMonth()+1;
+                    for(var i=0; i<tag.length; i++){
+                        tagSection += '<div class="tag-span">'+tag[i]+'</div>';
+                    }
+                    var Content = $('<span class="project-div">\
+							<div class="project-desc">\
+								<h3>'+ title +'</h3>\
+								<span>'+ description +'</span>\
+								<div class="project-tag">'+tagSection +'</div>\
+								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
+							</div>\
+							<div class="project-image">\
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+							</div>\
+						</span>');
+                    Content.clone().insertAfter($('#Board-div').children().first()).fadeIn("slow");
+                }
             }
         });
     });
