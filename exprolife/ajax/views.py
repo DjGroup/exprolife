@@ -238,7 +238,7 @@ def competenceCheck(request):
         response['usage'] = 1
     if not sourceCode:
         response['sourceCode'] = 0
-    if response['title'] and response['tags'] and response['developers'] and response['manager'] :
+    if response['title'] and response['tags'] and response['developers'] and response['manager']:
 
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
