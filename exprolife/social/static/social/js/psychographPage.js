@@ -119,7 +119,7 @@ $(document).ready(function(){
     $("#Board-form").submit(function(event){
         $(".ajaxLogoBoard").show();
         event.preventDefault();
-        var content = $("textarea.psychograph-input").val();
+        var content = $("#text-area").val();
         var tags = $('.tag').find('span').text();
         var title = $('#title-board').val();
         var data ={
@@ -143,12 +143,12 @@ $(document).ready(function(){
                     });
                 }
                 if(result.content=='0'){
-                    $('textarea.psychograph-input').css({
+                    $("#Board-form").find('#text-area').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
                 }
                 else{
-                    $('textarea.psychograph-input').css({
+                    $("#Board-form").find('#text-area').css({
                         "background" : "#FFFFFF"
                     });
                 }
@@ -230,7 +230,44 @@ $(document).ready(function(){
         }
     });
     getInfoAjax.hide("slow");
-	
+
+
+
+    $.ajax({
+        url: 'ajax/getCompetence',
+        dataType: 'json',
+        success:function(result){
+            for(var i=0; i<result.ownCompetences.title.length; i++){
+                var title = result.ownCompetences.title[i];
+                var description = result.ownCompetences.description[i];
+                var tags = result.ownCompetences.tags[i];
+                var developers = result.ownCompetences.developers[i];
+                var manager = result.ownCompetences.manager[i];
+//                var Date = result.ownCompetences.Date[i];
+                var usage = result.ownCompetences.usage[i];
+                var tagSection = '';
+                for(var j=0; j<tags.length; j++){
+                    tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+                }
+                var currentDiv = $('<span class="project-div">\
+							<div class="project-desc">\
+								<h3>'+ title +'</h3>\
+								<span>'+ description +'</span>\
+								<div class="project-date">Created '   +result.ownCompetences.month[i]+   ' '   +result.ownCompetences.day[i]+   ', '   +result.ownCompetences.year[i] +   ' at '   +result.ownCompetences.hour[i]+   ':'   +result.ownCompetences.minute[i]+   ':'   +result.ownCompetences.second[i]+   '</div>\
+								<div class="project-tag">'+tagSection +'</div>\
+							</div>\
+							<div class="project-image">\
+								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+								<div class="score-number">0</div></div>\
+								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>\
+							</div>\
+							<span>'+ usage +'</span>\
+						</span>')
+                $('#Board-div').children().last().after(currentDiv);
+
+            }
+        }
+    });
 
 
     $("#Competence-form").submit(function(event){
@@ -261,22 +298,42 @@ $(document).ready(function(){
             dataType: 'json',
             success:function(result){
                 if(result.title=='0'){
-                    $('textarea.psychograph-input').css({
+                    $('#Title-text').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
                 }
                 else{
-                    $('textarea.psychograph-input').css({
+                    $('#Title-text').css({
                         "background" : "#FFFFFF"
                     });
                 }
                 if(result.tags=='0'){
-                    $('#Tag-input_tagsinput').css({
+                    $('#Tag-input1_tagsinput').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
                 }
                 else{
-                    $('#Tag-input_tagsinput').css({
+                    $('#Tag-input1_tagsinput').css({
+                        "background" : "#FFFFFF"
+                    });
+                }
+                if(result.developers=='0'){
+                    $('#Developers-text').css({
+                        "background" : "rgba(255, 82, 82, 0.5)"
+                    });
+                }
+                else{
+                    $('#Developers-text').css({
+                        "background" : "#FFFFFF"
+                    });
+                }
+                if(result.manager=='0'){
+                    $('#Manager-text').css({
+                        "background" : "rgba(255, 82, 82, 0.5)"
+                    });
+                }
+                else{
+                    $('#Manager-text').css({
                         "background" : "#FFFFFF"
                     });
                 }

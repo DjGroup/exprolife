@@ -3,16 +3,10 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
-    {% if myUser %}
     <title>Welcome {{ request.session.first_name }}</title>
-    {% endif %}
-
-    {% if anotherUser %}
-    <title>{{ anotherUser.firstName }} {{ anotherUser.lastName }}</title>
-    {% endif %}
 </head>
 
 
@@ -43,7 +37,7 @@
     <div id="Menu-wrapper">
         <div id="Menu-div">
             <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
-            <div id="Home-div"><a id="Home-link" href="/"><div id="Home-icon"></div></a></div>
+            <div id="Home-div"><a id="Home-link" href="#"><div id="Home-icon"></div></a></div>
             <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
         </div>
     </div>
@@ -52,152 +46,130 @@
 <div id="Main-div">
     <div id="Col-2">
         <section id="wrapper" class="wrapper">
-            <h1 id="Content-title">
-                {% if myUser %}
-                    {{request.session.first_name}} {{ request.session.last_name }}
-                {% endif %}
-                {% if anotherUser %}
-                    {{ anotherUser.firstName }} {{ anotherUser.lastName }}
-                {% endif %}
-            </h1>
+            <h1 id="Content-title">{{request.session.first_name}} {{ request.session.last_name }}</h1>
             <div id="v-nav">
                 <ul>
-   		            <li tab="Board" class="first current">Board</li>
-                    {% if myUser %}
+                    <li tab="Board" class="first current">Board</li>
                     <li tab="Edit" >Edit</li>
                     <li tab="Competence" class="second current">Add Competence</li>
-                    {% endif %}
 
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
                 </ul>
-				<div class="tab-content">
-	                <h3>Post</h3>
-			    	<div id="Board-div">
-                        {% if myUser %}
-						<form id="Board-form">
+                <div class="tab-content">
+                    <h3>Post</h3>
+                    <div id="Board-div">
+                        <form id="Board-form">
                             <input type="text" placeholder="insert your title" id="title-board" class="psychograph-input" name="comp-title">
-						    <textarea placeholder="Enter your post here" class="psychograph-input"></textarea>
-							<h3>Tags</h3>
-							<!--<input name="psychograph-input" class="psychograph-input" id="Tag-input" value="Clean,Fresh,Modern" />-->
-							<div id="Tag-div">
-							<input name="tagsinput" class="tagsinput"  id="Tag-input" />
-							</div>
+                            <textarea placeholder="Enter your post here" id="text-area" class="psychograph-input"></textarea>
+                            <h3>Tags</h3>
+                            <!--<input name="psychograph-input" class="psychograph-input" id="Tag-input" value="Clean,Fresh,Modern" />-->
+                            <div id="Tag-div">
+                                <input name="tagsinput" class="tagsinput"  id="Tag-input" />
+                            </div>
                             <div class="submit-div">
-							    <input type="submit" id="Post-button" name="PostSubmitButton" value="Post" />
+                                <input type="submit" id="Post-button" name="PostSubmitButton" value="Post" />
                                 <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                             </div>
-						</form>
-                        {% endif %}
+                        </form>
                         <div id="getInfoAjax">
                             <img src="../../static/social/images/loading3.gif" height="100px">
                         </div>
 
-{#                      #####################  POST STRUCTURE  ########################                  #}
+                        {#                      #####################  POST STRUCTURE  ########################                  #}
 
-{#						<span class="project-div">#}
-{#							<div class="project-desc">#}
-{#								<h3>Genetic Algorithm</h3>#}
-{#								<span>This project which is implemented by Java and PHP is one of the best projects that is created #}
-{#								on earth. Different kinds of frameworks and languages are used in order to produce a very high level#}
-{#								application and ...</span>#}
-{#								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>#}
-{#								<div class="project-tag">#}
-{#									<div class="tag-span">Java</div>#}
-{#									<div class="tag-span">PHP</div>#}
-{#									<div class="tag-span">...</div>#}
-{#								</div>#}
-{#							</div>#}
-{#							<div class="project-image">#}
-{#								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">#}
-{#								<div class="score-number">3555</div></div>#}
-{#								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>#}
-{#							</div>#}
-{#						</span>#}
+                        {#						<span class="project-div">#}
+                        {#							<div class="project-desc">#}
+                        {#								<h3>Genetic Algorithm</h3>#}
+                        {#								<span>This project which is implemented by Java and PHP is one of the best projects that is created #}
+                        {#								on earth. Different kinds of frameworks and languages are used in order to produce a very high level#}
+                        {#								application and ...</span>#}
+                        {#								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>#}
+                        {#								<div class="project-tag">#}
+                        {#									<div class="tag-span">Java</div>#}
+                        {#									<div class="tag-span">PHP</div>#}
+                        {#									<div class="tag-span">...</div>#}
+                        {#								</div>#}
+                        {#							</div>#}
+                        {#							<div class="project-image">#}
+                        {#								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">#}
+                        {#								<div class="score-number">3555</div></div>#}
+                        {#								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>#}
+                        {#							</div>#}
+                        {#						</span>#}
 
-{#                      #####################  /POST STRUCTURE  ########################                  #}
+                        {#                      #####################  /POST STRUCTURE  ########################                  #}
 
 
-{#                      ##################### COMMENT STRUCTURE ########################                  #}
+                        {#                      ##################### COMMENT STRUCTURE ########################                  #}
 
-{#						<div class="post-div">#}
-{#							<div class="post-body">This post is for test. A test project is made by me which need to be completed. I would#}
-{#be thankful if anybody could help me.#}
-{#							</div>#}
-{#							<div class="post-date">#}
-{#								Posted June 30, 2010 at 6:34 am#}
-{#							</div>#}
-{#						</div>#}
-{##}
-{#						<div class="post-div">#}
-{#							<div class="post-body">This is another post that can help me find different bugs and lets me find different aspects of the project. This post is just for test and doesn't have any other purposes.#}
-{#							</div>#}
-{#							<div class="post-date">#}
-{#								Posted Jan 15, 2012 at 10:54 pm#}
-{#							</div>#}
-{#						</div>#}
 
-{#                      ##################### /COMMENT STRUCTURE ########################                  #}
-						
-			    	</div>
+                        {##}
+                        {#						<div class="post-div">#}
+                        {#							<div class="post-body">This is another post that can help me find different bugs and lets me find different aspects of the project. This post is just for test and doesn't have any other purposes.#}
+                        {#							</div>#}
+                        {#							<div class="post-date">#}
+                        {#								Posted Jan 15, 2012 at 10:54 pm#}
+                        {#							</div>#}
+                        {#						</div>#}
+
+                        {#                      ##################### /COMMENT STRUCTURE ########################                  #}
+
+                    </div>
 
                 </div>
-                {% if myUser %}
                 <div class="tab-content">
                     <h3>Edit</h3>
                     <div id="Edit-form">
                         <form method="post" action="/">
                             {% csrf_token %}
-                        <h3 class="form-label">First Name</h3>
-                        <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" name="edit-first" />
-                        <h3 class="form-label">Last Name</h3>
-                        <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" name="edit-last" />
-                        <h3 class="form-label">Email</h3>
-                        <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />
-                        <br />
-                        <input type="submit" id="Save-button" name="saveButton" value="save" />
+                            <h3 class="form-label">First Name</h3>
+                            <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" name="edit-first" />
+                            <h3 class="form-label">Last Name</h3>
+                            <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" name="edit-last" />
+                            <h3 class="form-label">Email</h3>
+                            <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />
+                            <br />
+                            <input type="submit" id="Save-button" name="saveButton" value="save" />
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="tab-content">
                     <h3>Add Your Competences</h3>
                     <div id="Competence-form">
                         <form method="post" action="/">
                             {% csrf_token %}
-                            <h3 class="form-label">Title</h3>
+                            <h3 class="form-label">Title *</h3>
                             <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
                             <h3 class="form-label">Description</h3>
                             <textarea  class="psychograph-input" id = "Description-text" name="comp-descript"></textarea>
                             <!--<input type="text" id="Description-text" class="psychograph-input"  name="comp-descript" />-->
                             <!--<h3 class="form-label">Email</h3>
                                 <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
-                            <h3 class="form-label">Tags</h3>
+                            <h3 class="form-label">Tags *</h3>
                             <div id="Tag-div1">
                                 <input name="tagsinput" class="tagsinput"  id="Tag-input1"  />
                             </div>
                             <!--<input type="text" id="Tags-text" class="psychograph-input"  name="comp-tag" />-->
-                            <h3 class="form-label">Developers</h3>
+                            <h3 class="form-label">Developers *</h3>
                             <input type="text" id="Developers-text" class="psychograph-input"  name="comp-developer" />
-                            <h3 class="form-label">Manager</h3>
+                            <h3 class="form-label">Manager *</h3>
                             <input type="text" id="Manager-text" class="psychograph-input"  name="comp-manager" />
                             <h3 class="form-label">Picture</h3>
-                            <input type="text" id="Picture-text" class="psychograph-input"  name="comp-pic" />
-                            <input type="submit" id="PicBrowse-button" name="comp-picBrowseButton" value="Browse" />
+                            <input type="file" id="Picture-text" class="psychograph-input"  name="comp-pic" />
                             <input type="submit" id="Default-button" name="comp-defaultButton" value="Default" />
                             <h3 class="form-label">Source Code</h3>
-                            <input type="text" id="Code-text" class="psychograph-input"  name="comp-code" />
-                            <input type="submit" id="CodeBrowse-button" name="comp-codeBrowseButton" value="Browse" />
+                            <input type="file" id="Code-text" class="psychograph-input"  name="comp-code" />
                             <h3 class="form-label">Usage</h3>
                             <textarea  class="psychograph-input" id ="Usage-text" name="comp-usages"></textarea>
                             <!--<input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />-->
                             <br />
-							 <input type="submit" id="Save-button" name="saveButton1" value="save" />
+                            <input type="submit" id="Save-button" name="saveButton1" value="save" />
                             <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                         </form>
                     </div>
                 </div>
-                {% endif %}
             </div>
         </section>
     </div>
@@ -216,7 +188,7 @@
     </div>
 </div>
 <div id="down-footer">
-   <li> CopyRight 2013 - ExProLife </li>
+    <li> CopyRight 2013 - ExProLife </li>
 </div>
 
 <script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>

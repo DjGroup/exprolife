@@ -16,7 +16,10 @@ urlpatterns = patterns('',
 
     #get posts that related to the current user and send them to DOM
     url(r'getposts/$', views.getPosts, name='ajaxBoardPostsCheck'),
-	
+
+    url(r'getCompetence/$', views.getCompetence, name='ajaxCompetence'),
+
+
     url(r'competenceCheck/$', views.competenceCheck, name='ajaxcompetenceCheck')
 
     )

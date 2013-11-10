@@ -177,6 +177,36 @@ def getPosts(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
+
+
+
+
+def getCompetence(request):
+
+    response = {'ownCompetences': {"title": [], "description": [], "tags": [], "developers": [], "manager": [], "picture": [],
+                                   "year": [], "month": [], "day": [], "hour": [], "minute": [], "second": [],
+                                   "sourceCode": [], "usage": []}, }
+    user = User.objects.get(email=request.session['email'])
+    competencesOfUser = user.competence_set.all()
+    for i in competencesOfUser:
+        response['ownCompetences']["title"].append(i.title)
+        response['ownCompetences']["description"].append(i.description)
+        response['ownCompetences']['tags'].append(i.tags.replace(u'\xa0', u' ').split())
+        response['ownCompetences']["developers"].append(i.developers)
+        response['ownCompetences']["manager"].append(i.manager)
+        response['ownCompetences']["year"].append(i.date.year)
+        response['ownCompetences']["month"].append(i.date.month)
+        response['ownCompetences']["day"].append(i.date.day)
+        response['ownCompetences']["hour"].append(i.date.hour)
+        response['ownCompetences']["minute"].append(i.date.minute)
+        response['ownCompetences']["second"].append(i.date.second)
+
+        response['ownCompetences']["usage"].append(i.usage)
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+
 def competenceCheck(request):
     response = {'isOK': 0, 'title': 1, 'description': 1, 'tags': 1, 'developers': 1, 'manager': 1, 'picture': 1,
                 'sourceCode': 1, 'usage': 1}
@@ -189,7 +219,7 @@ def competenceCheck(request):
     sourceCode = request.REQUEST['sourceCode']
     usage = request.REQUEST['usage']
     time1 = datetime.today()
-    Date = time1.strftime('20%y-%m-%d')
+    Date = time1.strftime('%Y-%m-%d')
     print request.session['first_name']
     if not title:
         response['title'] = 0
@@ -207,12 +237,15 @@ def competenceCheck(request):
         response['usage'] = 1
     if not sourceCode:
         response['sourceCode'] = 0
-    if response['title'] and response['tags'] and response['developers'] and response['manager'] and response['picture'] and response['sourceCode'] :
+    if response['title'] and response['tags'] and response['developers'] and response['manager'] and \
+            response['picture'] and response['sourceCode'] :
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+Date+" "+sourceCode + " " + \
-            usage
+        # print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+
+        # str(timezone.now())+" "+sourceCode + " " + \
+        #     usage
         user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
-                                   manager=manager, picture=picture,Date=Date , sourceCode=sourceCode, usage=usage)
+                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
+                                   usage=usage)
 
     return HttpResponse(json.dumps(response), content_type='application.json')
