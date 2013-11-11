@@ -187,7 +187,16 @@ def getCompetence(request):
     response = {'ownCompetences': {"title": [], "description": [], "tags": [], "developers": [], "manager": [], "picture": [],
                                    "year": [], "month": [], "day": [], "hour": [], "minute": [], "second": [],
                                    "sourceCode": [], "usage": []}, }
-    user = User.objects.get(email=request.session['email'])
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
+        user = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user[int(firstAndLastName[2])-1]
+        else:
+            user = user[0]
+    except:
+        user = User.objects.get(email=request.session['email'])							
     competencesOfUser = user.competence_set.all().order_by("-date")
     for i in competencesOfUser:
         response['ownCompetences']["title"].append(i.title)

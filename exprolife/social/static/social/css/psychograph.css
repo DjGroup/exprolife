@@ -945,7 +945,7 @@ a:focus {
     width: 550px;
 }
 
--.alert{
+.alert{
      z-index: 9999;
      right: -400px;
      float: right;

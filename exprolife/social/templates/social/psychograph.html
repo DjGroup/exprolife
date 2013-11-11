@@ -50,7 +50,7 @@
     <div id="Menu-wrapper">
         <div id="Menu-div">
             <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
-            <div id="Home-div"><a id="Home-link" href="#"><div id="Home-icon"></div></a></div>
+            <div id="Home-div"><a id="Home-link" href="/"><div id="Home-icon"></div></a></div>
             <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
         </div>
     </div>
@@ -79,7 +79,12 @@
                     <li tab="tab4" class="last">Test3</li>-->
                 </ul>
                 <div class="tab-content">
+                    {% if anotherUser %}
+                    <h3>Post and Project</h3>
+                    {% endif %}
+                    {% if myUser %}
                     <h3>Post</h3>
+                    {% endif %}
                     <div id="Board-div">
                         {% if myUser %}
                         <form id="Board-form">

@@ -187,6 +187,9 @@ $(document).ready(function(){
 								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
 							</div>\
 						</span>');
+					document.getElementById("title-board").value="";
+                    document.getElementById("text-area").value="";
+                    $('.tag').remove();
                     mainContent.clone().hide().insertAfter($('#Board-div').children().first()).fadeIn("slow");
                 }
             }
@@ -212,7 +215,7 @@ $(document).ready(function(){
                 }
                 var currentDiv = $('<span class="project-div">\
 							<div class="project-desc">\
-								<h3><center>'+ title +'</center></h3>\
+								<h3>'+ title +'</h3>\
 								<h4>'+ content +'</h4>\
 								<div class="project-date">Created '   +result.ownPosts.month[i]+   ' '   +result.ownPosts.day[i]+   ', '   +result.ownPosts.year[i] +   ' at '   +result.ownPosts.hour[i]+   ':'   +result.ownPosts.minute[i]+   ':'   +result.ownPosts.second[i]+   '</div>\
 								<div class="project-tag">'+tagSection +'</div>\
@@ -229,10 +232,13 @@ $(document).ready(function(){
     getInfoAjax.hide("slow");
 
 
-
+	var dataSend ={
+        user: window.location.pathname
+    };
     $.ajax({
-        url: 'ajax/getCompetence',
+        url: '/ajax/getCompetence',
         dataType: 'json',
+        data: dataSend,
         success:function(result){
             for(var i=0; i<result.ownCompetences.title.length; i++){
                 var title = result.ownCompetences.title[i];
@@ -361,6 +367,14 @@ $(document).ready(function(){
 								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
 							</div>\
 						</span>');
+					document.getElementById("Title-text").value="";
+                    document.getElementById("Description-text").value="";
+                    $('.tag').remove();
+                    document.getElementById("Developers-text").value="";
+                    document.getElementById("Manager-text").value="";
+                    document.getElementById("Picture-text").value="";
+                    document.getElementById("Code-text").value="";
+                    document.getElementById("Usage-text").value="";
                     Content.clone().insertAfter($('#Board-div').children().first()).fadeIn("slow");
                 }
             }

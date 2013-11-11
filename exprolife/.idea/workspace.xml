@@ -6,9 +6,9 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/models.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1381696173401" ignored="false" />
     <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1382292136865" ignored="false" />
-    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1383747224125" ignored="false" />
+    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1384172850431" ignored="false" />
     <file path="/index.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1381689598927" ignored="false" />
-    <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1383748591601" ignored="false" />
+    <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1384163503897" ignored="false" />
     <file path="/psychograph.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1383748774011" ignored="false" />
     <file path="/settings.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1383509411437" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,10 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exprolife/settings.py">
+      <file leaf-file-name="psychograph.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="21" selection-start="497" selection-end="506" vertical-scroll-proportion="0.0">
+            <state line="27" column="25" selection-start="935" selection-end="935" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -47,52 +47,25 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="33" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
+            <state line="19" column="33" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exprolife/urls.py">
+      <file leaf-file-name="psychographPage.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="46" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
+            <state line="217" column="47" selection-start="8441" selection-end="8441" vertical-scroll-proportion="0.33247423">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="0" selection-start="5750" selection-end="5750" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="psychograph.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="psychograph.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="914" column="18" selection-start="18844" selection-end="18844" vertical-scroll-proportion="0.37662336">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="flat-ui.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/static/social/css/flat/flat-ui.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1787" column="4" selection-start="38897" selection-end="38897" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="psychograph.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="91" selection-start="8766" selection-end="8766" vertical-scroll-proportion="-9.153846">
+            <state line="952" column="30" selection-start="19452" selection-end="19452" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -106,7 +79,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../mylifetime" />
+    <option name="RECENT_GIT_ROOT_PATH" value="E:/mylifetime" />
   </component>
   <component name="GitLogSettings">
     <option name="myDateState">
@@ -125,6 +98,7 @@
         <option value="$PROJECT_DIR$/exprolife/settings.py" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
         <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
+        <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
       </list>
     </option>
   </component>
@@ -236,6 +210,58 @@
               <option name="myItemId" value="social" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -260,7 +286,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mylifetime" />
+    <property name="last_opened_file_path" value="E:/mylifetime" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -414,18 +440,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.760274" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22272727" sideWeight="0.7649063" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23787878" sideWeight="0.76870745" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2350937" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23129252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -494,13 +520,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/social/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="51" selection-start="4765" selection-end="4765" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="585" column="1" selection-start="12772" selection-end="12772" vertical-scroll-proportion="0.0">
@@ -510,9 +529,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/social/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="73" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="7" column="73" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/exprolife/urls.py">
@@ -557,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/flat/flat-ui.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1787" column="4" selection-start="38897" selection-end="38897" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exprolife/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="21" selection-start="497" selection-end="506" vertical-scroll-proportion="0.0">
@@ -578,30 +588,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/models.py">
+    <entry file="file://$PROJECT_DIR$/social/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="33" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
+        <state line="120" column="0" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/views.py">
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/flat/flat-ui.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="0" selection-start="5750" selection-end="5750" vertical-scroll-proportion="0.0">
+        <state line="1787" column="4" selection-start="38897" selection-end="38897" vertical-scroll-proportion="0.041463416" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="952" column="30" selection-start="19452" selection-end="19452" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="33" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="179" column="91" selection-start="8766" selection-end="8766" vertical-scroll-proportion="-9.153846">
+        <state line="27" column="25" selection-start="935" selection-end="935" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
+    <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="914" column="18" selection-start="18844" selection-end="18844" vertical-scroll-proportion="0.37662336">
+        <state line="217" column="47" selection-start="8441" selection-end="8441" vertical-scroll-proportion="0.33247423">
           <folding />
         </state>
       </provider>
