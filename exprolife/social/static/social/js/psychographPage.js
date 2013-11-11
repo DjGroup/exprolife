@@ -33,9 +33,7 @@ $(document).ready(function(){
         });
     }
 //  end of migration
-    $(".alert").animate({
-        "right":"50px"
-    } , 1500).delay(1000).fadeOut(1000);
+
 //  when click somewhere else input search box must be slideUp();
     $(document).not("#Search-input, #searchResultSection").click(function(){
         $("#searchResultSection").slideUp();
@@ -88,9 +86,9 @@ $(document).ready(function(){
                             $("#innerSearch").append(content);
                         }
                         $(".itemSearch").hover(function(){
-                            $(this).css({"background":"rgb(55, 108, 221)"});
+                            $(this).css({"background-color":"rgba(85,230,201,0.5)"});
                         },function(){
-                            $(this).css({"background":"#658be6"});
+                            $(this).css({"background-color":"rgba(72,201,176,0.5)"});
                         })
                             .on("click", function(){
                                 var first = $(this).children().first().next().text();
