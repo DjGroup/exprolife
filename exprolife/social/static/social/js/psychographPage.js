@@ -33,7 +33,9 @@ $(document).ready(function(){
         });
     }
 //  end of migration
-
+    $(".alert").animate({
+         "right":"50px"
+    } , 1500).delay(1000).fadeOut(1000);
 //  when click somewhere else input search box must be slideUp();
     $(document).not("#Search-input, #searchResultSection").click(function(){
         $("#searchResultSection").slideUp();
