@@ -155,6 +155,7 @@ def index(request):
                 request.session['first_name'] = loginedUser[0].firstName
                 request.session['last_name'] = loginedUser[0].lastName
                 request.session['email'] = loginedUser[0].email
+                request.session['friendRequestNumber'] = loginedUser[0].TraceShip_userReceiver.count()
                 template = loader.get_template('social/psychograph.html')
                 context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
@@ -188,7 +189,7 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
         else:
             raise Http404
         template = loader.get_template('social/psychograph.html')
-        context = RequestContext(request, {'anotherUser': anotherUser})
+        context = RequestContext(request, {'anotherUser': anotherUser, })
         return HttpResponse(template.render(context))
     except:
         raise Http404

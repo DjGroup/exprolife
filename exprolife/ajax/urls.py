@@ -20,6 +20,10 @@ urlpatterns = patterns('',
     url(r'getCompetence/$', views.getCompetence, name='ajaxCompetence'),
 
 
-    url(r'competenceCheck/$', views.competenceCheck, name='ajaxcompetenceCheck')
+    url(r'competenceCheck/$', views.competenceCheck, name='ajaxcompetenceCheck'),
+
+    url(r'trace/$', views.traceShip, name='ajaxTraceShipRequest'),
+
+    url(r'getnot/$', views.getNotification, name='ajaxGetNotification')
 
     )

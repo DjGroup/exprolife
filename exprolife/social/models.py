@@ -35,3 +35,10 @@ class BoardPost(models.Model):
     #image = models.ImageField()
     tagList = models.CharField(max_length=1000, blank=False, default=None)
     vote = models.IntegerField(default=0)
+
+
+class TraceShip(models.Model):
+    userSender = models.ForeignKey(User, related_name="TraceShip_userSender")
+    userReceiver = models.ForeignKey(User, related_name="TraceShip_userReceiver")
+    isUser2AcceptTrace = models.BooleanField(default=0, blank=None)
+    isShowNotificationToUser2 = models.BooleanField(default=1, blank=None)

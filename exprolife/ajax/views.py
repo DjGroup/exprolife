@@ -178,13 +178,10 @@ def getPosts(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
-
-
-
-
 def getCompetence(request):
 
-    response = {'ownCompetences': {"title": [], "description": [], "tags": [], "developers": [], "manager": [], "picture": [],
+    response = {'ownCompetences': {"title": [], "description": [], "tags": [], "developers": [], "manager": [],
+                                   "picture": [],
                                    "year": [], "month": [], "day": [], "hour": [], "minute": [], "second": [],
                                    "sourceCode": [], "usage": []}, }
     try:
@@ -214,7 +211,6 @@ def getCompetence(request):
         response['ownCompetences']["usage"].append(i.usage)
 
     return HttpResponse(json.dumps(response), content_type='application.json')
-
 
 
 def competenceCheck(request):
@@ -255,6 +251,36 @@ def competenceCheck(request):
         # str(timezone.now())+" "+sourceCode + " " + \
         #     usage
         user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
-                                  manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
-                                 usage=usage)
+                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
+                                   usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def traceShip(request):
+    response = {'isOK': 0}
+    userSender = User.objects.get(pk=request.session['user_id'])
+
+    userReceiverFN = request.REQUEST['userReceiverFirstName']
+    userReceiverLN = request.REQUEST['userReceiverLastName']
+    userReceiverNUM = request.REQUEST['userReceiverNumber']
+    userReceiver = User.objects.filter(firstName=userReceiverFN, lastName=userReceiverLN)
+    if userReceiverNUM:
+        userReceiver = userReceiver[int(userReceiverNUM)-1]
+    else:
+        userReceiver = userReceiver[0]
+    if not userSender.TraceShip_userSender.filter(userSender=userSender, userReceiver=userReceiver.id):
+        userSender.TraceShip_userSender.create(userReceiver=userReceiver,
+                                               isUser2AcceptTrace=0, isShowNotificationToUser2=1)
+    response['isOK'] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def getNotification(request):
+    response = {"users": []}
+    curUser = User.objects.get(pk=request.session['user_id'])
+    for j in curUser.TraceShip_userReceiver.all():
+        destinationUser = User.objects.get(pk=j.userSender_id)
+        response["users"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+

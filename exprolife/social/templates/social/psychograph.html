@@ -47,10 +47,22 @@
             </div>
         </div>
     </div>
+    <div id="notificationBox">
+        <div class="ajaxLogoNotification">
+            <img src="../../static/social/images/loading.gif" height="40px">
+        </div>
+    </div>
+    <div id="notificationNumber">
+        {% ifnotequal request.session.friendRequestNumber 0 %}
+            {{ request.session.friendRequestNumber }}
+        {%  endifnotequal %}
+    </div>
     <div id="Menu-wrapper">
         <div id="Menu-div">
             <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
             <div id="Home-div"><a id="Home-link" href="/"><div id="Home-icon"></div></a></div>
+
+            <div id="Notification-div"><a href="#"><div id="notification-icon"></div></a></div>
             <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
         </div>
     </div>
@@ -80,7 +92,11 @@
                 </ul>
                 <div class="tab-content">
                     {% if anotherUser %}
-                    <h3>Post and Project</h3>
+                    <div id="anotherUsersTitle">
+                        <h3>Post and Project</h3>
+                        <input id="Post-button" type="button" value="Trace">
+
+                    </div>
                     {% endif %}
                     {% if myUser %}
                     <h3>Post</h3>

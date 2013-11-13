@@ -1,7 +1,12 @@
 
+//*********************** CONSTANTS *****************************
+var isContinueAjax=false;
+
 var escapeTags = function(str) {
    return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+};
+
+
 
 $(document).ready(function(){
 //  migrated code from script.js
@@ -380,4 +385,61 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#anotherUsersTitle').children().first().next().on("click", function(){
+        buttonThis = $(this);
+        $(this).val("Trace...");
+        var receiver = location.pathname.split("/")[1].split(".");
+        var receiverFN = receiver[0];
+        var receiverLN = receiver[1];
+        var receiverNUM = null;
+        if(receiver.length==3){
+            receiverNUM = receiver[2];
+        }
+        dataSend = {
+            userReceiverFirstName: receiverFN,
+            userReceiverLastName: receiverLN,
+            userReceiverNumber: receiverNUM
+        };
+        $.ajax({
+            url: '/ajax/trace',
+            dataType: 'json',
+            data: dataSend,
+            success:function(result){
+                if(result.isOK==1){
+                    buttonThis.val("Traced " + "\u2714");
+//                    change color of button
+                }
+            }
+        });
+    });
+
+    $("#notification-icon").on("click", function(){
+        var ajaxLogo = $(".ajaxLogoNotification");
+        var notificationBox = $("#notificationBox");
+        notificationBox.slideToggle();
+        if((notificationBox).is(":visible") && !isContinueAjax){
+            ajaxLogo.show();
+            $.ajax({
+                url:'/ajax/getnot',
+                success:function(result){
+                    ajaxLogo.hide();
+                    for(var i=0; i<result.users.length; i++){
+                        var content='<div class="itemNotification"><img src="../../static/social/images/defaultMaleImage.png" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.users[i].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.users[i].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction"> traced you  </p>\
+                    <button class="button glass blue" >trace</button></div>';
+                        $("#notificationBox").prepend(content);
+                    }
+                    isContinueAjax = true;
+                    }
+                });
+            }
+        });
 });
