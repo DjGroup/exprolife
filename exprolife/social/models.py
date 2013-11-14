@@ -42,3 +42,4 @@ class TraceShip(models.Model):
     userReceiver = models.ForeignKey(User, related_name="TraceShip_userReceiver")
     isUser2AcceptTrace = models.BooleanField(default=0, blank=None)
     isShowNotificationToUser2 = models.BooleanField(default=1, blank=None)
+    isShowNotificationToUser1 = models.BooleanField(default=0, blank=None)

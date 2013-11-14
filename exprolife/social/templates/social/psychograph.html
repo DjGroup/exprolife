@@ -53,8 +53,9 @@
         </div>
     </div>
     <div id="notificationNumber">
-        {% ifnotequal request.session.friendRequestNumber 0 %}
-            {{ request.session.friendRequestNumber }}
+
+        {% ifnotequal request.session.totalNotification 0 %}
+            {{ request.session.totalNotification }}
         {%  endifnotequal %}
     </div>
     <div id="Menu-wrapper">
@@ -94,8 +95,14 @@
                     {% if anotherUser %}
                     <div id="anotherUsersTitle">
                         <h3>Post and Project</h3>
+                        {% ifnotequal request.session.user_id anotherUser.id %}
+                            {% if isTraced %}
+                        <div id="isTraced">Traced &#10004</div>
+                            {% endif %}
+                            {% if not isTraced %}
                         <input id="Post-button" type="button" value="Trace">
-
+                            {% endif %}
+                        {% endifnotequal %}
                     </div>
                     {% endif %}
                     {% if myUser %}

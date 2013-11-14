@@ -407,14 +407,16 @@ $(document).ready(function(){
             data: dataSend,
             success:function(result){
                 if(result.isOK==1){
-                    buttonThis.val("Traced " + "\u2714");
+                    buttonThis.replaceWith("<div id='isTraced'>Traced &#10004</div>")
 //                    change color of button
                 }
             }
         });
     });
 
+
     $("#notification-icon").on("click", function(){
+        $('#notificationNumber').hide();
         var ajaxLogo = $(".ajaxLogoNotification");
         var notificationBox = $("#notificationBox");
         notificationBox.slideToggle();
@@ -424,22 +426,97 @@ $(document).ready(function(){
                 url:'/ajax/getnot',
                 success:function(result){
                     ajaxLogo.hide();
-                    for(var i=0; i<result.users.length; i++){
+                    for(var i=0; i<result.traceUsers.length; i++){
                         var content='<div class="itemNotification"><img src="../../static/social/images/defaultMaleImage.png" height="50px">\
                     <p class="firstname">\
-                        <strong>' + result.users[i].firstname +  '</strong>\
+                        <strong>' + result.traceUsers[i].firstname +  '</strong>\
                     </p>\
                     <p class="lastname">\
-                        <strong>'+  result.users[i].lastname + '</strong>\
+                        <strong>'+  result.traceUsers[i].lastname + '</strong>\
                     </p>\
                     <br />\
                     <p class="notificationAction"> traced you  </p>\
-                    <button class="button glass blue" >trace</button></div>';
+                    <button class="button glass blue trace" >trace</button>\
+                    <button class="button glass blue OKT" >OK</button></div>';
+                        $("#notificationBox").prepend(content);
+                    }
+                    for(var j=0; j<result.tracebackUsers.length; j++){
+                        content='<div class="itemNotification"><img src="../../static/social/images/defaultMaleImage.png" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.tracebackUsers[j].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.tracebackUsers[j].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction"> you are now have traceship with this user</p>\
+                    <button class="button glass blue OKTB" >OK</button></div>';
                         $("#notificationBox").prepend(content);
                     }
                     isContinueAjax = true;
-                    }
-                });
-            }
-        });
+                    $('.OKT').on("click", function(){
+                        var thisOKButton = $(this);
+                        thisOKButton.text('OK...');
+                        var data={
+                            firstName: $('.firstname').text(),
+                            lastName: $('.lastname').text()
+                        };
+                        $.ajax({
+                            data:data,
+                            url:'/ajax/notshowagain',
+                            success:function(result){
+                                if(result.isOK=='1'){
+                                    thisOKButton.parent().fadeOut("fast");
+                                }
+                            }
+
+                        });
+                    });
+
+                    $('.OKTB').on("click", function(){
+                        var thisOKButton = $(this);
+                        thisOKButton.text('OK...');
+                        var data={
+                            firstName: $('.firstname').text(),
+                            lastName: $('.lastname').text()
+                        };
+                        $.ajax({
+                            data:data,
+                            url:'/ajax/notshowagaintb',
+                            success:function(result){
+                                if(result.isOK=='1'){
+                                    thisOKButton.parent().fadeOut("fast");
+                                }
+                            }
+
+                        });
+                    });
+
+
+
+                    $('.trace').on("click", function(){
+                        var thisTraceButton = $(this);
+                        thisTraceButton.text('trace...');
+                        var data={
+                            firstName: $('.firstname').text(),
+                            lastName: $('.lastname').text()
+                        };
+                        $.ajax({
+                            data:data,
+                            url:'/ajax/traceback',
+                            success:function(result){
+                                if(result.isOK=='1'){
+                                    thisTraceButton.replaceWith("<div class='glass'>Traced</div>");
+                                    $('.OK').fadeOut("fast");
+                                }
+                            }
+
+                        });
+                    });
+
+                }
+            });
+        }
+    });
+
 });

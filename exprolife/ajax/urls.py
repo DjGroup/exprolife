@@ -17,13 +17,25 @@ urlpatterns = patterns('',
     #get posts that related to the current user and send them to DOM
     url(r'getposts/$', views.getPosts, name='ajaxBoardPostsCheck'),
 
+    #get competence that related to the current user and send them to DOM
     url(r'getCompetence/$', views.getCompetence, name='ajaxCompetence'),
 
-
+    #check that is valid fields in competence and then send isOK signal to DOM with js
     url(r'competenceCheck/$', views.competenceCheck, name='ajaxcompetenceCheck'),
 
+    #trace button in another users profile has a TRACE button that when press this function will call
     url(r'trace/$', views.traceShip, name='ajaxTraceShipRequest'),
 
-    url(r'getnot/$', views.getNotification, name='ajaxGetNotification')
+    #get the notifications of the current user (trace back requests)
+    url(r'getnot/$', views.getNotification, name='ajaxGetNotification'),
 
+    #in trace back requests OK button will call this function that cause don't show again when user log in
+    url(r'notshowagain/$', views.notShowAgain, name='ajaxNotShowAgain'),
+
+    #don't show trace back notification in notBOX
+    url(r'notshowagaintb/$', views.notShowAgainTB, name='ajaxNotShowAgainTraceBackRequest'),
+
+    #traceback functionality : when someone click in the trace button in his/her notification box (box that contains OK
+    #and TRACE button
+    url(r'traceback/$', views.traceback, name='ajaxTraceback'),
     )

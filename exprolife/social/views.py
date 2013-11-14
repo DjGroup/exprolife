@@ -26,12 +26,7 @@ def isset(dict, string):
 
 
 def index(request):
-    #is currently logged in ?
-    """
-
-    :param request:
-    :return:
-    """
+    #is currently logged in
     if isset(request.session, 'user_id') and isset(request.session, 'first_name') and isset(request.session, 'last_name') :
         #This 'if' is for checking that save button in psychograph is clicked or not
         if request.POST.get('saveButton'):
@@ -52,14 +47,22 @@ def index(request):
             template = loader.get_template('social/psychograph.html')
             context = RequestContext(request, {'myUser': changedUser[0], 'myUrl': image_url})
             return HttpResponse(template.render(context))
+
         else:
             thisUser = User.objects.filter(id=request.session['user_id'])
+            request.session['traceRequestNumber'] = thisUser[0].TraceShip_userReceiver.filter(
+                isShowNotificationToUser2=1).count()
+            request.session['tracebackRequestNumber'] = thisUser[0].TraceShip_userSender.filter(
+                isShowNotificationToUser1=1).count()
+            request.session['totalNotification'] = request.session['traceRequestNumber'] +\
+                                                   request.session['tracebackRequestNumber']
             gravatar_url = "www.gravatar.com/avatar"
             emailHash = hashlib.md5(request.session['email']).hexdigest()
             image_url = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': thisUser[0] ,'myUrl': image_url})
+            context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
             return HttpResponse(template.render(context))
+
     if request.POST.get('registerButton'):
         #check that firstName is valid(containing number and letters only)
         firstName = request.POST['firstname']
@@ -114,7 +117,7 @@ def index(request):
             request.session['email'] = user.email
             theUser = User.objects.filter(id=request.session['user_id'])
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': theUser[0],'myUrl': image_url,'alert':1 })
+            context = RequestContext(request, {'myUser': theUser[0], 'myUrl': image_url, 'alert': 1})
             return HttpResponse(template.render(context))
         else:
             sendError = {"isNOTOK": True}
@@ -155,7 +158,12 @@ def index(request):
                 request.session['first_name'] = loginedUser[0].firstName
                 request.session['last_name'] = loginedUser[0].lastName
                 request.session['email'] = loginedUser[0].email
-                request.session['friendRequestNumber'] = loginedUser[0].TraceShip_userReceiver.count()
+                request.session['traceRequestNumber'] = loginedUser[0].TraceShip_userReceiver.filter(
+                    isShowNotificationToUser2=1).count()
+                request.session['tracebackRequestNumber'] = loginedUser[0].TraceShip_userSender.filter(
+                    isShowNotificationToUser1=1).count()
+                request.session['totalNotification'] = request.session['traceRequestNumber'] +\
+                                                       request.session['tracebackRequestNumber']
                 template = loader.get_template('social/psychograph.html')
                 context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
@@ -188,8 +196,12 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
                 anotherUser = anotherUser[int(queueNumber)-1]
         else:
             raise Http404
+        isTraced = anotherUser.TraceShip_userReceiver.filter(userSender_id=request.session.get("user_id")).count()
+        if not isTraced:
+            isTraced = anotherUser.TraceShip_userSender.filter(userReceiver_id=request.session.get("user_id"),
+                                                               isUser2AcceptTrace=1).count()
         template = loader.get_template('social/psychograph.html')
-        context = RequestContext(request, {'anotherUser': anotherUser, })
+        context = RequestContext(request, {'anotherUser': anotherUser, 'isTraced': isTraced})
         return HttpResponse(template.render(context))
     except:
         raise Http404

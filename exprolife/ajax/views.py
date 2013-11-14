@@ -268,19 +268,91 @@ def traceShip(request):
         userReceiver = userReceiver[int(userReceiverNUM)-1]
     else:
         userReceiver = userReceiver[0]
-    if not userSender.TraceShip_userSender.filter(userSender=userSender, userReceiver=userReceiver.id):
+    if not (userSender.TraceShip_userSender.filter(userReceiver=userReceiver.id) or
+            userReceiver.TraceShip_userSender.filter(userReceiver=userSender.id)):
         userSender.TraceShip_userSender.create(userReceiver=userReceiver,
-                                               isUser2AcceptTrace=0, isShowNotificationToUser2=1)
+                                               isUser2AcceptTrace=0,
+                                               isShowNotificationToUser2=1,
+                                               isShowNotificationToUser1=0)
+    if userReceiver.TraceShip_userSender.filter(userReceiver=userSender.id):
+        mustBeChange = userReceiver.TraceShip_userSender.get(userReceiver_id=request.session["user_id"])
+        mustBeChange.isUser2AcceptTrace = True
+        mustBeChange.isShowNotificationToUser1 = True
+        mustBeChange.isShowNotificationToUser2 = False
+        mustBeChange.save()
     response['isOK'] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
 def getNotification(request):
-    response = {"users": []}
+    response = {"traceUsers": [], "tracebackUsers": []}
     curUser = User.objects.get(pk=request.session['user_id'])
     for j in curUser.TraceShip_userReceiver.all():
-        destinationUser = User.objects.get(pk=j.userSender_id)
-        response["users"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
+        if j.isShowNotificationToUser2:
+            destinationUser = User.objects.get(pk=j.userSender_id)
+            response["traceUsers"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
+    for j in curUser.TraceShip_userSender.all():
+        if j.isShowNotificationToUser1:
+            destinationUser = User.objects.get(pk=j.userReceiver_id)
+            response["tracebackUsers"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
+    print response
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
+def notShowAgain(request):
+    response = {"isOK": 0}
+
+    #TODO:if two users with same firstName and lastName then this doesn't work => must be check with id
+    # => (find a way to show number of user in DOM that user don't sense it like hidden paragraph)
+    # => userFN.userLN & userFN.userLN.2 => if this two users send trace back request to a user DOM get don't work
+    # => and cause exception
+
+    curUser = User.objects.filter(firstName=request.REQUEST['firstName'].split()[0],
+                                  lastName=request.REQUEST['lastName'].split()[0])
+    curUser = curUser[0]
+    mustBeChange = curUser.TraceShip_userSender.get(userReceiver_id=request.session["user_id"])
+    mustBeChange.isShowNotificationToUser2 = False
+    mustBeChange.save()
+
+    response["isOK"] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def notShowAgainTB(request):
+    response = {"isOK": 0}
+
+    #TODO:if two users with same firstName and lastName then this doesn't work => must be check with id
+    # => (find a way to show number of user in DOM that user don't sense it like hidden paragraph)
+    # => userFN.userLN & userFN.userLN.2 => if this two users send trace back request to a user DOM get don't work
+    # => and cause exception
+
+    curUser = User.objects.filter(firstName=request.REQUEST['firstName'].split()[0],
+                                  lastName=request.REQUEST['lastName'].split()[0])
+    curUser = curUser[0]
+    mustBeChange = curUser.TraceShip_userReceiver.get(userSender_id=request.session["user_id"])
+    mustBeChange.isShowNotificationToUser1 = False
+    mustBeChange.save()
+
+    response["isOK"] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def traceback(request):
+    response = {"isOK": 0}
+
+    #TODO:if two users with same firstName and lastName then this doesn't work => must be check with id
+    # => (find a way to show number of user in DOM that user don't sense it like hidden paragraph)
+    # => userFN.userLN & userFN.userLN.2 => if this two users send trace back request to a user DOM get don't work
+    # => and cause exception
+
+    curUser = User.objects.filter(firstName=request.REQUEST['firstName'].split()[0],
+                                  lastName=request.REQUEST['lastName'].split()[0])
+    curUser = curUser[0]
+    mustBeChange = curUser.TraceShip_userSender.get(userReceiver_id=request.session["user_id"])
+    mustBeChange.isUser2AcceptTrace = True
+    mustBeChange.isShowNotificationToUser1 = True
+    mustBeChange.isShowNotificationToUser2 = False
+    mustBeChange.save()
+
+    response["isOK"] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
