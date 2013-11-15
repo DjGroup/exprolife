@@ -1,0 +1,121 @@
+/****************************************************************
+width of the screen Smaller than 500px
+*****************************************************************/
+
+@media screen and (max-width:500px){
+
+    /*header*/
+
+    #logo{
+        width:100%;
+        text-align: center;
+
+    }
+
+    #register{
+        width: 100%;
+    }
+
+    #login{
+        width: 100%;
+    }
+
+    #header{
+        height: 300px;
+    }
+
+    #rightSteps {
+        display: none;
+    }
+
+    #registerForm {
+        right: 3%;
+        left: 3%;
+        width:110%;
+    }
+
+    /*footer*/
+
+    .right1{
+        width: 100%;
+        height:90px;
+    }
+
+    .right2{
+        width:100%;
+        height:140px;
+    }
+
+    .left1{
+        width: 100%;
+        height:100px;
+    }
+
+    .left2{
+        width:100%;
+        height:100px;
+    }
+
+    #upper-footer {
+        height: 90%;
+    }
+
+    #footer{
+        height: 600px;
+    }
+}
+
+/****************************************************************
+width of the screen Bigger than 500px and Smaller than 900px
+*****************************************************************/
+
+@media screen and (min-width:500px) and (max-width:900px){
+
+    /*header*/
+
+    #logo{
+        width: 100%;
+        text-align: center;
+    }
+
+    #register{
+        width: 50%;
+    }
+
+    #login{
+        width: 50%;
+    }
+
+    #header{
+        height: 200px;
+    }
+
+    /* footer */
+
+    .right1{
+        width: 100%;
+        height:70px;
+    }
+
+    .right2{
+        width:100%;
+        height:120px;
+    }
+
+    .left1{
+        width: 50%;
+        height:100px;
+    }
+
+    .left2{
+        width:50%;
+        height:100px;
+    }
+
+    #upper-footer {
+        height: 90%;
+    }
+
+
+
+}

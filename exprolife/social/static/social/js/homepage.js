@@ -11,7 +11,44 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+function getWidth(){
+    return window.innerWidth;
+}
+
+function media_query(){
+    if (getWidth()<=1024){
+        $('.information, .arrow-left').hide();
+    }else{
+        $('.information, .arrow-left').show();
+    }
+    if(getWidth()<620){
+        emailRegister.removeClass('long1');
+        emailRegister.siblings(":last").removeClass('long');
+        emailRegister.siblings(":last").prev().removeClass('long');
+        emailRegister.siblings(":last").prev().prev().removeClass('long');
+    }else{
+        emailRegister.addClass('long1');
+        emailRegister.siblings(":last").addClass('long');
+        emailRegister.siblings(":last").prev().addClass('long');
+        emailRegister.siblings(":last").prev().prev().addClass('long');
+    }
+}
+
 $(document).ready(function(){
+
+
+/****************************************************************
+START media-queries
+****************************************************************/
+    media_query()
+    $(window).resize(function() {
+        media_query()
+    });
+
+
+/****************************************************************
+END media-queries
+****************************************************************/
 
     $(".alert").delay(3000).fadeOut(1000);
 
@@ -25,11 +62,12 @@ $(document).ready(function(){
             $("#loginClose").show();
         }
     });
-    $("#loginClose").on("click" ,function(){
-        $(this).next().find("h1").animate({
+    $("#loginClose").on("click" ,function(e){
+        $(this).next().animate({
             "marginTop" : "20px"
         } ,"fast");
         $("#loginClose").hide();
+        e.stopPropagation();
     });
 
     $("#register,#sign").on("click" ,function(){
@@ -51,26 +89,26 @@ $(document).ready(function(){
         $("#registerForm").hide();
 
     });
-
-    $('.RegisterInput').focusin(function(){
-        $(this).next().animate({
-            "opacity" : 1 ,
-            "marginLeft" : "20px"
-        }, "fast");
-        $(this).next().next().animate({
-            "opacity" : 1
-        } ,"fast");
-    })
-    .focusout(function(){
-        $(this).next().animate({
-            "opacity" : 0 ,
-            "marginLeft":"-30px"
-        }, "fast");
-        $(this).next().next().animate({
-            "opacity" : 0
-        } ,"fast");
-    });
-
+    if(getWidth()>1000){
+        $('.RegisterInput').focusin(function(){
+            $(this).next().animate({
+                "opacity" : 1 ,
+                "marginLeft" : "20px"
+            }, "fast");
+            $(this).next().next().animate({
+                "opacity" : 1
+            } ,"fast");
+        })
+        .focusout(function(){
+            $(this).next().animate({
+                "opacity" : 0 ,
+                "marginLeft":"-30px"
+            }, "fast");
+            $(this).next().next().animate({
+                "opacity" : 0
+            } ,"fast");
+        });
+    }
     $('.RegisterInput[name="firstname"] , .RegisterInput[name="lastname"]').keyup(function(){
         var correct = $(this).siblings(":last").prev();
         var notCorrect = $(this).siblings(":last");
@@ -212,6 +250,8 @@ $(document).ready(function(){
             var data = {
                 query: value
             };
+            correct.hide();
+            notCorrect.hide();
             $(".ajaxEmailCheck").show();
             $.ajax({
                 url: '/ajax/emailCheck',
@@ -291,19 +331,21 @@ $(document).ready(function(){
             data: data,
             dataType: 'json',
             success:function(result){
+
                 if(result.fn==0){
                     var correct = firstNameRegister.siblings(":last").prev();
                     var notCorrect = firstNameRegister.siblings(":last");
                     var warningSectionArrow = firstNameRegister.next();
                     var warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
-
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
                     firstNameRegister.css({
                             "background":"FFA798" ,
                             "border-color": "FF2808",
@@ -320,14 +362,15 @@ $(document).ready(function(){
                     notCorrect = lastNameRegister.siblings(":last");
                     warningSectionArrow = lastNameRegister.next();
                     warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
-
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
                     lastNameRegister.css({
                             "background":"FFA798" ,
                             "border-color": "FF2808",
@@ -344,14 +387,15 @@ $(document).ready(function(){
                     notCorrect = emailRegister.siblings(":last");
                     warningSectionArrow = emailRegister.next();
                     warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
-
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
                     emailRegister.css({
                             "background":"FFA798" ,
                             "border-color": "FF2808",
@@ -373,13 +417,15 @@ $(document).ready(function(){
                     notCorrect = passwordRegister.siblings(":last");
                     warningSectionArrow = passwordRegister.next();
                     warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
 
                     passwordRegister.css({
                             "background":"FFA798" ,
@@ -397,13 +443,15 @@ $(document).ready(function(){
                     notCorrect = rePassRegister.siblings(":last");
                     warningSectionArrow = rePassRegister.next();
                     warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
 
                     rePassRegister.css({
                             "background":"FFA798" ,
@@ -418,14 +466,15 @@ $(document).ready(function(){
                 if(result.sex == '0'){
                     warningSectionArrow = genderRegister.siblings(":last").prev();
                     warningSection = warningSectionArrow.next();
-                    warningSectionArrow.animate({
-                        opacity: "1",
-                        marginLeft:"20px"
-                    },"fast");
-                    warningSection.animate({
-                        opacity: "1"
-                    }, "fast");
-
+                    if(getWidth()>1000){
+                        warningSectionArrow.animate({
+                            opacity: "1",
+                            marginLeft:"20px"
+                        },"fast");
+                        warningSection.animate({
+                            opacity: "1"
+                        }, "fast");
+                    }
                     genderRegister.css({
                             "background":"FFA798" ,
                             "border-color": "FF2808",
