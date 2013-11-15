@@ -32,6 +32,9 @@ function media_query(){
         emailRegister.siblings(":last").prev().addClass('long');
         emailRegister.siblings(":last").prev().prev().addClass('long');
     }
+    $("#fadeLayer").css({
+        "height" : getWidth()
+    })
 }
 
 $(document).ready(function(){
