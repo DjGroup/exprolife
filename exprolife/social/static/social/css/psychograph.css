@@ -1253,3 +1253,7 @@ button:active.blue {
     color: #ffffff;
     border: none;
 }
+
+.accept{
+    background: #9cffcc;
+}

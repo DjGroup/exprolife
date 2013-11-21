@@ -506,8 +506,9 @@ $(document).ready(function(){
                             url:'/ajax/traceback',
                             success:function(result){
                                 if(result.isOK=='1'){
-                                    thisTraceButton.replaceWith("<div class='glass'>Traced</div>");
-                                    $('.OK').fadeOut("fast");
+                                    thisTraceButton.next().fadeOut("fast");
+                                    thisTraceButton.replaceWith("<div class='button glass blue accept'>traced &#10004</div>");
+
                                 }
                             }
 

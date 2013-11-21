@@ -200,6 +200,13 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
         if not isTraced:
             isTraced = anotherUser.TraceShip_userSender.filter(userReceiver_id=request.session.get("user_id"),
                                                                isUser2AcceptTrace=1).count()
+        thisUser = User.objects.filter(id=request.session['user_id'])
+        request.session['traceRequestNumber'] = thisUser[0].TraceShip_userReceiver.filter(
+            isShowNotificationToUser2=1).count()
+        request.session['tracebackRequestNumber'] = thisUser[0].TraceShip_userSender.filter(
+            isShowNotificationToUser1=1).count()
+        request.session['totalNotification'] = request.session['traceRequestNumber'] +\
+                                               request.session['tracebackRequestNumber']
         template = loader.get_template('social/psychograph.html')
         context = RequestContext(request, {'anotherUser': anotherUser, 'isTraced': isTraced})
         return HttpResponse(template.render(context))
