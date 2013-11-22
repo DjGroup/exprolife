@@ -38,4 +38,8 @@ urlpatterns = patterns('',
     #traceback functionality : when someone click in the trace button in his/her notification box (box that contains OK
     #and TRACE button
     url(r'traceback/$', views.traceback, name='ajaxTraceback'),
+
+    #get posts and competences in Feed
+    url(r'getpac/$', views.getPAC, name='ajaxGetPostsAndCompetences'),
+
     )

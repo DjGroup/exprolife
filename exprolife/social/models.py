@@ -15,15 +15,15 @@ class User(models.Model):
     
 class Competence(models.Model):
     user = models.ForeignKey(User)
-    title = models.CharField(max_length=30, blank=False, default=None)
-    description = models.TextField(max_length=100, blank=True, default=None)
-    tags = models.CharField(max_length=50, blank=False, default=None)
-    developers = models.CharField(max_length=50, blank=False, default=None)
-    manager = models.CharField(max_length=20, blank=False, default=None)
+    title = models.CharField(max_length=100, blank=False, default=None)
+    content = models.TextField(max_length=100, blank=True, default=None)
+    tagList = models.CharField(max_length=100, blank=False, default=None)
+    developers = models.CharField(max_length=200, blank=False, default=None)
+    manager = models.CharField(max_length=100, blank=False, default=None)
     picture = models.ImageField(upload_to="uploads_image/", blank=True)
     date = models.DateTimeField()
     sourceCode = models.FileField(upload_to="uploads_file/", blank=True)
-    usage = models.CharField(max_length=50, blank=True, default=None)
+    usage = models.CharField(max_length=1000, blank=True, default=None)
     vote = models.IntegerField(default=0)
 
 
@@ -39,7 +39,11 @@ class BoardPost(models.Model):
 
 class TraceShip(models.Model):
     userSender = models.ForeignKey(User, related_name="TraceShip_userSender")
+    senderTime = models.DateTimeField()
+
     userReceiver = models.ForeignKey(User, related_name="TraceShip_userReceiver")
+    receiverTime = models.DateTimeField()
+
     isUser2AcceptTrace = models.BooleanField(default=0, blank=None)
     isShowNotificationToUser2 = models.BooleanField(default=1, blank=None)
     isShowNotificationToUser1 = models.BooleanField(default=0, blank=None)

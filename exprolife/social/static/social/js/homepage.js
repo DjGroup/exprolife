@@ -43,9 +43,11 @@ $(document).ready(function(){
 /****************************************************************
 START media-queries
 ****************************************************************/
-    media_query()
+
+
+    media_query();
     $(window).resize(function() {
-        media_query()
+        media_query();
     });
 
 

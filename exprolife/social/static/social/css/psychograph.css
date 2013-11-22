@@ -634,7 +634,7 @@ a:focus {
 #Post-button{
     /*width: 70px;*/
     height: 40px;
-	margin-top:40px;
+	margin-top:10px;
 	margin-bottom:10px;
     left: 3px;
     cursor: pointer;
@@ -1224,7 +1224,7 @@ button:active.blue {
     float:right;
     border-radius: 6px;
     margin-right: 7px;
-    margin-top: 40px;
+    margin-top: 10px;
     margin-bottom: 10px;
     left: 3px;
     font-size: 17px;
@@ -1256,4 +1256,92 @@ button:active.blue {
 
 .accept{
     background: #9cffcc;
+}
+
+/* switch post and project */
+
+.switch {
+    position: relative;
+    height: 30px;
+    width: 270px;
+    float:right;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+.switch-label {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 90px;
+    line-height: 26px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-input:checked + .switch-label {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.65);
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+}
+
+/*.switch-input:checked + .switch-label-on ~ .switch-selection {*/
+    /*left: 90px;*/
+/*}*/
+
+.switch-input[value="post"]:checked  ~ .switch-selection {
+    left: 90px;
+}
+
+.switch-input[value="project"]:checked ~ .switch-selection {
+    left: 180px;
+}
+
+.switch-selection {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 90px;
+    height: 25px;
+    border-radius: 3px;
+    background-color: #6BB630;
+
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -ms-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+
+.container{
+    width: 100%;
+    height: 30px;
+    margin: 10px;
+}
+
+.content{
+    position: relative;
+    /*opacity: 0.1;*/
+}
+
+#switchAjax{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.gray{
+    background: red;
 }

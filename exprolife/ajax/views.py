@@ -5,6 +5,8 @@ import re
 import json
 from datetime import datetime
 
+from itertools import chain
+
 from django.utils import timezone
 
 
@@ -144,8 +146,20 @@ def postBoardCheck(request):
 
 
 def getPosts(request):
-    response = {'ownPosts': {"title": [], "content": [], "tagList": [], "year": [], "month": [],
-                             "day": [], "hour": [], "minute": [], "second": []},}   # another remaining
+    response = {'posts': {
+                    "title": [],
+                    "firstName": [],
+                    "lastName": [],
+                    "content": [],
+                    "tagList": [],
+                    "year": [],
+                    "month": [],
+                    "day": [],
+                    "hour": [],
+                    "minute": [],
+                    "second": []},
+                }   # another remaining
+
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
@@ -157,20 +171,127 @@ def getPosts(request):
     except:
         user = User.objects.get(email=request.session['email'])
 
+    #query for get tracing posts from 'TRACING USERs'
+
+    tracingList = []
+    for tracingUser in user.TraceShip_userSender.all():
+        curUser = User.objects.get(pk=tracingUser.userReceiver_id)
+        for post in curUser.boardpost_set.filter(date__gt=tracingUser.senderTime):
+            tracingList.append(post)
+
+    for tracingUser2 in user.TraceShip_userReceiver.filter(isUser2AcceptTrace=1):
+        curUser = User.objects.get(pk=tracingUser2.userSender_id)
+        for post in curUser.boardpost_set.filter(date__gt=tracingUser2.receiverTime):
+            tracingList.append(post)
+
     #query for get the posts that `USER OWNS THEM`
 
-    postsOfUser = user.boardpost_set.all().order_by("-date")
-    for i in postsOfUser:
-        response['ownPosts']["title"].append(i.title)
-        response['ownPosts']["content"].append(i.content)
-        response['ownPosts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
-        response['ownPosts']['year'].append(i.date.year)
-        response['ownPosts']['month'].append(i.date.month)
-        response['ownPosts']['day'].append(i.date.day)
-        response['ownPosts']['hour'].append(i.date.hour)
-        response['ownPosts']['minute'].append(i.date.minute)
-        response['ownPosts']['second'].append(i.date.second)
+    postsOfUser = user.boardpost_set.all()
 
+    #combine all of queries to send to DOM
+
+    allPosts = sorted(chain(postsOfUser, tracingList), key=lambda instance: instance.date,
+                      reverse=True)
+    for i in allPosts:
+        user = User.objects.filter(pk=i.user_id)[0]
+        response['posts']["firstName"].append(user.firstName)
+        response['posts']["lastName"].append(user.lastName)
+        response['posts']["title"].append(i.title)
+        response['posts']["content"].append(i.content)
+        response['posts']['month'].append(i.date.month)
+        response['posts']['day'].append(i.date.day)
+        response['posts']['hour'].append(i.date.hour)
+        response['posts']['minute'].append(i.date.minute)
+        response['posts']['second'].append(i.date.second)
+        response['posts']['year'].append(i.date.year)
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+
+        #else ?
+
+    #another queries ..... (traceShip , ...)
+    #......................
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def getPAC(request):
+    response = {'posts': {
+                    "isPost": [],
+                    "firstName": [],
+                    "lastName": [],
+                    "title": [],
+                    "content": [],
+                    "tagList": [],
+                    "year": [],
+                    "month": [],
+                    "day": [],
+                    "hour": [],
+                    "minute": [],
+                    "second": [],
+                    "developers": [],
+                    "manager": [],
+                    "picture": [],
+                    "sourceCode": [],
+                    "usage": []}, }   # another remaining
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
+        user = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user[int(firstAndLastName[2])-1]
+        else:
+            user = user[0]
+    except:
+        user = User.objects.get(email=request.session['email'])
+
+    #query for get tracing posts from 'TRACING USERs'
+
+    tracingList = []
+    for tracingUser in user.TraceShip_userSender.all():
+        curUser = User.objects.get(pk=tracingUser.userReceiver_id)
+        for post in curUser.boardpost_set.filter(date__gt=tracingUser.senderTime):
+            tracingList.append(post)
+        for competence in curUser.competence_set.filter(date__gt=tracingUser.senderTime):
+            tracingList.append(competence)
+
+    for tracingUser2 in user.TraceShip_userReceiver.filter(isUser2AcceptTrace=1):
+        curUser = User.objects.get(pk=tracingUser2.userSender_id)
+        for post in curUser.boardpost_set.filter(date__gt=tracingUser2.receiverTime):
+            tracingList.append(post)
+        for competence in curUser.competence_set.filter(date__gt=tracingUser2.receiverTime):
+            tracingList.append(competence)
+
+    #query for get the posts that `USER OWNS THEM`
+
+    postsOfUser = user.boardpost_set.all()
+    competencesOfUser = user.competence_set.all()
+
+    #combine all of queries to send to DOM
+
+    allPosts = sorted(chain(postsOfUser, competencesOfUser, tracingList), key=lambda instance: instance.date,
+                      reverse=True)
+    for i in allPosts:
+        user = User.objects.filter(pk=i.user_id)[0]
+        response['posts']["firstName"].append(user.firstName)
+        response['posts']["lastName"].append(user.lastName)
+        response['posts']["title"].append(i.title)
+        response['posts']["content"].append(i.content)
+        response['posts']['month'].append(i.date.month)
+        response['posts']['day'].append(i.date.day)
+        response['posts']['hour'].append(i.date.hour)
+        response['posts']['minute'].append(i.date.minute)
+        response['posts']['second'].append(i.date.second)
+        response['posts']['year'].append(i.date.year)
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        if isinstance(i, BoardPost):
+            response['posts']["isPost"].append(1)
+        elif isinstance(i, Competence):
+            response['posts']["isPost"].append(0)
+            response['posts']["developers"].append(i.developers)
+            response['posts']["manager"].append(i.manager)
+            response['posts']["usage"].append(i.usage)
+
+        #else ?
 
     #another queries ..... (traceShip , ...)
     #......................
@@ -179,11 +300,23 @@ def getPosts(request):
 
 
 def getCompetence(request):
-
-    response = {'ownCompetences': {"title": [], "description": [], "tags": [], "developers": [], "manager": [],
-                                   "picture": [],
-                                   "year": [], "month": [], "day": [], "hour": [], "minute": [], "second": [],
-                                   "sourceCode": [], "usage": []}, }
+    response = {'posts': {
+                    "firstName": [],
+                    "lastName": [],
+                    "title": [],
+                    "content": [],
+                    "tagList": [],
+                    "year": [],
+                    "month": [],
+                    "day": [],
+                    "hour": [],
+                    "minute": [],
+                    "second": [],
+                    "developers": [],
+                    "manager": [],
+                    "picture": [],
+                    "sourceCode": [],
+                    "usage": []}, }   # another remaining
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
@@ -193,64 +326,90 @@ def getCompetence(request):
         else:
             user = user[0]
     except:
-        user = User.objects.get(email=request.session['email'])							
-    competencesOfUser = user.competence_set.all().order_by("-date")
-    for i in competencesOfUser:
-        response['ownCompetences']["title"].append(i.title)
-        response['ownCompetences']["description"].append(i.description)
-        response['ownCompetences']['tags'].append(i.tags.replace(u'\xa0', u' ').split())
-        response['ownCompetences']["developers"].append(i.developers)
-        response['ownCompetences']["manager"].append(i.manager)
-        response['ownCompetences']["year"].append(i.date.year)
-        response['ownCompetences']["month"].append(i.date.month)
-        response['ownCompetences']["day"].append(i.date.day)
-        response['ownCompetences']["hour"].append(i.date.hour)
-        response['ownCompetences']["minute"].append(i.date.minute)
-        response['ownCompetences']["second"].append(i.date.second)
+        user = User.objects.get(email=request.session['email'])
 
-        response['ownCompetences']["usage"].append(i.usage)
+    #query for get tracing posts from 'TRACING USERs'
+
+    tracingList = []
+    for tracingUser in user.TraceShip_userSender.all():
+        curUser = User.objects.get(pk=tracingUser.userReceiver_id)
+        for post in curUser.boardpost_set.filter(date__gt=tracingUser.senderTime):
+            tracingList.append(post)
+        for competence in curUser.competence_set.filter(date__gt=tracingUser.senderTime):
+            tracingList.append(competence)
+
+    for tracingUser2 in user.TraceShip_userReceiver.filter(isUser2AcceptTrace=1):
+        curUser = User.objects.get(pk=tracingUser2.userSender_id)
+        for competence in curUser.competence_set.filter(date__gt=tracingUser2.receiverTime):
+            tracingList.append(competence)
+
+    #query for get the posts that `USER OWNS THEM`
+
+    competencesOfUser = user.competence_set.all()
+
+    #combine all of queries to send to DOM
+
+    allPosts = sorted(chain(competencesOfUser, tracingList), key=lambda instance: instance.date,
+                      reverse=True)
+    for i in allPosts:
+        user = User.objects.filter(pk=i.user_id)[0]
+        response['posts']["firstName"].append(user.firstName)
+        response['posts']["lastName"].append(user.lastName)
+        response['posts']["title"].append(i.title)
+        response['posts']["content"].append(i.content)
+        response['posts']['month'].append(i.date.month)
+        response['posts']['day'].append(i.date.day)
+        response['posts']['hour'].append(i.date.hour)
+        response['posts']['minute'].append(i.date.minute)
+        response['posts']['second'].append(i.date.second)
+        response['posts']['year'].append(i.date.year)
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        response['posts']["developers"].append(i.developers)
+        response['posts']["manager"].append(i.manager)
+        response['posts']["usage"].append(i.usage)
+
+        #else ?
+
+    #another queries ..... (traceShip , ...)
+    #......................
 
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
 def competenceCheck(request):
-    response = {'isOK': 0, 'title': 1, 'description': 1, 'tags': 1, 'developers': 1, 'manager': 1, 'picture': 1,
+    response = {'isOK': 0, 'title': 1, 'content': 1, 'tagList': 1, 'developers': 1, 'manager': 1, 'picture': 1,
                 'sourceCode': 1, 'usage': 1}
     title = request.REQUEST['title']
-    description = request.REQUEST['description']
-    tags = request.REQUEST['tags']
+    content = request.REQUEST['content']
+    tagList = request.REQUEST['tagList']
     developers = request.REQUEST['developers']
     manager = request.REQUEST['manager']
     picture = request.REQUEST['picture']
     sourceCode = request.REQUEST['sourceCode']
     usage = request.REQUEST['usage']
     time1 = datetime.today()
-    Date = time1.strftime('%Y-%m-%d')
-    print request.session['first_name']
     if not title:
         response['title'] = 0
-    if not tags:
-        response['tags'] = 0
+    if not tagList:
+        response['tagList'] = 0
     if not developers:
         response['developers'] = 0
     if not manager:
         response['manager'] = 0
     if not picture:
         response['picture'] = 0
-    if not description:
-        response['description'] = 1
+    if not content:
+        response['content'] = 1
     if not usage:
         response['usage'] = 1
     if not sourceCode:
         response['sourceCode'] = 0
-    if response['title'] and response['tags'] and response['developers'] and response['manager']:
+    if response['title'] and response['tagList'] and response['developers'] and response['manager']:
 
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        # print title+" "+description+" "+tags+" "+developers+" "+manager+" "+picture+" "+
-        # str(timezone.now())+" "+sourceCode + " " + \
-        #     usage
-        user.competence_set.create(title=title, description=description, tags=tags, developers=developers,
+
+        user.competence_set.create(title=title, content=content, tagList=tagList, developers=developers,
                                    manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
                                    usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')
@@ -273,7 +432,9 @@ def traceShip(request):
         userSender.TraceShip_userSender.create(userReceiver=userReceiver,
                                                isUser2AcceptTrace=0,
                                                isShowNotificationToUser2=1,
-                                               isShowNotificationToUser1=0)
+                                               isShowNotificationToUser1=0,
+                                               senderTime=timezone.now(),
+                                               receiverTime=timezone.now())
     if userReceiver.TraceShip_userSender.filter(userReceiver=userSender.id):
         mustBeChange = userReceiver.TraceShip_userSender.get(userReceiver_id=request.session["user_id"])
         mustBeChange.isUser2AcceptTrace = True
@@ -352,6 +513,7 @@ def traceback(request):
     mustBeChange.isUser2AcceptTrace = True
     mustBeChange.isShowNotificationToUser1 = True
     mustBeChange.isShowNotificationToUser2 = False
+    mustBeChange.receiverTime = timezone.now()
     mustBeChange.save()
 
     response["isOK"] = 1

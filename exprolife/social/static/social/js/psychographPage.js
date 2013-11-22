@@ -195,96 +195,84 @@ $(document).ready(function(){
 					document.getElementById("title-board").value="";
                     document.getElementById("text-area").value="";
                     $('.tag').remove();
-                    mainContent.clone().hide().insertAfter($('#Board-div').children().first()).fadeIn("slow");
+                    mainContent.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });
     });
+
+
     var getInfoAjax = $('#getInfoAjax');
     getInfoAjax.show();
     var data ={
         user: window.location.pathname
     };
+
+
     $.ajax({
-        url: '/ajax/getposts',
+        url: '/ajax/getpac',
         dataType: 'json',
-        data:data,
+        data: data,
         success:function(result){
-            for(var i=0; i<result.ownPosts.content.length; i++){
-                var title = escapeTags(result.ownPosts.title[i]);
-                var content = escapeTags(result.ownPosts.content[i]);
-                var tagList = result.ownPosts.tagList[i];
+            for(var i=0; i<result.posts.title.length; i++){
+                var title = result.posts.title[i];
+                var description = result.posts.content[i];
+                var tags = result.posts.tagList[i];
                 var tagSection = '';
-                for(var j=0; j<tagList.length; j++){
-                    tagSection += '<div class="tag-span">'+ tagList[j]+'</div>';
+                for(var j=0; j<tags.length; j++){
+                    tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
                 }
-                var currentDiv = $('<span class="project-div">\
+                var currentDiv = '';
+                if(result.posts.isPost[i]=='0'){
+                    var developers = result.posts.developers[i];
+                    var manager = result.posts.manager[i];
+                    var usage = result.posts.usage[i];
+
+                    currentDiv = $('<span class="project-div">\
+                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+    							<div class="project-desc">\
+    								<h3>'+ title +'</h3>\
+    								<span>'+ description +'</span>\
+    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+    								<div class="project-tag">'+tagSection +'</div>\
+    							</div>\
+    							<div class="project-image">\
+    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+    								<div class="score-number">0</div></div>\
+    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+    							</div>\
+    							<span><center>'+ usage +'</center></span>\
+    						</span>');
+                    $('.content').children().last().after(currentDiv);
+                }else{
+                    currentDiv = $('<span class="project-div">\
+                            <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
 							<div class="project-desc">\
 								<h3>'+ title +'</h3>\
-								<h4>'+ content +'</h4>\
-								<div class="project-date">Created '   +result.ownPosts.month[i]+   ' '   +result.ownPosts.day[i]+   ', '   +result.ownPosts.year[i] +   ' at '   +result.ownPosts.hour[i]+   ':'   +result.ownPosts.minute[i]+   ':'   +result.ownPosts.second[i]+   '</div>\
+								<h4>'+ description +'</h4>\
+								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
 								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\
 								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
 							</div>\
-						</span>')
-                $('#Board-div').children().last().after(currentDiv);
-
-            }
-        }
-    });
-    getInfoAjax.hide("slow");
-
-
-	var dataSend ={
-        user: window.location.pathname
-    };
-    $.ajax({
-        url: '/ajax/getCompetence',
-        dataType: 'json',
-        data: dataSend,
-        success:function(result){
-            for(var i=0; i<result.ownCompetences.title.length; i++){
-                var title = result.ownCompetences.title[i];
-                var description = result.ownCompetences.description[i];
-                var tags = result.ownCompetences.tags[i];
-                var developers = result.ownCompetences.developers[i];
-                var manager = result.ownCompetences.manager[i];
-//              var Date = result.ownCompetences.Date[i];
-                var usage = result.ownCompetences.usage[i];
-                var tagSection = '';
-                for(var j=0; j<tags.length; j++){
-                    tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+						</span>');
+                $('.content').append(currentDiv);
                 }
-                var currentDiv = $('<span class="project-div">\
-							<div class="project-desc">\
-								<h3>'+ title +'</h3>\
-								<span>'+ description +'</span>\
-								<div class="project-date">Created '   +result.ownCompetences.month[i]+   ' '   +result.ownCompetences.day[i]+   ', '   +result.ownCompetences.year[i] +   ' at '   +result.ownCompetences.hour[i]+   ':'   +result.ownCompetences.minute[i]+   ':'   +result.ownCompetences.second[i]+   '</div>\
-								<div class="project-tag">'+tagSection +'</div>\
-							</div>\
-							<div class="project-image">\
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-								<div class="score-number">0</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
-							</div>\
-							<span><center>'+ usage +'</center></span>\
-						</span>')
-                $('#Board-div').children().last().after(currentDiv);
 
             }
         }
     });
 
+    getInfoAjax.hide("slow");
 
     $("#Competence-form").submit(function(event){
         var thisRegisterForm = $(this);
         $(".ajaxLogoBoard").show();
         event.preventDefault();
         var title = $("#Title-text").val();
-        var description = $("#Description-text").val();
-        var tags = $("#Tag-input1").val();
+        var content = $("#Description-text").val();
+        var tagList = $("#Tag-input1").val();
         var developers = $("#Developers-text").val();
         var manager = $("#Manager-text").val();
         var picture = $("#Picture-text").val();
@@ -293,8 +281,8 @@ $(document).ready(function(){
         var check = 0;
         var data ={
             title:title,
-            description:description,
-            tags:tags,
+            content:content,
+            tagList:tagList,
             developers:developers,
             manager:manager,
             picture:picture,
@@ -317,7 +305,7 @@ $(document).ready(function(){
                         "background" : "#FFFFFF"
                     });
                 }
-                if(result.tags=='0'){
+                if(result.tagList=='0'){
                     check=1;
                     $('#Tag-input1_tagsinput').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
@@ -352,7 +340,7 @@ $(document).ready(function(){
                 }
 
                 $(".ajaxLogoBoard").hide();
-                if(result.manager=='1' && result.title=='1' && result.tags=='1' && result.developers=='1'){
+                if(result.manager=='1' && result.title=='1' && result.tagList=='1' && result.developers=='1'){
                     showTab("#Board");
                     var tag = $("#Tag-input1").val().split(',');
                     var tagSection = '';
@@ -364,7 +352,7 @@ $(document).ready(function(){
                     var Content = $('<span class="project-div">\
 							<div class="project-desc">\
 								<h3>'+ title +'</h3>\
-								<span>'+ description +'</span>\
+								<span>'+ content +'</span>\
 								<div class="project-tag">'+tagSection +'</div>\
 								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
 							</div>\
@@ -380,7 +368,8 @@ $(document).ready(function(){
                     document.getElementById("Picture-text").value="";
                     document.getElementById("Code-text").value="";
                     document.getElementById("Usage-text").value="";
-                    Content.clone().insertAfter($('#Board-div').children().first()).fadeIn("slow");
+                    //Content.clone().insertAfter($('#Board-div').children().first()).fadeIn("slow");
+                    Content.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });
@@ -515,6 +504,159 @@ $(document).ready(function(){
                         });
                     });
 
+                }
+            });
+        }
+    });
+
+    $("input[name='view']").change(function(){
+
+        $('#switchAjax').show("fast");
+        $('.content').css({
+            "opacity": "0.3"
+        }, "fast");
+        var state = $("input[name='view']:checked").val();
+        var data ={
+            user: window.location.pathname
+        };
+        if(state=="post"){
+            $.ajax({
+                data:data,
+                url:'/ajax/getposts',
+                success:function(result){
+                    $('.content').children().not('#switchAjax').remove();
+                        for(var i=0; i<result.posts.title.length; i++){
+                            var title = result.posts.title[i];
+                            var description = result.posts.content[i];
+                            var tags = result.posts.tagList[i];
+                            var tagSection = '';
+                            for(var j=0; j<tags.length; j++){
+                                tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+                            }
+                            var currentDiv = '';
+                            currentDiv = $('<span class="project-div">\
+                                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+							                    <div class="project-desc">\
+								                    <h3>'+ title +'</h3>\
+								                    <h4>'+ description +'</h4>\
+								                    <div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+								                    <div class="project-tag">'+tagSection +'</div>\
+							                    </div>\
+							                    <div class="project-image">\
+								                    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
+							                    </div>\
+						                    </span>');
+                            $('.content').append(currentDiv);
+                            $('#switchAjax').hide("slow");
+                            $('.content').css({
+                                "opacity": "1.0"
+                            }, "fast");
+                        }
+
+                }
+            });
+        }
+        else if(state=="project"){
+            $.ajax({
+                data:data,
+                url:'/ajax/getCompetence',
+                success:function(result){
+                    $('.content').children().not('#switchAjax').remove();
+                        for(var i=0; i<result.posts.title.length; i++){
+                            var title = result.posts.title[i];
+                            var description = result.posts.content[i];
+                            var tags = result.posts.tagList[i];
+                            var developers = result.posts.developers[i];
+                            var manager = result.posts.manager[i];
+                            var usage = result.posts.usage[i];
+                            var tagSection = '';
+                            for(var j=0; j<tags.length; j++){
+                                tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+                            }
+                            var currentDiv = '';
+                            currentDiv = $('<span class="project-div">\
+                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+    							<div class="project-desc">\
+    								<h3>'+ title +'</h3>\
+    								<span>'+ description +'</span>\
+    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+    								<div class="project-tag">'+tagSection +'</div>\
+    							</div>\
+    							<div class="project-image">\
+    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+    								<div class="score-number">0</div></div>\
+    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+    							</div>\
+    							<span><center>'+ usage +'</center></span>\
+    						</span>');
+
+                            $('.content').append(currentDiv);
+                            $('#switchAjax').hide("fast");
+                            $('.content').css({
+                                "opacity": "1.0"
+                            }, "fast");
+                        }
+                }
+            });
+        }
+        else{
+            $.ajax({
+                url: '/ajax/getpac',
+                dataType: 'json',
+                data: data,
+                success:function(result){
+                    $('.content').children().not('#switchAjax').remove();
+                    for(var i=0; i<result.posts.title.length; i++){
+                        var title = result.posts.title[i];
+                        var description = result.posts.content[i];
+                        var tags = result.posts.tagList[i];
+                        var tagSection = '';
+                        for(var j=0; j<tags.length; j++){
+                            tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+                        }
+                        var currentDiv = '';
+                        if(result.posts.isPost[i]=='0'){
+                            var developers = result.posts.developers[i];
+                            var manager = result.posts.manager[i];
+                            var usage = result.posts.usage[i];
+
+                            currentDiv = $('<span class="project-div">\
+                                        <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+            							<div class="project-desc">\
+            								<h3>'+ title +'</h3>\
+            								<span>'+ description +'</span>\
+            								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+            								<div class="project-tag">'+tagSection +'</div>\
+            							</div>\
+            							<div class="project-image">\
+            								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+            								<div class="score-number">0</div></div>\
+            								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+            							</div>\
+    	        						<span><center>'+ usage +'</center></span>\
+            						</span>');
+                            $('.content').children().last().after(currentDiv);
+                        }else{
+                            currentDiv = $('<span class="project-div">\
+                                    <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+        							<div class="project-desc">\
+        								<h3>'+ title +'</h3>\
+        								<h4>'+ description +'</h4>\
+        								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+        								<div class="project-tag">'+tagSection +'</div>\
+        							</div>\
+        							<div class="project-image">\
+        								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
+        							</div>\
+        						</span>');
+                        $('.content').append(currentDiv);
+                        }
+
+                    }
+                    $('#switchAjax').hide("slow");
+                    $('.content').css({
+                        "opacity": "1.0"
+                    }, "fast");
                 }
             });
         }
