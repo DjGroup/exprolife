@@ -65,8 +65,9 @@ def index(request):
 
     if request.POST.get('registerButton'):
         #check that firstName is valid(containing number and letters only)
-        firstName = request.POST['firstname']
-        lastName = request.POST['lastname']
+        firstName = request.POST['firstname'].lower()
+        print firstName
+        lastName = request.POST['lastname'].lower()
         email = request.POST['email']
         firstAndLastNameRegex = r'^[a-zA-Z0-9]+$'
         emailRegex = r'[a-zA-Z0-9_]+(\.[a-zA-Z0-9_+])*@[a-zA-Z0-9_]+\.[a-zA-Z0-9_.+]{2,}$'
@@ -102,8 +103,8 @@ def index(request):
             gravatar_url = "www.gravatar.com/avatar"
             emailHash = hashlib.md5(request.POST['email']).hexdigest()
             image_url = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
-            user = User.objects.create(firstName=request.POST['firstname'],
-                                       lastName=request.POST['lastname'],
+            user = User.objects.create(firstName=request.POST['firstname'].lower(),
+                                       lastName=request.POST['lastname'].lower(),
                                        password=hashed_password.hexdigest(),
                                        email=request.POST['email'],
                                        sex=0 if request.POST['gender'] == 'male' else 1 if request.POST['gender'] ==

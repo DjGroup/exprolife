@@ -15,18 +15,18 @@ def autocompleteModel(request):
     splitter = request.REQUEST['query'].split()
     if len(splitter) == 1:
         # users
-        users = User.objects.filter(Q(firstName__contains=splitter[0]) |
-                                    Q(lastName__contains=splitter[0])
+        users = User.objects.filter(Q(firstName__contains=splitter[0].lower()) |
+                                    Q(lastName__contains=splitter[0].lower())
                                     )
 
         # TODO: projects and posts must search also ....
 
     elif len(splitter) == 2:
         print splitter
-        users = User.objects.filter((Q(firstName__contains=splitter[0]) |
-                                    Q(lastName__contains=splitter[0])) &
-                                    (Q(firstName__contains=splitter[1]) |
-                                    Q(lastName__contains=splitter[1])))
+        users = User.objects.filter((Q(firstName__contains=splitter[0].lower()) |
+                                    Q(lastName__contains=splitter[0].lower())) &
+                                    (Q(firstName__contains=splitter[1].lower()) |
+                                    Q(lastName__contains=splitter[1].lower())))
 
     else:
         # TODO: projects and posts must search also ....
