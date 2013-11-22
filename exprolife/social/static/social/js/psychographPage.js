@@ -1,23 +1,84 @@
+/********************  BEGIN  ******************/
+/****************** CONSTANTS ******************/
+/************ AND REQUIRED FUNCTIONS ***********/
+/***********************************************/
 
-//*********************** CONSTANTS *****************************
 var isContinueAjax=false;
 
 var escapeTags = function(str) {
    return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 };
 
+//use this function to send ajax post, project and PAC queries (code bloat)
+function ajaxer(type, content, result){
+    for(var i=0; i<result.posts.title.length; i++){
+        var title = result.posts.title[i];
+        var description = result.posts.content[i];
+        var tags = result.posts.tagList[i];
+        var tagSection = '';
+        if(type=='getCompetence' ||(type=='getPAC' && result.posts.isPost[i]=='0')){
+            var developers = result.posts.developers[i];
+            var manager = result.posts.manager[i];
+            var usage = result.posts.usage[i];
+        }
+        for(var j=0; j<tags.length; j++){
+            tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+        }
+        var currentDiv = '';
+        if(type=='getPosts'|| (type=='getPAC' && result.posts.isPost[i]=='1')){
+            currentDiv = $('<span class="project-div">\
+                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+    							<div class="project-desc">\
+    							    <h3>'+ title +'</h3>\
+    								<h4>'+ description +'</h4>\
+    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+    								<div class="project-tag">'+tagSection +'</div>\
+    							</div>\
+    							<div class="project-image">\
+    							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
+    							</div>\
+    						</span>');
+        }else if(type=='getCompetence' || (type=='getPAC' && result.posts.isPost[i]=='0')){
+            currentDiv = $('<span class="project-div">\
+                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+    							<div class="project-desc">\
+    								<h3>'+ title +'</h3>\
+    								<span>'+ description +'</span>\
+    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+    								<div class="project-tag">'+tagSection +'</div>\
+    							</div>\
+    							<div class="project-image">\
+    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+    								<div class="score-number">0</div></div>\
+    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+    							</div>\
+    							<span><center>'+ usage +'</center></span>\
+    						</span>');
+        }
+        content.append(currentDiv);
+    }
+}
 
+/*******************   END   *******************/
+/****************** CONSTANTS ******************/
+/************ AND REQUIRED FUNCTIONS ***********/
+/***********************************************/
 
 $(document).ready(function(){
-//  migrated code from script.js
-    var items = $('#v-nav>ul>li').each(function () {
+
+/////////////////   BEGIN   ///////////////////////
+////////// navigation bar in the left /////////////
+///////////////////////////////////////////////////
+
+    var nav = $('#v-nav');
+    var items = nav.children('ul').children('li').each(function () {
         $(this).click(function () {
             //remove previous class and add it to clicked tab
             items.removeClass('current');
             $(this).addClass('current');
 
             //hide all content divs and show current one
-            $('#v-nav>div.tab-content').hide().eq(items.index($(this))).fadeIn('fast');
+            nav.children('div.tab-content').hide().eq(items.index($(this))).fadeIn('fast');
 
             window.location.hash = $(this).attr('tab');
         });
@@ -37,47 +98,98 @@ $(document).ready(function(){
             }
         });
     }
-//  end of migration
+
+/////////////////    END    ///////////////////////
+////////// navigation bar in the left /////////////
+///////////////////////////////////////////////////
+
+
+/////////////////  BEGIN    ///////////////////////
+///// Welcome message when login or register //////
+///////////////////////////////////////////////////
+
+
     $(".alert").animate({
          "right":"50px"
     } , 1500).delay(1000).fadeOut(1000);
-//  when click somewhere else input search box must be slideUp();
+
+/////////////////  END    /////////////////////////
+///// Welcome message when login or register //////
+///////////////////////////////////////////////////
+
+
+/////////////////  BEGIN    ///////////////////////
+//////// search input box in psychoGraph //////////
+///////////////////////////////////////////////////
+
+    // when click somewhere else input search box must be slideUp();
     $(document).not("#Search-input, #searchResultSection").click(function(){
         $("#searchResultSection").slideUp();
     });
 
     var currentRequest = null;
-    $("#Search-input").keyup(function(){
-        $(".itemSearch").remove();
-        $(".notfound").hide();
-//        $("#searchResultSection").height("20px");
 
-        if(!$("#Search-input").val()){
-            $("#searchResultSection").slideUp();
+    // when a key pressed in Keyboard then call this function
+    $("#Search-input").keyup(function(){
+        var notFound = $(".notfound");
+        var searchResultSection = $("#searchResultSection");
+        var searchInput = $("#Search-input");
+        var itemSearch = $(".itemSearch");
+        //remove previous items in search results
+        itemSearch.remove();
+
+        // not found text hide  =>  ["Nothing found please try something else"]
+        notFound.hide();
+
+
+        searchResultSection.height("70px");
+        // if search input box is empty (by delete all chars or backspace or ...)
+        if(!searchInput.val()){
+
+            //slide up search result and hide ajax logo and not found text.
+            searchResultSection.slideUp();
             $(".ajaxLogoSearch").hide();
-            $(".notfound").hide();
+            notFound.hide();
         }
+
+        // else search input box is not empty and search logic works with AJAX
         else{
+
+            // getting value of search input box
             var data = {
-                query: $("#Search-input").val()
+                query: searchInput.val()
             };
-            $("#searchResultSection").slideDown();
+
+            //search result slide down and show ajax logo in it
+            searchResultSection.slideDown();
             $(".ajaxLogoSearch").show();
+
+            //send AJAX to /ajax/search
             currentRequest = $.ajax({
                 url: '/ajax/search',
                 data: data,
                 dataType:'json',
+
+                // optimize bandwith of server => if two request comes first request aborted <=
                 beforeSend : function(){
                     if(currentRequest != null) {
                         currentRequest.abort();
                     }
                 },
+
+                //if AJAX success :
                 success:function(result){
-                    $(".itemSearch").remove();
+
+                    //remove previous results in search result section
+                    itemSearch.remove();
+
+                    //if not found:
                     if(result.found==0){
                         $(".ajaxLogoSearch").hide();
-                        $(".notfound").show();
+                        notFound.show();
                     }
+
+                    //else add to DOM
                     else{
                         var searchResult = $("#searchResultSection");
                         $(".ajaxLogoSearch").hide();
@@ -92,6 +204,11 @@ $(document).ready(function(){
                             }
                             $("#innerSearch").append(content);
                         }
+
+                        /************************   BEGIN   **************************/
+                        /************ bind hover and click after AJAX call ***********/
+                        /*************************************************************/
+
                         $(".itemSearch").hover(function(){
                             $(this).css({"background-color":"rgba(85,230,201,0.5)"});
                         },function(){
@@ -102,11 +219,24 @@ $(document).ready(function(){
                                 var last = $(this).children().first().next().next().text();
                                 document.location.href= '/' + first + '.' + last;
                             });
+
+                        /************************   END   **************************/
+                        /************ bind hover and click after AJAX call ***********/
+                        /*************************************************************/
                     }
                 }
             });
         }
     });
+
+/////////////////  END    ///////////////////////
+//////// search input box in psychoGraph //////////
+///////////////////////////////////////////////////
+
+
+////////////////////// BEGIN  //////////////////////////////
+// when click on .first navigation bar its width INCREASE //
+////////////////////////////////////////////////////////////
 
     $('.first').on("click", function(){
         $('#Col-1').fadeOut("slow", function(){
@@ -116,16 +246,43 @@ $(document).ready(function(){
             $('.project-div, .post-div').delay(500).fadeIn("slow");
         });
     });
-    $('#v-nav').children().first().children().not(".first").on("click", function(){
+
+////////////////////// BEGIN  //////////////////////////////
+// when click on .first navigation bar its width INCREASE //
+////////////////////////////////////////////////////////////
+
+
+//////////////////////// BEGIN  ////////////////////////////////
+// when click on not .first navigation bar its width DECREASE //
+////////////////////////////////////////////////////////////////
+
+    nav.children().first().children().not(".first").on("click", function(){
         $('#Col-2').animate({
                 width:"800px"
             }, "slow");
         $('#Col-1').delay(500).fadeIn("slow");
         $('.project-div, .post-div').hide();
     });
+
+///////////////////////// END  /////////////////////////////////
+// when click on not .first navigation bar its width DECREASE //
+////////////////////////////////////////////////////////////////
+
+
+////////////////////////// BEGIN  /////////////////////////////////
+// when submit on board post form in Board section of navigation //
+/////// without refreshing added to the DOM with fadeIn ///////////
+///////////////////////////////////////////////////////////////////
+
     $("#Board-form").submit(function(event){
+        var tag = $('.tag');
         $(".ajaxLogoBoard").show();
+
+        // prevent send to SERVER
+        //TODO:submit must change to normal button because never submit occur
         event.preventDefault();
+
+        // get values from DOM
         var content = $("#text-area").val();
         var tags = $('.tag').find('span').text();
         var title = $('#title-board').val();
@@ -134,16 +291,21 @@ $(document).ready(function(){
             tagList:tags,
             title:title
         };
+
+        //send AJAX to /ajax/postboardcheck
         $.ajax({
             url: '/ajax/postboardcheck',
             data: data,
             dataType: 'json',
             success:function(result){
+
+                // if any field is empty turn its color to light pink => rgba(255, 82, 82, 0.5)
                 if(result.title=='0'){
                     $('#title-board').css({
                         "background" : "rgba(255, 82, 82, 0.5)"
                     });
                 }
+                // else turn color to white => #FFFFFF
                 else{
                     $('#title-board').css({
                         "background" : "#FFFFFF"
@@ -170,11 +332,16 @@ $(document).ready(function(){
                     });
                 }
 
+                //TODO:ajax logo must hide here ? or must hide end of block ?
+
                 $(".ajaxLogoBoard").hide();
+
+                //if evrything is OK and post can post in board then DO:
                 if(result.isOK=='1'){
+
                     var title = escapeTags($('#title-board').val());
                     var content = escapeTags($('#Board-form').children().first().next().val());
-                    var tags = escapeTags($('.tag').text());
+                    var tags = escapeTags(tag.text());
                     var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160));
                     tagList.splice(-1);
                     var tagSection = '';
@@ -194,13 +361,22 @@ $(document).ready(function(){
 						</span>');
 					document.getElementById("title-board").value="";
                     document.getElementById("text-area").value="";
-                    $('.tag').remove();
+                    tag.remove();
                     mainContent.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });
     });
 
+//////////////////////////// END //////////////////////////////////
+// when submit on board post form in Board section of navigation //
+/////// without refreshing added to the DOM with fadeIn ///////////
+///////////////////////////////////////////////////////////////////
+
+
+///////////////////////   BEGIN  ///////////////////////////////
+// every time page loads it get POSTs and PROJECTs from DB in //
+///////////////////// behind of door :D/////////////////////////
 
     var getInfoAjax = $('#getInfoAjax');
     getInfoAjax.show();
@@ -208,68 +384,38 @@ $(document).ready(function(){
         user: window.location.pathname
     };
 
+    //get post and projects every time page loading
 
+    var content = $('.content');
     $.ajax({
         url: '/ajax/getpac',
         dataType: 'json',
         data: data,
         success:function(result){
-            for(var i=0; i<result.posts.title.length; i++){
-                var title = result.posts.title[i];
-                var description = result.posts.content[i];
-                var tags = result.posts.tagList[i];
-                var tagSection = '';
-                for(var j=0; j<tags.length; j++){
-                    tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
-                }
-                var currentDiv = '';
-                if(result.posts.isPost[i]=='0'){
-                    var developers = result.posts.developers[i];
-                    var manager = result.posts.manager[i];
-                    var usage = result.posts.usage[i];
 
-                    currentDiv = $('<span class="project-div">\
-                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-    							<div class="project-desc">\
-    								<h3>'+ title +'</h3>\
-    								<span>'+ description +'</span>\
-    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-    								<div class="project-tag">'+tagSection +'</div>\
-    							</div>\
-    							<div class="project-image">\
-    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-    								<div class="score-number">0</div></div>\
-    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
-    							</div>\
-    							<span><center>'+ usage +'</center></span>\
-    						</span>');
-                    $('.content').children().last().after(currentDiv);
-                }else{
-                    currentDiv = $('<span class="project-div">\
-                            <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-							<div class="project-desc">\
-								<h3>'+ title +'</h3>\
-								<h4>'+ description +'</h4>\
-								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-								<div class="project-tag">'+tagSection +'</div>\
-							</div>\
-							<div class="project-image">\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
-							</div>\
-						</span>');
-                $('.content').append(currentDiv);
-                }
-
-            }
+            //getPAC (PAC => Post And Projects)
+            ajaxer('getPAC', content, result);
         }
     });
 
     getInfoAjax.hide("slow");
 
+//////////////////////// END ///////////////////////////////////
+// every time page loads it get POSTs and PROJECTs from DB in //
+///////////////////// behind of door :D/////////////////////////
+
+
+///////////////////////// BEGIN ////////////////////////////////
+////// competence form in navigation bar => Competence /////////
+///////////////////// behind of door :D/////////////////////////
+
     $("#Competence-form").submit(function(event){
-        var thisRegisterForm = $(this);
         $(".ajaxLogoBoard").show();
+
+        //prevent normal submit when submit button click because check something ...
         event.preventDefault();
+
+        //getting values
         var title = $("#Title-text").val();
         var content = $("#Description-text").val();
         var tagList = $("#Tag-input1").val();
@@ -289,11 +435,14 @@ $(document).ready(function(){
             sourceCode:sourceCode,
             usage:usage
         };
+
+        //send AJAX
         $.ajax({
             url: '/ajax/competenceCheck',
             data: data,
             dataType: 'json',
             success:function(result){
+                //if something wrong then :
                 if(result.title=='0'){
                     check  =1;
                     $('#Title-text').css({
@@ -338,8 +487,10 @@ $(document).ready(function(){
                         "background" : "#FFFFFF"
                     });
                 }
-
+                //TODO:is ajax logo must hide here ? or end of the block ?
                 $(".ajaxLogoBoard").hide();
+
+                //if every thing is OK then add to DOM
                 if(result.manager=='1' && result.title=='1' && result.tagList=='1' && result.developers=='1'){
                     showTab("#Board");
                     var tag = $("#Tag-input1").val().split(',');
@@ -360,24 +511,37 @@ $(document).ready(function(){
 								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
 							</div>\
 						</span>');
-					document.getElementById("Title-text").value="";
-                    document.getElementById("Description-text").value="";
+
+                    //clear all fileds after submit
+                    $('#Title-text, #Description-text, #Developers-text, #Manager-text, #Picture-text, #Code-text, #Usage-text').val("");
                     $('.tag').remove();
-                    document.getElementById("Developers-text").value="";
-                    document.getElementById("Manager-text").value="";
-                    document.getElementById("Picture-text").value="";
-                    document.getElementById("Code-text").value="";
-                    document.getElementById("Usage-text").value="";
-                    //Content.clone().insertAfter($('#Board-div').children().first()).fadeIn("slow");
+
+                    //add content to DOM
                     Content.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });
     });
 
+////////////////////////// END /////////////////////////////////
+////// competence form in navigation bar => Competence /////////
+///////////////////// behind of door :D/////////////////////////
+
+
+///////////////////////// BEGIN ////////////////////////////////
+//// TRACE a user that redirect from search box(currently) /////
+////////////////////////////////////////////////////////////////
+
+    //when TRACE button clicked DO:
     $('#anotherUsersTitle').children().first().next().on("click", function(){
-        buttonThis = $(this);
+
+        //this button may be needed in later
+        var buttonThis = $(this);
+
+        //instead of ajax logo add 3 dot at end of the TRACE button text
         $(this).val("Trace...");
+
+        //get the firstName and lastName from URL and split it to send to server
         var receiver = location.pathname.split("/")[1].split(".");
         var receiverFN = receiver[0];
         var receiverLN = receiver[1];
@@ -385,24 +549,34 @@ $(document).ready(function(){
         if(receiver.length==3){
             receiverNUM = receiver[2];
         }
-        dataSend = {
+        var dataSend = {
             userReceiverFirstName: receiverFN,
             userReceiverLastName: receiverLN,
             userReceiverNumber: receiverNUM
         };
+        //ajax send
         $.ajax({
             url: '/ajax/trace',
             dataType: 'json',
             data: dataSend,
             success:function(result){
                 if(result.isOK==1){
+                    //change the text of button to trace + tick and change button to div
                     buttonThis.replaceWith("<div id='isTraced'>Traced &#10004</div>")
-//                    change color of button
+
                 }
             }
         });
     });
 
+////////////////////////// END /////////////////////////////////
+//// TRACE a user that redirect from search box(currently) /////
+////////////////////////////////////////////////////////////////
+
+
+///////////////////////// BEGIN ////////////////////////////////
+//// when notification box clicked then trace ship and other ///
+///////////// requests must be shown to user ///////////////////
 
     $("#notification-icon").on("click", function(){
         $('#notificationNumber').hide();
@@ -481,8 +655,6 @@ $(document).ready(function(){
                         });
                     });
 
-
-
                     $('.trace').on("click", function(){
                         var thisTraceButton = $(this);
                         thisTraceButton.text('trace...');
@@ -497,22 +669,28 @@ $(document).ready(function(){
                                 if(result.isOK=='1'){
                                     thisTraceButton.next().fadeOut("fast");
                                     thisTraceButton.replaceWith("<div class='button glass blue accept'>traced &#10004</div>");
-
                                 }
                             }
-
                         });
                     });
-
                 }
             });
         }
     });
 
-    $("input[name='view']").change(function(){
+////////////////////////// END /////////////////////////////////
+//// when notification box clicked then trace ship and other ///
+///////////// requests must be shown to user ///////////////////
 
+
+///////////////////////// BEGIN ////////////////////////////////
+/////////// filter searching with ALL, POST, PROJECT ///////////
+////////////////////////////////////////////////////////////////
+
+    $("input[name='view']").change(function(){
+        var content = $('.content');
         $('#switchAjax').show("fast");
-        $('.content').css({
+        content.css({
             "opacity": "0.3"
         }, "fast");
         var state = $("input[name='view']:checked").val();
@@ -524,34 +702,12 @@ $(document).ready(function(){
                 data:data,
                 url:'/ajax/getposts',
                 success:function(result){
-                    $('.content').children().not('#switchAjax').remove();
-                        for(var i=0; i<result.posts.title.length; i++){
-                            var title = result.posts.title[i];
-                            var description = result.posts.content[i];
-                            var tags = result.posts.tagList[i];
-                            var tagSection = '';
-                            for(var j=0; j<tags.length; j++){
-                                tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
-                            }
-                            var currentDiv = '';
-                            currentDiv = $('<span class="project-div">\
-                                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-							                    <div class="project-desc">\
-								                    <h3>'+ title +'</h3>\
-								                    <h4>'+ description +'</h4>\
-								                    <div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-								                    <div class="project-tag">'+tagSection +'</div>\
-							                    </div>\
-							                    <div class="project-image">\
-								                    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
-							                    </div>\
-						                    </span>');
-                            $('.content').append(currentDiv);
-                            $('#switchAjax').hide("fast");
-                            $('.content').css({
+                    content.children().not('#switchAjax').remove();
+                    ajaxer('getPosts', content, result);
+                    $('#switchAjax').hide("fast");
+                            content.css({
                                 "opacity": "1.0"
                             }, "fast");
-                        }
 
                 }
             });
@@ -561,41 +717,12 @@ $(document).ready(function(){
                 data:data,
                 url:'/ajax/getCompetence',
                 success:function(result){
-                    $('.content').children().not('#switchAjax').remove();
-                        for(var i=0; i<result.posts.title.length; i++){
-                            var title = result.posts.title[i];
-                            var description = result.posts.content[i];
-                            var tags = result.posts.tagList[i];
-                            var developers = result.posts.developers[i];
-                            var manager = result.posts.manager[i];
-                            var usage = result.posts.usage[i];
-                            var tagSection = '';
-                            for(var j=0; j<tags.length; j++){
-                                tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
-                            }
-                            var currentDiv = '';
-                            currentDiv = $('<span class="project-div">\
-                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-    							<div class="project-desc">\
-    								<h3>'+ title +'</h3>\
-    								<span>'+ description +'</span>\
-    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-    								<div class="project-tag">'+tagSection +'</div>\
-    							</div>\
-    							<div class="project-image">\
-    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-    								<div class="score-number">0</div></div>\
-    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
-    							</div>\
-    							<span><center>'+ usage +'</center></span>\
-    						</span>');
-
-                            $('.content').append(currentDiv);
-                            $('#switchAjax').hide("fast");
-                            $('.content').css({
+                    content.children().not('#switchAjax').remove();
+                    ajaxer('getCompetence', content, result);
+                    $('#switchAjax').hide("fast");
+                            content.css({
                                 "opacity": "1.0"
                             }, "fast");
-                        }
                 }
             });
         }
@@ -605,61 +732,18 @@ $(document).ready(function(){
                 dataType: 'json',
                 data: data,
                 success:function(result){
-                    $('.content').children().not('#switchAjax').remove();
-                    for(var i=0; i<result.posts.title.length; i++){
-                        var title = result.posts.title[i];
-                        var description = result.posts.content[i];
-                        var tags = result.posts.tagList[i];
-                        var tagSection = '';
-                        for(var j=0; j<tags.length; j++){
-                            tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
-                        }
-                        var currentDiv = '';
-                        if(result.posts.isPost[i]=='0'){
-                            var developers = result.posts.developers[i];
-                            var manager = result.posts.manager[i];
-                            var usage = result.posts.usage[i];
-
-                            currentDiv = $('<span class="project-div">\
-                                        <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-            							<div class="project-desc">\
-            								<h3>'+ title +'</h3>\
-            								<span>'+ description +'</span>\
-            								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-            								<div class="project-tag">'+tagSection +'</div>\
-            							</div>\
-            							<div class="project-image">\
-            								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-            								<div class="score-number">0</div></div>\
-            								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
-            							</div>\
-    	        						<span><center>'+ usage +'</center></span>\
-            						</span>');
-                            $('.content').children().last().after(currentDiv);
-                        }else{
-                            currentDiv = $('<span class="project-div">\
-                                    <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-        							<div class="project-desc">\
-        								<h3>'+ title +'</h3>\
-        								<h4>'+ description +'</h4>\
-        								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-        								<div class="project-tag">'+tagSection +'</div>\
-        							</div>\
-        							<div class="project-image">\
-        								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
-        							</div>\
-        						</span>');
-                        $('.content').append(currentDiv);
-                        }
-
-                    }
+                    content.children().not('#switchAjax').remove();
+                    ajaxer('getPAC', content, result);
                     $('#switchAjax').hide("fast");
-                    $('.content').css({
+                    content.css({
                         "opacity": "1.0"
                     }, "fast");
                 }
             });
         }
     });
-
 });
+
+////////////////////////// END /////////////////////////////////
+/////////// filter searching with ALL, POST, PROJECT ///////////
+////////////////////////////////////////////////////////////////
