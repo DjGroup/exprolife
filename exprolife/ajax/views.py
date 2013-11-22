@@ -333,8 +333,6 @@ def getCompetence(request):
     tracingList = []
     for tracingUser in user.TraceShip_userSender.all():
         curUser = User.objects.get(pk=tracingUser.userReceiver_id)
-        for post in curUser.boardpost_set.filter(date__gt=tracingUser.senderTime):
-            tracingList.append(post)
         for competence in curUser.competence_set.filter(date__gt=tracingUser.senderTime):
             tracingList.append(competence)
 
@@ -408,10 +406,6 @@ def competenceCheck(request):
 
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-
-        user.competence_set.create(title=title, content=content, tagList=tagList, developers=developers,
-                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
-                                   usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 

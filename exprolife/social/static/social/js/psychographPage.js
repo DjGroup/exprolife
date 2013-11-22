@@ -547,7 +547,7 @@ $(document).ready(function(){
 							                    </div>\
 						                    </span>');
                             $('.content').append(currentDiv);
-                            $('#switchAjax').hide("slow");
+                            $('#switchAjax').hide("fast");
                             $('.content').css({
                                 "opacity": "1.0"
                             }, "fast");
@@ -653,7 +653,7 @@ $(document).ready(function(){
                         }
 
                     }
-                    $('#switchAjax').hide("slow");
+                    $('#switchAjax').hide("fast");
                     $('.content').css({
                         "opacity": "1.0"
                     }, "fast");
