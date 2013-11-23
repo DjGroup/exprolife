@@ -14,7 +14,11 @@ function ajaxer(type, content, result){
     for(var i=0; i<result.posts.title.length; i++){
         var title = result.posts.title[i];
         var description = result.posts.content[i];
-        var tags = result.posts.tagList[i];
+        var tags = result.posts.tagList[i].split(',');
+        var length = tags.length;
+        if(tags[length-1]==""){
+            tags.splice(-1);
+        }
         var tagSection = '';
         if(type=='getCompetence' ||(type=='getPAC' && result.posts.isPost[i]=='0')){
             var developers = result.posts.developers[i];
@@ -508,6 +512,8 @@ $(document).ready(function(){
 								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
 							</div>\
 							<div class="project-image">\
+								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+    								<div class="score-number">0</div></div>\
 								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
 							</div>\
 						</span>');
@@ -517,7 +523,7 @@ $(document).ready(function(){
                     $('.tag').remove();
 
                     //add content to DOM
-                    Content.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
+                    Content.clone().hide().delay(1000).insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });

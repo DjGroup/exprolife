@@ -122,6 +122,7 @@ def postBoardCheck(request):
                   }
     content = request.REQUEST['content']
     tagList = request.REQUEST['tagList']
+
     title = request.REQUEST['title']
     # print request.session['first_name']
     if not content:
@@ -133,7 +134,11 @@ def postBoardCheck(request):
     if response['content'] and response['tagList'] and response['title']:
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        user.boardpost_set.create(date=timezone.now(), content=content, tagList=tagList, title=title)
+        print "post " + tagList
+        STR=""
+        for i in tagList.split():
+            STR += i + ","
+        user.boardpost_set.create(date=timezone.now(), content=content, tagList=STR, title=title)
         currentDateTime = timezone.now()
         response['year'] = currentDateTime.year
         response['month'] = monthNames[currentDateTime.month]
@@ -204,7 +209,7 @@ def getPosts(request):
         response['posts']['minute'].append(i.date.minute)
         response['posts']['second'].append(i.date.second)
         response['posts']['year'].append(i.date.year)
-        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
 
         #else ?
 
@@ -282,7 +287,7 @@ def getPAC(request):
         response['posts']['minute'].append(i.date.minute)
         response['posts']['second'].append(i.date.second)
         response['posts']['year'].append(i.date.year)
-        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
         if isinstance(i, BoardPost):
             response['posts']["isPost"].append(1)
         elif isinstance(i, Competence):
@@ -361,7 +366,7 @@ def getCompetence(request):
         response['posts']['minute'].append(i.date.minute)
         response['posts']['second'].append(i.date.second)
         response['posts']['year'].append(i.date.year)
-        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' ').split())
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
         response['posts']["developers"].append(i.developers)
         response['posts']["manager"].append(i.manager)
         response['posts']["usage"].append(i.usage)
@@ -406,8 +411,14 @@ def competenceCheck(request):
 
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
+        print "comp" + tagList
+        STR = ""
+        for i in tagList.split():
+            STR += i + ","
+        user.competence_set.create(title=title, content=content, tagList=STR, developers=developers,
+                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
+                                   usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')
-
 
 def traceShip(request):
     response = {'isOK': 0}
