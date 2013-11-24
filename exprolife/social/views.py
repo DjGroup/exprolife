@@ -165,6 +165,12 @@ def index(request):
                     isShowNotificationToUser1=1).count()
                 request.session['totalNotification'] = request.session['traceRequestNumber'] +\
                                                        request.session['tracebackRequestNumber']
+                a = TraceShip.objects.filter(userSender=loginedUser[0].id).count()
+                b = TraceShip.objects.filter(userReceiver=loginedUser[0].id,isUser2AcceptTrace=1).count()
+                c = a+b
+                request.session['tracing'] = c
+                d = TraceShip.objects.filter(userReceiver=loginedUser[0].id).count()
+                request.session['tracer'] = d
                 template = loader.get_template('social/psychograph.html')
                 context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
@@ -213,7 +219,6 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
         return HttpResponse(template.render(context))
     except:
         raise Http404
-
 
 def idDetailIndex(request, user_id):
     user = get_object_or_404(User, id=user_id)

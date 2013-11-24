@@ -1345,3 +1345,96 @@ button:active.blue {
 .gray{
     background: red;
 }
+
+.notifications {
+    position: relative;
+}
+.notify {
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    width: 269px;
+    height: 50px;
+    background-color: #fdf4ff;
+    border-radius: 2px;
+    box-shadow: 0px 5px 20px #444;
+    margin-left: 80px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+}
+.notify:hover, .notify:focus {
+    background-color: #f4e3f4;
+    outline: none;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+}
+.notify:first-child {
+    text-align: center;
+}
+.circle {
+    width: 45px;
+    height: 22px;
+    float:right;
+    border-radius: 10%;
+    color: white;
+    text-align: center;
+    padding: 20px 10px 10px 5px;
+}
+.gr > .circle { background-color:#d0c2d4; }
+.gr > .info span:first-child { color: #d0c2d4; }
+.rd > .circle { background-color: red; }
+.rd > .info span:first-child { color: red; }
+.or > .circle { background-color: orange; }
+.or > .info span:first-child { color: orange; }
+.bl > .circle { background-color: #86c1ff; }
+.bl > .info span:first-child { color: #86c1ff; }
+.info {
+    font-family: sans-serif;
+    padding: 20px 5px 10px 20px ;
+    text-align: center;
+}
+.info span:first-child {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+.info span:last-child {
+    font-size: 13px;
+    text-align: center;
+}
+.info span a {
+    color: hsl(0, 0%, 33%);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.button2{
+    display:inline-block;
+    width: 25px;
+    height: 22px;
+    border-radius: 100%;
+    float: right;
+    text-align:center;
+    cursor:pointer;
+    background:rgba(255,255,255,.1);
+    transition:background .2s;
+}
+.button2:after{
+    display:inline-block;
+    border-radius: 100%;
+    content:'';
+    box-sizing:content-box;
+    backface-visibility: hidden;
+}
+.button2:before{
+    display:block;
+    font-family: 'FontAwesome', sans-serif;
+    font-size:2.5rem;
+    z-index :1;
+    line-height:90px;
+}
+
