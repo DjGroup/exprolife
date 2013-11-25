@@ -71,7 +71,6 @@ function ajaxer(type, content, result){
         var ID = $(this).children().first().children().first().next().children().first().text();
         var title = $(this).children().first().children().first().next().children().first().next().text();
         title = title.split(' ').join('%20');
-        alert(title);
         document.location.href = 'Post/' + title + '.' + ID;
     });
 }

@@ -152,6 +152,7 @@ def postBoardCheck(request):
 
 def getPosts(request):
     response = {'posts': {
+                    "id":[],
                     "title": [],
                     "firstName": [],
                     "lastName": [],
@@ -201,6 +202,7 @@ def getPosts(request):
         user = User.objects.filter(pk=i.user_id)[0]
         response['posts']["firstName"].append(user.firstName)
         response['posts']["lastName"].append(user.lastName)
+        response['posts']["id"].append(i.id)
         response['posts']["title"].append(i.title)
         response['posts']["content"].append(i.content)
         response['posts']['month'].append(i.date.month)
@@ -224,6 +226,7 @@ def getPAC(request):
                     "isPost": [],
                     "firstName": [],
                     "lastName": [],
+                    "id": [],
                     "title": [],
                     "content": [],
                     "tagList": [],
@@ -275,10 +278,12 @@ def getPAC(request):
 
     allPosts = sorted(chain(postsOfUser, competencesOfUser, tracingList), key=lambda instance: instance.date,
                       reverse=True)
+    print allPosts
     for i in allPosts:
         user = User.objects.filter(pk=i.user_id)[0]
         response['posts']["firstName"].append(user.firstName)
         response['posts']["lastName"].append(user.lastName)
+        response['posts']["id"].append(i.id)
         response['posts']["title"].append(i.title)
         response['posts']["content"].append(i.content)
         response['posts']['month'].append(i.date.month)
@@ -306,6 +311,7 @@ def getPAC(request):
 
 def getCompetence(request):
     response = {'posts': {
+                    "id":[],
                     "firstName": [],
                     "lastName": [],
                     "title": [],
@@ -356,6 +362,7 @@ def getCompetence(request):
                       reverse=True)
     for i in allPosts:
         user = User.objects.filter(pk=i.user_id)[0]
+        response['posts']["id"].append(i.id)
         response['posts']["firstName"].append(user.firstName)
         response['posts']["lastName"].append(user.lastName)
         response['posts']["title"].append(i.title)

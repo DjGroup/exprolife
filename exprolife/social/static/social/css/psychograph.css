@@ -39,7 +39,7 @@ h6,
     line-height: 1.2;
 }
 a {
-    color: #16a085;
+    /*color: #16a085;*/
     text-decoration: none;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
@@ -49,8 +49,24 @@ a {
 }
 a:hover,
 a:focus {
-    color: #1abc9c;
+    /*color: #1abc9c;*/
     text-decoration: none;
+}
+.project-link{
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 6px;
+}
+.project-link:hover, .project-link:focus{
+    background-color: #ECF0F1;
+}
+.post-link{
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 6px;
+}
+.post-link:hover, .post-link:focus{
+    background-color: #ECF0F1;
 }
 .header{
 	background-color:rgb(44,62,80);

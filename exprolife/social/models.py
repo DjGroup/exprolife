@@ -20,7 +20,7 @@ class Competence(models.Model):
     tagList = models.CharField(max_length=100, blank=False, default=None)
     developers = models.CharField(max_length=200, blank=False, default=None)
     manager = models.CharField(max_length=100, blank=False, default=None)
-    picture = models.ImageField(upload_to="uploads_image/", blank=True)
+    picture = models.FileField(upload_to="uploads_image/", blank=True)
     date = models.DateTimeField()
     sourceCode = models.FileField(upload_to="uploads_file/", blank=True)
     usage = models.CharField(max_length=1000, blank=True, default=None)
