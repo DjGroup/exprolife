@@ -223,3 +223,25 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
 def idDetailIndex(request, user_id):
     user = get_object_or_404(User, id=user_id)
     return redirect('FLSocial', first_name=user.firstName, last_name=user.lastName)
+
+def competenceLoader(request, competence_title, competence_id):
+    competence = Competence.objects.filter(id = competence_id, title = competence_title)
+    if not(competence) :
+        raise Http404
+    ComTags = competence[0].tagList.split(',')
+    ComTags.remove('')
+    creationDate = str(competence[0].date.month)
+    creationDate += ' '+str(competence[0].date.day)+' '+str(competence[0].date.year)+' at '+str(competence[0].date.hour)+':'+str(competence[0].date.minute)+':'+str(competence[0].date.second)
+    template = loader.get_template('social/competence.html')
+    context = RequestContext(request, {'competence':competence[0], 'comTags':ComTags,'creationDate':creationDate})
+    return HttpResponse(template.render(context))
+
+def postLoader(request, post_title, post_id):
+    post = BoardPost.objects.filter(id = post_id, title = post_title)
+    PostTags = post[0].tagList.split(',')
+    PostTags.remove('')
+    creationDate = str(post[0].date.month)
+    creationDate += ' '+str(post[0].date.day)+' '+str(post[0].date.year)+' at '+str(post[0].date.hour)+':'+str(post[0].date.minute)+':'+str(post[0].date.second)
+    template = loader.get_template('social/post.html')
+    context = RequestContext(request, {'post':post[0], 'postTags':PostTags ,'creationDate':creationDate})
+    return HttpResponse(template.render(context))

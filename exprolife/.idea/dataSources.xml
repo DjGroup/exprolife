@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" compressed="false" hash="1948666675" />
+  <component name="DataSourceManagerImpl" format="xml" hash="1948666675">
+    <data-source source="LOCAL" name="Django default" uuid="8b79a98f-e589-4064-b032-3addffadc345">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql:///exprolife</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df92df9ddf98df9fdf9adf9fdf9cdf9fdf9b</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.PyCharm20/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.PyCharm20/config/jdbc-drivers/mysql-connector-java-5.1.26-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
 </project>
 

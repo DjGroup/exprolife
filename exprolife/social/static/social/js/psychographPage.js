@@ -12,6 +12,7 @@ var escapeTags = function(str) {
 //use this function to send ajax post, project and PAC queries (code bloat)
 function ajaxer(type, content, result){
     for(var i=0; i<result.posts.title.length; i++){
+        var gID = result.posts.id[i];
         var title = result.posts.title[i];
         var description = result.posts.content[i];
         var tags = result.posts.tagList[i].split(',');
@@ -30,10 +31,10 @@ function ajaxer(type, content, result){
         }
         var currentDiv = '';
         if(type=='getPosts'|| (type=='getPAC' && result.posts.isPost[i]=='1')){
-            currentDiv = $('<span class="project-div">\
+            currentDiv = $('<a class="post-link"><span class="project-div">\
                                 <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
     							<div class="project-desc">\
-    							    <h3>'+ title +'</h3>\
+    							    <span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
     								<h4>'+ description +'</h4>\
     								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
     								<div class="project-tag">'+tagSection +'</div>\
@@ -41,12 +42,12 @@ function ajaxer(type, content, result){
     							<div class="project-image">\
     							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
     							</div>\
-    						</span>');
+    						</span></a>');
         }else if(type=='getCompetence' || (type=='getPAC' && result.posts.isPost[i]=='0')){
-            currentDiv = $('<span class="project-div">\
+            currentDiv = $('<a class="project-link"><span class="project-div">\
                                 <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
     							<div class="project-desc">\
-    								<h3>'+ title +'</h3>\
+    								<span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
     								<span>'+ description +'</span>\
     								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
     								<div class="project-tag">'+tagSection +'</div>\
@@ -57,10 +58,22 @@ function ajaxer(type, content, result){
     								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
     							</div>\
     							<span><center>'+ usage +'</center></span>\
-    						</span>');
+    						</span></a>');
         }
         content.append(currentDiv);
     }
+    $(".project-link").on("click", function(){
+        var ID = $(this).children().first().children().first().next().children().first().text();
+        var title = $(this).children().first().children().first().next().children().first().next().text();
+        document.location.href = 'Competence/' + title + '.' + ID;
+    });
+    $(".post-link").on("click", function(){
+        var ID = $(this).children().first().children().first().next().children().first().text();
+        var title = $(this).children().first().children().first().next().children().first().next().text();
+        title = title.split(' ').join('%20');
+        alert(title);
+        document.location.href = 'Post/' + title + '.' + ID;
+    });
 }
 
 /*******************   END   *******************/
@@ -510,8 +523,8 @@ $(document).ready(function(){
 							<div class="project-desc">\
 								<h3>'+ title +'</h3>\
 								<span>'+ content +'</span>\
-								<div class="project-tag">'+tagSection +'</div>\
 								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
+								<div class="project-tag">'+tagSection +'</div>\
 							</div>\
 							<div class="project-image">\
 								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\

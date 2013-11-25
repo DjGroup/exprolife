@@ -1,0 +1,120 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/post.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
+    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+      <title>{{ post.title }}</title>
+</head>
+
+
+<body>
+<div class="header">
+    <div id="Logo-image">
+        <img  src="{% static 'social/images/logo.png' %}"/>
+    </div>
+    <div id="Search-div">
+        <form id="Search-form">
+            <label id="Search-label">Search</label>
+            <input type="text" placeholder="Projects, People" id="Search-input" class="psychograph-input" />
+            <input type="button" id="Search-icon" />
+        </form>
+    </div>
+    <div id="searchResultSection">
+        <div id="innerSearch">
+            <div class="ajaxLogoSearch">
+                <img src="../../static/social/images/loading.gif" height="40px">
+            </div>
+            <div class="notfound">
+                <p>Nothing found please try something else</p>
+            </div>
+            <div class="itemSearch">
+            </div>
+        </div>
+    </div>
+    <div id="notificationBox">
+        <div class="ajaxLogoNotification">
+            <img src="../../static/social/images/loading.gif" height="40px">
+        </div>
+    </div>
+    <div id="notificationNumber">
+
+        {% ifnotequal request.session.totalNotification 0 %}
+            {{ request.session.totalNotification }}
+        {%  endifnotequal %}
+    </div>
+    <div id="Menu-wrapper">
+        <div id="Menu-div">
+            <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
+            <div id="Home-div"><a id="Home-link" href="/"><div id="Home-icon"></div></a></div>
+
+            <div id="Notification-div"><a href="#"><div id="notification-icon"></div></a></div>
+            <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
+        </div>
+    </div>
+</div>
+<div id="Main-div">
+    <!--<div id="Col-2">
+    </div>
+    <div id="Col-1">
+        <div id="Psychograph-image-div">
+            <div id="Psychograph-image" style="background-image:url({{ myUrl }});"></div>
+        </div>
+        <div id="Score-div">
+            <label id="Score">Score</label>
+            <span id="Score-text">{{ myUser.score }}</span>
+        </div>
+        <p><label>First Name: </label>{{ myUser.firstName }}</p>
+        <p><label>Last Name: </label>{{ myUser.lastName }}</p>
+        <p><label>Email: </label>{{ myUser.email }}</p>
+    </div>-->
+    <div id="Com-div">
+        <div id="Right-div">
+            <section id="wrapper" class="wrapper">
+                <h1 id="Content-title">{{ post.title }}</h1>
+                <div class="Com-content">
+                <!--<h3 class="form-label">Description</h3>-->
+                <p class="post-content">{{ post.content }}</p>
+                    <div class="Right-content">
+                        <h3 class="form-label">Tags</h3>
+                        <div class="project-tag">
+                            {% for atag in postTags %}
+                                <div class="tag-span"> {{ atag }} </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="Left-content">
+                        <h3 class="form-label" id="creationDate">Posted on</h3>
+                        <p id="creationDate-p">{{ creationDate }}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="Left-div">
+            <div id="Competence-image-div">
+                <div id="Competence-image" style="background-image:url('../../static/social/images/logos/post.jpg');"></div>
+            </div>
+            <div id="Score-div">
+                <label id="Score">Score</label>
+                <span id="Score-text">{{ post.vote }}</span>
+            </div>
+            <p><label>Title: </label>{{ post.title }}</p>
+            <p><label>Posted by: </label>{{ post.user.firstName }} {{ post.user.lastName }}</p>
+        </div>
+    </div>
+</div>
+<div id="down-footer">
+    <li> CopyRight 2013 - ExProLife </li>
+</div>
+
+<script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script src="{% static 'social/js/psychographPage.js' %}"></script>
+<script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
+<script src="{% static 'social/js/flat/application.js' %}"></script>
+<script src="{% static 'social/js/flat/bootstrap.min.js' %}"></script>
+<script src="{% static 'social/js/flat/bootstrap-select.js' %}"></script>
+<script src="{% static 'social/js/flat/jquery-1.8.3.min.js' %}"></script>
+</body>
+</html>

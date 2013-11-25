@@ -26,4 +26,10 @@ urlpatterns = patterns('',
 
     #same but with user_id:domain.com/10052
     url(r'^(?P<user_id>\d+)/$', views.idDetailIndex, name="IDSocial"),
+
+    #dedicated link for each competence: domain.com/Competence/title.id
+    url(r'^Competence/(?P<competence_title>[\w \d]+).(?P<competence_id>\d+)', views.competenceLoader, name="comSocial"),
+
+    #dedicated link for each post: domain.com/Post/title.id
+    url(r'^Post/(?P<post_title>[\w \d]+).(?P<post_id>\d+)', views.postLoader, name="postSocial"),
 )
