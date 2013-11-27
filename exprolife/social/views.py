@@ -165,12 +165,6 @@ def index(request):
                     isShowNotificationToUser1=1).count()
                 request.session['totalNotification'] = request.session['traceRequestNumber'] +\
                                                        request.session['tracebackRequestNumber']
-                a = TraceShip.objects.filter(userSender=loginedUser[0].id).count()
-                b = TraceShip.objects.filter(userReceiver=loginedUser[0].id,isUser2AcceptTrace=1).count()
-                c = a+b
-                request.session['tracing'] = c
-                d = TraceShip.objects.filter(userReceiver=loginedUser[0].id).count()
-                request.session['tracer'] = d
                 template = loader.get_template('social/psychograph.html')
                 context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
@@ -244,4 +238,72 @@ def postLoader(request, post_title, post_id):
     creationDate += ' '+str(post[0].date.day)+' '+str(post[0].date.year)+' at '+str(post[0].date.hour)+':'+str(post[0].date.minute)+':'+str(post[0].date.second)
     template = loader.get_template('social/post.html')
     context = RequestContext(request, {'post':post[0], 'postTags':PostTags ,'creationDate':creationDate})
+    return HttpResponse(template.render(context))
+
+
+def traces(request):
+    tracer = []
+    tracing = []
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user1']).split(".")
+        user2 = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user2[int(firstAndLastName[2])-1]
+        else:
+            user = user2[0]
+    except:
+        user = User.objects.get(email=request.session['email'])
+
+    temp = TraceShip.objects.filter(userSender=user.id)
+    for i in temp:
+        tempDic1 = {}
+        tempDic1['firstName'] = i.userReceiver.firstName
+        tempDic1['lastName'] = i.userReceiver.lastName
+        tempDic1['score'] = i.userReceiver.score
+        gravatar_url = "www.gravatar.com/avatar"
+        emailHash = hashlib.md5(i.userReceiver.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        tempDic1['email'] = image_url1
+        tracing.append(tempDic1)
+
+    temp = TraceShip.objects.filter(userReceiver=user.id,isUser2AcceptTrace=1)
+    for i in temp:
+        tempDic1={}
+        tempDic1['firstName'] = i.userSender.firstName
+        tempDic1['lastName'] = i.userSender.lastName
+        tempDic1['score'] = i.userSender.score
+        gravatar_url = "www.gravatar.com/avatar"
+        emailHash = hashlib.md5(i.userSender.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        tempDic1['email'] = image_url1
+        tracing.append(tempDic1)
+
+
+
+    temp = TraceShip.objects.filter(userReceiver=user.id)
+    for i in temp:
+        tempDic = {}
+        tempDic['firstName'] = i.userSender.firstName
+        tempDic['lastName'] = i.userSender.lastName
+        tempDic['score'] = i.userSender.score
+        gravatar_url = "www.gravatar.com/avatar"
+        emailHash = hashlib.md5(i.userSender.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        tempDic['email'] = image_url1
+        tracer.append(tempDic)
+
+    temp = TraceShip.objects.filter(userSender=user.id,isUser2AcceptTrace=1)
+    for i in temp:
+        tempDic = {}
+        tempDic['firstName'] = i.userReceiver.firstName
+        tempDic['lastName'] = i.userReceiver.lastName
+        tempDic['score'] = i.userReceiver.score
+        gravatar_url = "www.gravatar.com/avatar"
+        emailHash = hashlib.md5(i.userReceiver.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        tempDic['email'] = image_url1
+        tracer.append(tempDic)
+    template = loader.get_template('social/trace.html')
+    context = RequestContext(request,{'tracer':tracer,'tracing':tracing})
     return HttpResponse(template.render(context))

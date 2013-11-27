@@ -21,6 +21,9 @@ urlpatterns = patterns('',
 
     url(r'^ajax/', include('ajax.urls', namespace="ajax")),
 
+    url(r'traces/$', views.traces, name='ajaxTrace'),
+
+
     #see the profile of members in the public (with privileges ):domain.com/firstName.lastName
     url(r'^(?P<first_name>\w+).(?P<last_name>\w+)(.)?(?P<queueNumber>\d+)?/$', views.nameDetailIndex, name="FLSocial"),
 

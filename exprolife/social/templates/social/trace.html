@@ -1,0 +1,132 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/trace.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
+    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+    {% if myUser %}
+        <title>Welcome {{ request.session.first_name }}</title>
+    {% endif %}
+
+    {% if anotherUser %}
+        <title>{{ anotherUser.firstName }} {{ anotherUser.lastName }}</title>
+    {% endif %}
+
+
+    {% if alert %}
+        <div class="alert">
+            <p>  <strong>Welcome!</strong> Hello {{ request.session.first_name }}</p>
+        </div>
+    {% endif %}
+</head>
+
+
+<body>
+<div class="header">
+    <div id="Logo-image">
+        <img  src="{% static 'social/images/logo.png' %}"/>
+    </div>
+    <div id="Search-div">
+        <form id="Search-form">
+            <label id="Search-label">Search</label>
+            <input type="text" placeholder="Projects, People" id="Search-input" class="psychograph-input" />
+            <input type="button" id="Search-icon" />
+        </form>
+    </div>
+    <div id="searchResultSection">
+        <div id="innerSearch">
+            <div class="ajaxLogoSearch">
+                <img src="../../static/social/images/loading.gif" height="40px">
+            </div>
+            <div class="notfound">
+                <p>Nothing found please try something else</p>
+            </div>
+            <div class="itemSearch">
+            </div>
+        </div>
+    </div>
+    <div id="notificationBox">
+        <div class="ajaxLogoNotification">
+            <img src="../../static/social/images/loading.gif" height="40px">
+        </div>
+    </div>
+    <div id="notificationNumber">
+
+        {% ifnotequal request.session.totalNotification 0 %}
+            {{ request.session.totalNotification }}
+        {%  endifnotequal %}
+    </div>
+    <div id="Menu-wrapper">
+        <div id="Menu-div">
+            <!--<div id="Notification-div"><a id="Notification-link" href="#"><div id="Notification-icon"></div></a></div>-->
+            <div id="Home-div"><a id="Home-link" href="/"><div id="Home-icon"></div></a></div>
+
+            <div id="Notification-div"><a href="#"><div id="notification-icon"></div></a></div>
+            <div id="Exit-div"><a id="Exit-link" href="/logout"><div id="Exit-icon"></div></a></div>
+        </div>
+    </div>
+</div>
+
+<div id="Main-div">
+    <div id="Col-2">
+        <section id="wrapper" class="wrapper">
+            <h1 id="Content-title">
+                {% if myUser %}
+                    {{request.session.first_name}} {{ request.session.last_name }}
+                {% endif %}
+                {% if anotherUser %}
+                    {{ anotherUser.firstName }} {{ anotherUser.lastName }}
+                {% endif %}
+            </h1>
+            <div id="v-nav">
+                <div class="container">
+                    <div class='spacer'>
+                        <h2>Tracers : </h2>
+                        {% for k in tracer %}
+
+                            <a href="/{{ k.firstName }}.{{ k.lastName }}" class='wide orange'>
+                            <img style="width:135px"  src={{ k.email }}  >
+                                <h2 style="top: 20px ">{{ k.firstName }}</h2>
+                                <h2 style="top:40px" >{{ k.lastName }}</h2>
+                                <h2 style="bottom: 20px"> Score : {{ k.score }}</h2>
+                            </a>
+                        {% endfor %}
+                    </div>
+                        <div class='spacer'>
+                            <h2>Tracings : </h2>
+
+                        {% for i in tracing  %}
+                            <a href="/{{ i.firstName }}.{{ i.lastName }}" class='wide blue'>
+                                <img style="width:135px"  src={{ i.email }}  >
+                                <h2 style="top: 20px ">{{ i.firstName }}</h2>
+                                <h2 style="top: 40px ">{{ i.lastName }}</h2>
+                                <h2 style="bottom: 20px"> Score : {{ i.score }}</h2>
+                            </a>
+                        {% endfor %}
+                        </a>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+<div id="down-footer">
+    <li> CopyRight 2013 - ExProLife </li>
+</div>
+
+<script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script src="{% static 'social/js/trace.js' %}"></script>
+<script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
+<script src="{% static 'social/js/flat/application.js' %}"></script>
+<script src="{% static 'social/js/flat/bootstrap.min.js' %}"></script>
+<script src="{% static 'social/js/flat/bootstrap-select.js' %}"></script>
+<script src="{% static 'social/js/flat/jquery-1.8.3.min.js' %}"></script>
+</body>
+</html>

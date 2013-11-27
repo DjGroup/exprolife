@@ -767,3 +767,76 @@ $(document).ready(function(){
 ////////////////////////// END /////////////////////////////////
 /////////// filter searching with ALL, POST, PROJECT ///////////
 ////////////////////////////////////////////////////////////////
+
+
+////////////////////////// Begin ///////////////////////////////
+//// go to trace page and showing the tracers and tracings ////
+///////////////////////////////////////////////////////////////
+
+$("#tracer").on("click", function(){
+    var dataa ={
+        user1: window.location.pathname
+    };
+    window.location.href = "/traces" ;
+
+    $.ajax({
+        url: '/traces',
+        dataType: 'json',
+        data: dataa,
+        success:function(result){
+            if(result.isOK==1){
+                alert(123)
+//                    change color of button
+            }
+        }
+    });
+});
+$("#tracing").on("click", function(){
+    var dataa ={
+        user1: window.location.pathname
+    };
+    window.location.href = "/traces" ;
+    $.ajax({
+        url: '/traces',
+        dataType: 'json',
+        data:dataa,
+        success:function(result){
+            if(result.isOK==1){
+                alert(123)
+//                    change color of button
+            }
+        }
+    });
+});
+
+////////////////////////// END /////////////////////////////////
+//// go to trace page and showing the tracers and tracings ////
+////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////// Begin ///////////////////////////////
+////// Showing Tracer and Tracing number in Psycograph ////////
+///////////////////////////////////////////////////////////////
+
+$(window).load(function(){
+    var dat = { address : window.location.pathname};
+    $.ajax({
+        url: '/ajax/traceNum',
+        dataType: 'json',
+        data:dat,
+        success:function(response){
+            if(response.isOK==1){
+                alert(123);
+//                    change color of button
+            }
+            $(".circle").last().text(response['tracing']);
+            $(".circle").first().text(response['tracer']);
+        }
+
+    });
+});
+
+////////////////////////// END ////////////////////////////////
+////// Showing Tracer and Tracing number in Psycograph ////////
+///////////////////////////////////////////////////////////////

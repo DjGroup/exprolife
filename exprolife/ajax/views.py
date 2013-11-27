@@ -530,3 +530,27 @@ def traceback(request):
 
     response["isOK"] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
+
+def traceNum(request):
+    response = {'tracer':[],'tracing':[],'email':[]}
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user1']).split(".")
+        user2 = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user2[int(firstAndLastName[2])-1]
+        else:
+            user = user2[0]
+    except:
+        user = User.objects.get(email=request.session['email'])
+    response['email'] = user.email
+    a = TraceShip.objects.filter(userSender=user.id).count()
+    b = TraceShip.objects.filter(userReceiver=user.id,isUser2AcceptTrace=1).count()
+    c = a+b
+    response['tracing'] = c
+    d = TraceShip.objects.filter(userReceiver=user.id).count()
+    e = TraceShip.objects.filter(userSender=user.id,isUser2AcceptTrace=1).count()
+    response['tracer'] = d+e
+    print response['tracing']
+    print response['tracer']
+    return HttpResponse(json.dumps(response), content_type='application.json')
