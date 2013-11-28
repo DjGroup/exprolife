@@ -200,6 +200,7 @@ a:focus {
 	height:auto;
 	width:90px;
 	float:right;
+    position: relative;
 }
 #Exit-div{
 	height:auto;
@@ -988,7 +989,7 @@ a:focus {
     font-size: 10px;
     position: absolute;
     z-index: 1000000;
-    right: -20px;
+    right: 10px;
     background: rgba(255, 0, 0, 0.80);
     min-width: 20px;
 }

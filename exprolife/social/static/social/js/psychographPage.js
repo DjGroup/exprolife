@@ -65,13 +65,13 @@ function ajaxer(type, content, result){
     $(".project-link").on("click", function(){
         var ID = $(this).children().first().children().first().next().children().first().text();
         var title = $(this).children().first().children().first().next().children().first().next().text();
-        document.location.href = 'Competence/' + title + '.' + ID;
+        document.location.href = '/Competence/' + title + '.' + ID;
     });
     $(".post-link").on("click", function(){
         var ID = $(this).children().first().children().first().next().children().first().text();
         var title = $(this).children().first().children().first().next().children().first().next().text();
         title = title.split(' ').join('%20');
-        document.location.href = 'Post/' + title + '.' + ID;
+        document.location.href = '/Post/' + title + '.' + ID;
     });
 }
 

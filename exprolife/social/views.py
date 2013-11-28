@@ -223,7 +223,8 @@ def competenceLoader(request, competence_title, competence_id):
     if not(competence) :
         raise Http404
     ComTags = competence[0].tagList.split(',')
-    ComTags.remove('')
+    # shotgunner change => I got error from this line then I comment it
+    # ComTags.remove('')
     creationDate = str(competence[0].date.month)
     creationDate += ' '+str(competence[0].date.day)+' '+str(competence[0].date.year)+' at '+str(competence[0].date.hour)+':'+str(competence[0].date.minute)+':'+str(competence[0].date.second)
     template = loader.get_template('social/competence.html')
@@ -233,7 +234,8 @@ def competenceLoader(request, competence_title, competence_id):
 def postLoader(request, post_title, post_id):
     post = BoardPost.objects.filter(id = post_id, title = post_title)
     PostTags = post[0].tagList.split(',')
-    PostTags.remove('')
+    # shotgunner change => I got error from this line then I comment it
+    # PostTags.remove('')
     creationDate = str(post[0].date.month)
     creationDate += ' '+str(post[0].date.day)+' '+str(post[0].date.year)+' at '+str(post[0].date.hour)+':'+str(post[0].date.minute)+':'+str(post[0].date.second)
     template = loader.get_template('social/post.html')
