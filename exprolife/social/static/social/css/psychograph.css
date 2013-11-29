@@ -775,7 +775,7 @@ a:focus {
 .project-logo{
 	background-position:center;
 	background-repeat: no-repeat;
-	background-size:cover;
+	background-size:contain;
 	background-color: transparent;
 	position: relative;
 	top: 25px;

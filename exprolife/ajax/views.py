@@ -98,6 +98,9 @@ def registerCheck(request):
 
 def postBoardCheck(request):
     response = {'isOK': 0, 'title': 1, 'content': 1, 'tagList': 1,
+                'fn': None,
+                'ln': None,
+                'id': None,
                 'year': None,
                 'month': None,
                 'day': None,
@@ -135,7 +138,10 @@ def postBoardCheck(request):
         STR = ""
         for i in tagList.split():
             STR += i + ","
-        user.boardpost_set.create(date=timezone.now(), content=content, tagList=STR, title=title)
+        myPost = user.boardpost_set.create(date=timezone.now(), content=content, tagList=STR, title=title)
+        response['fn'] = user.firstName
+        response['ln'] = user.lastName
+        response['id'] = myPost.id
         currentDateTime = timezone.now()
         response['year'] = currentDateTime.year
         response['month'] = monthNames[currentDateTime.month]

@@ -697,9 +697,9 @@ button:active.blue {
 #Competence-image{
 	background-size:cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: inherit;
 	width:210px;
-	height:210px;
+	height:250px;
 	margin-left:30px;
 	top:30px;
 	position:relative;

@@ -34,8 +34,8 @@ urlpatterns = patterns('',
     url(r'^(?P<user_id>\d+)/$', views.idDetailIndex, name="IDSocial"),
 
     #dedicated link for each competence: domain.com/Competence/title.id
-    url(r'^Competence/(?P<competence_title>[\w ]+).(?P<competence_id>\d+)', views.competenceLoader, name="comSocial"),
+    url(r'^Competence/(?P<competence_title>[\S ]+).(?P<competence_id>\d+)', views.competenceLoader, name="comSocial"),
 
     #dedicated link for each post: domain.com/Post/title.id
-    url(r'^Post/(?P<post_title>[\w ]+).(?P<post_id>\d+)', views.postLoader, name="postSocial"),
+    url(r'^Post/(?P<post_title>[\S ]+).(?P<post_id>\d+)', views.postLoader, name="postSocial"),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

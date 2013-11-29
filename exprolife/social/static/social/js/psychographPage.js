@@ -67,13 +67,13 @@ function ajaxer(type, content, result){
     $(".project-link").on("click", function(){
         var ID = $(this).children().first().children().first().next().children().first().text();
         var title = $(this).children().first().children().first().next().children().first().next().text();
-        document.location.href = '/Competence/' + title + '.' + ID;
+        document.location.href = '/Competence/' + encodeURIComponent(title) + '.' + ID;
     });
     $(".post-link").on("click", function(){
         var ID = $(this).children().first().children().first().next().children().first().text();
         var title = $(this).children().first().children().first().next().children().first().next().text();
         title = title.split(' ').join('%20');
-        document.location.href = '/Post/' + title + '.' + ID;
+        document.location.href = '/Post/' + encodeURIComponent(title) + '.' + ID;
     });
 }
 
@@ -321,7 +321,7 @@ $(document).ready(function(){
 
         // get values from DOM
         var content = $("#text-area").val();
-        var tags = $('.tag').find('span').text();
+        var tags = tag.find('span').text();
         var title = $('#title-board').val();
         var data ={
             content:content,
@@ -375,9 +375,9 @@ $(document).ready(function(){
 
                 //if evrything is OK and post can post in board then DO:
                 if(result.isOK=='1'){
-
+                    var gID = result.id;
                     var title = escapeTags($('#title-board').val());
-                    var content = escapeTags($('#Board-form').children().first().next().val());
+                    var description = escapeTags($('#Board-form').children().first().next().val());
                     var tags = escapeTags(tag.text());
                     var tagList = tags.split(String.fromCharCode(160)+String.fromCharCode(160));
                     tagList.splice(-1);
@@ -385,21 +385,28 @@ $(document).ready(function(){
                     for(var i=0; i<tagList.length; i++){
                         tagSection += '<div class="tag-span">'+tagList[i]+'</div>';
                     }
-                    var mainContent = $('<span class="project-div">\
-							<div class="project-desc">\
-								<h3>'+ title +'</h3>\
-								<span>'+ content +'</span>\
-								<div class="project-date">Created '   +result.month+   ' '   +result.day+   ', '   +result.year +   ' at '   +result.hour+   ':'   +result.minute+   ':'   +result.second+   '</div>\
-								<div class="project-tag">'+tagSection +'</div>\
-							</div>\
-							<div class="project-image">\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
-							</div>\
-						</span>');
+                    var mainContent = $('<a class="post-link"><span class="project-div">\
+                                <h3>'+ result.fn +' '+ result.ln + ' '+ 'Writes:</h3>\
+    							<div class="project-desc">\
+    							    <span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
+    								<h4>'+ description +'</h4>\
+    								<div class="project-date">Created '   +result.month+   ' '   +result.day+   ', '   +result.year +   ' at '   +result.hour +   ':'   +result.minute +  ':'   + result.second +   '</div>\
+    								<div class="project-tag">'+tagSection +'</div>\
+    							</div>\
+    							<div class="project-image">\
+    							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
+    							</div>\
+    						</span></a>');
 					document.getElementById("title-board").value="";
                     document.getElementById("text-area").value="";
                     tag.remove();
                     mainContent.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
+                    $(".post-link").on("click", function(){
+                        var ID = $(this).children().first().children().first().next().children().first().text();
+                        var title = $(this).children().first().children().first().next().children().first().next().text();
+                        title = title.split(' ').join('%20');
+                        document.location.href = '/Post/' + encodeURIComponent(title) + '.' + ID;
+                    });
                 }
             }
         });
