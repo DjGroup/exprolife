@@ -226,7 +226,7 @@
                 <div class="tab-content">
                     <h3>Add Your Competences</h3>
                     <div id="Competence-form">
-                        <form method="post" action="/">
+                        <form id="competence" method="post" action="/" enctype="multipart/form-data">
                             {% csrf_token %}
                             <h3 class="form-label">Title *</h3>
                             <input type="text" id="Title-text"class="psychograph-input" name="comp-title"  />
@@ -253,7 +253,7 @@
                             <textarea  class="psychograph-input" id ="Usage-text" name="comp-usages"></textarea>
                             <!--<input type="text" id="Usage-text" class="psychograph-input"  name="comp-usage" />-->
                             <br />
-                            <input type="submit" id="Save-button" name="saveButton1" value="Submit" />
+                            <input type="submit" id="Save-button" name="competenceAdd" value="Submit" />
                             <img src="../../static/social/images/loading3.gif" class = "ajaxLogoBoard" height="100px">
                         </form>
                     </div>

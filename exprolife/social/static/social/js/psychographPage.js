@@ -25,6 +25,8 @@ function ajaxer(type, content, result){
             var developers = result.posts.developers[i];
             var manager = result.posts.manager[i];
             var usage = result.posts.usage[i];
+            var picture = result.posts.picture[i];
+            var sourceCode = result.posts.sourceCode[i];
         }
         for(var j=0; j<tags.length; j++){
             tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
@@ -55,7 +57,7 @@ function ajaxer(type, content, result){
     							<div class="project-image">\
     								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
     								<div class="score-number">0</div></div>\
-    								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+    								<div class="project-logo" style="background-image: url(../..'+ picture + ');"></div>\
     							</div>\
     							<span><center>'+ usage +'</center></span>\
     						</span></a>');
@@ -74,6 +76,23 @@ function ajaxer(type, content, result){
         document.location.href = '/Post/' + title + '.' + ID;
     });
 }
+
+function upload(field, upload_url) {
+     if (field.files.length == 0) {
+         return;
+     }
+     var file = field.files[0];
+     var formData = new FormData();
+     formData.append('file_upload', file);
+     $.ajax({
+         url: upload_url,
+         type: 'POST',
+         data: formData,
+         processData: false,
+         contentType: false,
+         success: console.log('success!')
+     });
+ }
 
 /*******************   END   *******************/
 /****************** CONSTANTS ******************/
@@ -428,6 +447,7 @@ $(document).ready(function(){
 ///////////////////// behind of door :D/////////////////////////
 
     $("#Competence-form").submit(function(event){
+        var thisCompetenceForm = $(this);
         $(".ajaxLogoBoard").show();
 
         //prevent normal submit when submit button click because check something ...
@@ -510,34 +530,36 @@ $(document).ready(function(){
 
                 //if every thing is OK then add to DOM
                 if(result.manager=='1' && result.title=='1' && result.tagList=='1' && result.developers=='1'){
-                    showTab("#Board");
-                    var tag = $("#Tag-input1").val().split(',');
-                    var tagSection = '';
-                    var d = new Date();
-                    var month = d.getMonth()+1;
-                    for(var i=0; i<tag.length; i++){
-                        tagSection += '<div class="tag-span">'+tag[i]+'</div>';
-                    }
-                    var Content = $('<span class="project-div">\
-							<div class="project-desc">\
-								<h3>'+ title +'</h3>\
-								<span>'+ content +'</span>\
-								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
-								<div class="project-tag">'+tagSection +'</div>\
-							</div>\
-							<div class="project-image">\
-								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-    								<div class="score-number">0</div></div>\
-								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
-							</div>\
-						</span>');
-
-                    //clear all fileds after submit
-                    $('#Title-text, #Description-text, #Developers-text, #Manager-text, #Picture-text, #Code-text, #Usage-text').val("");
-                    $('.tag').remove();
-
-                    //add content to DOM
-                    Content.clone().hide().delay(1000).insertAfter($('.content').children().first()).fadeIn("slow");
+                      thisCompetenceForm.unbind('submit');
+                      thisCompetenceForm.submit();
+//                    showTab("#Board");
+//                    var tag = $("#Tag-input1").val().split(',');
+//                    var tagSection = '';
+//                    var d = new Date();
+//                    var month = d.getMonth()+1;
+//                    for(var i=0; i<tag.length; i++){
+//                        tagSection += '<div class="tag-span">'+tag[i]+'</div>';
+//                    }
+//                    var Content = $('<span class="project-div">\
+//							<div class="project-desc">\
+//								<h3>'+ title +'</h3>\
+//								<span>'+ content +'</span>\
+//								<div class="project-date">Created '   + month+   ' '   + d.getDate()+   ', '   + d.getFullYear() +   ' at '   + d.getHours()+   ':'   + d.getMinutes()+   ':'   + d.getSeconds()+   '</div>\
+//								<div class="project-tag">'+tagSection +'</div>\
+//							</div>\
+//							<div class="project-image">\
+//								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+//    								<div class="score-number">0</div></div>\
+//								<div class="project-logo" style="background-image: url(../../static/social/images/logos/pylogo.png);"></div>\
+//							</div>\
+//						</span>');
+//
+//                    //clear all fileds after submit
+//                    $('#Title-text, #Description-text, #Developers-text, #Manager-text, #Picture-text, #Code-text, #Usage-text').val("");
+//                    $('.tag').remove();
+//
+//                    //add content to DOM
+//                    Content.clone().hide().delay(1000).insertAfter($('.content').children().first()).fadeIn("slow");
                 }
             }
         });

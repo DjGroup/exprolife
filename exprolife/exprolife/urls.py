@@ -5,6 +5,9 @@ from django.contrib import admin
 from social import views
 admin.autodiscover()
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = patterns('',
     url(r'^$', include('social.urls', namespace="social")),
     # url(r'^exprolife/', include('exprolife.foo.urls')),
@@ -35,4 +38,4 @@ urlpatterns = patterns('',
 
     #dedicated link for each post: domain.com/Post/title.id
     url(r'^Post/(?P<post_title>[\w ]+).(?P<post_id>\d+)', views.postLoader, name="postSocial"),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

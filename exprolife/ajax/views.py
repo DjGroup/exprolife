@@ -22,7 +22,6 @@ def autocompleteModel(request):
         # TODO: projects and posts must search also ....
 
     elif len(splitter) == 2:
-        print splitter
         users = User.objects.filter((Q(firstName__contains=splitter[0].lower()) |
                                     Q(lastName__contains=splitter[0].lower())) &
                                     (Q(firstName__contains=splitter[1].lower()) |
@@ -124,7 +123,6 @@ def postBoardCheck(request):
     tagList = request.REQUEST['tagList']
 
     title = request.REQUEST['title']
-    # print request.session['first_name']
     if not content:
         response['content'] = 0
     if not tagList:
@@ -134,8 +132,7 @@ def postBoardCheck(request):
     if response['content'] and response['tagList'] and response['title']:
         response['isOK'] = 1
         user = User.objects.get(email=request.session['email'])
-        print "post " + tagList
-        STR=""
+        STR = ""
         for i in tagList.split():
             STR += i + ","
         user.boardpost_set.create(date=timezone.now(), content=content, tagList=STR, title=title)
@@ -278,7 +275,6 @@ def getPAC(request):
 
     allPosts = sorted(chain(postsOfUser, competencesOfUser, tracingList), key=lambda instance: instance.date,
                       reverse=True)
-    print allPosts
     for i in allPosts:
         user = User.objects.filter(pk=i.user_id)[0]
         response['posts']["firstName"].append(user.firstName)
@@ -296,6 +292,14 @@ def getPAC(request):
         if isinstance(i, BoardPost):
             response['posts']["isPost"].append(1)
         elif isinstance(i, Competence):
+            if i.picture.url[1] == 'm':
+                 response['posts']['picture'].append(i.picture.url[13:])
+            else:
+                response['posts']['picture'].append(i.picture.url)
+            try:
+                response['posts']['sourceCode'].append(i.sourceCode.url[13:])
+            except:
+                response['posts']['sourceCode'].append(None)
             response['posts']["isPost"].append(0)
             response['posts']["developers"].append(i.developers)
             response['posts']["manager"].append(i.manager)
@@ -377,6 +381,14 @@ def getCompetence(request):
         response['posts']["developers"].append(i.developers)
         response['posts']["manager"].append(i.manager)
         response['posts']["usage"].append(i.usage)
+        if i.picture.url[1] == 'm':
+            response['posts']['picture'].append(i.picture.url[13:])
+        else:
+            response['posts']['picture'].append(i.picture.url)
+        try:
+            response['posts']['sourceCode'].append(i.sourceCode.url[13:])
+        except:
+            response['posts']['sourceCode'].append(None)
 
         #else ?
 
@@ -414,18 +426,8 @@ def competenceCheck(request):
         response['usage'] = 1
     if not sourceCode:
         response['sourceCode'] = 0
-    if response['title'] and response['tagList'] and response['developers'] and response['manager']:
-
-        response['isOK'] = 1
-        user = User.objects.get(email=request.session['email'])
-        print "comp" + tagList
-        STR = ""
-        for i in tagList.split():
-            STR += i + ","
-        user.competence_set.create(title=title, content=content, tagList=STR, developers=developers,
-                                   manager=manager, picture=picture, date=timezone.now(), sourceCode=sourceCode,
-                                   usage=usage)
     return HttpResponse(json.dumps(response), content_type='application.json')
+
 
 def traceShip(request):
     response = {'isOK': 0}
@@ -463,12 +465,13 @@ def getNotification(request):
     for j in curUser.TraceShip_userReceiver.all():
         if j.isShowNotificationToUser2:
             destinationUser = User.objects.get(pk=j.userSender_id)
-            response["traceUsers"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
+            response["traceUsers"].append({"firstname": destinationUser.firstName,
+                                           "lastname": destinationUser.lastName})
     for j in curUser.TraceShip_userSender.all():
         if j.isShowNotificationToUser1:
             destinationUser = User.objects.get(pk=j.userReceiver_id)
-            response["tracebackUsers"].append({"firstname": destinationUser.firstName, "lastname": destinationUser.lastName})
-    print response
+            response["tracebackUsers"].append({"firstname": destinationUser.firstName,
+                                               "lastname": destinationUser.lastName})
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
@@ -532,13 +535,13 @@ def traceback(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 def traceNum(request):
-    response = {'tracer':[],'tracing':[],'email':[]}
+    response = {'tracer': [], 'tracing': [], 'email': []}
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user1']).split(".")
         user2 = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
         if len(firstAndLastName) == 3:
-            user = user2[int(firstAndLastName[2])-1]
+            user = user2[int(firstAndLastName[2]) - 1]
         else:
             user = user2[0]
     except:
@@ -546,11 +549,9 @@ def traceNum(request):
     response['email'] = user.email
     a = TraceShip.objects.filter(userSender=user.id).count()
     b = TraceShip.objects.filter(userReceiver=user.id,isUser2AcceptTrace=1).count()
-    c = a+b
+    c = a + b
     response['tracing'] = c
     d = TraceShip.objects.filter(userReceiver=user.id).count()
-    e = TraceShip.objects.filter(userSender=user.id,isUser2AcceptTrace=1).count()
-    response['tracer'] = d+e
-    print response['tracing']
-    print response['tracer']
+    e = TraceShip.objects.filter(userSender=user.id, isUser2AcceptTrace=1).count()
+    response['tracer'] = d + e
     return HttpResponse(json.dumps(response), content_type='application.json')

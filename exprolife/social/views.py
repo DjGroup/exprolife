@@ -16,6 +16,25 @@ from django.shortcuts import redirect
 from social.models import *
 import re
 
+# for save_file function
+
+from django.conf import settings
+import os
+from datetime import datetime
+
+
+def save_file(f, whatIsType, title, userId, pacTime):
+    original_name, file_extension = os.path.splitext(f.name)
+    filename = str(title + '_' + str(userId) + '_' + str(pacTime) + file_extension)
+    if whatIsType == 'picture':
+        path = settings.MEDIA_ROOT + 'picture/' + filename
+    else:
+        path = settings.MEDIA_ROOT + 'source/' + filename
+    destination = open(path, 'wb+')
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()
+    return path
 
 def isset(dict, string):
     try:
@@ -28,37 +47,61 @@ def isset(dict, string):
 def index(request):
     #is currently logged in
     if isset(request.session, 'user_id') and isset(request.session, 'first_name') and isset(request.session, 'last_name') :
+        thisUser = User.objects.filter(id=request.session['user_id'])
+        request.session['traceRequestNumber'] = thisUser[0].TraceShip_userReceiver.filter(
+            isShowNotificationToUser2=1).count()
+        request.session['tracebackRequestNumber'] = thisUser[0].TraceShip_userSender.filter(
+            isShowNotificationToUser1=1).count()
+        request.session['totalNotification'] = request.session['traceRequestNumber'] +\
+                                               request.session['tracebackRequestNumber']
+        gravatar_url = "www.gravatar.com/avatar"
+        emailHash = hashlib.md5(request.session['email']).hexdigest()
+        image_url = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
         #This 'if' is for checking that save button in psychograph is clicked or not
         if request.POST.get('saveButton'):
-            gravatar_url = "www.gravatar.com/avatar"
-            emailHash = hashlib.md5(request.POST['edit-email']).hexdigest()
-            image_url = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
-            user_edit = User.objects.get(id=request.session['user_id'])
-            user_edit.firstName = request.POST['edit-first']
-            request.session['first_name'] = user_edit.firstName  # Changing First Name in Session
-            user_edit.lastName = request.POST['edit-last']  # changing Last Name in Database
-            request.session['last_name'] = user_edit.lastName  # Changing Last Name in Session
-            user_edit.email = request.POST['edit-email']  # changing Email in Database
-            request.session['email'] = user_edit.email  # Changing Email in Session
-            user_edit.save()
+            thisUser[0].firstName = request.POST['edit-first']
+            request.session['first_name'] = thisUser[0].firstName  # Changing First Name in Session
+            thisUser[0].lastName = request.POST['edit-last']  # changing Last Name in Database
+            request.session['last_name'] = thisUser[0].lastName  # Changing Last Name in Session
+            thisUser[0].email = request.POST['edit-email']  # changing Email in Database
+            request.session['email'] = thisUser[0].email  # Changing Email in Session
+            thisUser[0].save()
 
             #Reloading from Database
-            changedUser = User.objects.filter(id=request.session['user_id'])
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': changedUser[0], 'myUrl': image_url})
+            context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
             return HttpResponse(template.render(context))
 
+        elif request.POST.get('competenceAdd'):
+            title = request.POST['comp-title']
+            content = request.POST['comp-descript']
+            tagList = request.POST['tagsinput']
+            developers = request.POST['comp-developer']
+            manager = request.POST['comp-manager']
+            picture = request.FILES.get('comp-pic')
+            code = request.FILES.get('comp-code')
+            usage = request.POST['comp-usages']
+            currentDate = datetime.now()
+            if picture:
+                picturePath = save_file(picture, 'picture', str(title), request.session['user_id'], currentDate)
+            else:
+                picturePath = '/static/social/images/logos/pylogo.png'
+            if code:
+                sourceCodePath = save_file(code, 'source', str(title), request.session['user_id'], currentDate)
+            else:
+                sourceCodePath = None
+            STR = ""
+            for i in tagList.split():
+                STR += i + ","
+            thisUser[0].competence_set.create(title=title, content=content, tagList=STR, developers=developers,
+                                              manager=manager, picture=picturePath, date=currentDate,
+                                              sourceCode=sourceCodePath,
+                                              usage=usage)
+            template = loader.get_template('social/psychograph.html')
+            print request.FILES
+            context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
+            return HttpResponse(template.render(context))
         else:
-            thisUser = User.objects.filter(id=request.session['user_id'])
-            request.session['traceRequestNumber'] = thisUser[0].TraceShip_userReceiver.filter(
-                isShowNotificationToUser2=1).count()
-            request.session['tracebackRequestNumber'] = thisUser[0].TraceShip_userSender.filter(
-                isShowNotificationToUser1=1).count()
-            request.session['totalNotification'] = request.session['traceRequestNumber'] +\
-                                                   request.session['tracebackRequestNumber']
-            gravatar_url = "www.gravatar.com/avatar"
-            emailHash = hashlib.md5(request.session['email']).hexdigest()
-            image_url = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
             template = loader.get_template('social/psychograph.html')
             context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
             return HttpResponse(template.render(context))
@@ -214,28 +257,43 @@ def nameDetailIndex(request, first_name, last_name, queueNumber=None):
     except:
         raise Http404
 
+
 def idDetailIndex(request, user_id):
     user = get_object_or_404(User, id=user_id)
     return redirect('FLSocial', first_name=user.firstName, last_name=user.lastName)
 
+
 def competenceLoader(request, competence_title, competence_id):
-    competence = Competence.objects.filter(id = competence_id, title = competence_title)
-    if not(competence) :
+    competence = Competence.objects.filter(id=competence_id, title=competence_title)
+    if not competence:
         raise Http404
     ComTags = competence[0].tagList.split(',')
-    # shotgunner change => I got error from this line then I comment it
-    # ComTags.remove('')
+    try:
+        ComTags.remove('')
+    except:
+        pass
     creationDate = str(competence[0].date.month)
-    creationDate += ' '+str(competence[0].date.day)+' '+str(competence[0].date.year)+' at '+str(competence[0].date.hour)+':'+str(competence[0].date.minute)+':'+str(competence[0].date.second)
+    creationDate += ' ' + str(competence[0].date.day) + ' ' + str(competence[0].date.year) + ' at ' +\
+                    str(competence[0].date.hour) + ':' + str(competence[0].date.minute) + ':' + \
+                    str(competence[0].date.second)
     template = loader.get_template('social/competence.html')
-    context = RequestContext(request, {'competence':competence[0], 'comTags':ComTags,'creationDate':creationDate})
+    pictureUrl = competence[0].picture.url[13:] if competence[0].picture.url[1] == 'm' else competence[0].picture.url
+    context = RequestContext(request, {
+        'competence': competence[0],
+        'comTags': ComTags,
+        'creationDate': creationDate,
+        'pictureUrl': pictureUrl
+    })
     return HttpResponse(template.render(context))
+
 
 def postLoader(request, post_title, post_id):
     post = BoardPost.objects.filter(id = post_id, title = post_title)
     PostTags = post[0].tagList.split(',')
-    # shotgunner change => I got error from this line then I comment it
-    # PostTags.remove('')
+    try:
+        PostTags.remove('')
+    except:
+        pass
     creationDate = str(post[0].date.month)
     creationDate += ' '+str(post[0].date.day)+' '+str(post[0].date.year)+' at '+str(post[0].date.hour)+':'+str(post[0].date.minute)+':'+str(post[0].date.second)
     template = loader.get_template('social/post.html')
