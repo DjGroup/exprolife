@@ -11,7 +11,7 @@
     <file path="/homepage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385658283981" ignored="false" />
     <file path="/urls.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385669051266" ignored="false" />
     <file path="/competence.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385675846022" ignored="false" />
-    <file path="/psychograph.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385710096488" ignored="false" />
+    <file path="/psychograph.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385716696290" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,19 +36,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="psychograph.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="psychograph.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.45422536">
+            <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="-5.265306">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psychograph.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="psychograph.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="990" column="21" selection-start="20144" selection-end="20161" vertical-scroll-proportion="-10.64">
+            <state line="1457" column="1" selection-start="36417" selection-end="36417" vertical-scroll-proportion="0.7466216">
               <folding />
             </state>
           </provider>
@@ -156,11 +156,11 @@
         <option value="$PROJECT_DIR$/ajax/views.py" />
         <option value="$PROJECT_DIR$/exprolife/settings.py" />
         <option value="$PROJECT_DIR$/exprolife/urls.py" />
-        <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
         <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
         <option value="$PROJECT_DIR$/social/templates/social/competence.html" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
         <option value="$PROJECT_DIR$/social/views.py" />
+        <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
       </list>
     </option>
   </component>
@@ -437,7 +437,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="24" width="1231" height="1000" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -447,7 +447,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23329559" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23329559" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -613,13 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="990" column="21" selection-start="20144" selection-end="20161" vertical-scroll-proportion="-10.64">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="69" column="67" selection-start="3787" selection-end="3846" vertical-scroll-proportion="-10.64">
@@ -629,7 +622,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.45422536">
+        <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="-5.265306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1457" column="1" selection-start="36417" selection-end="36417" vertical-scroll-proportion="0.7466216">
           <folding />
         </state>
       </provider>
