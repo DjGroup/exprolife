@@ -4,8 +4,8 @@
     <list default="true" id="4195d60d-f114-4482-8988-0c1d27e97466" name="Default" comment="" />
     <ignored path="exprolife.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385737115244" ignored="false" />
-    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385740501991" ignored="false" />
+    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385919010785" ignored="false" />
+    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385921736715" ignored="false" />
     <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385740631567" ignored="false" />
     <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385667382967" ignored="false" />
     <file path="/homepage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385658283981" ignored="false" />
@@ -40,7 +40,7 @@
       <file leaf-file-name="psychograph.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="-0.625">
+            <state line="60" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -49,7 +49,7 @@
       <file leaf-file-name="psychograph.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="777" column="27" selection-start="16250" selection-end="16250" vertical-scroll-proportion="-9.68">
+            <state line="777" column="27" selection-start="16250" selection-end="16250" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,19 +58,28 @@
       <file leaf-file-name="post.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="701" column="13" selection-start="21386" selection-end="21386" vertical-scroll-proportion="-27.68">
+            <state line="701" column="13" selection-start="21386" selection-end="21386" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ajax/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="349" column="62" selection-start="13067" selection-end="13067" vertical-scroll-proportion="0.664966">
+            <state line="301" column="66" selection-start="11073" selection-end="11257" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="30" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,10 +102,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psychographPage.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="psychographPage.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="403" column="59" selection-start="16656" selection-end="16656" vertical-scroll-proportion="-19.2">
+            <state line="73" column="106" selection-start="4122" selection-end="4122" vertical-scroll-proportion="0.8467742">
               <folding />
             </state>
           </provider>
@@ -105,7 +114,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="290" column="28" selection-start="14382" selection-end="14382" vertical-scroll-proportion="0.0">
+            <state line="291" column="20" selection-start="14401" selection-end="14401" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,20 +155,20 @@
         <option value="$PROJECT_DIR$/exprolife/settings.py" />
         <option value="$PROJECT_DIR$/social/templates/social/competence.html" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
-        <option value="$PROJECT_DIR$/social/views.py" />
         <option value="$PROJECT_DIR$/exprolife/urls.py" />
         <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
         <option value="$PROJECT_DIR$/social/static/social/css/post.css" />
-        <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
         <option value="$PROJECT_DIR$/ajax/views.py" />
+        <option value="$PROJECT_DIR$/social/views.py" />
+        <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="48" />
-    <option name="y" value="-4" />
-    <option name="width" value="1233" />
-    <option name="height" value="1029" />
+    <option name="x" value="49" />
+    <option name="y" value="24" />
+    <option name="width" value="1231" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -187,6 +196,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,7 +307,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -475,18 +484,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="-4" width="1233" height="1029" extended-state="6" />
+    <frame x="49" y="24" width="1231" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.760274" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26244727" sideWeight="0.7689694" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27257383" sideWeight="0.7701019" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23103058" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22989808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -568,9 +577,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="40" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="47" column="40" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/templates/social/trace.html">
@@ -580,21 +587,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/social/templates/social/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="31" selection-start="3855" selection-end="3865" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="95" column="31" selection-start="3855" selection-end="3865" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ajax/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="16" selection-start="2138" selection-end="2144" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="30" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -606,16 +604,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/templates/social/competence.html">
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="51" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0">
+        <state line="777" column="27" selection-start="16250" selection-end="16250" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/views.py">
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="290" column="28" selection-start="14382" selection-end="14382" vertical-scroll-proportion="0.0">
+        <state line="701" column="13" selection-start="21386" selection-end="21386" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/js/homepage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="504" column="37" selection-start="18903" selection-end="18903" vertical-scroll-proportion="0.7092084" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="30" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ajax/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="301" column="66" selection-start="11073" selection-end="11257" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/templates/social/competence.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="51" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -627,47 +660,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
+    <entry file="file://$PROJECT_DIR$/social/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="777" column="27" selection-start="16250" selection-end="16250" vertical-scroll-proportion="-9.68">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="701" column="13" selection-start="21386" selection-end="21386" vertical-scroll-proportion="-27.68">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/js/homepage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="504" column="37" selection-start="18903" selection-end="18903" vertical-scroll-proportion="0.7092084">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="-0.625">
+        <state line="291" column="20" selection-start="14401" selection-end="14401" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="403" column="59" selection-start="16656" selection-end="16656" vertical-scroll-proportion="-19.2">
+        <state line="73" column="106" selection-start="4122" selection-end="4122" vertical-scroll-proportion="0.8467742">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ajax/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="349" column="62" selection-start="13067" selection-end="13067" vertical-scroll-proportion="0.664966">
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

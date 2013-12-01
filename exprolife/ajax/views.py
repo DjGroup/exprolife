@@ -294,18 +294,28 @@ def getPAC(request):
         response['posts']['minute'].append(i.date.minute)
         response['posts']['second'].append(i.date.second)
         response['posts']['year'].append(i.date.year)
-        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
-        if isinstance(i, BoardPost):
-            response['posts']["isPost"].append(1)
-        elif isinstance(i, Competence):
+        # if i.picture.url[1] == 'm':
+        try:
             if i.picture.url[1] == 'm':
-                 response['posts']['picture'].append(i.picture.url[13:])
+                response['posts']['picture'].append(i.picture.url[13:])
             else:
                 response['posts']['picture'].append(i.picture.url)
-            try:
-                response['posts']['sourceCode'].append(i.sourceCode.url[13:])
-            except:
-                response['posts']['sourceCode'].append(None)
+        except:
+            response['posts']['picture'].append(None)
+
+        response['posts']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
+
+        try:
+            response['posts']['sourceCode'].append(i.sourceCode.url[13:])
+        except:
+            response['posts']['sourceCode'].append(None)
+
+        if isinstance(i, BoardPost):
+            response['posts']["isPost"].append(1)
+            response['posts']["developers"].append(None)
+            response['posts']["manager"].append(None)
+            response['posts']["usage"].append(None)
+        elif isinstance(i, Competence):
             response['posts']["isPost"].append(0)
             response['posts']["developers"].append(i.developers)
             response['posts']["manager"].append(i.manager)
