@@ -10,7 +10,7 @@ class User(models.Model):
 
     #male=0 female=1
     sex = models.BooleanField(blank=False, default=None)
-    #image = models.ImageField()
+    # image = models.ImageField(upload_to="uploads_image/", default=None)
 
     
 class Competence(models.Model):
