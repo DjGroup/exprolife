@@ -264,7 +264,6 @@ def idDetailIndex(request, user_id):
 
 
 def competenceLoader(request, competence_title, competence_id):
-    print competence_title
     competence = Competence.objects.filter(id=competence_id, title=competence_title)
     if not competence:
         raise Http404
@@ -289,8 +288,10 @@ def competenceLoader(request, competence_title, competence_id):
 
 
 def postLoader(request, post_title, post_id):
+    print post_id
     print post_title
     post = BoardPost.objects.filter(id=post_id, title=post_title)
+    print post
     if not post:
         raise Http404
     PostTags = post[0].tagList.split(',')

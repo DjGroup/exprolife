@@ -4,12 +4,12 @@
     <list default="true" id="4195d60d-f114-4482-8988-0c1d27e97466" name="Default" comment="" />
     <ignored path="exprolife.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385919010785" ignored="false" />
-    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385921736715" ignored="false" />
+    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1386315936621" ignored="false" />
+    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1386318141587" ignored="false" />
     <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385740631567" ignored="false" />
     <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385667382967" ignored="false" />
     <file path="/homepage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385658283981" ignored="false" />
-    <file path="/urls.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385737659484" ignored="false" />
+    <file path="/urls.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1386317480581" ignored="false" />
     <file path="/competence.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385675846022" ignored="false" />
     <file path="/psychograph.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385738423230" ignored="false" />
     <file path="/post.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385738472856" ignored="false" />
@@ -37,75 +37,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="psychograph.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="psychograph.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/static/social/css/psychograph.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="777" column="27" selection-start="16250" selection-end="16250" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="701" column="13" selection-start="21386" selection-end="21386" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ajax/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="301" column="66" selection-start="11073" selection-end="11257" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="30" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exprolife/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="20" selection-start="2038" selection-end="2038" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/exprolife/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="34" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="psychographPage.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="106" selection-start="4122" selection-end="4122" vertical-scroll-proportion="0.8467742">
+            <state line="39" column="33" selection-start="1496" selection-end="1496" vertical-scroll-proportion="0.8125">
               <folding />
             </state>
           </provider>
@@ -114,16 +49,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="291" column="20" selection-start="14401" selection-end="14401" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="competence.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/social/templates/social/competence.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="51" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0">
+            <state line="265" column="63" selection-start="13354" selection-end="13354" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -147,20 +73,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/templates/social/index.html" />
-        <option value="$PROJECT_DIR$/templates/social/psychograph.html" />
         <option value="$PROJECT_DIR$/social/templates/social/index.html" />
         <option value="$PROJECT_DIR$/social/models.py" />
         <option value="$PROJECT_DIR$/social/static/social/js/homepage.js" />
         <option value="$PROJECT_DIR$/exprolife/settings.py" />
         <option value="$PROJECT_DIR$/social/templates/social/competence.html" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
-        <option value="$PROJECT_DIR$/exprolife/urls.py" />
         <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
         <option value="$PROJECT_DIR$/social/static/social/css/post.css" />
         <option value="$PROJECT_DIR$/ajax/views.py" />
-        <option value="$PROJECT_DIR$/social/views.py" />
         <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
+        <option value="dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/exprolife..auth_group" />
+        <option value="dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/exprolife..django_session" />
+        <option value="dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/mylifetime..social_user" />
+        <option value="dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/mysql..servers" />
+        <option value="$PROJECT_DIR$/exprolife/urls.py" />
+        <option value="$PROJECT_DIR$/social/views.py" />
       </list>
     </option>
   </component>
@@ -196,7 +124,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -226,6 +153,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exprolife" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -307,18 +252,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="E:/mylifetime" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -346,29 +293,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="exprolife" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -390,6 +314,29 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="exprolife" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -489,13 +436,13 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.760274" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.7707151" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27257383" sideWeight="0.7701019" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27763712" sideWeight="0.7707151" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22989808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2292849" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -570,33 +517,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/flat/flat-ui.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1787" column="4" selection-start="38897" selection-end="38897" vertical-scroll-proportion="0.041463416" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="40" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/templates/social/trace.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/templates/social/post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="31" selection-start="3855" selection-end="3865" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ajax/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="16" selection-start="2138" selection-end="2144" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exprolife/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="20" selection-start="2038" selection-end="2038" vertical-scroll-proportion="0.0">
@@ -625,7 +545,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/social/templates/social/psychograph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="0.0">
+        <state line="60" column="38" selection-start="2233" selection-end="2246" vertical-scroll-proportion="-0.625">
           <folding />
         </state>
       </provider>
@@ -640,36 +560,81 @@
     <entry file="file://$PROJECT_DIR$/ajax/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="301" column="66" selection-start="11073" selection-end="11257" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/templates/social/competence.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="51" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exprolife/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="34" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="291" column="20" selection-start="14401" selection-end="14401" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="106" selection-start="4122" selection-end="4122" vertical-scroll-proportion="0.8467742">
+        <state line="73" column="106" selection-start="4122" selection-end="4122" vertical-scroll-proportion="0.0234375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/templates/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/exprolife..auth_group">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/exprolife..django_session">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/mylifetime..social_user">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d1ae80b4/8b79a98f-e589-4064-b032-3addffadc345/mysql..servers">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/templates/social/competence.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="51" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.07467532">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="265" column="63" selection-start="13354" selection-end="13354" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exprolife/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="33" selection-start="1496" selection-end="1496" vertical-scroll-proportion="0.8125">
           <folding />
         </state>
       </provider>
