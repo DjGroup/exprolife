@@ -6,7 +6,7 @@
 var isContinueAjax=false;
 
 var escapeTags = function(str) {
-   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 };
 
 //use this function to send ajax post, project and PAC queries (code bloat)
@@ -76,22 +76,50 @@ function ajaxer(type, content, result){
     });
 }
 
+function removeClick(button){
+
+    $(button).on("click",function(){
+        var comment_id = $(this).parent().next().next().text();
+        var com = $(this).parent().parent();
+
+        var vars={
+            id:comment_id,
+            main:window.location.pathname
+        };
+        $.ajax({
+            url: '/ajax/remove',
+            dataType: 'json',
+            data:vars,
+            success:function(result){
+                if(result.isOK==1){
+                    com.fadeOut("slow");
+                    var x = result.children;
+                    y = result.children.length;
+                    for(i=0;i<y;i++){
+                        var me = $('span:contains("'+result.children[i]+'")');
+                        me.parent().fadeOut("slow");
+                    }
+                }
+            }
+        });
+    });
+}
 function upload(field, upload_url) {
-     if (field.files.length == 0) {
-         return;
-     }
-     var file = field.files[0];
-     var formData = new FormData();
-     formData.append('file_upload', file);
-     $.ajax({
-         url: upload_url,
-         type: 'POST',
-         data: formData,
-         processData: false,
-         contentType: false,
-         success: console.log('success!')
-     });
- }
+    if (field.files.length == 0) {
+        return;
+    }
+    var file = field.files[0];
+    var formData = new FormData();
+    formData.append('file_upload', file);
+    $.ajax({
+        url: upload_url,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: console.log('success!')
+    });
+}
 
 /*******************   END   *******************/
 /****************** CONSTANTS ******************/
@@ -103,7 +131,24 @@ $(document).ready(function(){
 /////////////////   BEGIN   ///////////////////////
 ////////// navigation bar in the left /////////////
 ///////////////////////////////////////////////////
-
+    $(document).keyup(function(key){
+        if(key.which==27){
+            $('#holder').detach();
+            fad = $("#fader");
+            fad.css({
+                "height":0
+            });
+            fad.fadeOut("slow");
+        }
+    });
+    var url = window.location.hash;
+    url = url.replace("#","");
+    url1 = url.split("+");
+    var this1 = $("span:contains('"+url1[1]+"')").parent();
+    for(i=0;i<3;i++){
+        this1.fadeTo("slow",0);
+        this1.fadeTo("slow",1);
+    }
     var nav = $('#v-nav');
     var items = nav.children('ul').children('li').each(function () {
         $(this).click(function () {
@@ -144,7 +189,7 @@ $(document).ready(function(){
 
 
     $(".alert").animate({
-         "right":"50px"
+        "right":"50px"
     } , 1500).delay(1000).fadeOut(1000);
 
 /////////////////  END    /////////////////////////
@@ -294,8 +339,8 @@ $(document).ready(function(){
 
     nav.children().first().children().not(".first").on("click", function(){
         $('#Col-2').animate({
-                width:"800px"
-            }, "slow");
+            width:"800px"
+        }, "slow");
         $('#Col-1').delay(500).fadeIn("slow");
         $('.project-div, .post-div').hide();
     });
@@ -396,7 +441,7 @@ $(document).ready(function(){
     							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
     							</div>\
     						</span></a>');
-					document.getElementById("title-board").value="";
+                    document.getElementById("title-board").value="";
                     document.getElementById("text-area").value="";
                     tag.remove();
                     mainContent.clone().hide().insertAfter($('.content').children().first()).fadeIn("slow");
@@ -536,8 +581,8 @@ $(document).ready(function(){
 
                 //if every thing is OK then add to DOM
                 if(result.manager=='1' && result.title=='1' && result.tagList=='1' && result.developers=='1'){
-                      thisCompetenceForm.unbind('submit');
-                      thisCompetenceForm.submit();
+                    thisCompetenceForm.unbind('submit');
+                    thisCompetenceForm.submit();
 //                    showTab("#Board");
 //                    var tag = $("#Tag-input1").val().split(',');
 //                    var tagSection = '';
@@ -652,7 +697,7 @@ $(document).ready(function(){
                         $("#notificationBox").prepend(content);
                     }
                     for(var j=0; j<result.tracebackUsers.length; j++){
-                        content='<div class="itemNotification"><img src="../../static/social/images/defaultMaleImage.png" height="50px">\
+                        content=' <div class="itemNotification"><img src="../../static/social/images/defaultMaleImage.png" height="50px">\
                     <p class="firstname">\
                         <strong>' + result.tracebackUsers[j].firstname +  '</strong>\
                     </p>\
@@ -664,7 +709,125 @@ $(document).ready(function(){
                     <button class="button glass blue OKTB" >OK</button></div>';
                         $("#notificationBox").prepend(content);
                     }
+                    for (var x=0;x<result.post.length;x++){
+                        content='<div class="itemNotification"><img src="'+result.post[x].hash+'" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.post[x].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.post[x].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction">has replied on your comment</p>\
+                    <span style="display:none">Post/'+result.post[x].title +'.'+result.post[x].id+'</span>\
+                    <button class="button glass blue Reply" id="see">See More</button>\
+                    <span style="display:none">Post:'+result.post[x].this +'</span></div>';
+
+                        $("#notificationBox").append(content);
+
+                    }
+
+                    for (var x=0;x<result.post1.length;x++){
+                        content='<div class="itemNotification"><img src="'+result.post1[x].hash+'" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.post1[x].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.post1[x].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction">has commented on your post</p>\
+                    <span style="display:none">Post/'+result.post1[x].title +'.'+result.post1[x].id+'</span>\
+                    <button class="button glass blue Comment" id="see">See More</button>\
+                    <span style="display:none">Post:'+result.post1[x].this+'</span></div>';
+
+                        $("#notificationBox").append(content);
+
+                    }
+
+                    for(var x=0;x<result.competence.length;x++){
+                        content='<div class="itemNotification"><img src="'+result.competence[x].hash+'" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.competence[x].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.competence[x].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction"> has replied on your comment</p>\
+                    <span style="display:none">Competence/'+result.competence[x].title+'.'+result.competence[x].id+'</span>\
+                    <button class="button glass blue Reply" id="see">See More</button>\
+                    <span style="display:none">Competence:'+result.competence[x].this+'</span></div>';
+
+                        $("#notificationBox").append(content);
+
+                    }
+
+                    for(var x=0;x<result.competence1.length;x++){
+                        content='<div class="itemNotification"><img src="'+result.competence1[x].hash+'" height="50px">\
+                    <p class="firstname">\
+                        <strong>' + result.competence1[x].firstname +  '</strong>\
+                    </p>\
+                    <p class="lastname">\
+                        <strong>'+  result.competence1[x].lastname + '</strong>\
+                    </p>\
+                    <br />\
+                    <p class="notificationAction"> has commented on your competence</p>\
+                    <span style="display:none">Competence/'+result.competence1[x].title+'.'+result.competence1[x].id+'</span>\
+                    <button class="button glass blue Comment" id="see">See More</button>\
+                    <span style="display:none">Competence:'+result.competence1[x].this+'</span></div>';
+
+                        $("#notificationBox").append(content);
+
+                    }
+
+
+
                     isContinueAjax = true;
+                    $('.Reply').on("click",function(){
+                        var me = $(this);
+                        var page =me.prev().text();
+                        var main = me.next().text();
+                        var send ={
+                            page:page,
+                            main:main
+                        };
+                        $.ajax({
+                            data:send,
+                            url:'/ajax/reply_not',
+                            success:function(result){
+                                if(result.isOK=='1'){
+                                    var t = main.split(":");
+                                    //alert(page+":");
+                                    window.location.href = page + "#myID+"+t[1];
+                                }
+                            }
+
+                        });
+                    });
+
+                    $('.Comment').on("click",function(){
+                        var me = $(this);
+                        var page =me.prev().text();
+                        var main = me.next().text();
+                        var send ={
+                            page:page,
+                            main:main
+                        };
+                        $.ajax({
+                            data:send,
+                            url:'/ajax/comment_not',
+                            success:function(result){
+                                if(result.isOK=='1'){
+                                    var t = main.split(":");
+                                    window.location.href = page + "#myID+"+t[1];
+                                }
+                            }
+
+                        });
+                    });
+
+
                     $('.OKT').on("click", function(){
                         var thisOKButton = $(this);
                         thisOKButton.text('OK...');
@@ -753,9 +916,9 @@ $(document).ready(function(){
                     content.children().not('#switchAjax').remove();
                     ajaxer('getPosts', content, result);
                     $('#switchAjax').hide("fast");
-                            content.css({
-                                "opacity": "1.0"
-                            }, "fast");
+                    content.css({
+                        "opacity": "1.0"
+                    }, "fast");
 
                 }
             });
@@ -768,9 +931,9 @@ $(document).ready(function(){
                     content.children().not('#switchAjax').remove();
                     ajaxer('getCompetence', content, result);
                     $('#switchAjax').hide("fast");
-                            content.css({
-                                "opacity": "1.0"
-                            }, "fast");
+                    content.css({
+                        "opacity": "1.0"
+                    }, "fast");
                 }
             });
         }
@@ -813,7 +976,6 @@ $("#tracer").on("click", function(){
         data: dataa,
         success:function(result){
             if(result.isOK==1){
-                alert(123)
 //                    change color of button
             }
         }
@@ -868,3 +1030,171 @@ $(window).load(function(){
 ////////////////////////// END ////////////////////////////////
 ////// Showing Tracer and Tracing number in Psycograph ////////
 ///////////////////////////////////////////////////////////////
+
+$("#submit_comment").on("click",function(e){
+    e.preventDefault();
+    var content = $("textarea").val();
+    if (content ==""){
+        alert("You must type something");
+    }
+    else {
+        if ($("#label").closest("p").text() != ""){
+            var owner = $("#label").closest("p").text();}
+        else
+        {
+            var owner = $("#com").closest("p").text();}
+        var da = { address : window.location.pathname,
+            owner:owner,
+            content:content};
+        $.ajax({
+            url: '/ajax/comment',
+            dataType: 'json',
+            data:da,
+            success:function(result){
+                if(result.repeat == 1){
+                    alert("You can't comment again :D");
+//                    change color of button
+                }
+                else if(result.isOk==1 && result.null=='0'){
+                    var x = ""
+                    if(result.time.hour>=12){
+                        x = "p.m"
+                        result.time.hour = result.time.hour-12;
+                    }
+                    else{
+                        x = "a.m"
+                    }
+                    var content1 = $('<li class="comment">\
+                    <a href="/" title="View this user profile" class="photo"><img style="width: 35px" src='+result.email+'  ></a>\
+                    <div class="meta">'+result.name +' | '+result.time.month+', '+ result.time.day+', '+result.time.year+', '+result.time.hour+':'+result.time.minute+' '+x+'</div>\
+                    <div class="body">'+result.mohtava+'</div>\
+                    </li>\
+                </ul>') ;
+                    $('ul.comments').css({
+                        "display": "block"
+                    }, "slow");
+                    content1.clone().hide().appendTo($('ul.comments')).fadeIn("slow");
+
+                }
+                else if (result.null == '1'){
+                    alert("You must type something");
+                }
+            }
+
+        });
+        //removeClick('.remove');
+    }
+});
+
+$(".reply").on("click",function(){
+    var id1 = document.getElementById("id");
+    var id = id1.innerHTML;
+    var but = $(this);
+    var comment_id = $(this).parent().next().next().text();
+    var b = document.getElementById("email");
+    var c = document.getElementById("hash");
+    var hash = c.innerHTML;
+    var mail = b.innerHTML;
+    // alert(c);
+    //alert(mail1[0]);
+    var cont = $('<div id="holder" style="">\
+        <div class="box">\
+            <div class="user-pic"><img style="width:70px"src='+ hash+' /></div>\
+            <div class="comment-box">\
+                <textarea id="reply-comment" placeholder="Write something..."></textarea>\
+            </div>\
+        </div>\
+    </div>');
+    cont.clone().hide().insertBefore($('#table')).fadeIn("slow");
+    var fader = $('#fader');
+    fader.css({
+        "height": document.body.scrollHeight
+    });
+    fader.fadeIn("slow");
+    var msg = $('#reply-comment');
+    $('#reply-comment').keydown(function(key){
+        if(msg.val().length > 0){
+            if(key.which == 13){
+                var content= msg.val();
+                //alert(msg.val());
+                $('#holder').detach();
+                fader.css({
+                    "height":0
+                });
+                fader.fadeOut("slow");
+                but.hide();
+                var vars={
+                    address : window.location.pathname,
+                    id: id,
+                    comment_id:comment_id,
+                    email:mail,
+                    content:content
+                };
+                $.ajax({
+                    url: '/ajax/reply',
+                    dataType: 'json',
+                    data:vars,
+                    success:function(result){
+                        if(result.isOk==1){
+                            var x = ""
+                            if(result.time.hour>=12){
+                                x = "p.m"
+                                result.time.hour = result.time.hour-12;
+                            }
+                            else{
+                                x = "a.m"
+                            }
+                            var test=$(' <li class="comment level-'+result.depth+'">\
+                    <a href="/'+result.firstName+' .'+result.lastName+'" title="View this user profile" class="photo"><img style="width: 35px" src='+ hash+'  > </a>\
+                    <div class="meta" >'+ result.firstName+' '+result.lastName+' | '+result.time.month+', '+ result.time.day+', '+result.time.year+', '+result.time.hour+':'+result.time.minute+' '+x+'</div>\
+                    <div class="body">'+ msg.val()+'</div>\
+                </li>');
+                            test.clone().hide().insertAfter(but.parent().parent()).fadeIn();//                    change color of button
+                        }
+                        if(result.isOk==0){
+                            alert("You have replied once before");
+                        }
+                    }
+                });
+                //removeClick(".remove");
+
+            }
+
+        }
+    });
+
+});
+
+removeClick(".remove");
+//$(".remove").on("click",function(){
+//    var comment_id = $(this).parent().next().next().text();
+//    var com = $(this).parent().parent();
+//
+//    var vars={
+//       id:comment_id,
+//       main:window.location.pathname
+//    };
+//    $.ajax({
+//        url: '/ajax/remove',
+//        dataType: 'json',
+//        data:vars,
+//        success:function(result){
+//            if(result.isOK==1){
+//                com.fadeOut("slow");
+//                var x = result.children;
+//                y = result.children.length;
+//                for(i=0;i<y;i++){
+//                    var me = $('span:contains("'+result.children[i]+'")');
+//                    me.parent().fadeOut("slow");
+//                }
+//            }
+//        }
+//    });
+//});
+
+//Animation is for Webkit Browser Only :)
+//To be updated soon...
+
+//Animation is for Webkit Browser Only :)
+//To be updated soon...
+

@@ -47,3 +47,24 @@ class TraceShip(models.Model):
     isUser2AcceptTrace = models.BooleanField(default=0, blank=None)
     isShowNotificationToUser2 = models.BooleanField(default=1, blank=None)
     isShowNotificationToUser1 = models.BooleanField(default=0, blank=None)
+
+
+class CommentPost(models.Model):
+    user = models.BigIntegerField(blank=False)
+    content = models.TextField(max_length=1000, blank=False, default=None)
+    referencePost = models.ForeignKey(BoardPost,blank=False)
+    referenceComment = models.BigIntegerField(blank=False,default=0)
+    depth = models.PositiveSmallIntegerField(blank=False,default=0)
+    user_notification = models.BooleanField(default=1, blank=None)
+    main_notification = models.BooleanField(default=0, blank=None)
+    time = models.DateTimeField()
+
+class CommentCompetence(models.Model):
+    user = models.BigIntegerField(blank=False)
+    content = models.TextField(max_length=1000, blank=False, default=None)
+    referenceCompetence = models.ForeignKey(Competence,blank=False)
+    referenceComment = models.BigIntegerField(blank=False,default=0)
+    depth = models.PositiveSmallIntegerField(blank=False,default=0)
+    user_notification = models.BooleanField(default=1, blank=None)
+    main_notification = models.BooleanField(default=0, blank=None)
+    time = models.DateTimeField()

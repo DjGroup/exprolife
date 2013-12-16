@@ -202,12 +202,30 @@ def index(request):
                 request.session['first_name'] = loginedUser[0].firstName
                 request.session['last_name'] = loginedUser[0].lastName
                 request.session['email'] = loginedUser[0].email
+                j=0
+                j1=0
+                c=0
+                c1=0
                 request.session['traceRequestNumber'] = loginedUser[0].TraceShip_userReceiver.filter(
                     isShowNotificationToUser2=1).count()
                 request.session['tracebackRequestNumber'] = loginedUser[0].TraceShip_userSender.filter(
                     isShowNotificationToUser1=1).count()
+
+                for k in CommentCompetence.objects.filter(user=loginedUser[0].id):
+                    j = j+ CommentCompetence.objects.filter(referenceComment = k.id,user_notification='0').count()
+                for k1 in CommentPost.objects.filter(user=loginedUser[0].id):
+                    j1 =j1+ CommentPost.objects.filter(referenceComment = k1.id,user_notification='0').count()
+
+                for k2 in Competence.objects.filter(user=loginedUser[0].id):
+
+                    c = c+  CommentCompetence.objects.exclude(user = loginedUser[0].id).filter(referenceCompetence=k2.id,main_notification='0',referenceComment='0',).count()
+
+                for k3 in BoardPost.objects.filter(user=loginedUser[0].id):
+                    c1 = c1 + CommentPost.objects.exclude(user = loginedUser[0].id).filter(referencePost=k3.id,main_notification='0',referenceComment='0').count()
                 request.session['totalNotification'] = request.session['traceRequestNumber'] +\
-                                                       request.session['tracebackRequestNumber']
+                                                       request.session['tracebackRequestNumber']+\
+                                                       j+j1+c+c1
+
                 template = loader.get_template('social/psychograph.html')
                 context = RequestContext(request, {'myUser': loginedUser[0], 'myUrl': image_url})
                 return HttpResponse(template.render(context))
@@ -264,6 +282,15 @@ def idDetailIndex(request, user_id):
 
 
 def competenceLoader(request, competence_title, competence_id):
+    print competence_title
+    bb = User.objects.get(email=request.session['email'])
+    me1 = bb.email
+    gravatar_url = "www.gravatar.com/avatar"
+    emailHash = hashlib.md5(me1).hexdigest()
+    me = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+    comment = []
+    gravatar_url = "www.gravatar.com/avatar"
+
     competence = Competence.objects.filter(id=competence_id, title=competence_title)
     if not competence:
         raise Http404
@@ -273,12 +300,32 @@ def competenceLoader(request, competence_title, competence_id):
     except:
         pass
     creationDate = str(competence[0].date.month)
-    creationDate += ' ' + str(competence[0].date.day) + ' ' + str(competence[0].date.year) + ' at ' +\
+    creationDate += ' ' + str(competence[0].date.day) + ' ' + str(competence[0].date.year) + ' at ' + \
                     str(competence[0].date.hour) + ':' + str(competence[0].date.minute) + ':' + \
                     str(competence[0].date.second)
+    commentdb = CommentCompetence.objects.filter(referenceCompetence=competence_id).order_by("time")
+    for i in commentdb:
+        use = User.objects.get(id=i.user)
+        temp = {}
+        temp['id'] = i.id
+        temp['firstName'] = use.firstName
+        temp['lastName'] = use.lastName
+        temp['content'] = i.content
+        temp['time'] = i.time
+        temp['refer'] = i.referenceComment
+        emailHash = hashlib.md5(use.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        temp['email'] = image_url1
+        temp['depth'] = i.depth*2
+        comment.append(temp)
+
     template = loader.get_template('social/competence.html')
     pictureUrl = competence[0].picture.url[13:] if competence[0].picture.url[1] == 'm' else competence[0].picture.url
+
     context = RequestContext(request, {
+        'comment' : comment,
+        'me':me,
+        'email':me1,
         'competence': competence[0],
         'comTags': ComTags,
         'creationDate': creationDate,
@@ -288,10 +335,15 @@ def competenceLoader(request, competence_title, competence_id):
 
 
 def postLoader(request, post_title, post_id):
-    print post_id
     print post_title
+    bb = User.objects.get(email=request.session['email'])
+    me1 = bb.email
+    gravatar_url = "www.gravatar.com/avatar"
+    emailHash = hashlib.md5(me1).hexdigest()
+    me = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+    comment = []
+    gravatar_url = "www.gravatar.com/avatar"
     post = BoardPost.objects.filter(id=post_id, title=post_title)
-    print post
     if not post:
         raise Http404
     PostTags = post[0].tagList.split(',')
@@ -302,14 +354,32 @@ def postLoader(request, post_title, post_id):
     creationDate = str(post[0].date.month)
     creationDate += ' ' + str(post[0].date.day) + ' ' + str(post[0].date.year) + ' at ' + str(post[0].date.hour) + \
                     ':' + str(post[0].date.minute) + ':' + str(post[0].date.second)
+    commentdb = CommentPost.objects.filter(referencePost=post_id).order_by("time")
+    for i in commentdb:
+        use = User.objects.get(id=i.user)
+        temp = {}
+        temp['id'] = i.id
+        temp['firstName'] = use.firstName
+        temp['lastName'] = use.lastName
+        temp['content'] = i.content
+        temp['time'] = i.time
+        temp['refer'] = i.referenceComment
+        emailHash = hashlib.md5(use.email).hexdigest()
+        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        temp['email'] = image_url1
+        temp['depth'] = i.depth*2
+        comment.append(temp)
+
     template = loader.get_template('social/post.html')
     context = RequestContext(request, {
+        'comment':comment,
+        'me':me,
+        'email':me1,
         'post': post[0],
         'postTags': PostTags,
         'creationDate': creationDate
     })
     return HttpResponse(template.render(context))
-
 
 def traces(request):
     tracer = []

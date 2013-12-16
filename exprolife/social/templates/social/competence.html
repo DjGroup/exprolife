@@ -6,12 +6,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
-      <title>{{ competence.title }}</title>
-	  
+    <title>{{ competence.title }}</title>
 </head>
 
 
 <body>
+<div id="fader" >
+
+</div>
 <div class="header">
     <div id="Logo-image">
         <img  src="{% static 'social/images/logo.png' %}"/>
@@ -109,8 +111,73 @@
             </div>
             <p><label>Title: </label>{{ competence.title }}</p>
             <p><label>Developed by: </label>{{ competence.developers }}</p>
+            <p id="com" style="display: none"><label>Developed by: </label>{{ competence.user.firstName }} {{ competence.user.lastName }} </p>
+            <p id="id" style="display: none">{{ competence.id }}</p>
+            <p id="hash" style="display: none" >{{ me }}</p>
+            <p id="email" style="display: none" >{{ email }}</p>
         </div>
     </div>
+    <div id="table">
+        <div id="pizza">
+            <form method="get" action="">
+                <textarea name="comment" placeholder="Leave your comment"></textarea>
+                <button class="big-button" id="submit_comment"  value="Submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+        <div id="hamburger">
+        </div>
+    </div>
+    {% if comment %}
+        <ul class="comments">
+
+            {% for k in comment %}
+                {% if k.depth == 0 %}
+                    <li class="comment" id='myID+{{ k.id }}'>
+                        <a href="/{{ k.firstName }}.{{ k.lastName }}" title="View this user profile" class="photo"><img style="width: 35px" src={{ k.email }}  > </a>
+                        <div class="meta" >{{ k.firstName }} {{ k.lastName }} | {{ k.time }} {% if k.email == me %} <a class="remove">Remove</a>{% else %}<a class="reply">Reply</a>{% endif %}</div>
+                        <div class="body">{{ k.content }}</div>
+                        <span id="comment_id" style="display: none">{{ k.id }}</span>
+                    </li>
+                    {% for j in comment %}
+                        {% if j.refer == k.id %}
+                            <li class="comment level-{{ j.depth }}" id='myID+{{ j.id }}'>
+                                <a href="/{{ j.firstName }}.{{ j.lastName }}" title="View this user profile" class="photo"><img style="width: 35px" src={{ j.email }}  > </a>
+                                <div class="meta" >{{ j.firstName }} {{ j.lastName }} | {{ j.time }} {% if j.email == me %}<a class="remove">Remove</a> {% else %}<a class="reply">Reply</a>{% endif %}</div>
+                                <div class="body">{{ j.content }}</div>
+                                <span id="comment_id" style="display: none">{{ j.id }}</span>
+                            </li>
+                            {% for u in comment %}
+                                {% if u.refer == j.id %}
+                                    <li class="comment level-{{ u.depth }}" id='myID+{{ u.id }}'>
+                                        <a href="/{{ u.firstName }}.{{ u.lastName }}" title="View this user profile" class="photo"><img style="width: 35px" src={{ u.email }}  > </a>
+                                        <div class="meta" >{{ u.firstName }} {{ u.lastName }} | {{ u.time }} {% if u.email == me %}<a class="remove">Remove</a> {% else %}<a class="reply">Reply</a>{% endif %}</div>
+                                        <div class="body">{{ u.content }}</div>
+                                        <span id="comment_id" style="display: none">{{ u.id }}</span>
+                                    </li>
+                                    {% for p in comment %}
+                                        {% if p.refer == u.id %}
+                                            <li class="comment level-{{ p.depth }}" id='myID+{{ p.id }}'>
+                                                <a href="/{{ p.firstName }}.{{ p.lastName }}" title="View this user profile" class="photo"><img style="width: 35px" src={{ p.email }}  > </a>
+                                                <div class="meta" >{{ p.firstName }} {{ p.lastName }} | {{ p.time }}{% if p.email == me %}<a class="remove">Remove</a>{% endif %} </div>
+                                                <div class="body">{{ p.content }}</div>
+                                                <span id="comment_id" style="display: none">{{ p.id }}</span>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul class="comments" style="display: none">
+        </ul>
+    {% endif %}
 </div>
 <div id="down-footer">
     <li> CopyRight 2013 - ExProLife </li>

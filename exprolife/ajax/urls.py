@@ -44,4 +44,14 @@ urlpatterns = patterns('',
     #get posts and competences in Feed
     url(r'getpac/$', views.getPAC, name='ajaxGetPostsAndCompetences'),
 
+    url(r'comment/$', views.comment, name='comment'),
+
+    url(r'reply/$', views.reply, name='reply'),
+
+    url(r'remove/$', views.remove, name='remove'),
+
+    url(r'reply_not/$', views.reply_not, name='replynotification'),
+
+    url(r'comment_not/$', views.comment_not, name='commentnotification'),
+
     )

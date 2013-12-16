@@ -3,6 +3,7 @@ from social.models import *
 from django.db.models import Q
 import re
 import json
+import hashlib
 from datetime import datetime
 
 from itertools import chain
@@ -476,8 +477,9 @@ def traceShip(request):
 
 
 def getNotification(request):
-    response = {"traceUsers": [], "tracebackUsers": []}
+    response = {"traceUsers": [], "tracebackUsers": [],"post":[],"competence":[],"post1":[],"competence1":[]}
     curUser = User.objects.get(pk=request.session['user_id'])
+    gravatar_url = "www.gravatar.com/avatar"
     for j in curUser.TraceShip_userReceiver.all():
         if j.isShowNotificationToUser2:
             destinationUser = User.objects.get(pk=j.userSender_id)
@@ -488,6 +490,78 @@ def getNotification(request):
             destinationUser = User.objects.get(pk=j.userReceiver_id)
             response["tracebackUsers"].append({"firstname": destinationUser.firstName,
                                                "lastname": destinationUser.lastName})
+
+
+    for k in CommentCompetence.objects.filter(user=curUser.id):
+        for j in CommentCompetence.objects.filter(referenceComment = k.id,user_notification='0'):
+            replier = User.objects.get(id = j.user)
+            main = Competence.objects.get(id = j.referenceCompetence_id)
+            emailHash = hashlib.md5(replier.email).hexdigest()
+            image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+            if (curUser.id != replier.id):
+                response["competence"].append({"firstname": replier.firstName,
+                                               "lastname":replier.lastName,
+                                               "hash":image_url1,
+                                               "id":main.id,
+                                               "title":main.title,
+                                               "this":j.id
+                })
+
+
+
+    for j in Competence.objects.filter(user=curUser.id):
+
+        for a in CommentCompetence.objects.filter(referenceCompetence=j.id,main_notification='0',referenceComment='0'):
+            commenter = User.objects.get(id=a.user)
+            emailHash = hashlib.md5(commenter.email).hexdigest()
+            image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+            if (curUser.id != commenter.id):
+
+                response["competence1"].append({"firstname": commenter.firstName,
+                                                "lastname":commenter.lastName,
+                                                "hash":image_url1,
+                                                "id":j.id,
+                                                "title":j.title,
+                                                "this":a.id
+
+                })
+
+
+
+    for j in BoardPost.objects.filter(user=curUser.id):
+        for a in CommentPost.objects.filter(referencePost=j.id,main_notification='0',referenceComment='0'):
+            commenter = User.objects.get(id=a.user)
+            emailHash = hashlib.md5(commenter.email).hexdigest()
+            image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+            if (curUser.id != commenter.id):
+                response["post1"].append({"firstname": commenter.firstName,
+                                          "lastname":commenter.lastName,
+                                          "hash":image_url1,
+                                          "id":j.id,
+                                          "title":j.title,
+                                          "this":a.id
+
+                })
+
+
+    for k1 in CommentPost.objects.filter(user=curUser.id):
+        for j in CommentPost.objects.filter(referenceComment = k1.id,user_notification='0'):
+            replier = User.objects.get(id = j.user)
+            main = BoardPost.objects.get(id = j.referencePost_id)
+            emailHash = hashlib.md5(replier.email).hexdigest()
+            image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+            if (curUser.id != replier.id):
+
+                response["post"].append({"firstname": replier.firstName,
+                                         "lastname":replier.lastName,
+                                         "hash":image_url1,
+                                         "id":main.id,
+                                         "title":main.title,
+                                         "this":j.id
+                })
+
+
+
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
@@ -571,3 +645,210 @@ def traceNum(request):
     e = TraceShip.objects.filter(userSender=user.id, isUser2AcceptTrace=1).count()
     response['tracer'] = d + e
     return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def reply(request):
+    response = {'isOk':0,'firstName':[],'lastName':[],
+                'time':{'year':[],'month':[],'day':[],'hour':[],'minute':[],'second':[]},
+                'depth':[],'content':[],'hash':[],}
+    gravatar_url = "www.gravatar.com/avatar"
+    reference = request.REQUEST['address'].split("/")
+    idtemp = reference[2].split(".")
+    monthNames = {1: "Jan",
+                  2: "Feb",
+                  3: "Mar",
+                  4: "Apr",
+                  5: "May",
+                  6: "Jun",
+                  7: "Jul",
+                  8: "Aug",
+                  9: "Sep",
+                  10: "Oct",
+                  11: "Nov",
+                  12: "Dec"
+    }
+    content= request.REQUEST['content']
+    comment_id =  request.REQUEST['comment_id']
+    email =  request.REQUEST['email']
+    user = User.objects.get(email=email)
+    id1 =  request.REQUEST['id']
+    if(reference[1]=="Post"):
+        main = BoardPost.objects.get(id= id1 )
+        comment1 = CommentPost.objects.get(id=comment_id)
+
+
+    elif(reference[1]=="Competence"):
+        main = Competence.objects.get(id= id1 )
+        comment1 = CommentCompetence.objects.get(id=comment_id)
+
+
+    depth = comment1.depth
+    new_depth = depth+1
+    emailHash = hashlib.md5(user.email).hexdigest()
+    image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+    response['hash']=image_url1
+    response['time']['year'] = timezone.now().year
+    response['time']['month'] = monthNames[timezone.now().month]
+    response['time']['day'] = timezone.now().day
+    response['time']['hour'] = timezone.now().hour
+    response['time']['minute'] = timezone.now().minute
+    response['time']['second'] = timezone.now().second
+
+    if(reference[1]=="Post"):
+        main.commentpost_set.create(user=user.id,content=content,referencePost=main.id,referenceComment = comment1.id,user_notification=0,depth=new_depth,time = timezone.now())
+        response['isOk'] = 1
+    elif(reference[1]=="Competence"):
+        main.commentcompetence_set.create(user=user.id,content=content,referenceCompetence=main.id,referenceComment = comment1.id,user_notification=0,depth=new_depth,time = timezone.now())
+        response['isOk'] = 1
+    response['firstName'] = user.firstName
+    response['lastName'] = user.lastName
+    response['content'] = content
+    response['depth'] = new_depth*2
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def comment(request):
+    response = {'isOk': 0,'repeat':0,'name':[],'mohtava':[],'null':0,
+                'email':[], 'time':{'year':[],'month':[],'day':[],'hour':[],'minute':[],'second':[]},}
+    reference = request.REQUEST['address'].split("/")
+    id1 = reference[2].split(".")
+    content = request.REQUEST['content']
+    a = content.replace("\n","")
+    b = a.replace("\r","")
+    owner = request.REQUEST['owner'].split(":")
+    gravatar_url = "www.gravatar.com/avatar"
+    monthNames = {1: "Jan",
+                  2: "Feb",
+                  3: "Mar",
+                  4: "Apr",
+                  5: "May",
+                  6: "Jun",
+                  7: "Jul",
+                  8: "Aug",
+                  9: "Sep",
+                  10: "Oct",
+                  11: "Nov",
+                  12: "Dec"
+    }
+    x = owner[1].split(" ")
+    try:
+        pattern = "/"
+        firstAndLastName = re.sub(pattern, "", request.REQUEST['user1']).split(".")
+        post_id = firstAndLastName[2]
+        user2 = User.objects.filter(firstName=firstAndLastName[0], lastName=firstAndLastName[1])
+        if len(firstAndLastName) == 3:
+            user = user2[int(firstAndLastName[2]) - 1]
+        else:
+            user = user2[0]
+    except:
+        user = User.objects.get(email=request.session['email'])
+
+    print user.firstName + " "+ user.lastName
+    response["name"]=user.firstName + " "+ user.lastName
+    emailHash = hashlib.md5(user.email).hexdigest()
+    image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+    print timezone.now().hour
+    response['email']=image_url1
+    response['time']['year'] = timezone.now().year
+    response['time']['month'] = monthNames[timezone.now().month]
+    response['time']['day'] = timezone.now().day
+    response['time']['hour'] = timezone.now().hour
+    response['time']['minute'] = timezone.now().minute
+    response['time']['second'] = timezone.now().second
+    response["mohtava"] =content
+    print user.id
+    print reference[1]
+    print reference[2]
+    print content
+    print id1[0]
+    print id1[1]
+    if (b == ""):
+        response['null'] = 1
+    else:
+        if(reference[1]=="Post"):
+            id2 = BoardPost.objects.get(id=id1[1])
+            id2.commentpost_set.create(user=user.id,content=content,referencePost=id2.id,time = timezone.now())
+        elif(reference[1]=="Competence"):
+            id2 = Competence.objects.get(id=id1[1])
+            id2.commentcompetence_set.create(user=user.id,content=content,referenceCompetence=id2.id,time = timezone.now())
+
+    response['isOk'] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+
+def remove(request):
+    def child1(a):
+        children = CommentPost.objects.filter(referenceComment=a)
+        for i in children:
+            response["children"].append(i.id)
+            if i.referenceComment != '0':
+                child1(i.id)
+            i.delete()
+    def child2(a):
+        children = CommentCompetence.objects.filter(referenceComment=a)
+        for i in children:
+            response["children"].append(i.id)
+            if i.referenceComment != '0':
+                child2(i.id)
+            i.delete()
+    response = {"isOK": 0,"children":[]}
+    main = request.REQUEST["main"]
+    myid = request.REQUEST["id"]
+    id1 = main.split(".")
+    type = id1[0].split("/")
+    if type[1]=="Competence":
+        mustBeDelete = CommentCompetence.objects.get(id=myid)
+        if mustBeDelete.referenceComment != '0':
+            child2(mustBeDelete.id)
+        mustBeDelete.delete()
+    elif type[1]=="Post":
+        mustBeDelete = CommentPost.objects.get(id=myid)
+        if mustBeDelete.referenceComment != '0':
+            child1(mustBeDelete.id)
+        mustBeDelete.delete()
+        #children.delete()
+    #mustBeDelete.delete()
+
+
+    print "delete ok "
+    response["isOK"] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def reply_not(request):
+    response = {"isOK": 0}
+    main = request.REQUEST["main"]
+    page = request.REQUEST["page"]
+    id1 = main.split(":")
+    if id1[0]=="Competence":
+        mustBeChange = CommentCompetence.objects.get(id=id1[1])
+    elif id1[0]=="Post":
+        mustBeChange = CommentPost.objects.get(id=id1[1])
+
+    mustBeChange.user_notification = True
+    mustBeChange.save()
+    print "reply ok"
+    response["isOK"] = 1
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def comment_not(request):
+    response = {"isOK": 0}
+    main = request.REQUEST["main"]
+    page = request.REQUEST["page"]
+    id1 = main.split(":")
+
+
+    if id1[0]=="Competence":
+        mustBeChange = CommentCompetence.objects.get(id=id1[1])
+    elif id1[0]=="Post":
+        mustBeChange = CommentPost.objects.get(id=id1[1])
+
+    mustBeChange.main_notification = True
+    mustBeChange.save()
+    print "comment ok "
+    response["isOK"] = 1
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
