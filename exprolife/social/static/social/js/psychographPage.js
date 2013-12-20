@@ -11,69 +11,128 @@ var escapeTags = function(str) {
 
 //use this function to send ajax post, project and PAC queries (code bloat)
 function ajaxer(type, content, result){
-    for(var i=0; i<result.posts.title.length; i++){
-        var gID = result.posts.id[i];
-        var title = result.posts.title[i];
-        var description = result.posts.content[i];
-        var tags = result.posts.tagList[i].split(',');
-        var length = tags.length;
-        if(tags[length-1]==""){
-            tags.splice(-1);
+    if (!(type=='getTUsers') && !(type=='getTProjects') ){
+        for(var i=0; i<result.posts.title.length; i++){
+            var gID = result.posts.id[i];
+            var title = result.posts.title[i];
+            var description = result.posts.content[i];
+            var tags = result.posts.tagList[i].split(',');
+            var length = tags.length;
+            if(tags[length-1]==""){
+                tags.splice(-1);
+            }
+            var tagSection = '';
+            if(type=='getCompetence' ||(type=='getPAC' && result.posts.isPost[i]=='0')){
+                var developers = result.posts.developers[i];
+                var manager = result.posts.manager[i];
+                var usage = result.posts.usage[i];
+                var picture = result.posts.picture[i];
+                var sourceCode = result.posts.sourceCode[i];
+            }
+            for(var j=0; j<tags.length; j++){
+                tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+            }
+            var currentDiv = '';
+            if(type=='getPosts'|| (type=='getPAC' && result.posts.isPost[i]=='1')){
+                currentDiv = $('<a class="post-link"><span class="project-div">\
+                                    <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+        							<div class="project-desc">\
+        							    <span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
+        								<h4>'+ description +'</h4>\
+        								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+        								<div class="project-tag">'+tagSection +'</div>\
+        							</div>\
+        							<div class="project-image">\
+        							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
+        							</div>\
+        						</span></a>');
+            }else if(type=='getCompetence' || (type=='getPAC' && result.posts.isPost[i]=='0')){
+                currentDiv = $('<a class="project-link"><span class="project-div">\
+                                    <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
+        							<div class="project-desc">\
+        								<span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
+        								<span>'+ description +'</span>\
+        								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
+        								<div class="project-tag">'+tagSection +'</div>\
+        							</div>\
+        							<div class="project-image">\
+        								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+        								<div class="score-number">' + result.posts.rate[i] + '</div></div>\
+        								<div class="project-logo" style="background-image: url(../..'+ picture + ');"></div>\
+        							</div>\
+        							<span><center>'+ usage +'</center></span>\
+        						</span></a>');
+            }
+            content.append(currentDiv);
         }
-        var tagSection = '';
-        if(type=='getCompetence' ||(type=='getPAC' && result.posts.isPost[i]=='0')){
-            var developers = result.posts.developers[i];
-            var manager = result.posts.manager[i];
-            var usage = result.posts.usage[i];
-            var picture = result.posts.picture[i];
-            var sourceCode = result.posts.sourceCode[i];
-        }
-        for(var j=0; j<tags.length; j++){
-            tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
-        }
-        var currentDiv = '';
-        if(type=='getPosts'|| (type=='getPAC' && result.posts.isPost[i]=='1')){
-            currentDiv = $('<a class="post-link"><span class="project-div">\
-                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-    							<div class="project-desc">\
-    							    <span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
-    								<h4>'+ description +'</h4>\
-    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-    								<div class="project-tag">'+tagSection +'</div>\
-    							</div>\
-    							<div class="project-image">\
-    							    <div class="project-logo" style="background-image: url(../../static/social/images/logos/post.jpg);"></div>\
-    							</div>\
-    						</span></a>');
-        }else if(type=='getCompetence' || (type=='getPAC' && result.posts.isPost[i]=='0')){
-            currentDiv = $('<a class="project-link"><span class="project-div">\
-                                <h3>'+ result.posts.firstName[i] +' '+result.posts.lastName[i] + ' '+ 'Writes:</h3>\
-    							<div class="project-desc">\
-    								<span style="display:none;">'+ gID +'</span><h3>'+ title +'</h3>\
-    								<span>'+ description +'</span>\
-    								<div class="project-date">Created '   +result.posts.month[i]+   ' '   +result.posts.day[i]+   ', '   +result.posts.year[i] +   ' at '   +result.posts.hour[i]+   ':'   +result.posts.minute[i]+   ':'   +result.posts.second[i]+   '</div>\
-    								<div class="project-tag">'+tagSection +'</div>\
-    							</div>\
-    							<div class="project-image">\
-    								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-    								<div class="score-number">' + result.posts.rate[i] + '</div></div>\
-    								<div class="project-logo" style="background-image: url(../..'+ picture + ');"></div>\
-    							</div>\
-    							<span><center>'+ usage +'</center></span>\
-    						</span></a>');
-        }
-        content.append(currentDiv);
+        $(".project-link").on("click", function(){
+            var ID = $(this).children().first().children().first().next().children().first().text();
+            var title = $(this).children().first().children().first().next().children().first().next().text();
+            document.location.href = '/Competence/' + encodeURIComponent(title) + '.' + ID;
+        });
+        $(".post-link").on("click", function(){
+            var ID = $(this).children().first().children().first().next().children().first().text();
+            var title = $(this).children().first().children().first().next().children().first().next().text();
+            document.location.href = '/Post/' + encodeURIComponent(title) + '.' + ID;
+        });
     }
-    $(".project-link").on("click", function(){
-        var ID = $(this).children().first().children().first().next().children().first().text();
-        var title = $(this).children().first().children().first().next().children().first().next().text();
-        document.location.href = '/Competence/' + encodeURIComponent(title) + '.' + ID;
-    });
-    $(".post-link").on("click", function(){
-        var ID = $(this).children().first().children().first().next().children().first().text();
-        var title = $(this).children().first().children().first().next().children().first().next().text();
-        document.location.href = '/Post/' + encodeURIComponent(title) + '.' + ID;
-    });
+    else{
+        if (type=='getTUsers'){
+            for(var i=0; i<result.users.FN.length; i++){
+                currentDiv = $('<a class="project-link"><span class="project-div">\
+        							<div class="project-desc">\
+        								<span style="display:none;"></span><h3>'+ result.users.FN[i] + ' ' + result.users.LN[i] +'</h3>\
+        							</div>\
+        							<div class="project-image">\
+        								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+        								<div class="score-number">' + result.users.score[i] + '</div></div>\
+        								<div class="project-logo" style="background-image: url('+ result.users.url[i] + ');"></div>\
+        							</div>\
+        						</span></a>');
+                content.append(currentDiv);
+            }
+            $(".project-link").on("click", function(){
+                var FN = $(this).children().first().children().first().find('h3').text().split(" ")[0];
+                var LN = $(this).children().first().children().first().find('h3').text().split(" ")[1];
+                document.location.href = "/" + FN + "." + LN;
+            });
+        }
+        else{
+
+            for(var i=0; i<result.projects.title.length; i++){
+                var tagSection = '';
+                tags = result.projects.tagList[i].split(',');
+                var length = tags.length;
+                if(tags[length-1]==""){
+                    tags.splice(-1);
+                }
+                for(var j=0; j<tags.length; j++){
+                    tagSection += '<div class="tag-span">'+ tags[j]+'</div>';
+                }
+                currentDiv = $('<a class="project-link"><span class="project-div">\
+                                    <h3>'+ result.projects.firstName[i] +' '+result.projects.lastName[i] + ' '+ 'Writes:</h3>\
+        							<div class="project-desc">\
+        								<span style="display:none;">'+ result.projects.id[i] +'</span><h3>'+ result.projects.title[i] +'</h3>\
+        								<span>'+ result.projects.content[i] +'</span>\
+        								<div class="project-date">Created '   +result.projects.month[i]+   ' '   +result.projects.day[i]+   ', '   +result.projects.year[i] +   ' at '   +result.projects.hour[i]+   ':'   +result.projects.minute[i]+   ':'   +result.projects.second[i]+   '</div>\
+        								<div class="project-tag">'+tagSection +'</div>\
+        							</div>\
+        							<div class="project-image">\
+        								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
+        								<div class="score-number">' + result.projects.rate[i] + '</div></div>\
+        								<div class="project-logo" style="background-image: url(../..'+ result.projects.picture[i] + ');"></div>\
+        							</div>\
+        							<span><center>'+ result.projects.usage[i] +'</center></span>\
+        						</span></a>');
+                content.append(currentDiv);
+            }
+            $(".project-link").on("click", function(){
+                var ID = $(this).children().first().children().first().next().children().first().text();
+                var title = $(this).children().first().children().first().next().children().first().next().text();
+                document.location.href = '/Competence/' + encodeURIComponent(title) + '.' + ID;
+            });
+        }
+    }
 }
 
 function removeClick(button){
@@ -319,7 +378,7 @@ $(document).ready(function(){
 // when click on .first navigation bar its width INCREASE //
 ////////////////////////////////////////////////////////////
 
-    $('.first').on("click", function(){
+    $('.first, .third').on("click", function(){
         $('#Col-1').fadeOut("slow", function(){
             $('#Col-2').animate({
                 width:"1100px"
@@ -337,7 +396,7 @@ $(document).ready(function(){
 // when click on not .first navigation bar its width DECREASE //
 ////////////////////////////////////////////////////////////////
 
-    nav.children().first().children().not(".first").on("click", function(){
+    nav.children().first().children().not(".first, .third").on("click", function(){
         $('#Col-2').animate({
             width:"800px"
         }, "slow");
@@ -483,6 +542,38 @@ $(document).ready(function(){
 
             //getPAC (PAC => Post And Projects)
             ajaxer('getPAC', content, result);
+        }
+    });
+
+    $(window).hashchange(function(){
+        if(location.hash == "#Top"){
+            $.ajax({
+                url:'/ajax/tusers',
+                dataType: 'json',
+                success:function(result){
+                    content.children().not('#switchAjax').remove();
+                    ajaxer('getTUsers', content, result);
+                    $('#switchAjax').hide("fast");
+                    content.css({
+                        "opacity": "1.0"
+                    }, "fast");
+                }
+            });
+        }
+        else if(location.hash == "#Board"){
+            $.ajax({
+                url: '/ajax/getpac',
+                dataType: 'json',
+                success:function(result){
+                    content.children().not('#switchAjax').remove();
+                    //getPAC (PAC => Post And Projects)
+                    ajaxer('getPAC', content, result);
+                    $('#switchAjax').hide("fast");
+                    content.css({
+                        "opacity": "1.0"
+                    }, "fast");
+                }
+            });
         }
     });
 
@@ -953,12 +1044,57 @@ $(document).ready(function(){
             });
         }
     });
-});
+
 
 ////////////////////////// END /////////////////////////////////
 /////////// filter searching with ALL, POST, PROJECT ///////////
 ////////////////////////////////////////////////////////////////
+        $("input[name='tops']").change(function(){
+            var content = $('.content');
+            $('#topSwitchAjax').show("fast");
+            content.css({
+                "opacity": "0.3"
+            }, "fast");
+            var state = $("input[name='tops']:checked").val();
+            if(state=="users"){
+                $.ajax({
+                    url:'/ajax/tusers',
+                    dataType: 'json',
+                    success:function(result){
+                        content.children().not('#switchAjax').remove();
+                        ajaxer('getTUsers', content, result);
+                        $('#switchAjax').hide("fast");
+                        content.css({
+                            "opacity": "1.0"
+                        }, "fast");
 
+                    }
+                });
+            }else{
+                $.ajax({
+                    url: '/ajax/tprojects',
+                    dataType: 'json',
+                    success:function(result){
+                        content.children().not('#switchAjax').remove();
+                        ajaxer('getTProjects', content, result);
+                        $('#switchAjax').hide("fast");
+                        content.css({
+                            "opacity": "1.0"
+                        }, "fast");
+                    }
+                });
+            }
+
+        });
+///////////////////////// BEGIN ////////////////////////////////
+/////////// filter top Users and Projects with Ajax ////////////
+////////////////////////////////////////////////////////////////
+
+
+});
+////////////////////////// END /////////////////////////////////
+/////////// filter top Users and Projects with Ajax ////////////
+////////////////////////////////////////////////////////////////
 
 ////////////////////////// Begin ///////////////////////////////
 //// go to trace page and showing the tracers and tracings ////

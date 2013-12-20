@@ -54,6 +54,13 @@ urlpatterns = patterns('',
 
     url(r'comment_not/$', views.comment_not, name='commentnotification'),
 
+    # rate a project with ajax
     url(r'rate/$', views.rateProject, name="rateProjectAjax"),
+
+    # top users show in psychograph
+    url(r'tusers/$', views.TUsers, name="topUsersAjax"),
+
+    # top projects ...
+    url(r'tprojects/$', views.TProjects, name="topProjectsAjax"),
 
     )

@@ -941,8 +941,11 @@ def rateProject(request):
 
     # if user that want to vote is same as user that create the competence => then must not vote
     if user_id == relatedUser_id:
-            return HttpResponse(json.dumps(response), content_type='application.json')
+        return HttpResponse(json.dumps(response), content_type='application.json')
 
+    #user must not vote 200000 or -2000000 :D must check when save in DB
+    if not -2 <= rateValue <= 3:
+        return HttpResponse(json.dumps(response), content_type='application.json')
     # if this user voted this competence in past ...
     history = userProjectRate.objects.filter(user_id=user_id, project_id=competenceID)
     user = User.objects.get(pk=user_id)
@@ -1009,3 +1012,74 @@ def rateProject(request):
 
 
     return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def TUsers(request):
+    response = {"isOK": 1,
+                "users":
+                    {"FN": [],
+                     "LN": [],
+                     "score": [],
+                     "url": []}
+    }
+
+    users = User.objects.order_by("-score")
+    for i in users:
+        response["users"]["FN"].append(i.firstName)
+        response["users"]["LN"].append(i.lastName)
+        response["users"]["score"].append(i.score)
+        response["users"]["url"].append("http://www.gravatar.com/avatar/" + hashlib.md5(i.email).hexdigest() + "?s=210&d=identicon&r=PG")
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def TProjects(request):
+    response = {'projects': {
+                    "id":[],
+                    "firstName": [],
+                    "lastName": [],
+                    "title": [],
+                    "content": [],
+                    "tagList": [],
+                    "year": [],
+                    "month": [],
+                    "day": [],
+                    "hour": [],
+                    "minute": [],
+                    "second": [],
+                    "developers": [],
+                    "manager": [],
+                    "picture": [],
+                    "sourceCode": [],
+                    "usage": [],
+                    "rate": []}, }
+    competences = Competence.objects.order_by("-vote", "-date")
+    for i in competences:
+        response["projects"]["id"].append(i.id)
+        response["projects"]["firstName"].append(i.user.firstName)
+        response["projects"]["lastName"].append(i.user.lastName)
+        response['projects']["title"].append(i.title)
+        response['projects']["content"].append(i.content)
+        response['projects']['month'].append(i.date.month)
+        response['projects']['day'].append(i.date.day)
+        response['projects']['hour'].append(i.date.hour)
+        response['projects']['minute'].append(i.date.minute)
+        response['projects']['second'].append(i.date.second)
+        response['projects']['year'].append(i.date.year)
+        response['projects']['tagList'].append(i.tagList.replace(u'\xa0', u' '))
+        response['projects']["developers"].append(i.developers)
+        response['projects']["manager"].append(i.manager)
+        response['projects']["usage"].append(i.usage)
+        response['projects']["rate"].append(i.vote)
+        if i.picture.url[1] == 'm':
+            response['projects']['picture'].append(i.picture.url[13:])
+        else:
+            response['projects']['picture'].append(i.picture.url)
+        try:
+            response['projects']['sourceCode'].append(i.sourceCode.url[13:])
+        except:
+            response['projects']['sourceCode'].append(None)
+
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+

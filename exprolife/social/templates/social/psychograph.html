@@ -92,7 +92,7 @@
                     {% if myUser %}
                      <li tab="Edit" >Edit</li>
                      <li tab="Competence" class="second current">Add Competence</li>
-                        <li tab="Top">Top</li>
+                        <li tab="Top" class="third">Top</li>
                     {% endif %}
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
@@ -162,46 +162,6 @@
                                     <img src="../../static/social/images/loading.gif" height="120px">
                                 </div>
                             </div>
-
-                        {#                      #####################  PROJECT STRUCTURE  ########################                  #}
-
-                        {#						<span class="project-div">#}
-                        {#							<div class="project-desc">#}
-                        {#								<h3>Genetic Algorithm</h3>#}
-                        {#								<span>This project which is implemented by Java and PHP is one of the best projects that is created #}
-                        {#								on earth. Different kinds of frameworks and languages are used in order to produce a very high level#}
-                        {#								application and ...</span>#}
-                        {#								<div class="project-date">Created Mar 22, 2012 at 8:45 am</div>#}
-                        {#								<div class="project-tag">#}
-                        {#									<div class="tag-span">Java</div>#}
-                        {#									<div class="tag-span">PHP</div>#}
-                        {#									<div class="tag-span">...</div>#}
-                        {#								</div>#}
-                        {#							</div>#}
-                        {#							<div class="project-image">#}
-                        {#								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">#}
-                        {#								<div class="score-number">3555</div></div>#}
-                        {#								<div class="project-logo" style="background-image: url(../../static/social/images/logos/Java_Logo.png);"></div>#}
-                        {#							</div>#}
-                        {#						</span>#}
-
-                        {#                      #####################  /PROJECT STRUCTURE  ########################                  #}
-
-
-                        {#                      ##################### POST STRUCTURE ########################                  #}
-
-
-                        {##}
-                        {#						<div class="post-div">#}
-                        {#							<div class="post-body">This is another post that can help me find different bugs and lets me find different aspects of the project. This post is just for test and doesn't have any other purposes.#}
-                        {#							</div>#}
-                        {#							<div class="post-date">#}
-                        {#								Posted Jan 15, 2012 at 10:54 pm#}
-                        {#							</div>#}
-                        {#						</div>#}
-
-                        {#                      ##################### /POST STRUCTURE ########################                  #}
-
                     </div>
 
                 </div>
@@ -263,13 +223,18 @@
                     <h3>Tops</h3>
                     <div id="home-form">
                         <div class="container" style="width: 100%;height: 30px;margin: 10px;">
-                            <div class="switch" style="width:210px;">
-                                <input type="radio" class="switch-input" name="view" value="top-users" id="switch-top-users" checked >
+                            <div class="switch" style="width:190px;">
+                                <input type="radio" class="switch-input" name="tops" value="users" id="switch-top-users" checked >
                                 <label for="switch-top-users" class="switch-label switch-label-off">Users</label>
-                                <input type="radio" class="switch-input" name="view" value="post" id="switch-top-projects">
-                                <label for="switch-top-projects" class="switch-label switch-label-off" style="width:114px">Projects</label>
+                                <input type="radio" class="switch-input" name="tops" value="projects" id="switch-top-projects">
+                                <label for="switch-top-projects" class="switch-label switch-label-off" style="width:100px">Projects</label>
                                 <span class="switch-selection"></span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div id="topSwitchAjax">
+                            <img src="../../static/social/images/loading.gif" height="120px">
                         </div>
                     </div>
                 </div>

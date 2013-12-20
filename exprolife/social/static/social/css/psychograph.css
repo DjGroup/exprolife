@@ -1321,6 +1321,14 @@ button:active.blue {
     left: 180px;
 }
 
+.switch-input[value="users"]:checked  ~ .switch-selection {
+    left: 0px;
+}
+
+.switch-input[value="projects"]:checked  ~ .switch-selection {
+    left: 95px;
+}
+
 .switch-selection {
     position: absolute;
     z-index: 1;
@@ -1353,6 +1361,13 @@ button:active.blue {
 }
 
 #switchAjax{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#topSwitchAjax{
     display: none;
     position: absolute;
     left: 50%;
