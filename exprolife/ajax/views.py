@@ -11,6 +11,9 @@ from itertools import chain
 from django.utils import timezone
 
 
+from math import log
+
+
 def autocompleteModel(request):
     response = {"users": [], "found": 0}
     splitter = request.REQUEST['query'].split()
@@ -244,7 +247,8 @@ def getPAC(request):
                     "manager": [],
                     "picture": [],
                     "sourceCode": [],
-                    "usage": []}, }   # another remaining
+                    "usage": [],
+                    "rate": []}, }   # another remaining
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
@@ -295,6 +299,7 @@ def getPAC(request):
         response['posts']['minute'].append(i.date.minute)
         response['posts']['second'].append(i.date.second)
         response['posts']['year'].append(i.date.year)
+
         # if i.picture.url[1] == 'm':
         try:
             if i.picture.url[1] == 'm':
@@ -316,11 +321,14 @@ def getPAC(request):
             response['posts']["developers"].append(None)
             response['posts']["manager"].append(None)
             response['posts']["usage"].append(None)
+            response['posts']["rate"].append(None)
         elif isinstance(i, Competence):
             response['posts']["isPost"].append(0)
             response['posts']["developers"].append(i.developers)
             response['posts']["manager"].append(i.manager)
             response['posts']["usage"].append(i.usage)
+            response['posts']["rate"].append(i.vote)
+
 
         #else ?
 
@@ -348,7 +356,8 @@ def getCompetence(request):
                     "manager": [],
                     "picture": [],
                     "sourceCode": [],
-                    "usage": []}, }   # another remaining
+                    "usage": [],
+                    "rate": []}, }   # another remaining
     try:
         pattern = "/"
         firstAndLastName = re.sub(pattern, "", request.REQUEST['user']).split(".")
@@ -398,6 +407,7 @@ def getCompetence(request):
         response['posts']["developers"].append(i.developers)
         response['posts']["manager"].append(i.manager)
         response['posts']["usage"].append(i.usage)
+        response['posts']["rate"].append(i.vote)
         if i.picture.url[1] == 'm':
             response['posts']['picture'].append(i.picture.url[13:])
         else:
@@ -448,16 +458,20 @@ def competenceCheck(request):
 
 def traceShip(request):
     response = {'isOK': 0}
+    # currently logged in user is userSender (want to trace some one)
     userSender = User.objects.get(pk=request.session['user_id'])
 
+    # find the receiver user for trace ...
     userReceiverFN = request.REQUEST['userReceiverFirstName']
     userReceiverLN = request.REQUEST['userReceiverLastName']
     userReceiverNUM = request.REQUEST['userReceiverNumber']
     userReceiver = User.objects.filter(firstName=userReceiverFN, lastName=userReceiverLN)
     if userReceiverNUM:
-        userReceiver = userReceiver[int(userReceiverNUM)-1]
+        userReceiver = userReceiver[int(userReceiverNUM) - 1]
     else:
         userReceiver = userReceiver[0]
+
+    #
     if not (userSender.TraceShip_userSender.filter(userReceiver=userReceiver.id) or
             userReceiver.TraceShip_userSender.filter(userReceiver=userSender.id)):
         userSender.TraceShip_userSender.create(userReceiver=userReceiver,
@@ -466,12 +480,50 @@ def traceShip(request):
                                                isShowNotificationToUser1=0,
                                                senderTime=timezone.now(),
                                                receiverTime=timezone.now())
+        _ = TraceShip.objects.filter(userReceiver=userReceiver.id).count()
+        _ += TraceShip.objects.filter(userSender=userReceiver.id, isUser2AcceptTrace=1).count()
+        userProjects = Competence.objects.filter(user_id=userReceiver.id)
+        rate = 0
+        for _ in userProjects:
+            rate += _.vote
+
+        if rate > 0:
+            _ = log(rate, 2)
+        else:
+            _ = 0
+        if rate > 0:
+            rate = log(rate)
+        else:
+            rate = 0
+        finalScore = rate + _
+        print finalScore
+        userReceiver.score = int(finalScore) + 1
+        userReceiver.save()
     if userReceiver.TraceShip_userSender.filter(userReceiver=userSender.id):
         mustBeChange = userReceiver.TraceShip_userSender.get(userReceiver_id=request.session["user_id"])
         mustBeChange.isUser2AcceptTrace = True
         mustBeChange.isShowNotificationToUser1 = True
         mustBeChange.isShowNotificationToUser2 = False
         mustBeChange.save()
+        _ = TraceShip.objects.filter(userReceiver=userSender.id).count()
+        _ += TraceShip.objects.filter(userSender=userSender.id, isUser2AcceptTrace=1).count()
+        userProjects = Competence.objects.filter(user_id=userSender.id)
+        rate = 0
+        for _ in userProjects:
+            rate += _.vote
+
+        if rate > 0:
+            _ = log(rate, 2)
+        else:
+            _ = 0
+        if rate > 0:
+            rate = log(rate)
+        else:
+            rate = 0
+        finalScore = rate + _
+        print finalScore
+        userSender.score = int(finalScore) + 1
+        userSender.save()
     response['isOK'] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
 
@@ -621,8 +673,29 @@ def traceback(request):
     mustBeChange.receiverTime = timezone.now()
     mustBeChange.save()
 
+    _ = TraceShip.objects.filter(userReceiver=curUser.id).count()
+    _ += TraceShip.objects.filter(userSender=curUser.id, isUser2AcceptTrace=1).count()
+    userProjects = Competence.objects.filter(user_id=curUser.id)
+    rate = 0
+    for _ in userProjects:
+        rate += _.vote
+    print "rate", rate
+    if rate > 0:
+        _ = log(rate, 2)
+    else:
+        _ = 0
+    print "_", _
+    if rate > 0:
+        rate = log(rate)
+    else:
+        rate = 0
+    finalScore = rate + _
+    print finalScore
+    curUser.score = int(finalScore) + 1
+    curUser.save()
     response["isOK"] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
+
 
 def traceNum(request):
     response = {'tracer': [], 'tracing': [], 'email': []}
@@ -755,7 +828,7 @@ def comment(request):
     response['time']['hour'] = timezone.now().hour
     response['time']['minute'] = timezone.now().minute
     response['time']['second'] = timezone.now().second
-    response["mohtava"] =content
+    response["mohtava"] = content
     print user.id
     print reference[1]
     print reference[2]
@@ -774,7 +847,6 @@ def comment(request):
 
     response['isOk'] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
-
 
 
 def remove(request):
@@ -840,7 +912,6 @@ def comment_not(request):
     page = request.REQUEST["page"]
     id1 = main.split(":")
 
-
     if id1[0]=="Competence":
         mustBeChange = CommentCompetence.objects.get(id=id1[1])
     elif id1[0]=="Post":
@@ -852,3 +923,89 @@ def comment_not(request):
     response["isOK"] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
 
+
+def rateProject(request):
+    # current rate of user
+    rateValue = int(request.REQUEST["value"])
+
+    # competence ID for save in database
+    competenceID = int(request.REQUEST["competenceID"])
+    curComp = Competence.objects.get(pk=competenceID)
+
+    #user <= competence
+    relatedUser_id = curComp.user_id
+    relatedUser = User.objects.get(pk=relatedUser_id)
+    response = {"isOK": 1, "projRate": curComp.vote}
+
+    user_id = request.session['user_id']
+
+    # if user that want to vote is same as user that create the competence => then must not vote
+    if user_id == relatedUser_id:
+            return HttpResponse(json.dumps(response), content_type='application.json')
+
+    # if this user voted this competence in past ...
+    history = userProjectRate.objects.filter(user_id=user_id, project_id=competenceID)
+    user = User.objects.get(pk=user_id)
+
+    # person multiplier unit when doing some actions
+    personEffectiveScore = 1 if user.score == 0 else user.score
+
+    # if person voted the competence in past .... :D (my english is good no ?)
+    if history:
+        if not history[0].rate == rateValue:
+            # decrease previous vote
+            curComp.vote -= (history[0].rate * personEffectiveScore)
+
+            # increase current vote
+            curComp.vote += (rateValue * personEffectiveScore)
+
+            # save that this user now voted => rateValue and save it in DB
+            history[0].rate = rateValue
+            history[0].save()
+
+            # save competence vote in DB
+            curComp.save()
+
+            # save in dictionary to send jquery and add to DOM
+            response["projRate"] = curComp.vote
+
+    # else => this user never vote this competence then must add new row to userProjectVote table in DB
+    else:
+        # create row in DB...
+        createHistory = userProjectRate.objects.create(user_id=user_id, project_id=competenceID, rate=rateValue)
+        createHistory.save()
+
+        # add vote to current competence and save it
+        curComp.vote += (rateValue * personEffectiveScore)
+        curComp.save()
+
+        # send to jquery ...
+        response["projRate"] = curComp.vote
+
+    # change the score of people in 2 way : 1.vote their competences (here) 2.changing the number of tracers
+    # (in traceship request)
+
+    # I use _ for fun :D
+    _ = TraceShip.objects.filter(userReceiver=relatedUser.id).count()
+    _ += TraceShip.objects.filter(userSender=relatedUser.id, isUser2AcceptTrace=1).count()
+    userProjects = Competence.objects.filter(user_id=relatedUser.id)
+    rate = 0
+    for _ in userProjects:
+        rate += _.vote
+    print "rate", rate
+    if rate > 0:
+        _ = log(rate, 2)
+    else:
+        _ = 0
+    print "_", _
+    if rate > 0:
+        rate = log(rate)
+    else:
+        rate = 0
+    finalScore = rate + _
+    print finalScore
+    relatedUser.score = int(finalScore) + 1
+    relatedUser.save()
+
+
+    return HttpResponse(json.dumps(response), content_type='application.json')

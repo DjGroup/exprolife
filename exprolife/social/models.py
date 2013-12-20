@@ -34,7 +34,7 @@ class BoardPost(models.Model):
     content = models.TextField(max_length=1000, blank=False, default=None)
     #image = models.ImageField()
     tagList = models.CharField(max_length=1000, blank=False, default=None)
-    vote = models.IntegerField(default=0)
+    # vote = models.IntegerField(default=0)
 
 
 class TraceShip(models.Model):
@@ -52,19 +52,26 @@ class TraceShip(models.Model):
 class CommentPost(models.Model):
     user = models.BigIntegerField(blank=False)
     content = models.TextField(max_length=1000, blank=False, default=None)
-    referencePost = models.ForeignKey(BoardPost,blank=False)
-    referenceComment = models.BigIntegerField(blank=False,default=0)
-    depth = models.PositiveSmallIntegerField(blank=False,default=0)
+    referencePost = models.ForeignKey(BoardPost, blank=False)
+    referenceComment = models.BigIntegerField(blank=False, default=0)
+    depth = models.PositiveSmallIntegerField(blank=False, default=0)
     user_notification = models.BooleanField(default=1, blank=None)
     main_notification = models.BooleanField(default=0, blank=None)
     time = models.DateTimeField()
 
+
 class CommentCompetence(models.Model):
     user = models.BigIntegerField(blank=False)
     content = models.TextField(max_length=1000, blank=False, default=None)
-    referenceCompetence = models.ForeignKey(Competence,blank=False)
-    referenceComment = models.BigIntegerField(blank=False,default=0)
-    depth = models.PositiveSmallIntegerField(blank=False,default=0)
+    referenceCompetence = models.ForeignKey(Competence, blank=False)
+    referenceComment = models.BigIntegerField(blank=False, default=0)
+    depth = models.PositiveSmallIntegerField(blank=False, default=0)
     user_notification = models.BooleanField(default=1, blank=None)
     main_notification = models.BooleanField(default=0, blank=None)
     time = models.DateTimeField()
+
+
+class userProjectRate(models.Model):
+    user = models.ForeignKey(User)
+    project = models.ForeignKey(Competence)
+    rate = models.IntegerField(default=0)

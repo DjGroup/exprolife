@@ -6,13 +6,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
     <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
-    <script type="text/javascript" src="{% static 'social/js/rate.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'social/css/rate.css' %}">
-    <script type="text/javascript">
-    $(function() {
-    		$('#exprolife-rating').barrating();
-    	});
-               </script>
 
     {% if myUser %}
       <title>Welcome {{ request.session.first_name }}</title>
@@ -99,7 +92,7 @@
                     {% if myUser %}
                      <li tab="Edit" >Edit</li>
                      <li tab="Competence" class="second current">Add Competence</li>
-                        <li tab="Home">Home</li>
+                        <li tab="Top">Top</li>
                     {% endif %}
                     <!--<li tab="tab3">Test2</li>
                     <li tab="tab4" class="last">Test3</li>-->
@@ -266,21 +259,20 @@
                         </form>
                     </div>
                 </div>
-                				<div class="tab-content">
-                                    <h3>Home</h3>
-                                    <div id="home-form">
-                                         <div class="container" style="width: 100%;height: 30px;margin: 10px;">
-                                        <div class="switch" style="width:210px;">
-                                            <input type="radio" class="switch-input" name="view" value="top-users" id="switch-top-users" checked >
-                                            <label for="switch-top-users" class="switch-label switch-label-off">Top users</label>
-                                            <input type="radio" class="switch-input" name="view" value="post" id="switch-top-projects">
-                                            <label for="switch-top-projects" class="switch-label switch-label-off" style="width:114px">Top projects</label>
-                                            <span class="switch-selection"></span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-
+                <div class="tab-content">
+                    <h3>Tops</h3>
+                    <div id="home-form">
+                        <div class="container" style="width: 100%;height: 30px;margin: 10px;">
+                            <div class="switch" style="width:210px;">
+                                <input type="radio" class="switch-input" name="view" value="top-users" id="switch-top-users" checked >
+                                <label for="switch-top-users" class="switch-label switch-label-off">Users</label>
+                                <input type="radio" class="switch-input" name="view" value="post" id="switch-top-projects">
+                                <label for="switch-top-projects" class="switch-label switch-label-off" style="width:114px">Projects</label>
+                                <span class="switch-selection"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -313,16 +305,6 @@
                     <span>Tracings  </span>
                 </div>
             </div>
-            			<div class="input select rating-a">
-                        <select name="rating" id="exprolife-rating" style="display: none;">
-                            <option value="-2">-2</option>
-                            <option value="-1">-1</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select><div class="br-widget"> </div>
-
         </div>
     </div>
 </div>

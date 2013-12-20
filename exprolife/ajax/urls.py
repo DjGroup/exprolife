@@ -54,4 +54,6 @@ urlpatterns = patterns('',
 
     url(r'comment_not/$', views.comment_not, name='commentnotification'),
 
+    url(r'rate/$', views.rateProject, name="rateProjectAjax"),
+
     )

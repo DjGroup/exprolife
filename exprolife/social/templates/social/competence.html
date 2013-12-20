@@ -4,8 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/competence.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
-    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'social/css/rate.css' %}">
     <title>{{ competence.title }}</title>
 </head>
 
@@ -109,6 +108,16 @@
                 <label id="Score">Score</label>
                 <span id="Score-text">{{ competence.vote }}</span>
             </div>
+            <div class="input select rating-a">
+                <select name="rating" id="exprolife-rating" style="display: none;">
+                    <option value="-2">-2</option>
+                    <option value="-1">-1</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
             <p><label>Title: </label>{{ competence.title }}</p>
             <p><label>Developed by: </label>{{ competence.developers }}</p>
             <p id="com" style="display: none"><label>Developed by: </label>{{ competence.user.firstName }} {{ competence.user.lastName }} </p>
@@ -180,15 +189,21 @@
     {% endif %}
 </div>
 <div id="down-footer">
+    {{ amIMe }}
     <li> CopyRight 2013 - ExProLife </li>
 </div>
 
-<script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
-<script src="{% static 'social/js/psychographPage.js' %}"></script>
-<script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
-<script src="{% static 'social/js/flat/application.js' %}"></script>
-<script src="{% static 'social/js/flat/bootstrap.min.js' %}"></script>
-<script src="{% static 'social/js/flat/bootstrap-select.js' %}"></script>
-<script src="{% static 'social/js/flat/jquery-1.8.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+<script> var NUM = '{{ projectRateNumber }}'</script>
+<script type="text/javascript" src="{% static 'social/js/psychographPage.js' %}"></script>
+{% ifnotequal amIMe 1 %}
+<script type="text/javascript" src="{% static 'social/js/rate.js' %}"></script>
+{% endifnotequal %}
+<script type="text/javascript">
+    $(function() {
+    		$('#exprolife-rating').barrating();
+    });
+</script>
 </body>
 </html>

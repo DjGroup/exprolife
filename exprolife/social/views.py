@@ -282,7 +282,6 @@ def idDetailIndex(request, user_id):
 
 
 def competenceLoader(request, competence_title, competence_id):
-    print competence_title
     bb = User.objects.get(email=request.session['email'])
     me1 = bb.email
     gravatar_url = "www.gravatar.com/avatar"
@@ -292,9 +291,13 @@ def competenceLoader(request, competence_title, competence_id):
     gravatar_url = "www.gravatar.com/avatar"
 
     competence = Competence.objects.filter(id=competence_id, title=competence_title)
+
     if not competence:
         raise Http404
+    relatedUser_id = competence[0].user_id
+    amIMe = (relatedUser_id == bb.id)
     ComTags = competence[0].tagList.split(',')
+
     try:
         ComTags.remove('')
     except:
@@ -314,22 +317,30 @@ def competenceLoader(request, competence_title, competence_id):
         temp['time'] = i.time
         temp['refer'] = i.referenceComment
         emailHash = hashlib.md5(use.email).hexdigest()
-        image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+        image_url1 = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
         temp['email'] = image_url1
-        temp['depth'] = i.depth*2
+        temp['depth'] = i.depth * 2
         comment.append(temp)
 
     template = loader.get_template('social/competence.html')
     pictureUrl = competence[0].picture.url[13:] if competence[0].picture.url[1] == 'm' else competence[0].picture.url
+    projectUserRate = userProjectRate.objects.filter(user_id = request.session["user_id"], project_id=competence_id)
+    if projectUserRate:
+        projectUserRateNumber = projectUserRate[0].rate
+    else:
+        projectUserRateNumber = 0
+
 
     context = RequestContext(request, {
-        'comment' : comment,
-        'me':me,
-        'email':me1,
+        'comment': comment,
+        'me': me,
+        'email': me1,
+        'amIMe': int(amIMe),
         'competence': competence[0],
         'comTags': ComTags,
         'creationDate': creationDate,
-        'pictureUrl': pictureUrl
+        'pictureUrl': pictureUrl,
+        'projectRateNumber': projectUserRateNumber,
     })
     return HttpResponse(template.render(context))
 
@@ -380,6 +391,7 @@ def postLoader(request, post_title, post_id):
         'creationDate': creationDate
     })
     return HttpResponse(template.render(context))
+
 
 def traces(request):
     tracer = []

@@ -56,7 +56,7 @@ function ajaxer(type, content, result){
     							</div>\
     							<div class="project-image">\
     								<div class="project-score" style="background-image: url(../../static/social/images/logos/green_sea.png);">\
-    								<div class="score-number">0</div></div>\
+    								<div class="score-number">' + result.posts.rate[i] + '</div></div>\
     								<div class="project-logo" style="background-image: url(../..'+ picture + ');"></div>\
     							</div>\
     							<span><center>'+ usage +'</center></span>\

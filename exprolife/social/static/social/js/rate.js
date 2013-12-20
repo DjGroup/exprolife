@@ -123,6 +123,7 @@
                     if (!userOptions.readonly) {
 
                         $all.on(clickEvent, function (event) {
+
                             var $a = $(this),
                                 value,
                                 text;
@@ -135,6 +136,29 @@
 
                             value = $a.attr('data-rating-value');
                             text = $a.attr('data-rating-text');
+
+                            var vars={
+                                value:value,
+                                competenceID:window.location.pathname.split('/')[2].split('.')[1]
+                            };
+
+                            $.ajax({
+                                url: '/ajax/rate',
+                                dataType: 'json',
+                                data:vars,
+                                success:function(result){
+                                    if(result.isOK=="1"){
+                                        currentScore = $('#Score-text').text();
+                                        finalScore = result.projRate;
+                                        if( finalScore != currentScore){
+//                                            $("Score-text").text(finalScore);
+                                            $("#Score-text").fadeOut("fast",function() {
+                                                $(this).text(finalScore).fadeIn("fast");
+                                            });
+                                        }
+                                    }
+                                }
+                            });
 
                             // is current and deselectable?
                             if ($a.hasClass('br-current') && $this.data('barrating').deselectable) {
@@ -286,7 +310,7 @@
         });
     };
     return $.fn.barrating.defaults = {
-        initialRating:null, // initial rating
+        initialRating:NUM, // initial rating
         showValues:false, // display rating values on the bars?
         showSelectedRating:true, // append a div with a rating to the widget?
         reverse:false, // reverse the rating?
