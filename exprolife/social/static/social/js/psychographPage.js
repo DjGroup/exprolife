@@ -534,48 +534,70 @@ $(document).ready(function(){
     //get post and projects every time page loading
 
     var content = $('.content');
-    $.ajax({
-        url: '/ajax/getpac',
-        dataType: 'json',
-        data: data,
-        success:function(result){
+    var isSession = 0;
+    if(location.pathname == "/"){
+        isSession = 1;
+        $.ajax({
+            url: '/ajax/getpac',
+            dataType: 'json',
+            data: data,
+            success:function(result){
 
-            //getPAC (PAC => Post And Projects)
-            ajaxer('getPAC', content, result);
-        }
-    });
+                //getPAC (PAC => Post And Projects)
+                ajaxer('getPAC', content, result);
+            }
+        });
+    }
+    if(isSession){
+        $(window).hashchange(function(){
+            if(location.hash == "#Top"){
+                $.ajax({
+                    url:'/ajax/tusers',
+                    dataType: 'json',
+                    success:function(result){
+                        content.children().not('#switchAjax').remove();
+                        ajaxer('getTUsers', content, result);
+                        $('#switchAjax').hide("fast");
+                        content.css({
+                            "opacity": "1.0"
+                        }, "fast");
+                    }
+                });
+            }
+            else if(location.hash == "#Board"){
+                $.ajax({
+                    url: '/ajax/getpac',
+                    dataType: 'json',
+                    success:function(result){
+                        content.children().not('#switchAjax').remove();
+                        //getPAC (PAC => Post And Projects)
+                        ajaxer('getPAC', content, result);
+                        $('#switchAjax').hide("fast");
+                        content.css({
+                            "opacity": "1.0"
+                        }, "fast");
+                    }
+                });
+            }
+        });
+    }
+    else{
 
-    $(window).hashchange(function(){
-        if(location.hash == "#Top"){
-            $.ajax({
-                url:'/ajax/tusers',
-                dataType: 'json',
-                success:function(result){
-                    content.children().not('#switchAjax').remove();
-                    ajaxer('getTUsers', content, result);
-                    $('#switchAjax').hide("fast");
-                    content.css({
-                        "opacity": "1.0"
-                    }, "fast");
-                }
-            });
-        }
-        else if(location.hash == "#Board"){
-            $.ajax({
-                url: '/ajax/getpac',
-                dataType: 'json',
-                success:function(result){
-                    content.children().not('#switchAjax').remove();
-                    //getPAC (PAC => Post And Projects)
-                    ajaxer('getPAC', content, result);
-                    $('#switchAjax').hide("fast");
-                    content.css({
-                        "opacity": "1.0"
-                    }, "fast");
-                }
-            });
-        }
-    });
+        $.ajax({
+            url: '/ajax/getpac',
+            dataType: 'json',
+            data:data,
+            success:function(result){
+                content.children().not('#switchAjax').remove();
+                //getPAC (PAC => Post And Projects)
+                ajaxer('getPAC', content, result);
+                $('#switchAjax').hide("fast");
+                content.css({
+                    "opacity": "1.0"
+                }, "fast");
+            }
+        });
+    }
 
     getInfoAjax.hide("slow");
 
@@ -890,7 +912,16 @@ $(document).ready(function(){
                                 if(result.isOK=='1'){
                                     var t = main.split(":");
                                     //alert(page+":");
-                                    window.location.href = page + "#myID+"+t[1];
+                                    me.parent().fadeOut("fast");
+                                    window.location.href = "/"+page + "#myID+"+t[1];
+                                    var url = window.location.hash;
+                                    url = url.replace("#","");
+                                    url1 = url.split("+");
+                                    var this1 = $("span:contains('"+url1[1]+"')").parent();
+                                    for(i=0;i<3;i++){
+                                        this1.fadeTo("slow",0);
+                                        this1.fadeTo("slow",1);
+                                    }
                                 }
                             }
 
@@ -911,7 +942,16 @@ $(document).ready(function(){
                             success:function(result){
                                 if(result.isOK=='1'){
                                     var t = main.split(":");
-                                    window.location.href = page + "#myID+"+t[1];
+                                    me.parent().fadeOut("fast");
+                                    window.location.href = "/"+page + "#myID+"+t[1];
+                                    var url = window.location.hash;
+                                    url = url.replace("#","");
+                                    url1 = url.split("+");
+                                    var this1 = $("span:contains('"+url1[1]+"')").parent();
+                                    for(i=0;i<3;i++){
+                                        this1.fadeTo("slow",0);
+                                        this1.fadeTo("slow",1);
+                                    }
                                 }
                             }
 
@@ -1128,7 +1168,6 @@ $("#tracing").on("click", function(){
         data:dataa,
         success:function(result){
             if(result.isOK==1){
-                alert(123)
 //                    change color of button
             }
         }
@@ -1153,7 +1192,6 @@ $(window).load(function(){
         data:dat,
         success:function(response){
             if(response.isOK==1){
-                alert(123);
 //                    change color of button
             }
             $(".circle").last().text(response['tracing']);
