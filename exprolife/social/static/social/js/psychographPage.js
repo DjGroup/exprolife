@@ -188,6 +188,32 @@ function upload(field, upload_url) {
 $(document).ready(function(){
 
 /////////////////   BEGIN   ///////////////////////
+////////////////   NODE.JS   //////////////////////
+///////////////////////////////////////////////////
+    var socket = io.connect('localhost', {port: 4000});
+    $.ajax({
+        url: '/ajax/getid',
+        type: 'get',
+        success:function(result){
+            socket.emit('checkRDB', {ID: result.ID});
+        }
+    });
+
+    socket.on('show_in_dom', function(data){
+        $('.button').text(data.title + " : " + data.change + " unit changed.")
+            .fadeIn("fast").delay(8000).fadeOut("slow").on("click", function(){
+            window.location.href = "/Competence/" + data.title + "." + data.projID;
+        });
+
+//        alert(data.change + " " + data.title + " " + data.projID);
+    });
+
+
+//////////////////   END   ////////////////////////
+////////////////   NODE.JS   //////////////////////
+///////////////////////////////////////////////////
+
+/////////////////   BEGIN   ///////////////////////
 ////////// navigation bar in the left /////////////
 ///////////////////////////////////////////////////
     $(document).keyup(function(key){

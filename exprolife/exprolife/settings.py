@@ -134,7 +134,8 @@ INSTALLED_APPS = (
     'social',
     # The following line enable gravatar usage
     #'django_gravatar',
-    'south'
+    'south',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging

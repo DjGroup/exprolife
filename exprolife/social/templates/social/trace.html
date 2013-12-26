@@ -4,8 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/trace.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
-    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+
     {% if myUser %}
         <title>Welcome {{ request.session.first_name }}</title>
     {% endif %}
@@ -106,13 +105,8 @@
                             </a>
                         {% endfor %}
                         </a>
-
                     </div>
-
-
-
                 </div>
-
             </div>
         </section>
     </div>
@@ -121,7 +115,10 @@
     <li> CopyRight 2013 - ExProLife </li>
 </div>
 
+
 <script src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+<script src="{% static 'social/js/socket.io.js' %}"></script>
 <script src="{% static 'social/js/trace.js' %}"></script>
 <script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
 <script src="{% static 'social/js/flat/application.js' %}"></script>

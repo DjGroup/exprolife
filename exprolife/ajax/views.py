@@ -935,7 +935,13 @@ def rateProject(request):
     #user <= competence
     relatedUser_id = curComp.user_id
     relatedUser = User.objects.get(pk=relatedUser_id)
-    response = {"isOK": 1, "projRate": curComp.vote}
+    response = {"isOK": 1,
+                "projRate": curComp.vote,
+                "changed": 0,
+                "DBID": relatedUser_id,
+                "title": curComp.title,
+                "projID": competenceID
+                }
 
     user_id = request.session['user_id']
 
@@ -956,6 +962,7 @@ def rateProject(request):
     # if person voted the competence in past .... :D (my english is good no ?)
     if history:
         if not history[0].rate == rateValue:
+            response["changed"] = (rateValue-history[0].rate)*personEffectiveScore
             # decrease previous vote
             curComp.vote -= (history[0].rate * personEffectiveScore)
 
@@ -984,6 +991,7 @@ def rateProject(request):
 
         # send to jquery ...
         response["projRate"] = curComp.vote
+        response["changed"] = (rateValue-curComp.vote)*personEffectiveScore
 
     # change the score of people in 2 way : 1.vote their competences (here) 2.changing the number of tracers
     # (in traceship request)
@@ -1083,3 +1091,8 @@ def TProjects(request):
     return HttpResponse(json.dumps(response), content_type='application.json')
 
 
+def getID(request):
+    response = {"isOK": 1,
+                "ID": request.session['user_id']
+    }
+    return HttpResponse(json.dumps(response), content_type='application.json')

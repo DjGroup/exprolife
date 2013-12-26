@@ -4,8 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/psychograph.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'social/css/flat/flat-ui.css' %}">
-    <script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+
 
     {% if myUser %}
       <title>Welcome {{ request.session.first_name }}</title>
@@ -25,6 +24,7 @@
 
 
 <body>
+<button class="button glass blue-a" type="button"></button>
 <div class="header">
     <div id="Logo-image">
         <img  src="{% static 'social/images/logo.png' %}"/>
@@ -277,6 +277,9 @@
     <li> CopyRight 2013 - ExProLife </li>
 </div>
 
+<script type="text/javascript" src="{% static 'social/js/jquery-2.0.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'social/js/jquery.ba-hashchange.js' %}"></script>
+<script src="{% static 'social/js/socket.io.js' %}"></script>
 <script src="{% static 'social/js/psychographPage.js' %}"></script>
 <script src="{% static 'social/js/flat/jquery.tagsinput.js' %}"></script>
 <script src="{% static 'social/js/flat/application.js' %}"></script>

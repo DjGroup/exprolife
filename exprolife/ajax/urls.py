@@ -63,4 +63,6 @@ urlpatterns = patterns('',
     # top projects ...
     url(r'tprojects/$', views.TProjects, name="topProjectsAjax"),
 
+    url(r'getid/$', views.getID, name="getUserId")
+
     )
