@@ -13,11 +13,19 @@ io.sockets.on('connection', function (socket) {
         client.get(message.DBID, function(err, res){
             console.log(res);
             var msgToDOM = {change: message.changed, title: message.title, projID: message.projID};
-            io.sockets.socket(res).emit('show_in_dom', msgToDOM);
+            io.sockets.socket(res).emit('show_in_dom_rate', msgToDOM);
         });
 
 
 
+    });
+
+    socket.on('comment_message', function(message){
+        client.get(message.DBID, function(err, res){
+            var msgToDOM = {firstName: message.FN, lastName: message.LN, title:message.title, ID: message.PID,
+                            isPost: message.isPost};
+            io.sockets.socket(res).emit('show_in_dom_comment', msgToDOM);
+        });
     });
 
     socket.on('checkRDB', function(message){

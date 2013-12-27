@@ -199,10 +199,21 @@ $(document).ready(function(){
         }
     });
 
-    socket.on('show_in_dom', function(data){
+    socket.on('show_in_dom_rate', function(data){
         $('.button').text(data.title + " : " + data.change + " unit changed.")
             .fadeIn("fast").delay(8000).fadeOut("slow").on("click", function(){
             window.location.href = "/Competence/" + data.title + "." + data.projID;
+        });
+    });
+
+    socket.on('show_in_dom_comment', function(data){
+        $('.button').text(data.firstName + " " + data.lastName + " comments on '" + data.title +"'")
+            .fadeIn("fast").delay(8000).fadeOut("slow").on("click", function(){
+                if(!data.isPost){
+                    window.location.href = "/Competence/" + data.title + "." + data.ID;
+                }else{
+                    window.location.href = "/Post/" + data.title + "." + data.ID;
+                }
         });
     });
 
@@ -1254,9 +1265,9 @@ $("#submit_comment").on("click",function(e){
 //                    change color of button
                 }
                 else if(result.isOk==1 && result.null=='0'){
-                    var x = ""
+                    var x = "" ;
                     if(result.time.hour>=12){
-                        x = "p.m"
+                        x = "p.m" ;
                         result.time.hour = result.time.hour-12;
                     }
                     else{
@@ -1272,6 +1283,13 @@ $("#submit_comment").on("click",function(e){
                         "display": "block"
                     }, "slow");
                     content1.clone().hide().appendTo($('ul.comments')).fadeIn("slow");
+                    if(result.isMe == 0){
+                        var socket = io.connect('localhost', {port: 4000});
+                        socket.emit('comment_message', {DBID: result.DBID, title: result.title, PID: result.ID,
+                                                                FN: result.FN,
+                                                                LN: result.LN,
+                                                                isPost: result.isPost});
+                    }
 
                 }
                 else if (result.null == '1'){

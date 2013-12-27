@@ -5,18 +5,19 @@
     <ignored path="exprolife.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388123777161" ignored="false" />
-    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086444973" ignored="false" />
-    <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388089047989" ignored="false" />
+    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388135657622" ignored="false" />
+    <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388135797418" ignored="false" />
     <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086690937" ignored="false" />
     <file path="/homepage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385658283981" ignored="false" />
     <file path="/urls.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387554884761" ignored="false" />
     <file path="/competence.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387467782415" ignored="false" />
     <file path="/psychograph.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388087525633" ignored="false" />
-    <file path="/post.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385738472856" ignored="false" />
+    <file path="/post.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388134704072" ignored="false" />
     <file path="/models.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387459244993" ignored="false" />
     <file path="/rate.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387457332347" ignored="false" />
     <file path="/rate.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086481278" ignored="false" />
-    <file path="/node.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086508649" ignored="false" />
+    <file path="/node.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388133336328" ignored="false" />
+    <file path="/competence.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388134621700" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
       <file leaf-file-name="psychographPage.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="205" column="11" selection-start="10105" selection-end="10105" vertical-scroll-proportion="0.5760709">
+            <state line="1286" column="60" selection-start="53043" selection-end="53043" vertical-scroll-proportion="0.66561013">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -52,10 +53,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="trace.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/static/social/css/trace.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rate.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/static/social/css/rate.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="node.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nodejs/node.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="33" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+            <state line="24" column="94" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -64,7 +83,7 @@
       <file leaf-file-name="rate.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/static/social/js/rate.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="58" selection-start="6996" selection-end="7009" vertical-scroll-proportion="0.0">
+            <state line="159" column="82" selection-start="7150" selection-end="7150" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -73,7 +92,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ajax/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="993" column="40" selection-start="38771" selection-end="38771" vertical-scroll-proportion="0.0">
+            <state line="782" column="21" selection-start="31156" selection-end="31156" vertical-scroll-proportion="35.96">
               <folding />
             </state>
           </provider>
@@ -82,10 +101,28 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ajax/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="29" selection-start="2560" selection-end="2560" vertical-scroll-proportion="0.0">
+            <state line="46" column="32" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="competence.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1211" column="88" selection-start="36081" selection-end="36081" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1200" column="45" selection-start="35069" selection-end="35069" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,15 +152,15 @@
         <option value="$PROJECT_DIR$/social/views.py" />
         <option value="$PROJECT_DIR$/ajax/urls.py" />
         <option value="$PROJECT_DIR$/social/static/social/js/rate.js" />
-        <option value="$PROJECT_DIR$/nodejs/node.js" />
         <option value="$PROJECT_DIR$/social/static/social/css/psychograph.css" />
         <option value="$PROJECT_DIR$/social/templates/social/competence.html" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
-        <option value="$PROJECT_DIR$/social/static/social/css/competence.css" />
         <option value="$PROJECT_DIR$/social/templates/social/post.html" />
+        <option value="$PROJECT_DIR$/nodejs/node.js" />
+        <option value="$PROJECT_DIR$/social/static/social/css/competence.css" />
         <option value="$PROJECT_DIR$/social/static/social/css/post.css" />
-        <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
         <option value="$PROJECT_DIR$/ajax/views.py" />
+        <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
       </list>
     </option>
   </component>
@@ -681,43 +718,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/.npmignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/logger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/manager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1027" column="0" selection-start="22165" selection-end="22165" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/namespace.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="355" column="0" selection-start="7080" selection-end="7080" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/parser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="0" selection-start="4733" selection-end="4733" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/socket.io.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="143" column="0" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.0">
@@ -760,39 +760,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="33" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/js/rate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="58" selection-start="6996" selection-end="7009" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ajax/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="29" selection-start="2560" selection-end="2560" vertical-scroll-proportion="0.0">
+        <state line="46" column="32" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/social/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7826087">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/js/rate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="82" selection-start="7150" selection-end="7150" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodejs/node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="94" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/trace.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/rate.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1211" column="88" selection-start="36081" selection-end="36081" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1200" column="45" selection-start="35069" selection-end="35069" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ajax/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="993" column="40" selection-start="38771" selection-end="38771" vertical-scroll-proportion="0.0">
+        <state line="782" column="21" selection-start="31156" selection-end="31156" vertical-scroll-proportion="35.96">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="11" selection-start="10105" selection-end="10105" vertical-scroll-proportion="0.5760709">
+        <state line="1286" column="60" selection-start="53043" selection-end="53043" vertical-scroll-proportion="0.66561013">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

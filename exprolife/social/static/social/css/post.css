@@ -1170,12 +1170,12 @@ a { cursor: pointer; }
       0 10px rgba(0, 0, 0, 0.05) inset;
 }
 
-button:active {
+.button:active {
     margin-left: 2px;
     margin-right: -2px;
 }
 
-button:hover.blue-a {
+.button:hover.blue-a {
     color: rgba(64, 73, 117, 0.97);
     text-shadow: 0px 0px 2px rgba(230, 240, 255, 0.99), 0px 0px 4px rgba(200, 230, 255, 0.99);
     border-color: rgba(120, 200, 255, 0.4);
@@ -1187,7 +1187,7 @@ button:hover.blue-a {
     0 0px 10px 2px rgba(120, 200, 255, 0.75) inset;
 }
 
-button:active.blue-a {
+.button:active.blue-a {
     color: rgba(230, 240, 255, 0.99);
     text-shadow: 0px 0px 2px rgba(230, 240, 255, 0.99), 0px 0px 4px rgba(200, 230, 255, 0.99);
 

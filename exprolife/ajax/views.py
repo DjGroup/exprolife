@@ -781,13 +781,31 @@ def reply(request):
 
 
 def comment(request):
-    response = {'isOk': 0,'repeat':0,'name':[],'mohtava':[],'null':0,
-                'email':[], 'time':{'year':[],'month':[],'day':[],'hour':[],'minute':[],'second':[]},}
+    response = {'isOk': 0,
+                'repeat': 0,
+                'name': [],
+                'mohtava': [],
+                'null': 0,
+                'email': [], 'time': {'year': [],
+                                      'month': [],
+                                      'day': [],
+                                      'hour': [],
+                                      'minute': [],
+                                      'second': []
+                                      },
+                'FN': None,
+                'LN': None,
+                'title': None,
+                'isPost': 0,
+                'ID': None,
+                'DBID': None,
+                "isMe": 0,
+                }
     reference = request.REQUEST['address'].split("/")
     id1 = reference[2].split(".")
     content = request.REQUEST['content']
-    a = content.replace("\n","")
-    b = a.replace("\r","")
+    a = content.replace("\n", "")
+    b = a.replace("\r", "")
     owner = request.REQUEST['owner'].split(":")
     gravatar_url = "www.gravatar.com/avatar"
     monthNames = {1: "Jan",
@@ -802,7 +820,7 @@ def comment(request):
                   10: "Oct",
                   11: "Nov",
                   12: "Dec"
-    }
+                  }
     x = owner[1].split(" ")
     try:
         pattern = "/"
@@ -817,11 +835,13 @@ def comment(request):
         user = User.objects.get(email=request.session['email'])
 
     print user.firstName + " "+ user.lastName
-    response["name"]=user.firstName + " "+ user.lastName
+    response["FN"] = user.firstName
+    response["LN"] = user.lastName
+    response["name"] = user.firstName + " " + user.lastName
     emailHash = hashlib.md5(user.email).hexdigest()
-    image_url1 = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
+    image_url1 = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
     print timezone.now().hour
-    response['email']=image_url1
+    response['email'] = image_url1
     response['time']['year'] = timezone.now().year
     response['time']['month'] = monthNames[timezone.now().month]
     response['time']['day'] = timezone.now().day
@@ -838,12 +858,24 @@ def comment(request):
     if (b == ""):
         response['null'] = 1
     else:
-        if(reference[1]=="Post"):
+        if reference[1] == "Post":
+            response["isPost"] = 1
             id2 = BoardPost.objects.get(id=id1[1])
-            id2.commentpost_set.create(user=user.id,content=content,referencePost=id2.id,time = timezone.now())
-        elif(reference[1]=="Competence"):
+            response["title"] = id2.title
+            response["ID"] = id2.id
+            response["DBID"] = id2.user_id
+            if id2.user_id == user.id:
+                response["isMe"] = 1
+            id2.commentpost_set.create(user=user.id, content=content, referencePost=id2.id, time = timezone.now())
+        elif reference[1] == "Competence":
             id2 = Competence.objects.get(id=id1[1])
-            id2.commentcompetence_set.create(user=user.id,content=content,referenceCompetence=id2.id,time = timezone.now())
+            response["title"] = id2.title
+            response["ID"] = id2.id
+            response["DBID"] = id2.user_id
+            if id2.user_id == user.id:
+                response["isMe"] = 1
+            id2.commentcompetence_set.create(user=user.id, content=content, referenceCompetence=id2.id,
+                                             time=timezone.now())
 
     response['isOk'] = 1
     return HttpResponse(json.dumps(response), content_type='application.json')
@@ -857,6 +889,7 @@ def remove(request):
             if i.referenceComment != '0':
                 child1(i.id)
             i.delete()
+
     def child2(a):
         children = CommentCompetence.objects.filter(referenceComment=a)
         for i in children:
