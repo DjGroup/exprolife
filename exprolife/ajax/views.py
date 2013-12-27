@@ -962,7 +962,7 @@ def rateProject(request):
     # if person voted the competence in past .... :D (my english is good no ?)
     if history:
         if not history[0].rate == rateValue:
-            response["changed"] = (rateValue-history[0].rate)*personEffectiveScore
+            response["changed"] = (rateValue - history[0].rate) * personEffectiveScore
             # decrease previous vote
             curComp.vote -= (history[0].rate * personEffectiveScore)
 
@@ -991,7 +991,7 @@ def rateProject(request):
 
         # send to jquery ...
         response["projRate"] = curComp.vote
-        response["changed"] = (rateValue-curComp.vote)*personEffectiveScore
+        response["changed"] = (rateValue) * personEffectiveScore
 
     # change the score of people in 2 way : 1.vote their competences (here) 2.changing the number of tracers
     # (in traceship request)

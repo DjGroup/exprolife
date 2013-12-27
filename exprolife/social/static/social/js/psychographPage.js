@@ -204,8 +204,6 @@ $(document).ready(function(){
             .fadeIn("fast").delay(8000).fadeOut("slow").on("click", function(){
             window.location.href = "/Competence/" + data.title + "." + data.projID;
         });
-
-//        alert(data.change + " " + data.title + " " + data.projID);
     });
 
 
