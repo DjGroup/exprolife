@@ -1125,7 +1125,23 @@ def TProjects(request):
 
 
 def getID(request):
-    response = {"isOK": 1,
-                "ID": request.session['user_id']
-    }
+    try:
+        print "I am right"
+        print request.REQUEST["FN"]
+        user = User.objects.filter(firstName=request.REQUEST["FN"], lastName=request.REQUEST["LN"])
+        print " I am right 2"
+        response = {"isOK": 1,
+                    "ID": user[0].id,
+                    "FN": user[0].firstName,
+                    "LN": user[0].lastName
+                    }
+        print response
+    except:
+        print "here"
+        user = User.objects.get(pk=request.session["user_id"])
+        response = {"isOK": 1,
+                    "ID": request.session['user_id'],
+                    "FN": user.firstName,
+                    "LN": user.lastName
+                    }
     return HttpResponse(json.dumps(response), content_type='application.json')

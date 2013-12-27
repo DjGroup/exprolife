@@ -190,13 +190,47 @@ $(document).ready(function(){
 /////////////////   BEGIN   ///////////////////////
 ////////////////   NODE.JS   //////////////////////
 ///////////////////////////////////////////////////
+
+
     var socket = io.connect('localhost', {port: 4000});
     $.ajax({
         url: '/ajax/getid',
         type: 'get',
         success:function(result){
+
             socket.emit('checkRDB', {ID: result.ID});
+            if(window.location.pathname.indexOf(".") != -1 &&
+                !(window.location.pathname.indexOf("Competence") != -1) &&
+                !(window.location.pathname.indexOf("Post") != -1)){
+                var FLName = location.pathname.replace(/[/]/gi,"").split(".");
+                var firstName = FLName[0];
+                var lastName = FLName[1];
+//                var userNumber = FLName[2];
+
+                var data = {
+                    FN: firstName,
+                    LN: lastName
+                };
+                $.ajax({
+                    url:'/ajax/getid',
+                    dataType:'json',
+                    data:data,
+                    success:function(myResult){
+                        var targetID = myResult.ID;
+                        if( targetID != result.ID){
+                            socket.emit('profile_see', {TID: targetID, ID: result.ID, FN:result.FN, LN:result.LN});
+                        }
+                    }
+                });
+
+            }
         }
+    });
+    socket.on('show_in_dom_profile_see', function(data){
+        $('.button').text(data.firstName + " " + data.lastName + " is seeing your profile.")
+            .fadeIn("fast").delay(8000).fadeOut("slow").on("click", function(){
+            window.location.href = "/" + data.firstName + "." + data.lastName;
+        });
     });
 
     socket.on('show_in_dom_rate', function(data){

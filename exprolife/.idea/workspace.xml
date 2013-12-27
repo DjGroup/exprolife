@@ -4,9 +4,9 @@
     <list default="true" id="4195d60d-f114-4482-8988-0c1d27e97466" name="Default" comment="" />
     <ignored path="exprolife.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388123777161" ignored="false" />
-    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388135657622" ignored="false" />
-    <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388135797418" ignored="false" />
+    <file path="/Dummy.txt" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388148175017" ignored="false" />
+    <file path="/views.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388154821649" ignored="false" />
+    <file path="/psychographPage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388156557771" ignored="false" />
     <file path="/psychograph.html" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086690937" ignored="false" />
     <file path="/homepage.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1385658283981" ignored="false" />
     <file path="/urls.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387554884761" ignored="false" />
@@ -16,7 +16,7 @@
     <file path="/models.py" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387459244993" ignored="false" />
     <file path="/rate.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1387457332347" ignored="false" />
     <file path="/rate.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388086481278" ignored="false" />
-    <file path="/node.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388133336328" ignored="false" />
+    <file path="/node.js" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388156368081" ignored="false" />
     <file path="/competence.css" changelist="4195d60d-f114-4482-8988-0c1d27e97466" time="1388134621700" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,9 +45,13 @@
       <file leaf-file-name="psychographPage.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1286" column="60" selection-start="53043" selection-end="53043" vertical-scroll-proportion="0.66561013">
+            <state line="231" column="77" selection-start="11130" selection-end="11130" vertical-scroll-proportion="0.68938196">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="n#!!block;n#ajaxer#0" expanded="false" />
+                <element signature="n#!!block;n#removeClick#0" expanded="false" />
+                <element signature="n#!!block;n#upload#0" expanded="false" />
+                <element signature="e#11518#11963#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -74,7 +78,7 @@
       <file leaf-file-name="node.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nodejs/node.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="94" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0">
+            <state line="24" column="51" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -92,7 +96,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ajax/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="782" column="21" selection-start="31156" selection-end="31156" vertical-scroll-proportion="35.96">
+            <state line="1141" column="30" selection-start="44080" selection-end="44080" vertical-scroll-proportion="-19.24">
               <folding />
             </state>
           </provider>
@@ -101,10 +105,8 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ajax/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="32" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
+            <state line="14" column="41" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,19 +158,19 @@
         <option value="$PROJECT_DIR$/social/templates/social/competence.html" />
         <option value="$PROJECT_DIR$/social/templates/social/psychograph.html" />
         <option value="$PROJECT_DIR$/social/templates/social/post.html" />
-        <option value="$PROJECT_DIR$/nodejs/node.js" />
         <option value="$PROJECT_DIR$/social/static/social/css/competence.css" />
         <option value="$PROJECT_DIR$/social/static/social/css/post.css" />
         <option value="$PROJECT_DIR$/ajax/views.py" />
+        <option value="$PROJECT_DIR$/nodejs/node.js" />
         <option value="$PROJECT_DIR$/social/static/social/js/psychographPage.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="48" />
-    <option name="y" value="-4" />
-    <option name="width" value="1233" />
-    <option name="height" value="1029" />
+    <option name="x" value="49" />
+    <option name="y" value="24" />
+    <option name="width" value="1231" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -218,7 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -409,19 +410,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="E:/mylifetime" />
+    <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="last_opened_file_path" value="E:/mylifetime" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -468,29 +470,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="exprolife" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -512,6 +491,29 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="exprolife" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -576,8 +578,8 @@
       <method />
     </configuration>
     <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Django server.exprolife" />
-      <item index="1" class="java.lang.String" itemvalue="Python.views" />
+      <item index="0" class="java.lang.String" itemvalue="Python.views" />
+      <item index="1" class="java.lang.String" itemvalue="Django server.exprolife" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -632,14 +634,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="-4" width="1233" height="1029" extended-state="6" />
+    <frame x="49" y="24" width="1231" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.7707151" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21434599" sideWeight="0.810872" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21772152" sideWeight="0.810872" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -720,72 +722,37 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/socket.io.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="0" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="143" column="0" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/socket.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="369" column="0" selection-start="6508" selection-end="6508" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="369" column="0" selection-start="6508" selection-end="6508" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/static.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="395" column="0" selection-start="10034" selection-end="10034" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="395" column="0" selection-start="10034" selection-end="10034" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="0" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="98" column="0" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/transport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="534" column="0" selection-start="10794" selection-end="10794" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="534" column="0" selection-start="10794" selection-end="10794" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nodejs/node_modules/socket.io/lib/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ajax/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="32" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/social/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7826087">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/rate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="159" column="82" selection-start="7150" selection-end="7150" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejs/node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="94" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -804,13 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1211" column="88" selection-start="36081" selection-end="36081" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/css/post.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1200" column="45" selection-start="35069" selection-end="35069" vertical-scroll-proportion="0.0">
@@ -818,18 +778,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/social/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ajax/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="41" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ajax/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="782" column="21" selection-start="31156" selection-end="31156" vertical-scroll-proportion="35.96">
+        <state line="1141" column="30" selection-start="44080" selection-end="44080" vertical-scroll-proportion="-19.24">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/static/social/css/competence.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1211" column="88" selection-start="36081" selection-end="36081" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodejs/node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="51" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/static/social/js/psychographPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1286" column="60" selection-start="53043" selection-end="53043" vertical-scroll-proportion="0.66561013">
+        <state line="231" column="77" selection-start="11130" selection-end="11130" vertical-scroll-proportion="0.68938196">
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#ajaxer#0" expanded="false" />
+            <element signature="n#!!block;n#removeClick#0" expanded="false" />
+            <element signature="n#!!block;n#upload#0" expanded="false" />
+            <element signature="e#11518#11963#0" expanded="false" />
           </folding>
         </state>
       </provider>

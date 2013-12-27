@@ -28,6 +28,14 @@ io.sockets.on('connection', function (socket) {
         });
     });
 
+    socket.on('profile_see', function(message){
+        console.log(message);
+        client.get(message.TID, function(err, res){
+            var msgToDOM = {firstName: message.FN, lastName: message.LN};
+            io.sockets.socket(res).emit('show_in_dom_profile_see', msgToDOM);
+        });
+    });
+
     socket.on('checkRDB', function(message){
 
         client.set(message.ID, socket.id);
