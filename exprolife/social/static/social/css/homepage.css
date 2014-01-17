@@ -2,7 +2,20 @@
   my lcd innerheight: 850*/
 body{
     margin: 0;
-    background-color: #eeeef0;
+    /*background-color: #eeeef0;*/
+    font-family: tahoma;
+
+background: rgb(162,168,170); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(162,168,170,1) 0%, rgba(236,240,241,1) 6%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,168,170,1)), color-stop(6%,rgba(236,240,241,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(162,168,170,1) 0%,rgba(236,240,241,1) 6%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(162,168,170,1) 0%,rgba(236,240,241,1) 6%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(162,168,170,1) 0%,rgba(236,240,241,1) 6%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(162,168,170,1) 0%,rgba(236,240,241,1) 6%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2a8aa', endColorstr='#ecf0f1',GradientType=0 ); /* IE6-9 */
+
+
+
 }
     #header{
         margin-bottom: 20px;
@@ -19,7 +32,7 @@ body{
 
         #login{
             border: none;
-            background: #1abc9c;
+            background: #2C3E50;
             color: #ffffff;
             border-radius: 6px;
             -webkit-transition: 0.25s linear;
@@ -86,7 +99,7 @@ body{
             }
 
         #login:hover{
-            background-color: #1bd5b3;
+            background-color: #40576e;
         }
 
         #register{
@@ -106,13 +119,13 @@ body{
             float:right;
             width: 30%;
             height: 80px;
-            background-color: #D35400;
+            background-color: #34495E;
             text-align: center ;
             cursor: pointer;
         }
 
         #register:hover{
-            background-color: #E67E22;
+            background-color: #4c647c;
         }
 
     #logo{
@@ -122,11 +135,22 @@ body{
         float:left;
     }
     #slider{
-        background-color: #c9c9cb;
-        height: 100%;
+        /*background-color: #c9c9cb;
+        height: 100%;*/
         width: 100%;
         vertical-align:middle;
         text-align: center;
+
+background: rgb(236,240,241); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(236,240,241,1) 0%, rgba(162,168,170,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(236,240,241,1)), color-stop(100%,rgba(162,168,170,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(236,240,241,1) 0%,rgba(162,168,170,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(236,240,241,1) 0%,rgba(162,168,170,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(236,240,241,1) 0%,rgba(162,168,170,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(236,240,241,1) 0%,rgba(162,168,170,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecf0f1', endColorstr='#a2a8aa',GradientType=0 ); /* IE6-9 */
+
+
     }
     #fadeLayer{
         display: none;
@@ -147,7 +171,7 @@ body{
         right:15%;
         border-radius: 6px;
         left:15%;
-        height: 700px;
+        height: 600px;
         /*bottom: 70px;*/
         background-color: transparent;
     }
@@ -401,9 +425,9 @@ body{
     #slideshow {
 		margin:0 auto;
 		position:relative;
-        background-color: #d7d7d9;
-        height: 100%;
-		width:80%;
+        /*background-color: #d7d7d9;*/
+        height: 400px;
+		width:900px;
     }
 
     #slideshow IMG {
@@ -468,21 +492,24 @@ body{
 
     #footer{
         width:100%;
-        background: #3f4944;
-        height:400px;
+        background: #2c4054;
+        height:250px;
+        color: white;
     }
 
     #upper-footer{
         width:100%;
-        background: #7e8d88;
-        height: 70%;
+        background: #6b86a0;
+        height: 76%;
     }
 
     #down-footer{
         width:100%;
-        height:20%;
+        height:24%;
         text-align: center;
         font-size: 18;
+        position: relative;
+        bottom: 25px;
     }
 
     .left1, .left2, .right1, .right2{
