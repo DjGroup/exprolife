@@ -688,6 +688,17 @@ button:active.blue {
     margin-top: 30px;
     border-radius: 6px;
 }
+
+
+#Com-div:hover .remove1 { display: block; }
+#Com-div .remove1 { display: none; font-size: 20px; float: right; text-align: center;margin-top: -10px; margin-right:0;color: #34495e
+}
+
+#Com-div:hover .edit1 { display: block; }
+#Com-div .edit1 { display: none; font-size: 20px;  float: right ;text-align: center; margin-top: 30px; margin-right: 0; color: #34495e
+}
+#com-div a:hover {color: #34b5d0;}
+
 #Competence-image-div{
     height: 280px;
     width:269px;

@@ -80,9 +80,13 @@
                 <div class="Com-content">
                     <div class="Right-content">
                         {% if competence.usage %}
-                            <h3 class="form-label">Usage</h3>
+                            <h3 class="form-label">Usage
+                            </h3>
+
                             <p>{{ competence.usage }}</p>
                         {% endif %}
+                        <h3><a class="edit1" style="margin-bottom: 0px" id="edi">Edit</a></h3>
+                        <h3><a class="remove1" id="remov">Remove</a></h3>
                         <h3 class="form-label">Tags</h3>
                         <div class="project-tag">
                             {% for atag in comTags %}

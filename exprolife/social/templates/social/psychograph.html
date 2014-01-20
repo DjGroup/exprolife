@@ -24,6 +24,9 @@
 
 
 <body>
+<div id="fader" >
+
+</div>
 <button class="button glass blue-a" type="button"></button>
 <div class="header">
     <div id="Logo-image">
@@ -76,7 +79,55 @@
 </div>
 
 <div id="Main-div">
-    <div id="Col-2">
+<div class="container1" id="bubble1" style="margin-top: 120px ;left: 135px; display: none">
+    <div class="triangle1" style="left: 20px" ></div>
+    <div class="bubble1">
+        <div class="header1">
+            <div class="circle1"><p>Edit</p></div>
+            <a id="next1"> Next </a>
+        </div><!--END header-->
+        <div class="content1">
+            <p>Here you can edit your profile such as changing your password or name</p>
+            <a class="ignore">Ignore</a>
+        </div><!--END content-->
+    </div>
+</div>
+
+<div class="container1" id="bubble2" style="margin-top: 155px ;left: 135px; display: none">
+    <div class="triangle1" style="left: 20px" ></div>
+    <div class="bubble1">
+        <div class="header1">
+            <div class="circle1"><p>Add</p></div>
+            <a id="next2"> Next </a>
+        </div><!--END header-->
+        <div class="content1">
+            <p>Here you can add your new project and its information to show others</p>
+            <p>You must fill the essential information</p>
+            <a class="ignore">Ignore</a>
+        </div><!--END content-->
+    </div>
+</div>
+
+
+<div class="container1" id="bubble3" style="margin-top: 180px ;left: 135px; display: none">
+    <div class="triangle1" style="left: 20px" ></div>
+    <div class="bubble1">
+        <div class="header1">
+            <div class="circle1"><p>Top</p></div>
+            <a id="next3"> Next </a>
+        </div><!--END header-->
+        <div class="content1">
+            <p>Here you can add your new project and its information to show others</p>
+            <p>You must fill the essential information</p>
+            <a class="ignore">Ignore</a>
+        </div><!--END content-->
+    </div>
+</div>
+
+
+
+
+<div id="Col-2">
         <section id="wrapper" class="wrapper">
             <h1 id="Content-title">
                 {% if myUser %}
