@@ -283,6 +283,9 @@
         <p><label>First Name: </label>{{ myUser.firstName }}</p>
         <p><label>Last Name: </label>{{ myUser.lastName }}</p>
         <p><label>Email: </label>{{ myUser.email }}</p>
+        {% if myUser.studyField %}
+            <p><label>Study Field: </label>{{ myUser.studyField }}</p>
+        {% endif %}
         <div class="notifications" >
             <div class="notify gr" id="tracer"><a href=""></a>
                 <div class="circle">

@@ -59,17 +59,23 @@ def index(request):
         image_url = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
         #This 'if' is for checking that save button in psychograph is clicked or not
         if request.POST.get('saveButton'):
-            thisUser[0].firstName = request.POST['edit-first']
-            request.session['first_name'] = thisUser[0].firstName  # Changing First Name in Session
-            thisUser[0].lastName = request.POST['edit-last']  # changing Last Name in Database
-            request.session['last_name'] = thisUser[0].lastName  # Changing Last Name in Session
-            thisUser[0].email = request.POST['edit-email']  # changing Email in Database
-            request.session['email'] = thisUser[0].email  # Changing Email in Session
-            thisUser[0].save()
+            editedUser = User.objects.get(id=request.session['user_id'])
+            editedUser.firstName = request.POST['edit-first']
+            request.session['first_name'] = editedUser.firstName  # Changing First Name in Session
+            editedUser.lastName = request.POST['edit-last']  # changing Last Name in Database
+            request.session['last_name'] = editedUser.lastName  # Changing Last Name in Session
+            editedUser.studyField = request.POST['edit-field']
+            editedUser.degrees = request.POST['degrees']
+            editedUser.honors = request.POST['honors']
+            editedUser.languageSkills = request.POST['languages']
+            editedUser.areasOfInterest = request.POST['interest']
+            editedUser.nonAcademicInterest = request.POST['nonAckinterest']
+
+            editedUser.save()
 
             #Reloading from Database
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
+            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url})
             return HttpResponse(template.render(context))
 
         elif request.POST.get('competenceAdd'):
