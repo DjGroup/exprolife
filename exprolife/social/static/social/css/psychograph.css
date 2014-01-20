@@ -493,12 +493,22 @@ a:focus {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+#password-edit
+{
+    font-size: 2.2em;
+    color: Black;
+    text-shadow: 0px 1px 1px #F2F1F0;
+    border-bottom: 1px dotted #EEEDED;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: -20px;
+}
 #Edit-form{
 	margin-top: 20px;
 	margin-left:20px;
 }
 .form-label{
-	font-size:2.0em;
+	font-size:1.5em;
 	color:#34495e;
 	margin-top:20px;
     margin-bottom: 10px;
@@ -883,7 +893,7 @@ a:focus {
     background-color: #369E8A;
 }
 
-#Default-button{
+.Default-button{
     width: 80px;
     height: 35px;
     /*margin-top:50px;
@@ -899,7 +909,7 @@ a:focus {
     color: #ffffff;
     border: none;
 }
-#Default-button:hover, #Default-button:focus{
+.Default-button:hover, .Default-button:focus{
     background-color: #55E6C9;
     outline: none;
     -webkit-transition: 0.25s;
@@ -908,7 +918,7 @@ a:focus {
     transition: 0.25s;
     -webkit-backface-visibility: hidden;
 }
-#Default-button:active{
+.Default-button:active{
     background-color: #369E8A;
 }
 

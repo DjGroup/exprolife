@@ -175,8 +175,38 @@
                             <input type="text" id="First-text" class="psychograph-input" value="{{ request.session.first_name }}" name="edit-first" />
                             <h3 class="form-label">Last Name</h3>
                             <input type="text" id="Last-text" class="psychograph-input" value="{{ request.session.last_name }}" name="edit-last" />
-                            <h3 class="form-label">Email</h3>
-                            <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />
+                            <h3 class="form-label">Psychograph Picture</h3>
+                            <input type="file" class="psychograph-input"  name="psych-pic" />
+                            <input type="button" class="Default-button" name="comp-defaultButton" value="Default" />
+                            <h3 class="form-label">Study Field</h3>
+                            <input type="text" id="Field-text" class="psychograph-input" name="edit-field" />
+                            <h3 class="form-label">Degrees</h3>
+                            <div id="Tag-div2">
+                                <input name="degrees" class="tagsinput"  id="Tag-input2" />
+                            </div>
+                            <h3 class="form-label">Honors</h3>
+                            <div id="Tag-div3">
+                                <input name="honors" class="tagsinput"  id="Tag-input3" />
+                            </div>
+                            <h3 class="form-label">Language Skills</h3>
+                            <div id="Tag-div4">
+                                <input name="languages" class="tagsinput"  id="Tag-input4" />
+                            </div>
+                            <h3 class="form-label">Areas of Interest</h3>
+                            <div id="Tag-div5">
+                                <input name="interest" class="tagsinput"  id="Tag-input5" />
+                            </div>
+                            <h3 class="form-label">Non Academic Interests</h3>
+                            <div id="Tag-div6">
+                                <input name="nonAckinterest" class="tagsinput"  id="Tag-input6" />
+                            </div>
+                            <h3 class="form-label" id="password-edit">Password</h3>
+                            <h3 class="form-label">Current Password</h3>
+                            <input type="text" class="psychograph-input" name="curr-pass" />
+                            <h3 class="form-label">New Password</h3>
+                            <input type="text" class="psychograph-input" name="new-pass" />
+                            <h3 class="form-label">Repeat Password</h3>
+                            <input type="text" class="psychograph-input" name="rep-pass" />
                             <br />
                             <input type="submit" id="Save-button" name="saveButton" value="save" />
                         </form>
@@ -198,7 +228,7 @@
                                 <input type="text" id="Email-text" class="psychograph-input" value="{{ request.session.email }}" name="edit-email" />-->
                             <h3 class="form-label">Tags *</h3>
                             <div id="Tag-div1">
-                                <input name="tagsinput" class="tagsinput"  id="Tag-input1"  />
+                                <input name="tagsinput" class="tagsinput"  id="Tag-input1" />
                             </div>
                             <!--<input type="text" id="Tags-text" class="psychograph-input"  name="comp-tag" />-->
                             <h3 class="form-label">Developers *</h3>
@@ -207,7 +237,7 @@
                             <input type="text" id="Manager-text" class="psychograph-input"  name="comp-manager" />
                             <h3 class="form-label">Picture</h3>
                             <input type="file" id="Picture-text" class="psychograph-input"  name="comp-pic" />
-                            <input type="button" id="Default-button" name="comp-defaultButton" value="Default" />
+                            <input type="button" class="Default-button" name="comp-defaultButton" value="Default" />
                             <h3 class="form-label">Source Code</h3>
                             <input type="file" id="Code-text" class="psychograph-input"  name="comp-code" />
                             <h3 class="form-label">Usage</h3>
