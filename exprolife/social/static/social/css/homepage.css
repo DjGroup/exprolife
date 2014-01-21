@@ -171,7 +171,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecf0f1', end
         right:15%;
         border-radius: 6px;
         left:15%;
-        height: 600px;
+        height: 800px;
         /*bottom: 70px;*/
         background-color: transparent;
     }
@@ -206,6 +206,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecf0f1', end
                         width:100%;
                         height: 8%;
                         margin:10px 0 10px 0;
+                    }
+                    .fieldRow1{
+                        float:left;
+                        width:100%;
+                        height: 8%;
+                        margin:10px 20px 10px 20px;
                     }
                         label[for="male"], label[for="female"]{
                             float:left;

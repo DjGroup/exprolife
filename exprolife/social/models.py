@@ -12,6 +12,13 @@ class User(models.Model):
     sex = models.BooleanField(blank=False, default=None)
     # image = models.ImageField(upload_to="uploads_image/", default=None)
 
+    studyField = models.CharField(max_length=500,blank=True)
+    degrees = models.CharField(max_length=500, blank=True)
+    honors = models.CharField(max_length=500, blank=True)
+    languageSkills = models.CharField(max_length=500, blank=True)
+    areasOfInterest = models.CharField(max_length=500, blank=True)
+    nonAcademicInterest = models.CharField(max_length=500, blank=True)
+
     
 class Competence(models.Model):
     user = models.ForeignKey(User)

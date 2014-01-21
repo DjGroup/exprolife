@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     # The following line enable gravatar usage
     #'django_gravatar',
     'south',
-    'django_extensions',
+    #'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging

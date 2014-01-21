@@ -10,6 +10,7 @@ import hashlib
 #for password hashing
 #Download link of pyCrypto: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 from Crypto.Hash import MD5
+from recaptcha.client import captcha
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -59,17 +60,23 @@ def index(request):
         image_url = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
         #This 'if' is for checking that save button in psychograph is clicked or not
         if request.POST.get('saveButton'):
-            thisUser[0].firstName = request.POST['edit-first']
-            request.session['first_name'] = thisUser[0].firstName  # Changing First Name in Session
-            thisUser[0].lastName = request.POST['edit-last']  # changing Last Name in Database
-            request.session['last_name'] = thisUser[0].lastName  # Changing Last Name in Session
-            thisUser[0].email = request.POST['edit-email']  # changing Email in Database
-            request.session['email'] = thisUser[0].email  # Changing Email in Session
-            thisUser[0].save()
+            editedUser = User.objects.get(id=request.session['user_id'])
+            editedUser.firstName = request.POST['edit-first']
+            request.session['first_name'] = editedUser.firstName  # Changing First Name in Session
+            editedUser.lastName = request.POST['edit-last']  # changing Last Name in Database
+            request.session['last_name'] = editedUser.lastName  # Changing Last Name in Session
+            editedUser.studyField = request.POST['edit-field']
+            editedUser.degrees = request.POST['degrees']
+            editedUser.honors = request.POST['honors']
+            editedUser.languageSkills = request.POST['languages']
+            editedUser.areasOfInterest = request.POST['interest']
+            editedUser.nonAcademicInterest = request.POST['nonAckinterest']
+
+            editedUser.save()
 
             #Reloading from Database
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': thisUser[0], 'myUrl': image_url})
+            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url})
             return HttpResponse(template.render(context))
 
         elif request.POST.get('competenceAdd'):
@@ -131,13 +138,18 @@ def index(request):
         isPasswordValid = 1 if len(password) >= 6 else 0
         rePass = request.POST['rePass']
         isRePassValid = 1 if (len(rePass) >= 6 and rePass == password) else 0
+        captchaResp = captcha.submit(request.POST.get('recaptcha_challenge_field'),
+                                     request.POST.get('recaptcha_response_field'),
+                                     '6LdPOu0SAAAAAOG5mksE9Ief-MaGQUiVKOf4elGz',
+                                     request.META['REMOTE_ADDR'],)
         canGoHome = int(bool(
             isValidFirstName and
             isValidLastName and
             isValidEmailAddress and
             isValidSex and
             isPasswordValid and
-            isRePassValid
+            isRePassValid and
+            captchaResp.is_valid
         ))
         if canGoHome:
             #register with password hashing
@@ -179,6 +191,8 @@ def index(request):
                 sendError["PAE"] = "please Enter password at least 6 characters"
             if not isRePassValid:
                 sendError["RPE"] = "please retype your password"
+            if not captchaResp.is_valid:
+                sendError["AYE"] = "Are You a Bot?"
             template = loader.get_template('social/index.html')
             context = RequestContext(request, sendError)
             return HttpResponse(template.render(context))
