@@ -59,7 +59,7 @@ def index(request):
         emailHash = hashlib.md5(request.session['email']).hexdigest()
         image_url = "http://" + gravatar_url + "/" + emailHash + "?s=210&d=identicon&r=PG"
         #This 'if' is for checking that save button in psychograph is clicked or not
-        if request.POST.get('saveButton'):
+        if request.POST.get('okBut'):
             editedUser = User.objects.get(id=request.session['user_id'])
             editedUser.firstName = request.POST['edit-first']
             request.session['first_name'] = editedUser.firstName  # Changing First Name in Session
@@ -71,12 +71,16 @@ def index(request):
             editedUser.languageSkills = request.POST['languages']
             editedUser.areasOfInterest = request.POST['interest']
             editedUser.nonAcademicInterest = request.POST['nonAckinterest']
+			
+			hashed_passwordd = MD5.new()
+            hashed_passwordd.update(request.POST['new-pass'])
+            editedUser.password = hashed_passwordd.hexdigest()
 
             editedUser.save()
 
             #Reloading from Database
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url})
+            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url, 'isSaved':"True"})
             return HttpResponse(template.render(context))
 
         elif request.POST.get('competenceAdd'):

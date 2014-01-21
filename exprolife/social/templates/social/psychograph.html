@@ -24,6 +24,17 @@
 
 
 <body>
+{% if isSaved == "True" %}
+<div class="popup2" style="display: block;width: 340px;">
+    <div class="upper">Your changes have been saved.</div>
+    <div class="stroke"></div>
+    <div class="lower">
+    <input type="button" id="closeBut" class="alertButton" value="close"/>
+
+    </div>
+</div>
+{% endif %}
+
 <div id="fader" >
 
 </div>
@@ -230,26 +241,26 @@
                             <!--<input type="file" class="psychograph-input"  name="psych-pic" />-->
                             <input type="button" class="Default-button" name="comp-defaultButton" value="GRAVATAR" href="http://en.gravatar.com/" />
                             <h3 class="form-label">Study Field</h3>
-                            <input type="text" id="Field-text" class="psychograph-input" name="edit-field" />
+                            <input type="text" id="Field-text" class="psychograph-input" name="edit-field" value="{{ myUser.studyField }}"/>
                             <h3 class="form-label">Degrees</h3>
                             <div id="Tag-div2">
-                                <input name="degrees" class="tagsinput"  id="Tag-input2" />
+                                <input name="degrees" class="tagsinput"  id="Tag-input2" value="{{ myUser.degrees }}"/>
                             </div>
                             <h3 class="form-label">Honors</h3>
                             <div id="Tag-div3">
-                                <input name="honors" class="tagsinput"  id="Tag-input3" />
+                                <input name="honors" class="tagsinput"  id="Tag-input3" value="{{ myUser.honors }}"/>
                             </div>
                             <h3 class="form-label">Language Skills</h3>
                             <div id="Tag-div4">
-                                <input name="languages" class="tagsinput"  id="Tag-input4" />
+                                <input name="languages" class="tagsinput"  id="Tag-input4" value="{{ myUser.languageSkills }}"/>
                             </div>
                             <h3 class="form-label">Areas of Interest</h3>
                             <div id="Tag-div5">
-                                <input name="interest" class="tagsinput"  id="Tag-input5" />
+                                <input name="interest" class="tagsinput"  id="Tag-input5" value="{{ myUser.areasOfInterest }}"/>
                             </div>
                             <h3 class="form-label">Non Academic Interests</h3>
                             <div id="Tag-div6">
-                                <input name="nonAckinterest" class="tagsinput"  id="Tag-input6" />
+                                <input name="nonAckinterest" class="tagsinput"  id="Tag-input6" value="{{ myUser.nonAcademicInterest }}"/>
                             </div>
                             <h3 class="form-label" id="password-edit">Password</h3>
                             <h3 class="form-label">Current Password</h3>
@@ -259,7 +270,19 @@
                             <h3 class="form-label">Repeat Password</h3>
                             <input type="text" class="psychograph-input" name="rep-pass" />
                             <br />
-                            <input type="submit" id="Save-button" name="saveButton" value="save" />
+                            <input type="button" id="Save-button" name="saveButton" value="save" />
+							
+							<div class="popup">
+                                <div class="upper">Are you sure you know what you're doing?</div>
+                                <div class="stroke"></div>
+                                <div class="lower">
+                                    <!--<button class="alertButton" name="okBut2" id="okBut" ><i class="icon-large icon-ok"></i>yes</button>
+                                    <button class="alertButton"><i class="icon-large icon-remove"></i>no</button>-->
+                                    <input type="submit" name="okBut" class="alertButton" value="yes" />
+                                    <input type="button" id="cancelBut" class="alertButton" value="no"/>
+
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -369,5 +392,6 @@
 <script src="{% static 'social/js/flat/application.js' %}"></script>
 <script src="{% static 'social/js/flat/bootstrap.min.js' %}"></script>
 <script src="{% static 'social/js/flat/bootstrap-select.js' %}"></script>
+<script type="text/javascript" src="{% static 'social/js/jQuery.alert.js' %}"></script>
 </body>
 </html>

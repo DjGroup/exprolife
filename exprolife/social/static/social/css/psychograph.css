@@ -1697,3 +1697,121 @@ button:active.blue-a {
     width: 100%;
     z-index: 15;
 }
+
+
+/* RESET BUTTON */
+.alertButton::-moz-focus-inner {
+  border:0;
+  padding:0
+}
+.alertButton {
+  width:auto;
+  border:0 none;
+  margin:0;
+  padding:0;
+  background:transparent;
+  overflow:visible;
+  font:14px arial, sans-serif;
+  #vertical-align:middle; /* IE6,IE7 */
+}
+
+/* STYLES */
+.popup {
+    display: none;
+  margin: 2% auto;
+  width:320px;
+  position: fixed;
+  top: 30%;
+  left: 15%;
+    right: 15%;
+    z-index: 40;
+}
+
+.popup2 {
+    display: none;
+  margin: 2% auto;
+  width:320px;
+  position: fixed;
+  top: 30%;
+  left: 15%;
+    right: 15%;
+    z-index: 40;
+}
+.upper {
+  box-sizing:border-box;
+  padding:12% 10%;
+  background-color: #878787;
+  height:120px;
+  font-family:helvetica;
+  color: #ffffff;
+  font-size:18px;
+  transition: color 0.4s ease;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.upper:hover {
+  color: #ffffff;
+}
+
+.stroke {
+  height:5px;
+  background: #1763a6; /* Old browsers */
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(#1763a6), color-stop(0.47, #419ca6), color-stop(0.91, #54bf83));
+  background: -webkit-linear-gradient(left, #1763a6 0%, #419ca6 47%, #54bf83 91%);
+  background: -moz-linear-gradient(left, #1763a6 0%, #419ca6 47%, #54bf83 91%);
+  background: -o-linear-gradient(left, #1763a6 0%, #419ca6 47%, #54bf83 91%);
+  background: linear-gradient(left, #1763a6 0%, #419ca6 47%, #54bf83 91%); /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */ /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1763a6', endColorstr='#54bf83',GradientType=1 ); /* IE6-9 */
+}
+
+.lower {
+  box-sizing:border-box;
+  background-color: #333;
+  height:60px;
+  width:100%;
+  padding: 6% 15%;
+  color: rgb(200,200,200);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.alertButton {
+  float:left;
+  height:18px;
+  line-height:18px;
+  display:block;
+  color: rgba(255, 255, 255, 0.6);
+  width:25%;
+  transition: color 0.3s ease;
+}
+
+.alertButton:last-child {
+  margin-left:50%;
+}
+
+#closeBut{
+    margin-left: 37%;
+}
+.alertButton i {
+  width:19px;
+  height:18px;
+  display:block;
+  float:left;
+}
+
+.alertButton:hover {
+  cursor: pointer;
+}
+
+.alertButton:hover {
+  color: rgba(255,255,255,1);
+}
+
+.alertButton:hover .icon-ok {
+  color:rgba(100,255,100,0.5);
+}
+
+.alertButton:hover .icon-remove {
+  color:rgba(255,100,100,0.5);
+}

@@ -192,6 +192,21 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////
 
 
+    $("#Save-button").click( function(e)
+	{
+		e.preventDefault();
+        checkForContinue();
+	});
+
+    $("#cancelBut").click( function(e)
+	{
+        cancelOp();
+	});
+
+    $("#closeBut").click( function(e)
+	{
+        closeOp();
+	});
     var socket = io.connect('http://mynodejs-prolife.rhcloud.com/');
     $.ajax({
         url: '/ajax/getid',
