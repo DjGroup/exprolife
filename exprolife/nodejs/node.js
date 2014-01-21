@@ -6,7 +6,7 @@ var redis = require('socket.io/node_modules/redis');
 var client = redis.createClient();
 
 io.sockets.on('connection', function (socket) {
-
+    console.log("123123123");
     socket.on('rate_message', function (message) {
         console.log(123);
         console.log(message);

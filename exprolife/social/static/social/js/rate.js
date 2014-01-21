@@ -155,7 +155,7 @@
                                             $("#Score-text").fadeOut("fast",function() {
                                                 $(this).text(finalScore).fadeIn("fast");
                                             });
-                                            var socket = io.connect('localhost', {port: 4000});
+                                            var socket = io.connect('http://mynodejs-prolife.rhcloud.com/');
                                             socket.emit('rate_message', {changed: result.changed, DBID: result.DBID,
                                                                     title: result.title, projID: result.projID});
                                         }

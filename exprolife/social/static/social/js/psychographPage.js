@@ -192,7 +192,7 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////
 
 
-    var socket = io.connect('localhost', {port: 4000});
+    var socket = io.connect('http://mynodejs-prolife.rhcloud.com/');
     $.ajax({
         url: '/ajax/getid',
         type: 'get',
