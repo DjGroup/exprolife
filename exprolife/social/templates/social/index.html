@@ -12,7 +12,7 @@
     {% endif %}
     {% if isNOTOK %}
         <div class="registerAlert">
-            <h4> correct This Errors: </h4>
+            <h4> Warning </h4>
             {% if FNE %}
                 <p> {{ FNE }}</p>
             {% endif %}
@@ -85,6 +85,23 @@
                                 <input class= "RegisterInput" name="rePass" type="password" placeholder="retype password">
                                 <div class="arrow-left"></div>
                                 <div class="information">retype your password</div>
+                                <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                                <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                            </div>
+                            <div class="fieldRow1">
+                                <span class="validation_error">{{ captcha_response }}</span>
+                                <script type="text/javascript" src="http://api.recaptcha.net/challenge?k=6LdPOu0SAAAAAG25-792at7sv3Sxeydm3CvaIgX5">
+                                </script>
+
+                                <noscript>
+                                    <iframe src="http://api.recaptcha.net/noscript?k=6LdPOu0SAAAAAG25-792at7sv3Sxeydm3CvaIgX5"
+                                            height="300" width="400" frameborder="0"></iframe><br>
+                                    <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+                                    </textarea>
+                                    <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+                                </noscript>
+                                <div class="arrow-left"></div>
+                                <div class="information">Write the Letters?</div>
                                 <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
                                 <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
                             </div>

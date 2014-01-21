@@ -10,6 +10,7 @@ import hashlib
 #for password hashing
 #Download link of pyCrypto: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 from Crypto.Hash import MD5
+from recaptcha.client import captcha
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -137,13 +138,18 @@ def index(request):
         isPasswordValid = 1 if len(password) >= 6 else 0
         rePass = request.POST['rePass']
         isRePassValid = 1 if (len(rePass) >= 6 and rePass == password) else 0
+        captchaResp = captcha.submit(request.POST.get('recaptcha_challenge_field'),
+                                     request.POST.get('recaptcha_response_field'),
+                                     '6LdPOu0SAAAAAOG5mksE9Ief-MaGQUiVKOf4elGz',
+                                     request.META['REMOTE_ADDR'],)
         canGoHome = int(bool(
             isValidFirstName and
             isValidLastName and
             isValidEmailAddress and
             isValidSex and
             isPasswordValid and
-            isRePassValid
+            isRePassValid and
+            captchaResp.is_valid
         ))
         if canGoHome:
             #register with password hashing
@@ -185,6 +191,8 @@ def index(request):
                 sendError["PAE"] = "please Enter password at least 6 characters"
             if not isRePassValid:
                 sendError["RPE"] = "please retype your password"
+            if not captchaResp.is_valid:
+                sendError["AYE"] = "Are You a Bot?"
             template = loader.get_template('social/index.html')
             context = RequestContext(request, sendError)
             return HttpResponse(template.render(context))

@@ -12,7 +12,7 @@ from django.utils import timezone
 
 
 from math import log
-
+from recaptcha.client import captcha
 
 def autocompleteModel(request):
     response = {"users": [], "found": 0}
@@ -85,13 +85,20 @@ def registerCheck(request):
 
     rePass = request.REQUEST['repass']
     isRePassValid = 1 if (len(rePass) >= 6 and rePass == password) else 0
+
+
+    #captchaResp = captcha.submit(request.REQUEST.get('recaptcha_challenge_field'),
+    #                             request.REQUEST.get('recaptcha_response_field'),
+    #                             '6LdPOu0SAAAAAOG5mksE9Ief-MaGQUiVKOf4elGz',
+    #                             request.META['REMOTE_ADDR'],)
     canGoHome = int(bool(
         isValidFirstName and
         isValidLastName and
         isValidEmailAddress and
         isValidSex and
         isPasswordValid and
-        isRePassValid
+        isRePassValid# and
+        #captchaResp.is_valid
     ))
     response = {"fn": int(bool(isValidFirstName)), "ln": int(bool(isValidLastName)), "email": isValidEmailAddress,
                 "sex": isValidSex, "password": isPasswordValid, "rePass": isRePassValid,
