@@ -32,7 +32,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2a8aa', end
 
         #login{
             border: none;
-            background: #2C3E50;
+            background: #D35400;
             color: #ffffff;
             border-radius: 6px;
             -webkit-transition: 0.25s linear;
@@ -99,7 +99,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2a8aa', end
             }
 
         #login:hover{
-            background-color: #40576e;
+            background-color: #ed5700;
         }
 
         #register{

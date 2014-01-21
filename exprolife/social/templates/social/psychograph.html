@@ -24,7 +24,7 @@
 
 
 <body>
-{% if isSaved == "True" %}
+{% if isSaved == "True" and status == 0 %}
 <div class="popup2" style="display: block;width: 340px;">
     <div class="upper">Your changes have been saved.</div>
     <div class="stroke"></div>
@@ -34,7 +34,26 @@
     </div>
 </div>
 {% endif %}
+{% if status == 1 %}
+<div class="popup2" style="display: block;width: 340px;">
+    <div class="upper">The password is incorrect.</div>
+    <div class="stroke"></div>
+    <div class="lower">
+    <input type="button" id="closeBut" class="alertButton" value="close"/>
 
+    </div>
+</div>
+{% endif %}
+
+{% if status == 2 %}
+<div class="popup2" style="display: block;width: 340px;">
+    <div class="upper">Two passwords don't match.</div>
+    <div class="stroke"></div>
+    <div class="lower">
+    <input type="button" id="closeBut" class="alertButton" value="close"/>
+
+    </div>
+</div>
 <div id="fader" >
 
 </div>

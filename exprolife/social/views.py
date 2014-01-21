@@ -71,16 +71,25 @@ def index(request):
             editedUser.languageSkills = request.POST['languages']
             editedUser.areasOfInterest = request.POST['interest']
             editedUser.nonAcademicInterest = request.POST['nonAckinterest']
-			
-			hashed_passwordd = MD5.new()
-            hashed_passwordd.update(request.POST['new-pass'])
-            editedUser.password = hashed_passwordd.hexdigest()
+			status = 0
+            hashed_old_pass = MD5.new()
+            hashed_old_pass.update(request.POST['old-pass'])
+            if(request.POST['new-pass'] != "") :
+                if(hashed_old_pass.hexdigest() == editedUser.password ):
+                    if (request.POST['new-pass'] == request.POST['rep-pass']):
+                        hashed_passwordd = MD5.new()
+                        hashed_passwordd.update(request.POST['new-pass'])
+                        editedUser.password = hashed_passwordd.hexdigest()
+                    else:
+                        status = 2
+                else:
+                    status = 1
 
             editedUser.save()
 
             #Reloading from Database
             template = loader.get_template('social/psychograph.html')
-            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url, 'isSaved':"True"})
+            context = RequestContext(request, {'myUser': editedUser, 'myUrl': image_url, 'isSaved':"True", 'status':status})
             return HttpResponse(template.render(context))
 
         elif request.POST.get('competenceAdd'):
