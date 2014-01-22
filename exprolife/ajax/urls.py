@@ -63,6 +63,20 @@ urlpatterns = patterns('',
     # top projects ...
     url(r'tprojects/$', views.TProjects, name="topProjectsAjax"),
 
-    url(r'getid/$', views.getID, name="getUserId")
+    url(r'getid/$', views.getID, name="getUserId"),
+
+    #show post information for edit
+    url(r'postinfo/$', views.postinfo, name='info'),
+
+    url(r'editpost/$', views.editpost, name='info'),
+
+    url(r'editcomp/$', views.editcomp, name='info'),
+
+    #show competence information for edit
+    url(r'cominfo/$', views.cominfo, name='info'),
+
+    url(r'removepost/$', views.removepost, name='rpost'),
+
+    url(r'removecomp/$', views.removecomp, name='rpost'),
 
     )

@@ -1152,3 +1152,96 @@ def getID(request):
                     "LN": user.lastName
                     }
     return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+
+def postinfo(request):
+    response = {"isOK": 1,
+                "title": None,
+                "content":None,
+                "id":None
+    }
+    id = request.REQUEST['id']
+    post = BoardPost.objects.get(id=id)
+    response = {"isOK": 1,
+                "title": post.title,
+                "content": post.content,
+                "id":post.id
+    }
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+
+def cominfo(request):
+    response = {"isOK": 1,
+                "title": None,
+                "description":None,
+                "id":None,
+                "manager":None,
+                "usage":None,
+                "developer":None,
+
+                }
+    id = request.REQUEST['id']
+    comp = Competence.objects.get(id=id)
+    response = {"isOK": 1,
+                "title": comp.title,
+                "description": comp.content,
+                "manager":comp.manager,
+                "developer":comp.developers,
+                "usage":comp.usage,
+                "id":comp.id
+    }
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+def editpost(request):
+    id = request.REQUEST['id']
+    title1 = request.REQUEST['title']
+    content1 = request.REQUEST['content']
+    this = BoardPost.objects.get(id =id)
+    this.content = content1
+    this.title = title1
+    this.save()
+    response = {"isOK":1}
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+
+
+def editcomp(request):
+    id = request.REQUEST['id']
+    title = request.REQUEST['title']
+    desc = request.REQUEST['desc']
+    manager = request.REQUEST['manager']
+    usage = request.REQUEST['usage']
+    developer = request.REQUEST['developer']
+
+    this = Competence.objects.get(id =id)
+    this.content = desc
+    this.title = title
+    this.usage = usage
+    this.manager = manager
+    this.developers = developer
+    this.save()
+    response = {"isOK":1}
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+def removepost(request):
+    id = request.REQUEST['id']
+    this = BoardPost.objects.get(id =id)
+    this.delete()
+    response = {"isOK":1}
+    return HttpResponse(json.dumps(response), content_type='application.json')
+
+def removecomp(request):
+    print "hi"
+    id = request.REQUEST['id']
+    this = Competence.objects.get(id=id)
+    score = this.vote
+    print score
+    if (score > 0):
+        this.user.score = this.user.score - log(score,2)
+    print this.user.score
+    this.delete()
+    response = {"isOK":1}
+    return HttpResponse(json.dumps(response), content_type='application.json')

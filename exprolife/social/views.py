@@ -311,6 +311,7 @@ def idDetailIndex(request, user_id):
 def competenceLoader(request, competence_title, competence_id):
     bb = User.objects.get(email=request.session['email'])
     me1 = bb.email
+    Iam =0
     gravatar_url = "www.gravatar.com/avatar"
     emailHash = hashlib.md5(me1).hexdigest()
     me = "http://"+gravatar_url+"/"+emailHash+"?s=210&d=identicon&r=PG"
@@ -324,7 +325,9 @@ def competenceLoader(request, competence_title, competence_id):
     relatedUser_id = competence[0].user_id
     amIMe = (relatedUser_id == bb.id)
     ComTags = competence[0].tagList.split(',')
-
+    owner = competence[0].user.email
+    if (owner == me1):
+        Iam = 1
     try:
         ComTags.remove('')
     except:
@@ -362,6 +365,7 @@ def competenceLoader(request, competence_title, competence_id):
         'comment': comment,
         'me': me,
         'email': me1,
+        'Iam':Iam,
         'amIMe': int(amIMe),
         'competence': competence[0],
         'comTags': ComTags,
@@ -374,6 +378,7 @@ def competenceLoader(request, competence_title, competence_id):
 
 def postLoader(request, post_title, post_id):
     print post_title
+    Iam = 0
     bb = User.objects.get(email=request.session['email'])
     me1 = bb.email
     gravatar_url = "www.gravatar.com/avatar"
@@ -389,6 +394,9 @@ def postLoader(request, post_title, post_id):
         PostTags.remove('')
     except:
         pass
+    owner = post[0].user.email
+    if (owner == me1):
+        Iam = 1
     creationDate = str(post[0].date.month)
     creationDate += ' ' + str(post[0].date.day) + ' ' + str(post[0].date.year) + ' at ' + str(post[0].date.hour) + \
                     ':' + str(post[0].date.minute) + ':' + str(post[0].date.second)
@@ -413,6 +421,7 @@ def postLoader(request, post_title, post_id):
         'comment':comment,
         'me':me,
         'email':me1,
+        'Iam':Iam,
         'post': post[0],
         'postTags': PostTags,
         'creationDate': creationDate

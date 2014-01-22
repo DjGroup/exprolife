@@ -330,10 +330,293 @@ $(document).ready(function(){
 ///// Welcome message when login or register //////
 ///////////////////////////////////////////////////
 
+    var fader1 = $('#fader');
+    var pos = $("li:contains('Edit')").offset()
+    var change ;
+    $(window).resize(function(){
+        var url1 = window.location.hash;
+        $(url1).fadeOut("slow");
+        var id = url1[7];
+        var str2;
+
+        fader1.css({
+            "height": document.body.scrollHeight,
+            "width":document.body.scrollWidth
+
+        });
+
+        if (id != 1){
+            str2 = ".next";
+        }
+        else {
+            $("#bubble1").css({
+                "display": "block",
+                "marginTop": pos.top-100,
+                "left":pos.left
+            });
+            $("#bubble1").fadeIn("slow");
+
+            window.location.hash = "bubble1";
+        }
+        change = 1;
+        $(str2).click();
+        change =0 ;
+    });
+    $(".alert").animate({
+        "right":"50px"
+    } , 1500).delay(1000).fadeOut(1000);
+
+
+    $(".ignore").on("click",function(){
+        $(".container1").fadeOut("slow");
+        fader1.fadeOut("slow");
+        test = 1;
+        showTab("#Board");
+
+    });
+    $(".next").on("click",function(){
+        var url1 = window.location.hash;
+        $(url1).fadeOut("slow");
+        fader1.css({
+            "height": document.body.scrollHeight
+        });
+        var id1 = parseInt(url1[7]);
+        if (id1 == 6){
+            $(".ignore").click();
+            showTab("#Board");
+        }
+        else{
+            if (change != 1){
+                id1 = id1 + 1;}
+            var str1 = "#bubble"+(id1);
+            if (id1 == 4){
+                showTab("#Edit");
+            }
+            if (id1<4){
+                pos =  $("li:contains('"+$(str1).children().last().children().first().children().first().text()
+                    +"')").offset();
+            }
+
+            else if (id1>3){
+                pos =  $("li:contains('"+$(str1).children().last().children().first().children().first().text()
+                    +"')").siblings().offset();
+            }
+            //  alert(str1);
+            $(url1).fadeOut("slow");
+
+            $(str1).css({
+                marginTop:pos.top,
+                left:pos.left
+            });
+            $(str1).fadeIn("slow");
+            window.location.hash = str1;}
+    });
 
     $(".alert").animate({
         "right":"50px"
     } , 1500).delay(1000).fadeOut(1000);
+
+    $("#remov").on("click",function(){
+
+        var temp = $('<div class="popup">\
+    <div class="upper">Are you sure you want delete ?</div>\
+    <div class="stroke"></div>\
+        <div class="lower">\
+            <button1 id="sure"><i class="icon-large icon-ok" ></i>yes</button1>\
+            <button1  id="cancel"><i class="icon-large icon-remove"></i>no</button1>\
+        </div>\
+    </div>');
+        temp.clone().hide().insertAfter($("#Com-div")).fadeIn("slow");
+        $("#cancel").on("click",function(){
+            $(".popup").fadeOut("slow");
+        });
+        $("#sure").on("click",function(){
+            var id = $("#id").text();
+            url2 = window.location.pathname;
+            var send2 ={
+                id:id
+            };
+            if (url2[1]=="P"){
+                $.ajax({
+                    data:send2,
+                    url:'/ajax/removepost',
+                    success:function(result){
+                        if(result.isOK==1){
+                            document.location.href = '/#Board';
+                            $(".popup").hide();
+                        }
+                    }
+                });
+            }
+            else if (url2[1]=="C"){
+                $.ajax({
+                    data:send2,
+                    url:'/ajax/removecomp',
+                    success:function(result){
+                        if(result.isOK==1){
+                            $(".popup").hide();
+
+                            document.location.href = '/#Board';
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    $("#ignore").on("click" ,function(){
+        $("#fadeLayer").hide();
+        $("#registerForm").hide();
+    });
+    $("#savecomp").on("click",function(){
+        var id = $("#compid").val();
+        var title = $("#comptitle").val();
+        var desc = $("#compdes").val();
+        var manager = $("#compmanager").val();
+        var usage = $("#compusage").val();
+        var developer = $("#compdeveloper").val();
+        var send3 ={
+            id:id,
+            title:title,
+            desc:desc,
+            manager:manager,
+            developer:developer,
+            usage:usage
+        };
+        if (title == ""){
+            alert("Please Enter title");
+        }
+        if (desc==""){
+            alert("Please Enter description");
+        }
+        if (manager==""){
+            alert("Please Enter manager");
+        }
+        if (developer==""){
+            alert("Please Enter developer");
+        }
+        if (usage==""){
+            alert("Please Enter usage");
+        }
+        else {
+            $(".ajaxLogoRegister").show();
+            $.ajax({
+                data:send3,
+                url:'/ajax/editcomp',
+                success:function(result){
+                    if(result.isOK==1){
+                        document.location.href = '/Competence/' +title + '.' + id;
+                        $(".ajaxLogoRegister").hide();
+                    }
+                }
+            });}
+
+    });
+    $('.RegisterInput').hover(function(){
+            $(this).next().animate({
+                "opacity" : 1 ,
+                "marginLeft" : "20px"
+            }, "fast");
+            $(this).next().next().animate({
+                "opacity" : 1
+            } ,"fast");
+        }
+        ,(function(){
+            $(this).next().animate({
+                "opacity" : 0 ,
+                "marginLeft":"-30px"
+            }, "fast");
+            $(this).next().next().animate({
+                "opacity" : 0
+            } ,"fast");
+        }));
+    $("#save").on("click",function(){
+        var id = $("#postid").val();
+        var title = $("#posttitle").val();
+        var content = $("#postcontent").val();
+        var send1 ={
+            id:id,
+            title:title,
+            content:content
+        };
+        if (title == ""){
+            alert("Please Enter title");
+        }
+        if (content==""){
+            alert("Please Enter content");
+        }
+        else {
+            $(".ajaxLogoRegister").show();
+
+            $.ajax({
+                data:send1,
+                url:'/ajax/editpost',
+                success:function(result){
+                    if(result.isOK==1){
+                        $(".ajaxLogoRegister").hide();
+                        document.location.href = '/Post/' +title + '.' + id;
+                    }
+                }
+            });}
+    });
+    $("#edi").on("click",function(){
+        var id = $("#id").text();
+        var send ={
+            id:id
+        };
+        url = window.location.pathname;
+        if (url[1]=="P"){
+            $.ajax({
+                data:send,
+                url:'/ajax/postinfo',
+                success:function(result){
+                    if(result.isOK==1){
+                        $("#fadeLayer").css({
+                            "height": document.body.scrollHeight
+                        });
+                        $("#fadeLayer").show();
+                        $(".ajaxLogoRegister").hide();
+                        $("#registerForm").show();
+                        document.getElementById("postid").value=result.id;
+                        document.getElementById("posttitle").value=result.title;
+                        document.getElementById("postcontent").value=result.content;
+
+
+
+                    }
+                }
+
+            });}
+        else if (url[1]=="C"){
+            $.ajax({
+                data:send,
+                url:'/ajax/cominfo',
+                success:function(result){
+                    if(result.isOK==1){
+                        $("#fadeLayer").css({
+                            "height": document.body.scrollHeight
+                        });
+                        $("#fadeLayer").show();
+                        $(".ajaxLogoRegister").hide();
+                        $("#registerForm").show();
+                        document.getElementById("compid").value=result.id;
+                        document.getElementById("comptitle").value=result.title;
+                        document.getElementById("compdes").value=result.description;
+                        document.getElementById("compmanager").value=result.manager;
+                        document.getElementById("compdeveloper").value=result.developer;
+                        document.getElementById("compusage").value=result.usage;
+
+
+
+                    }
+                }
+
+            });
+        }
+
+    });
+
+
 
 /////////////////  END    /////////////////////////
 ///// Welcome message when login or register //////
@@ -629,6 +912,21 @@ $(document).ready(function(){
 
                 //getPAC (PAC => Post And Projects)
                 ajaxer('getPAC', content, result);
+                if (window.location.pathname == "/" && $("#Iam").text()=='1'){
+                    fader1.fadeIn("slow");
+                    $("#bubble1").css({
+                        "display": "block",
+                        "marginTop": pos.top,
+                        "left":pos.left
+                    });
+                    $("#bubble1").fadeIn("slow");
+
+                    window.location.hash = "bubble1";
+
+                    fader1.css({
+                        "height": document.body.scrollHeight
+                    });
+                }
             }
         });
     }

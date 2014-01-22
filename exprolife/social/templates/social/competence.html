@@ -59,6 +59,67 @@
     </div>
 </div>
 <div id="Main-div">
+
+    <div id="fadeLayer" {% if isNOTOK %}style="display: block;" {% endif %}></div>
+    <form id="mainRegisterForm" action="/" method="post" >
+        {% csrf_token %}
+        <div id="registerForm" {% if isNOTOK %} style="display: block;" {% endif %}>
+            <div id="leftRegisterContent">
+                <div id="upContent">
+                    <div id="innerUpContent">
+                        <h3>Edit your Information:</h3>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" id="compid" name="ID" type="text"  disabled="disabled" placeholder="You must enter something">
+                            <div class="arrow-left"></div>
+                            <div class="information">ID</div>
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" id="comptitle"  name="Title" type="text" placeholder="You must enter something">
+                            <div class="arrow-left"></div>
+                            <div class="information">Title</div>
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+
+                        <div class="fieldRow" >
+                            <input style=" width:700px;" type="text" class= "RegisterInput" name="Content" id="compdes" placeholder="You must enter something" >
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" id="compmanager"  name="Title" type="text" placeholder="You must enter something">
+                            <div class="arrow-left"></div>
+                            <div class="information">Manager</div>
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" id="compdeveloper"  name="Title" type="text" placeholder="You must enter something">
+                            <div class="arrow-left"></div>
+                            <div class="information">Developers</div>
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+                        <div class="fieldRow">
+                            <input class= "RegisterInput" id="compusage"  name="Title" type="text" placeholder="You must enter something">
+                            <div class="arrow-left"></div>
+                            <div class="information">Usages</div>
+                            <img class="correct" src="{% static 'social/images/correct.png' %}" width="30px">
+                            <img class="notCorrect" src="{% static 'social/images/notCorrect.png' %}" width="30px">
+                        </div>
+                    </div>
+                </div>
+                {#                    <input class="RegisterButton left red" type="button" value="Skip this step">#}
+                <input class="RegisterButton right green" id="savecomp" name="registerSubmit" value="Save">
+                <input class="RegisterButton right green" id="ignore" name="registerSubmit" value="Igonre">
+                <img class="ajaxLogoRegister" width="80px" src="{% static 'social/images/loading3.gif' %}">
+
+            </div>
+
+        </div>
+    </form>
     <!--<div id="Col-2">
     </div>
     <div id="Col-1">
@@ -85,8 +146,10 @@
 
                             <p>{{ competence.usage }}</p>
                         {% endif %}
-                        <h3><a class="edit1" style="margin-bottom: 0px" id="edi">Edit</a></h3>
-                        <h3><a class="remove1" id="remov">Remove</a></h3>
+                        {% if Iam  %}
+                            <h3><a class="edit1" style="margin-bottom: 0px" id="edi">Edit</a></h3>
+                            <h3><a class="remove1" id="remov">Remove</a></h3>
+                        {% endif %}
                         <h3 class="form-label">Tags</h3>
                         <div class="project-tag">
                             {% for atag in comTags %}
